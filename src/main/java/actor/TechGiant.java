@@ -4,20 +4,21 @@ import java.util.ArrayList;
 
 public class TechGiant extends Actor {
     
-    private ArrayList<Actor> startups;
+    private ArrayList<StartUp> startups;
     
     public TechGiant(String name, String description) {
         setName(name);
         setDescription(description);
+        startups = new ArrayList<StartUp>();
     }
 
     // getters and setters
     
-    public ArrayList<Actor> getStartups() {
+    public ArrayList<StartUp> getStartups() {
         return startups;
     }
 
-    public void setStartups(ArrayList<Actor> startups) {
+    public void setStartups(ArrayList<StartUp> startups) {
         this.startups = startups;
     }
 
