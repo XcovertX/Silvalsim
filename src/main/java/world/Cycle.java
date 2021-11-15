@@ -5,11 +5,14 @@ public class Cycle implements Runnable {
     private boolean running;
     private final double updateRate = 1.0d/60.0d;
     
+    private Quarter currentQuarter;
+    
     private World world;
     
     public Cycle(World w) {
         
         this.world = w;
+        currentQuarter = new Quarter(0, 0);
     }
 
     @Override
@@ -39,7 +42,9 @@ public class Cycle implements Runnable {
         
         try {
             
-            world.updateWorld();
+            currentQuarter.incrementDay();
+            
+            world.updateWorld(currentQuarter.getCurrentQuarter(), currentQuarter.getCurrentDay());
             
             Thread.sleep(1000); 
             
@@ -48,6 +53,16 @@ public class Cycle implements Runnable {
             e.printStackTrace();
             
         }
+    }
+    
+    // getters and setters
+
+    public Quarter getCurrentQuarter() {
+        return currentQuarter;
+    }
+
+    public void setCurrentQuarter(Quarter currentQuarter) {
+        this.currentQuarter = currentQuarter;
     }   
 }
 

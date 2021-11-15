@@ -12,6 +12,8 @@ public class World {
     
     public World() {
         
+        actors = new ArrayList<Actor>();
+        
         TechGiant tg1 = new TechGiant("Meta", "Taking over the world one face at a time.");
         StartUp su1 = new StartUp("Instagram", "Addicting Pictures");
         
@@ -21,9 +23,9 @@ public class World {
         
     }
 
-    public void updateWorld() {
+    public void updateWorld(int currentQuarter, int currentDay) {
         
-        System.out.println("Update");
+        System.out.println("Quarter: " + currentQuarter + " Day: " + currentDay);
         
         
     }
