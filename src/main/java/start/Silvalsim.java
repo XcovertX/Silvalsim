@@ -16,9 +16,9 @@ public class Silvalsim extends Thread {
         
         System.out.println(new Silvalsim().getGreeting());
         
-        World w = new World();
-        Thread cycleThread = new Thread( new Cycle( w ) );
-        cycleThread.setName( "Cycle_Thread" );
+        World world = new World();
+        Thread cycleThread = new Thread(new Cycle(world));
+        cycleThread.setName("Cycle_Thread");
         cycleThread.start();
     }
 }

@@ -41,7 +41,7 @@ public class Cycle implements Runnable {
             
             world.updateWorld();
             
-            Thread.sleep(1000); // TODO not sure how to appropriately free up the thread. Fix when build thread-pool
+            Thread.sleep(1000); 
             
         } catch (InterruptedException e) {
             
