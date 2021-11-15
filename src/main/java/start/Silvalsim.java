@@ -3,13 +3,22 @@
  */
 package main.java.start;
 
-public class Silvalsim {
+import main.java.world.Cycle;
+import main.java.world.World;
+
+public class Silvalsim extends Thread {
     
     public String getGreeting() {
-        return "Hello world.";
+        return "Welcome to Silvalsim.";
     }
 
     public static void main(String[] args) {
+        
         System.out.println(new Silvalsim().getGreeting());
+        
+        World w = new World();
+        Thread cycleThread = new Thread( new Cycle( w ) );
+        cycleThread.setName( "Cycle_Thread" );
+        cycleThread.start();
     }
 }

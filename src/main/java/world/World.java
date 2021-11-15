@@ -7,8 +7,7 @@ public class World {
     }
 
     public void updateWorld() {
-        // TODO Auto-generated method stub
         
+        System.out.println("Update");
     }
-
 }
