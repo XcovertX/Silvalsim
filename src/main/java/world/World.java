@@ -26,7 +26,6 @@ public class World {
     public void updateWorld(int currentQuarter, int currentDay) {
         
         System.out.println("Quarter: " + currentQuarter + " Day: " + currentDay);
-        
-        
+              
     }
 }
