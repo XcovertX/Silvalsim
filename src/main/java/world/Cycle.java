@@ -12,7 +12,7 @@ public class Cycle implements Runnable {
     public Cycle(World w) {
         
         this.world = w;
-        currentQuarter = new Quarter(0, 0);
+        currentQuarter = w.getCurrentQuarter();
     }
 
     @Override
@@ -42,11 +42,11 @@ public class Cycle implements Runnable {
         
         try {
             
-            currentQuarter.incrementDay();
-            
             world.updateWorld(currentQuarter.getCurrentQuarter(), currentQuarter.getCurrentDay());
             
-            Thread.sleep(1000); 
+            currentQuarter.incrementDay();
+            
+            Thread.sleep(10); 
             
         } catch (InterruptedException e) {
             

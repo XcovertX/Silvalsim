@@ -1,14 +1,19 @@
 package main.java.actor;
 
+import main.java.world.Location;
+import main.java.world.NewYork;
+
 public class StartUp extends Actor {
     
     private double netIncome;
     private double revenue;
     private double marketShare;
+    private Location location;
     
-    public StartUp(String name, String description) {
+    public StartUp(String name, String description, Location location) {
         setName(name);
         setDescription(description);
+        setLocation(location);
     }
     
     // getters and setters
@@ -35,6 +40,14 @@ public class StartUp extends Actor {
 
     public void setMarketShare(double marketShare) {
         this.marketShare = marketShare;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
 }

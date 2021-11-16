@@ -1,5 +1,9 @@
 package main.java.world;
 
+import java.util.Random;
+
+import main.java.actor.StartUp;
+
 public class Quarter {
     
     final static int Q1 = 0;
@@ -11,37 +15,52 @@ public class Quarter {
     private int currentDay; 
     private boolean isEven;
     
+    private double taxCutPercent;
+    
     public Quarter(int currentQuarter, int currentDay) {
         
         setCurrentQuarter(currentQuarter);
         setCurrentDay(currentDay);
+        calculateCorporateTaxCutPercent();
     }
     
-    private void setCurrentDay(int currentDay) {
+    private void calculateCorporateTaxCutPercent() {
         
-        if(!(currentDay < 0 || currentDay >= 90)) {
-            
-            this.currentDay = currentDay; 
-            
-        } else {
-            
-            this.currentDay = 0;
-        }
+        Random r = new Random();
+        double rangeMin = 1.01;
+        double rangeMax = 1.05;
+        taxCutPercent = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
         
     }
 
-    private void setCurrentQuarter(int currentQuarter) {
+    public void applyFinancialEvents(StartUp startup){
         
-        if(!(currentQuarter < 0 || currentQuarter >= 3)) {
+        
+        double adjustedRevenue = startup.getRevenue();
+        double taxRate = startup.getLocation().getTaxRate();
+        
+        if(currentQuarter == Q1) {
             
-            this.currentQuarter = currentQuarter; 
-            
-        } else {
-            
-            this.currentQuarter = Q1;
+            calculateCorporateTaxCutPercent();
+            taxRate = applyCorporateTaxCuts(taxRate);
+             
         }
         
-        setEven();
+        adjustedRevenue = deductTaxes(adjustedRevenue, taxRate); 
+        startup.setRevenue(adjustedRevenue);
+    }
+    
+    private double deductTaxes(double revenue, double taxRate) {
+        
+        return revenue - (revenue * (taxRate * 0.01));
+        
+    }
+    
+    private double applyCorporateTaxCuts(double taxRate) {
+        
+        double adjustedTaxRate = taxRate - (taxCutPercent - 1);
+        return adjustedTaxRate;
+        
     }
 
     public void incrementQuarter() {
@@ -71,6 +90,33 @@ public class Quarter {
     
     // getters and setters
     
+    private void setCurrentDay(int currentDay) {
+        
+        if(!(currentDay < 0 || currentDay >= 90)) {
+            
+            this.currentDay = currentDay; 
+            
+        } else {
+            
+            this.currentDay = 0;
+        }
+        
+    }
+
+    private void setCurrentQuarter(int currentQuarter) {
+        
+        if(!(currentQuarter < 0 || currentQuarter >= 3)) {
+            
+            this.currentQuarter = currentQuarter; 
+            
+        } else {
+            
+            this.currentQuarter = Q1;
+        }
+        
+        setEven();
+    }
+    
     public int getCurrentQuarter() {
         
         return this.currentQuarter;
@@ -81,7 +127,7 @@ public class Quarter {
         return this.currentDay;
     }
 
-    public boolean isEven() {
+    private boolean isEven() {
         return isEven;
     }
 
