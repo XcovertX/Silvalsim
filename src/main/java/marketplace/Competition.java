@@ -20,11 +20,13 @@ public class Competition {
         this.opponentOne.setCurrentCompetition(this);
         this.opponentTwo.setCurrentCompetition(this);
         
-//        combatCycle();
+        combatCycle();
     }
     
-//    public void combatCycle() {
-//        
+    public void combatCycle() {
+        
+        new DrainTalentCommand(opponentOne, opponentTwo).execute();
+        
 //        if( counterOne/( opponentOne.getDexterity().getSpeedOfMovement() ) > 1 ) {
 //            new Attack( opponentOne, opponentTwo );
 //            setCounterOne( 0 );
@@ -38,7 +40,7 @@ public class Competition {
 //        if(opponentOne.getRevenue() <= 0 ) {
 //            opponentOne.die();
 //            if( opponentOne.equals( Game.currentGame.getPlayer() ) ) {
-//                Game.currentGame.getUI().print( "You have ");
+//                world.print("You have ");
 //                Game.currentGame.getUI().printColor( "died", Color.RED);
 //                Game.currentGame.getUI().println( ".");
 //            } else {
@@ -69,7 +71,7 @@ public class Competition {
 //        
 //            endFight();
 //        }
-//    }
+    }
 
     public StartUp getOpponentOne() {
         return opponentOne;
