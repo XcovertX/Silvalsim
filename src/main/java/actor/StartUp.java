@@ -1,5 +1,6 @@
 package main.java.actor;
 
+import main.java.marketplace.Competition;
 import main.java.world.Location;
 import main.java.world.NewYork;
 
@@ -9,6 +10,9 @@ public class StartUp extends Actor {
     private double revenue;
     private double marketShare;
     private Location location;
+    
+    private boolean engagedInCompetition;
+    private Competition currentCompetition;
     
     public StartUp(String name, String description, Location location) {
         setName(name);
@@ -48,6 +52,22 @@ public class StartUp extends Actor {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public boolean isEngagedInCompetition() {
+        return engagedInCompetition;
+    }
+
+    public void setEngagedInCompetition(boolean engagedInCompetition) {
+        this.engagedInCompetition = engagedInCompetition;
+    }
+
+    public Competition getCurrentCompetition() {
+        return currentCompetition;
+    }
+
+    public void setCurrentCompetition(Competition currentCompetition) {
+        this.currentCompetition = currentCompetition;
     }
 
 }

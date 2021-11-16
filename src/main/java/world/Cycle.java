@@ -46,7 +46,7 @@ public class Cycle implements Runnable {
             
             currentQuarter.incrementDay();
             
-            Thread.sleep(10); 
+            Thread.sleep(1000); 
             
         } catch (InterruptedException e) {
             
