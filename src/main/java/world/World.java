@@ -15,6 +15,7 @@ public class World {
     private ArrayList<Actor> actors;
     private Quarter currentQuarter;
     private MarketPlace marketPlace;
+    private Competition currentCompetition;
     
     public World() {
         
@@ -30,10 +31,15 @@ public class World {
         su1.setRevenue(100.00);
         su2.setRevenue(100.00);
         
+        su1.setSpeed(3);
+        su2.setSpeed(5);
+        
         tg1.getStartups().add(su1);
         tg1.getStartups().add(su2);
         
         actors.add(tg1);
+        
+        currentCompetition = new Competition(su1, su2);
         
     }
 
@@ -45,10 +51,13 @@ public class World {
         if (this.currentQuarter.getCurrentDay() == FIRST_OF_THE_MONTH) {
 
             this.currentQuarter.applyFinancialEvents(instagram);
-            this.currentQuarter.applyFinancialEvents(instagram);
-            
-            new Competition(instagram, myspace);
+            this.currentQuarter.applyFinancialEvents(myspace);
         }
+        
+        if (this.currentCompetition != null) {
+            this.currentCompetition.combatCycle();
+        }
+        
               
     }
 

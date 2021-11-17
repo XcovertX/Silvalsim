@@ -20,5 +20,4 @@ public class UndercutPricesCommand implements Command {
         
         attack.undercutPrices(attacker, recipient);
     }
-
 }

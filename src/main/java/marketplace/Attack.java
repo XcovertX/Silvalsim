@@ -51,7 +51,7 @@ public class Attack {
         Printer.print(Printer.ANSI_RED, "UNDERCUTS");
         Printer.print(" their prices, ");
         Printer.print(Printer.ANSI_RED, "TEMPORARILY REDUCING");
-        Printer.println(" sales of ");
+        Printer.print(" sales of ");
         Printer.print(Printer.ANSI_BLUE, " " + startupRecipient.getName());
         Printer.println("!!");
         

@@ -4,39 +4,47 @@ import main.java.actor.StartUp;
 
 public class Competition {
     
+    // opponent one //////////////////
     private StartUp opponentOne;
-    private StartUp opponentTwo;
+    private Offense opponentOneOffense;
+    private Defense opponentOneDefense;
     private int counterOne;
+    
+    // opponent two //////////////////
+    private StartUp opponentTwo;
+    private Offense opponentTwoOffense;
+    private Defense opponentTwoDefense;
     private int counterTwo;
     
     public Competition(StartUp actorOne, StartUp actorTwo) {
         
         this.setOpponentOne(actorOne);
         this.setOpponentTwo(actorTwo);
-//        this.setCounterOne(actorOne.getDexterity().getSpeedOfMovement());
-//        this.setCounterTwo(actorTwo.getDexterity().getSpeedOfMovement());
+        this.setCounterOne(actorOne.getSpeed());
+        this.setCounterTwo(actorTwo.getSpeed());
         this.opponentOne.setEngagedInCompetition(true);
         this.opponentTwo.setEngagedInCompetition(true);
         this.opponentOne.setCurrentCompetition(this);
         this.opponentTwo.setCurrentCompetition(this);
+        this.opponentOneOffense = new Offense(opponentOne, opponentTwo);
+        this.opponentTwoOffense = new Offense(opponentTwo, opponentOne);
+        this.opponentOneDefense = new Defense(opponentOne, opponentTwo);
+        this.opponentTwoDefense = new Defense(opponentTwo, opponentOne);
         
         combatCycle();
     }
     
     public void combatCycle() {
         
-        new DrainTalentCommand(opponentOne, opponentTwo).execute();
-        new StealTradeSecretCommand(opponentOne, opponentTwo).execute();
+        if (counterOne / (opponentOne.getSpeed()) > 1) {
+            opponentOneOffense.attack();
+            setCounterOne(0);
+        }
         
-//        if( counterOne/( opponentOne.getDexterity().getSpeedOfMovement() ) > 1 ) {
-//            new Attack( opponentOne, opponentTwo );
-//            setCounterOne( 0 );
-//        }
-//        
-//        if( counterTwo/( opponentTwo.getDexterity().getSpeedOfMovement() ) > 1 ) {
-//            new Attack( opponentTwo, opponentOne );
-//            setCounterTwo( 0 );
-//        }
+        if (counterTwo / (opponentTwo.getSpeed()) > 1) {
+            opponentTwoOffense.attack();
+            setCounterTwo(0);
+        }
 //        
 //        if(opponentOne.getRevenue() <= 0 ) {
 //            opponentOne.die();
@@ -72,6 +80,7 @@ public class Competition {
 //        
 //            endFight();
 //        }
+        incrementCounters();
     }
 
     public StartUp getOpponentOne() {
@@ -117,5 +126,9 @@ public class Competition {
         this.opponentOne.setCurrentCompetition( null );
         this.opponentTwo.setCurrentCompetition( null );
     }
-
+    
+    public int selectAttack(StartUp startup) {
+        
+        return 0;
+    }
 }
