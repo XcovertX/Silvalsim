@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import main.java.marketplace.Competition;
+import main.java.marketplace.RecordEntry;
 import main.java.world.Location;
 import main.java.world.NewYork;
 
@@ -17,18 +18,25 @@ public class StartUp extends Actor {
     private double marketShare;             // defense points
     private int speed;                      // action speed
     
+    private ArrayList<RecordEntry> financialRecord;
+    
     // Devs ////////////////////////
     private ArrayList<Developer> devs;      // dev talent
     private Location location;              // company location
     
     private boolean engagedInCompetition;
     private Competition currentCompetition;
+    
+    private static final int NET_INCOME_MULTIPLIER = 100000;
+    private static final int REVENUE_MULTIPLIER = 1000000;
 
     
     public StartUp(String name, String description, Location location) {
         
         setName(name);
         setDescription(description);
+        setAlive(true);
+        
         setLocation(location);
         setXP(0);
         setNetIncome(0);
@@ -125,11 +133,12 @@ public class StartUp extends Actor {
             if (devs.get(i).equals(dev)) {
                 devs.remove(i);
                 this.speed--;
+                this.netIncome -= devs.get(i).getTalent() * NET_INCOME_MULTIPLIER;
             }
         }
     }
     
-    public void removeTopDev() {
+    public Developer removeTopDev() {
         
         Collections.sort(devs, new Comparator<Developer>() {
             
@@ -147,11 +156,12 @@ public class StartUp extends Actor {
             }
         });
         
-        devs.remove(0);
         this.speed--;
+        this.netIncome -= devs.get(0).getTalent() * NET_INCOME_MULTIPLIER;
+        return devs.remove(0);
     }
     
-    public void removeLowestDev() {
+    public Developer removeLowestDev() {
         
         Collections.sort(devs, new Comparator<Developer>() {
             
@@ -169,17 +179,53 @@ public class StartUp extends Actor {
             }
         });
         
-        devs.remove(0);
         this.speed--;
+        this.netIncome -= devs.get(0).getTalent() * NET_INCOME_MULTIPLIER;
+        return devs.remove(0);
     }
     
     public void addDev(Developer dev) {
         
         devs.add(dev);
         this.speed++;
+        this.netIncome += dev.getTalent() * NET_INCOME_MULTIPLIER;
     }
     
+    public void increaseRevenue(Developer dev) {
+        
+        this.setRevenue(revenue + (dev.getTalent() * REVENUE_MULTIPLIER));
+    }
+    
+    public void increaseNetIncome(Developer dev) {
+        
+        this.setNetIncome(netIncome + (dev.getTalent() * NET_INCOME_MULTIPLIER));
+    }
 
+    public ArrayList<RecordEntry> getFinancialRecord() {
+ 
+        return financialRecord;
+    }
+
+    public void setFinancialRecord(ArrayList<RecordEntry> financialRecord) {
+ 
+        this.financialRecord = financialRecord;
+    }
+    
+    public void addFinancialRecord() {
+        
+        RecordEntry re = new RecordEntry(this.netIncome, this.revenue, this.marketShare);
+        this.financialRecord.add(re);
+    }
+    
+    public RecordEntry getLastEntry() {
+        
+        return this.financialRecord.get(financialRecord.size() - 1);
+    }
+    
+    public RecordEntry getSecondToLastEntry() {
+        
+        return this.financialRecord.get(financialRecord.size() - 2);
+    }
 
 
 }

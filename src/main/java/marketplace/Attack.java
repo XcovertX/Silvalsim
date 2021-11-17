@@ -21,7 +21,25 @@ public class Attack {
         
         calculateAttackOutcome();
         
-        int developers = 2;
+        int strength = calculateAttackStrength();
+        boolean critical = calculateCriticalAttackSuccess();
+        
+        int developers = 0;
+        
+        for(int i = 0; i < strength; i++) {
+            
+            if (critical) {
+                
+                attacker.addDev(defender.removeTopDev());
+                
+            } else {
+                
+                attacker.addDev(defender.removeLowestDev());
+            }
+        }
+        
+        
+        
         
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
         Printer.print(Printer.ANSI_RED, "DRAINS");
@@ -29,6 +47,16 @@ public class Attack {
         Printer.print(" of valuable talent by stealing ");
         Printer.print(Printer.ANSI_RED, Integer.toString(developers));
         Printer.println(" key developers!!");
+        
+        Printer.print(Printer.ANSI_CYAN, attacker.getName());
+        Printer.print(" now has ");
+        Printer.print(Printer.ANSI_GREEN, Integer.toString(attacker.getDevs().size()));
+        Printer.println(" developers.");
+        
+        Printer.print(Printer.ANSI_CYAN, defender.getName());
+        Printer.print(" now has ");
+        Printer.print(Printer.ANSI_RED, Integer.toString(defender.getDevs().size()));
+        Printer.println(" developers.");
         
     }
     
@@ -91,11 +119,20 @@ public class Attack {
 //        results[3] = calculateDodgeStrength();
          
     }
-//    
-//    private int calculateAttackStrength() {
-//        
-//    }
-//    
+    
+    private int calculateAttackStrength() {
+        
+        int strength = (int) Math.round(attacker.getNetIncome() / 1000000.00);
+        
+        if (strength < 1) {
+            
+            strength = 1;
+        }
+        
+        return strength;
+        
+    }
+    
 //    private int calculateCriticalAttack() {
 //        
 //    }
@@ -111,11 +148,13 @@ public class Attack {
 //    private boolean calculateAttackSuccess() {
 //        
 //    }
-//    
-//    private boolean calculateCriticalAttackSuccess() {
-//        
-//    }
-//    
+    
+    private boolean calculateCriticalAttackSuccess() {
+        
+        return true;
+        
+    }
+    
 //    private boolean calculateDefenseSuccess() {
 //        
 //    }

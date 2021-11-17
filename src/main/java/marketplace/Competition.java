@@ -1,6 +1,7 @@
 package main.java.marketplace;
 
 import main.java.actor.StartUp;
+import main.java.world.Printer;
 
 public class Competition {
     
@@ -45,41 +46,19 @@ public class Competition {
             opponentTwoOffense.attack();
             setCounterTwo(0);
         }
-//        
-//        if(opponentOne.getRevenue() <= 0 ) {
-//            opponentOne.die();
-//            if( opponentOne.equals( Game.currentGame.getPlayer() ) ) {
-//                world.print("You have ");
-//                Game.currentGame.getUI().printColor( "died", Color.RED);
-//                Game.currentGame.getUI().println( ".");
-//            } else {
-//                Game.currentGame.getUI().print( "The ");
-//                Game.currentGame.getUI().printColor( opponentOne.toString(), Color.GREEN);
-//                Game.currentGame.getUI().print( " has ");
-//                Game.currentGame.getUI().printColor( "died", Color.RED );
-//                Game.currentGame.getUI().println( "." );
-//            }
-//        }
-//        
-//        if(opponentTwo.getRevenue() <= 0 ) {
-//            opponentTwo.die();
-//            if( opponentTwo.equals( Game.currentGame.getPlayer() ) ) {
-//                Game.currentGame.getUI().print( "You have ");
-//                Game.currentGame.getUI().printColor( "died", Color.RED);
-//                Game.currentGame.getUI().println( ".");
-//            } else {
-//                Game.currentGame.getUI().print( "The ");
-//                Game.currentGame.getUI().printColor( opponentTwo.toString(), Color.GREEN);
-//                Game.currentGame.getUI().print( " has ");
-//                Game.currentGame.getUI().printColor( "died", Color.RED );
-//                Game.currentGame.getUI().println( "." );
-//            }
-//        }
-//        
-//        if( !opponentOne.isAlive() || !opponentTwo.isAlive() ) {
-//        
-//            endFight();
-//        }
+        
+        if(opponentOne.getRevenue() <= 0 ) {
+            opponentOne.die();
+        }
+        
+        if(opponentTwo.getRevenue() <= 0 ) {
+            opponentTwo.die();
+        }
+        
+        if( !opponentOne.isAlive() || !opponentTwo.isAlive() ) {
+        
+            endFight();
+        }
         incrementCounters();
     }
 

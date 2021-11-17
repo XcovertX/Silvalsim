@@ -22,6 +22,8 @@ public class Quarter {
         setCurrentQuarter(currentQuarter);
         setCurrentDay(currentDay);
         calculateCorporateTaxCutPercent();
+        Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
+        
     }
     
     private void calculateCorporateTaxCutPercent() {
@@ -67,11 +69,15 @@ public class Quarter {
         
         if(currentQuarter >= Q4) {
             
+            Printer.print(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has ended and ");
             currentQuarter = Q1;
+            Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
             
         } else {
             
+            Printer.print(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has ended and ");
             currentQuarter++;
+            Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
         }
     }
     
