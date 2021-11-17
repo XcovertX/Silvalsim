@@ -3,6 +3,7 @@ package main.java.world;
 import java.util.ArrayList;
 
 import main.java.actor.Actor;
+import main.java.actor.Developer;
 import main.java.actor.StartUp;
 import main.java.actor.TechGiant;
 import main.java.marketplace.Competition;
@@ -24,15 +25,33 @@ public class World {
         marketPlace = new MarketPlace();
         
         TechGiant tg1 = new TechGiant("Meta", "Taking over the world one face at a time.");
+        
         StartUp su1 = new StartUp("Instagram", "Addicting Pictures", new NewYork());
-
         StartUp su2 = new StartUp("Myspace", "Jenky Pictures", new Washington());
         
+        Developer seniorDev1 = new Developer("Steve", "Has grey hair", 10);
+        Developer seniorDev2 = new Developer("James", "Has grey hair", 10);
+        Developer seniorDev3 = new Developer("Bill", "Has grey hair", 10);
+        Developer seniorDev4 = new Developer("Tony", "Has grey hair", 10);
+        
+        Developer juniorDev1 = new Developer("Steve", "Has grey hair", 1);
+        Developer juniorDev2 = new Developer("James", "Has grey hair", 3);
+        Developer juniorDev3 = new Developer("Bill", "Has grey hair", 2);
+        Developer juniorDev4 = new Developer("Tony", "Has grey hair", 2);
+        
         su1.setRevenue(100.00);
+        su1.addDev(seniorDev1);
+        su1.addDev(seniorDev2);
+        su1.addDev(seniorDev3);
+        su1.addDev(juniorDev1);
+        su1.setRevenue(200.00);
+        
+        su2.addDev(seniorDev4);
+        su2.addDev(juniorDev2);
+        su2.addDev(juniorDev3);
+        su2.addDev(juniorDev4);
         su2.setRevenue(100.00);
         
-        su1.setSpeed(3);
-        su2.setSpeed(5);
         
         tg1.getStartups().add(su1);
         tg1.getStartups().add(su2);

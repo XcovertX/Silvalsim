@@ -1,6 +1,8 @@
 package main.java.actor;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import main.java.marketplace.Competition;
 import main.java.world.Location;
@@ -28,6 +30,13 @@ public class StartUp extends Actor {
         setName(name);
         setDescription(description);
         setLocation(location);
+        setXP(0);
+        setNetIncome(0);
+        setRevenue(0);
+        setMarketShare(0);
+        setSpeed(0);
+        
+        devs = new ArrayList<Developer>();
         
     }
     
@@ -85,7 +94,7 @@ public class StartUp extends Actor {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    private void setSpeed(int speed) {
         this.speed = speed;
     }
 
@@ -102,6 +111,7 @@ public class StartUp extends Actor {
     }
 
     public void setDevs(ArrayList<Developer> devs) {
+        this.speed = devs.size();
         this.devs = devs;
     }
     
@@ -109,8 +119,67 @@ public class StartUp extends Actor {
         return devs.get(index);
     }
     
-    public void addDev(Developer dev) {
-        devs.add(dev);
+    public void removeDev(Developer dev) {
+        
+        for(int i = 0; i < devs.size(); i++) {
+            if (devs.get(i).equals(dev)) {
+                devs.remove(i);
+                this.speed--;
+            }
+        }
     }
+    
+    public void removeTopDev() {
+        
+        Collections.sort(devs, new Comparator<Developer>() {
+            
+            @Override
+            public int compare(Developer d1, Developer d2) {
+                
+                if (d1.getTalent() > d2.getTalent()) {
+                    return 1;
+                }
+                
+                if (d1.getTalent() < d2.getTalent()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+        
+        devs.remove(0);
+        this.speed--;
+    }
+    
+    public void removeLowestDev() {
+        
+        Collections.sort(devs, new Comparator<Developer>() {
+            
+            @Override
+            public int compare(Developer d1, Developer d2) {
+                
+                if (d1.getTalent() < d2.getTalent()) {
+                    return 1;
+                }
+                
+                if (d1.getTalent() > d2.getTalent()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+        
+        devs.remove(0);
+        this.speed--;
+    }
+    
+    public void addDev(Developer dev) {
+        
+        devs.add(dev);
+        this.speed++;
+    }
+    
+
+
 
 }

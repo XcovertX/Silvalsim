@@ -26,10 +26,10 @@ public class Competition {
         this.opponentTwo.setEngagedInCompetition(true);
         this.opponentOne.setCurrentCompetition(this);
         this.opponentTwo.setCurrentCompetition(this);
-        this.opponentOneOffense = new Offense(opponentOne, opponentTwo);
-        this.opponentTwoOffense = new Offense(opponentTwo, opponentOne);
         this.opponentOneDefense = new Defense(opponentOne, opponentTwo);
         this.opponentTwoDefense = new Defense(opponentTwo, opponentOne);
+        this.opponentOneOffense = new Offense(opponentOne, opponentTwo);
+        this.opponentTwoOffense = new Offense(opponentTwo, opponentOne);
         
         combatCycle();
     }
