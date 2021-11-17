@@ -37,12 +37,12 @@ public class Competition {
     public void combatCycle() {
         
         if (counterOne / (opponentOne.getSpeed()) > 1) {
-            opponentOneOffense.attack();
+            opponentOneOffense.attack(opponentTwoDefense);
             setCounterOne(0);
         }
         
         if (counterTwo / (opponentTwo.getSpeed()) > 1) {
-            opponentTwoOffense.attack();
+            opponentTwoOffense.attack(opponentOneDefense);
             setCounterTwo(0);
         }
 //        
