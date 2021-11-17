@@ -26,6 +26,7 @@ public class Competition {
     public void combatCycle() {
         
         new DrainTalentCommand(opponentOne, opponentTwo).execute();
+        new StealTradeSecretCommand(opponentOne, opponentTwo).execute();
         
 //        if( counterOne/( opponentOne.getDexterity().getSpeedOfMovement() ) > 1 ) {
 //            new Attack( opponentOne, opponentTwo );
