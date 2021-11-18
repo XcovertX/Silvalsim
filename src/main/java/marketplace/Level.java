@@ -1,20 +1,34 @@
 package main.java.marketplace;
 
+import java.util.Random;
+
+import main.java.world.Printer;
+
 public abstract class Level {
     
     private String title;
     private int levelNumber;
     private int successMultiplier; 
     private int baseNumber;
+    private int xpMin;
+    private int xpMax;
     
     public boolean compareXPBase(int xp) {
         
+
+        Printer.println(Printer.ANSI_GREEN, "xp: " + Integer.toString(xp));
         if (xp > baseNumber) {
             
-            return true;
-            
+            return true;   
         }
         return false;
+    }
+    
+    public int getXP() {
+        
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(xpMax + 1 - xpMin) + xpMin;
+        return randomNumber;
     }
 
     public String getTitle() {
@@ -47,5 +61,21 @@ public abstract class Level {
 
     public void setLevelNumber(int levelNumber) {
         this.levelNumber = levelNumber;
+    }
+
+    public int getXPMin() {
+        return xpMin;
+    }
+
+    public void setXPMin(int xpMin) {
+        this.xpMin = xpMin;
+    }
+
+    public int getXPMax() {
+        return xpMax;
+    }
+
+    public void setXPMax(int xpMax) {
+        this.xpMax = xpMax;
     }
 }

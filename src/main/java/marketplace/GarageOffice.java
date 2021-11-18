@@ -7,6 +7,8 @@ public class GarageOffice extends Level {
         this.setTitle("Garage Office");
         this.setSuccessMultiplier(2);
         this.setBaseNumber(100);
+        this.setXPMin(1);
+        this.setXPMax(3);
     }
 
 }

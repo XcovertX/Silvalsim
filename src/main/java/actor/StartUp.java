@@ -47,7 +47,7 @@ public class StartUp extends Actor {
         setMarketShare(0.00);
         setSpeed(0);
         
-        setLevels(new Levels());
+        setLevels(new Levels(this));
         setLevel(levels.getLevel(0));
         
         devs = new ArrayList<Developer>();
@@ -126,6 +126,11 @@ public class StartUp extends Actor {
     private void setSpeed(int speed) {
         
         this.speed = speed;
+    }
+    
+    public void awardXP() {
+        
+        xp = xp + level.getXP();
     }
 
     public int getXP() {

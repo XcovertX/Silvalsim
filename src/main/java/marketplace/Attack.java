@@ -32,6 +32,7 @@ public class Attack {
                 if (critical) {
                     
                     attacker.addDev(defender.removeTopDev());
+                    attacker.awardXP();
                     developers++;
                     
                 } else {

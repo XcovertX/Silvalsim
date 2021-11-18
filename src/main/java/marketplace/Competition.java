@@ -63,6 +63,16 @@ public class Competition {
             opponentTwo.die();
         }
         
+        if (opponentOne.getLevel().compareXPBase(opponentOne.getXP())) {
+            
+            opponentOne.getLevels().levelUp(opponentOne.getLevel().getLevelNumber());
+        }
+        
+        if (opponentTwo.getLevel().compareXPBase(opponentTwo.getXP())) {
+            
+            opponentTwo.getLevels().levelUp(opponentTwo.getLevel().getLevelNumber());
+        }
+        
         if( !opponentOne.isAlive() || !opponentTwo.isAlive() ) {
         
             endFight();
