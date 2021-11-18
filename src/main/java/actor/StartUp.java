@@ -3,6 +3,7 @@ package main.java.actor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 import main.java.marketplace.Competition;
 import main.java.marketplace.Level;
@@ -25,11 +26,12 @@ public class StartUp extends Actor {
     private double revenue;                         // health points
     private double marketShare;                     // defense points
     private int speed;                              // action speed
-    
+    private double serviceCost;                     // cost to use the sevice
     private ArrayList<RecordEntry> financialRecord; // log of finances
     
     // Devs ////////////////////////
-    private ArrayList<Developer> devs;              // dev talent
+    private ArrayList<Developer> devs;              // devs employed
+    private ArrayList<Customer> customers;          // number of customers
     private Location location;                      // company location
     
     private boolean engagedInCompetition;
@@ -58,8 +60,81 @@ public class StartUp extends Actor {
         
         devs = new ArrayList<Developer>();
         financialRecord = new ArrayList<RecordEntry>();
+        customers = new ArrayList<Customer>();
         
         
+    }
+    
+    public void addJuniorDevs(int numOfDevs) {
+        
+        Random rand = new Random();
+        int max = 5;
+        int min = 0;
+        int offset = rand.nextInt(max + 1 - min) + min;
+        for(int i = 0; i < numOfDevs; i++) {
+            Developer dev = new Developer(Developer.JUNIOR_DEV_TALENT + offset);
+            this.addDev(dev);
+        }   
+    }
+    
+    public void addExperiencedDevs(int numOfDevs) {
+        
+        Random rand = new Random();
+        int max = 5;
+        int min = 0;
+        int offset = rand.nextInt(max + 1 - min) + min;
+        for(int i = 0; i < numOfDevs; i++) {
+            Developer dev = new Developer(Developer.EXPERIENCED_DEV_TALENT + offset);
+            this.addDev(dev);
+        }
+    }
+    
+    public void addSeniorDevs(int numOfDevs) {
+        
+        Random rand = new Random();
+        int max = 5;
+        int min = 0;
+        int offset = rand.nextInt(max + 1 - min) + min;
+        for(int i = 0; i < numOfDevs; i++) {
+            Developer dev = new Developer(Developer.SENIOR_DEV_TALENT + offset);
+            this.addDev(dev);
+        }
+    }
+    
+    public void addLowIncomeCustomers(int numOfCustomers) {
+        
+        Random rand = new Random();
+        int max = 10;
+        int min = 0;
+        int offset = rand.nextInt(max + 1 - min) + min;
+        for(int i = 0; i < numOfCustomers; i++) {
+            Customer customer = new Customer(Customer.LOW_INCOME_AVAILABLE_FUNDS + offset);
+            this.addCustomer(customer);
+        }   
+    }
+    
+    public void addMediumIncomeCustomers(int numOfCustomers) {
+        
+        Random rand = new Random();
+        int max = 200;
+        int min = 0;
+        int offset = rand.nextInt(max + 1 - min) + min;
+        for(int i = 0; i < numOfCustomers; i++) {
+            Customer customer = new Customer(Customer.MEDIUM_INCOME_AVAILABLE_FUNDS + offset);
+            this.addCustomer(customer);
+        }
+    }
+    
+    public void addHighIncomeCustomers(int numOfCustomers) {
+        
+        Random rand = new Random();
+        int max = 1000;
+        int min = 0;
+        int offset = rand.nextInt(max + 1 - min) + min;
+        for(int i = 0; i < numOfCustomers; i++) {
+            Customer customer = new Customer(Customer.HIGH_INCOME_AVAILABLE_FUNDS + offset);
+            this.addCustomer(customer);
+        }
     }
     
     // getters and setters
@@ -251,7 +326,8 @@ public class StartUp extends Actor {
     
     public void addFinancialRecord() {
         
-        RecordEntry re = new RecordEntry(this.netIncome, this.revenue, this.marketShare);
+        RecordEntry re = new RecordEntry(netIncome, revenue, marketShare, customers.size());
+        
         this.financialRecord.add(re);
     }
     
@@ -267,7 +343,7 @@ public class StartUp extends Actor {
             return this.financialRecord.get(financialRecord.size() - 2);
         } 
         
-        return new RecordEntry(0, 0, 0);
+        return new RecordEntry(0, 0, 0, 0);
     }
     
     public boolean compareXPToNextLevelXP() {
@@ -333,6 +409,91 @@ public class StartUp extends Actor {
 
     public void setXPMax(int xpMax) {
         this.xpMax = xpMax;
+    }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(ArrayList<Customer> customers) {
+        this.customers = customers;
+    }
+    
+    public Customer getCustomer(int index) {
+        
+        return customers.get(index);
+    }
+    
+    public void removeCustomer(Customer customer) {
+        
+        for(int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).equals(customer)) {
+                customers.remove(i);
+//                this.speed--;
+//                setNetIncome(this.netIncome - (devs.get(0).getTalent()));
+            }
+        }
+    }
+    
+//    public Developer removeHighIncomeCustomer() {
+//        
+//        Collections.sort(devs, new Comparator<Developer>() {
+//            
+//            @Override
+//            public int compare(Developer d1, Developer d2) {
+//                
+//                if (d1.getTalent() > d2.getTalent()) {
+//                    return 1;
+//                }
+//                
+//                if (d1.getTalent() < d2.getTalent()) {
+//                    return -1;
+//                }
+//                return 0;
+//            }
+//        });
+//        
+//        this.speed--;
+//        setNetIncome(this.netIncome - (devs.get(0).getTalent()));
+//        return devs.remove(0);
+//    }
+//    
+//    public Developer removeLowestDev() {
+//        
+//        Collections.sort(devs, new Comparator<Developer>() {
+//            
+//            @Override
+//            public int compare(Developer d1, Developer d2) {
+//                
+//                if (d1.getTalent() < d2.getTalent()) {
+//                    return 1;
+//                }
+//                
+//                if (d1.getTalent() > d2.getTalent()) {
+//                    return -1;
+//                }
+//                return 0;
+//            }
+//        });
+//        
+//        this.speed--;
+//        setNetIncome(this.netIncome - (devs.get(0).getTalent()));
+//        return devs.remove(0);
+//    }
+    
+    public void addCustomer(Customer customer) {
+        
+        customers.add(customer);
+//        this.speed++;
+//        setNetIncome(this.netIncome + (dev.getTalent()));
+    }
+
+    public double getServiceCost() {
+        return serviceCost;
+    }
+
+    public void setServiceCost(double serviceCost) {
+        this.serviceCost = serviceCost;
     }
 
 

@@ -4,13 +4,15 @@ public class RecordEntry {
     
     private double netIncome;
     private double revenue;
-    private double marketShare;
+    private double marketShare; 
+    private int numberOfCustomers;
     
-    public RecordEntry(double netIncome, double revenue, double marketShare) {
+    public RecordEntry(double netIncome, double revenue, double marketShare, int numOfCustomers) {
         
         this.netIncome = netIncome;
         this.revenue = revenue;
         this.marketShare = marketShare;
+        this.numberOfCustomers = numOfCustomers;
     }
     
     // getters and setters
@@ -43,5 +45,15 @@ public class RecordEntry {
     public void setMarketShare(double marketShare) {
         
         this.marketShare = marketShare;
+    }
+
+    public int getNumberOfCustomers() {
+        
+        return numberOfCustomers;
+    }
+
+    public void setNumberOfCustomers(int numberOfCustomers) {
+        
+        this.numberOfCustomers = numberOfCustomers;
     }
 }

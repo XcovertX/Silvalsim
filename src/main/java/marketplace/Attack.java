@@ -1,5 +1,7 @@
 package main.java.marketplace;
 
+import java.util.Random;
+
 import main.java.actor.StartUp;
 import main.java.world.Printer;
 
@@ -117,26 +119,41 @@ public class Attack {
         
         calculateAttackOutcome();
         
-        int strength = calculateAttackStrength();
-        boolean critical = calculateCriticalAttackSuccess();
+        boolean success = calculateAttackSuccess();
         
-        if (critical) {
+        if (success) {
             
-            defender.setRevenue(defender.getRevenue() / 2);
+            int strength = calculateAttackStrength();
+            boolean critical = calculateCriticalAttackSuccess();
+            
+            if (critical) {
+                
+                defender.setRevenue(defender.getRevenue() / 2);
+                
+            } else {
+                
+                defender.setRevenue(strength * 10);  
+            }
+            
+            Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
+            Printer.print(Printer.ANSI_RED, "UNDERCUTS");
+            Printer.print(" their prices, ");
+            Printer.print(Printer.ANSI_RED, "GOUGING");
+            Printer.print(" the overall revenue of ");
+            Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
+            Printer.println("!!");
             
         } else {
             
-            defender.setRevenue(strength * 10);  
+            
+            
+            Printer.print(Printer.ANSI_CYAN, attacker.getName());
+            Printer.print( " attempts to undercut thier prieces but,");
+            Printer.print( " the maneuver has no effect on");
+            Printer.print(" the revenue of ");
+            Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
+            Printer.println(".");
         }
-        
-        
-        Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
-        Printer.print(Printer.ANSI_RED, "UNDERCUTS");
-        Printer.print(" their prices, ");
-        Printer.print(Printer.ANSI_RED, "GOUGING");
-        Printer.print(" the overall revenue of ");
-        Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
-        Printer.println("!!");
         
     }
     
@@ -152,7 +169,6 @@ public class Attack {
     private int calculateAttackStrength() {
         
         int strength = (int) Math.round(attacker.getNetIncome() / 1000000.00);
-        
         
         if (strength < 1) {
             
@@ -174,17 +190,35 @@ public class Attack {
 //    private int calculateDodgeStrength() {
 //        
 //    }
-//    
-//    private boolean calculateAttackSuccess() {
-//        
-//    }
+    
+    private boolean calculateAttackSuccess() {
+        
+        Random rand = new Random();
+        int min = 0;
+        int max = 10;
+        int offset = attacker.getLevelNumber() - defender.getLevelNumber();
+        int probability = attacker.getAttackSuccessMultiplier() + offset;
+        int role = rand.nextInt(max + 1 - min) + min + offset;
+        
+        if (role <= probability) {
+            return true;
+        }
+        return false;    
+    }
     
     private boolean calculateCriticalAttackSuccess() {
         
+        Random rand = new Random();
+        int min = 0;
+        int max = 10;
+        int offset = attacker.getLevelNumber() - defender.getLevelNumber();
+        int probability = attacker.getAttackSuccessMultiplier() + offset;
+        int role = rand.nextInt(max + 1 - min) + min + offset;
         
-        
-        return true;
-        
+        if (role <= probability) {
+            return true;
+        }
+        return false; 
     }
     
 //    private boolean calculateDefenseSuccess() {

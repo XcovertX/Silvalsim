@@ -1,6 +1,7 @@
 package main.java.world;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import main.java.actor.Actor;
 import main.java.actor.Developer;
@@ -30,34 +31,30 @@ public class World {
         StartUp su1 = new StartUp("Instagram", "Addicting Pictures", new NewYork());
         StartUp su2 = new StartUp("Myspace", "Jenky Pictures", new Washington());
         
-        Developer seniorDev1 = new Developer("Steve", "Has grey hair", 10);
-        Developer seniorDev2 = new Developer("James", "Has grey hair", 10);
-        Developer seniorDev3 = new Developer("Bill", "Has grey hair", 10);
-        Developer seniorDev4 = new Developer("Tony", "Has grey hair", 10);
+        su1.addJuniorDevs(10);
+        su1.addExperiencedDevs(8);
+        su1.addSeniorDevs(4);
         
-        Developer juniorDev1 = new Developer("Steve", "Has grey hair", 1);
-        Developer juniorDev2 = new Developer("James", "Has grey hair", 3);
-        Developer juniorDev3 = new Developer("Bill", "Has grey hair", 2);
-        Developer juniorDev4 = new Developer("Tony", "Has grey hair", 2);
+        su2.addJuniorDevs(14);
+        su2.addExperiencedDevs(2);
+        su2.addSeniorDevs(3);
         
-        su1.setRevenue(100.00);
-        su1.addDev(seniorDev1);
-        su1.addDev(seniorDev2);
-        su1.addDev(seniorDev3);
-        su1.addDev(juniorDev1);
-        su1.setRevenue(200.00);
-         
-        su2.addDev(seniorDev4);
-        su2.addDev(juniorDev2);
-        su2.addDev(juniorDev3);
-        su2.addDev(juniorDev4);
-        su2.setRevenue(100.00);
+        su1.addLowIncomeCustomers(30);
+        su1.addMediumIncomeCustomers(15);
+        su1.addHighIncomeCustomers(10);
+        
+        su2.addLowIncomeCustomers(30);
+        su2.addMediumIncomeCustomers(15);
+        su2.addHighIncomeCustomers(10);
+        
         
         tg1.getStartups().add(su1);
         tg2.getStartups().add(su2);
         
         techGiants.add(tg1);
         techGiants.add(tg2);
+        
+        this.updateStartUps();
         
         currentCompetition = new Competition(su1, su2);
         
@@ -120,6 +117,7 @@ public class World {
             currentCompetition.combatCycle();
         }
     }
+    
     
     // getters and setters
     

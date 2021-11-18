@@ -2,13 +2,14 @@ package main.java.actor;
 
 public class Developer extends Actor {
     
+    public final static int JUNIOR_DEV_TALENT = 1;
+    public final static int EXPERIENCED_DEV_TALENT = 5;
+    public final static int SENIOR_DEV_TALENT = 10;
+    
     private int talent;
     
-    public Developer(String name, String description, int talent) {
-        
-        this.setName(name);
-        this.setDescription(description);
-        this.setTalent(talent);
+    public Developer(int talent) {
+
     }
 
     public int getTalent() {
@@ -18,5 +19,4 @@ public class Developer extends Actor {
     public void setTalent(int talent) {
         this.talent = talent;
     }
-
 }
