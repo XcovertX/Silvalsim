@@ -3,11 +3,12 @@ package main.java.actor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+//import java.lang.Math;
 
 import main.java.marketplace.Competition;
 import main.java.marketplace.RecordEntry;
 import main.java.world.Location;
-import main.java.world.NewYork;
+import main.java.world.Printer;
 
 public class StartUp extends Actor {
     
@@ -27,8 +28,8 @@ public class StartUp extends Actor {
     private boolean engagedInCompetition;
     private Competition currentCompetition;
     
-    private static final int NET_INCOME_MULTIPLIER = 100000;
-    private static final int REVENUE_MULTIPLIER = 1000000;
+    private static final double NET_INCOME_MULTIPLIER = 100000.00;
+    private static final double REVENUE_MULTIPLIER = 1000000.00;
 
     
     public StartUp(String name, String description, Location location) {
@@ -39,91 +40,111 @@ public class StartUp extends Actor {
         
         setLocation(location);
         setXP(0);
-        setNetIncome(0);
-        setRevenue(0);
-        setMarketShare(0);
+        setNetIncome(0.00);
+        setRevenue(0.00);
+        setMarketShare(0.00);
         setSpeed(0);
         
         devs = new ArrayList<Developer>();
+        financialRecord = new ArrayList<RecordEntry>();
         
     }
     
     // getters and setters
 
     public double getNetIncome() {
+        
         return netIncome;
     }
 
     public void setNetIncome(double netIncome) {
-        this.netIncome = netIncome;
+        
+        this.netIncome = Math.floor(netIncome * 100) / 100.00;
     }
 
     public double getRevenue() {
+        
         return revenue;
     }
 
     public void setRevenue(double revenue) {
-        this.revenue = revenue;
+        
+        this.revenue = Math.floor(revenue * 100) / 100.00;
     }
 
     public double getMarketShare() {
+        
         return marketShare;
     }
 
     public void setMarketShare(double marketShare) {
-        this.marketShare = marketShare;
+        
+        this.marketShare = Math.floor(marketShare * 100) / 100.00;
     }
 
     public Location getLocation() {
+        
         return location;
     }
 
     public void setLocation(Location location) {
+        
         this.location = location;
     }
 
     public boolean isEngagedInCompetition() {
+        
         return engagedInCompetition;
     }
 
     public void setEngagedInCompetition(boolean engagedInCompetition) {
+        
         this.engagedInCompetition = engagedInCompetition;
     }
 
     public Competition getCurrentCompetition() {
+        
         return currentCompetition;
     }
 
     public void setCurrentCompetition(Competition currentCompetition) {
+        
         this.currentCompetition = currentCompetition;
     }
 
     public int getSpeed() {
+        
         return speed;
     }
 
     private void setSpeed(int speed) {
+        
         this.speed = speed;
     }
 
     public int getXP() {
+        
         return xp;
     }
 
     public void setXP(int xp) {
+        
         this.xp = xp;
     }
 
     public ArrayList<Developer> getDevs() {
+        
         return devs;
     }
 
     public void setDevs(ArrayList<Developer> devs) {
+        
         this.speed = devs.size();
         this.devs = devs;
     }
     
     public Developer getDev(int index) {
+        
         return devs.get(index);
     }
     
@@ -133,7 +154,7 @@ public class StartUp extends Actor {
             if (devs.get(i).equals(dev)) {
                 devs.remove(i);
                 this.speed--;
-                this.netIncome -= devs.get(i).getTalent() * NET_INCOME_MULTIPLIER;
+                setNetIncome(this.netIncome - (devs.get(0).getTalent()));
             }
         }
     }
@@ -157,7 +178,7 @@ public class StartUp extends Actor {
         });
         
         this.speed--;
-        this.netIncome -= devs.get(0).getTalent() * NET_INCOME_MULTIPLIER;
+        setNetIncome(this.netIncome - (devs.get(0).getTalent()));
         return devs.remove(0);
     }
     
@@ -180,7 +201,7 @@ public class StartUp extends Actor {
         });
         
         this.speed--;
-        this.netIncome -= devs.get(0).getTalent() * NET_INCOME_MULTIPLIER;
+        setNetIncome(this.netIncome - (devs.get(0).getTalent()));
         return devs.remove(0);
     }
     
@@ -188,17 +209,17 @@ public class StartUp extends Actor {
         
         devs.add(dev);
         this.speed++;
-        this.netIncome += dev.getTalent() * NET_INCOME_MULTIPLIER;
+        setNetIncome(this.netIncome + (dev.getTalent()));
     }
     
     public void increaseRevenue(Developer dev) {
         
-        this.setRevenue(revenue + (dev.getTalent() * REVENUE_MULTIPLIER));
+        this.setRevenue(this.revenue + (dev.getTalent()));       
     }
     
     public void increaseNetIncome(Developer dev) {
         
-        this.setNetIncome(netIncome + (dev.getTalent() * NET_INCOME_MULTIPLIER));
+        this.setNetIncome(this.netIncome + (dev.getTalent()));
     }
 
     public ArrayList<RecordEntry> getFinancialRecord() {
@@ -224,7 +245,12 @@ public class StartUp extends Actor {
     
     public RecordEntry getSecondToLastEntry() {
         
-        return this.financialRecord.get(financialRecord.size() - 2);
+        if (financialRecord.size() - 2 >= 0) {
+            
+            return this.financialRecord.get(financialRecord.size() - 2);
+        } 
+        
+        return new RecordEntry(0, 0, 0);
     }
 
 

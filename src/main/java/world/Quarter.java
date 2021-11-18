@@ -44,11 +44,12 @@ public class Quarter {
         if(currentQuarter == Q1) {
             
             calculateCorporateTaxCutPercent();
-            taxRate = applyCorporateTaxCuts(taxRate);
-             
+            
+            taxRate = applyCorporateTaxCuts(taxRate);   
         }
         
-        adjustedRevenue = deductTaxes(adjustedRevenue, taxRate); 
+        adjustedRevenue = Math.floor(deductTaxes(adjustedRevenue, taxRate) * 100) / 100; 
+        
         startup.setRevenue(adjustedRevenue);
     }
     

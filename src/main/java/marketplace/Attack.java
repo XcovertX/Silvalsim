@@ -28,19 +28,20 @@ public class Attack {
         
         for(int i = 0; i < strength; i++) {
             
-            if (critical) {
-                
-                attacker.addDev(defender.removeTopDev());
-                
-            } else {
-                
-                attacker.addDev(defender.removeLowestDev());
+            if (defender.getDevs().size() > 1) {
+                if (critical) {
+                    
+                    attacker.addDev(defender.removeTopDev());
+                    developers++;
+                    
+                } else {
+                    
+                    attacker.addDev(defender.removeLowestDev());
+                    developers++;
+                }
             }
         }
-        
-        
-        
-        
+
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
         Printer.print(Printer.ANSI_RED, "DRAINS");
         Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
@@ -57,6 +58,8 @@ public class Attack {
         Printer.print(" now has ");
         Printer.print(Printer.ANSI_RED, Integer.toString(defender.getDevs().size()));
         Printer.println(" developers.");
+        
+        developers = 0;
         
     }
     
@@ -123,6 +126,7 @@ public class Attack {
     private int calculateAttackStrength() {
         
         int strength = (int) Math.round(attacker.getNetIncome() / 1000000.00);
+        
         
         if (strength < 1) {
             

@@ -46,13 +46,12 @@ public class World {
         su1.addDev(seniorDev3);
         su1.addDev(juniorDev1);
         su1.setRevenue(200.00);
-        
+         
         su2.addDev(seniorDev4);
         su2.addDev(juniorDev2);
         su2.addDev(juniorDev3);
         su2.addDev(juniorDev4);
         su2.setRevenue(100.00);
-        
         
         tg1.getStartups().add(su1);
         tg2.getStartups().add(su2);
@@ -69,9 +68,7 @@ public class World {
         updateFinancialEvents();
         updateStartUps();
         updateMarketPlace();
-        
-        printScore(currentCompetition.getOpponentOne());
-        printScore(currentCompetition.getOpponentTwo());
+
     }
 
     private void updateFinancialEvents() {
@@ -122,14 +119,6 @@ public class World {
             
             currentCompetition.combatCycle();
         }
-    }
-    
-    private void printScore(StartUp su) {
-        
-        Printer.println("");
-        Printer.print(Printer.ANSI_CYAN, su.getName());
-        Printer.print(" Revenue: ");
-        
     }
     
     // getters and setters
