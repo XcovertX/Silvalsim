@@ -15,8 +15,6 @@ public abstract class Level {
     
     public boolean compareXPBase(int xp) {
         
-
-        Printer.println(Printer.ANSI_GREEN, "xp: " + Integer.toString(xp));
         if (xp > baseNumber) {
             
             return true;   

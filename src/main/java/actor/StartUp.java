@@ -15,7 +15,12 @@ public class StartUp extends Actor {
     // Stats ///////////////////////
     private Levels levels;                          // all possible levels
     private Level level;                            // current level
+    private int levelNumber;                        // current level number
     private int xp;                                 // experience points
+    private int xpMin;                              // min awarded xp for successful attacks
+    private int xpMax;                              // max awarded xp for successful attacks
+    private int xpToNextLevel;                      // xp needed to level up
+    private int attackSuccessMultiplier;            // for determining attack success
     private double netIncome;                       // hit points
     private double revenue;                         // health points
     private double marketShare;                     // defense points
@@ -48,7 +53,8 @@ public class StartUp extends Actor {
         setSpeed(0);
         
         setLevels(new Levels(this));
-        setLevel(levels.getLevel(0));
+        
+        levels.setLevel(0);
         
         devs = new ArrayList<Developer>();
         financialRecord = new ArrayList<RecordEntry>();
@@ -263,6 +269,15 @@ public class StartUp extends Actor {
         
         return new RecordEntry(0, 0, 0);
     }
+    
+    public boolean compareXPToNextLevelXP() {
+        
+        if (this.xp > this.xpToNextLevel) {
+            
+            return true;
+        }
+        return false;
+    }
 
     public Level getLevel() {
         return level;
@@ -278,6 +293,46 @@ public class StartUp extends Actor {
 
     public void setLevels(Levels levels) {
         this.levels = levels;
+    }
+
+    public int getXpToNextLevel() {
+        return xpToNextLevel;
+    }
+
+    public void setXpToNextLevel(int xpToNextLevel) {
+        this.xpToNextLevel = xpToNextLevel;
+    }
+
+    public int getAttackSuccessMultiplier() {
+        return attackSuccessMultiplier;
+    }
+
+    public void setAttackSuccessMultiplier(int attackSuccessMultiplier) {
+        this.attackSuccessMultiplier = attackSuccessMultiplier;
+    }
+
+    public int getLevelNumber() {
+        return levelNumber;
+    }
+
+    public void setLevelNumber(int levelNumber) {
+        this.levelNumber = levelNumber;
+    }
+
+    public int getXPMin() {
+        return xpMin;
+    }
+
+    public void setXPMin(int xpMin) {
+        this.xpMin = xpMin;
+    }
+
+    public int getXPMax() {
+        return xpMax;
+    }
+
+    public void setXPMax(int xpMax) {
+        this.xpMax = xpMax;
     }
 
 

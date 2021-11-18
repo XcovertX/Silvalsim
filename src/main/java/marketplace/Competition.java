@@ -63,14 +63,14 @@ public class Competition {
             opponentTwo.die();
         }
         
-        if (opponentOne.getLevel().compareXPBase(opponentOne.getXP())) {
+        if (opponentOne.compareXPToNextLevelXP()) {
             
-            opponentOne.getLevels().levelUp(opponentOne.getLevel().getLevelNumber());
+            opponentOne.getLevels().levelUp(opponentOne.getLevelNumber());
         }
         
-        if (opponentTwo.getLevel().compareXPBase(opponentTwo.getXP())) {
+        if (opponentTwo.compareXPToNextLevelXP()) {
             
-            opponentTwo.getLevels().levelUp(opponentTwo.getLevel().getLevelNumber());
+            opponentTwo.getLevels().levelUp(opponentTwo.getLevelNumber());
         }
         
         if( !opponentOne.isAlive() || !opponentTwo.isAlive() ) {
@@ -117,7 +117,9 @@ public class Competition {
             Printer.print(Printer.ANSI_GREEN, "$" + Double.toString(su.getMarketShare()));
         }
         
-        Printer.println("");
+        Printer.print(Printer.ANSI_YELLOW, " XP: " + Integer.toString(su.getXP()));
+        
+        Printer.println(Printer.ANSI_YELLOW, " Current Level: " + su.getLevel().getTitle());
         
     }
 
