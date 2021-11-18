@@ -69,6 +69,8 @@ public class Attack {
         this.defender = defender;
         
         calculateAttackOutcome();
+        
+        
 
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
         Printer.print(Printer.ANSI_RED, "STEALS");
@@ -87,6 +89,17 @@ public class Attack {
         
         calculateAttackOutcome();
         
+        int strength = calculateAttackStrength();
+        boolean critical = calculateCriticalAttackSuccess();
+        
+        if (critical) {
+            
+            
+            
+        } else {
+            
+        }
+        
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
         Printer.print(Printer.ANSI_RED, "BRIBES");
         Printer.print(" a corrupt politician, ");
@@ -103,12 +116,24 @@ public class Attack {
         
         calculateAttackOutcome();
         
+        int strength = calculateAttackStrength();
+        boolean critical = calculateCriticalAttackSuccess();
+        
+        if (critical) {
+            
+            defender.setRevenue(defender.getRevenue() / 2);
+            
+        } else {
+            
+            defender.setRevenue(strength * 10);  
+        }
+        
         
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
         Printer.print(Printer.ANSI_RED, "UNDERCUTS");
         Printer.print(" their prices, ");
-        Printer.print(Printer.ANSI_RED, "TEMPORARILY REDUCING");
-        Printer.print(" sales of ");
+        Printer.print(Printer.ANSI_RED, "GOUGING");
+        Printer.print(" the overall revenue of ");
         Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
         Printer.println("!!");
         
@@ -154,6 +179,8 @@ public class Attack {
 //    }
     
     private boolean calculateCriticalAttackSuccess() {
+        
+        
         
         return true;
         

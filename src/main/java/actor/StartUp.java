@@ -3,27 +3,29 @@ package main.java.actor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-//import java.lang.Math;
 
 import main.java.marketplace.Competition;
+import main.java.marketplace.Level;
+import main.java.marketplace.Levels;
 import main.java.marketplace.RecordEntry;
 import main.java.world.Location;
-import main.java.world.Printer;
 
 public class StartUp extends Actor {
     
     // Stats ///////////////////////
-    private int xp;
-    private double netIncome;               // hit points
-    private double revenue;                 // health points
-    private double marketShare;             // defense points
-    private int speed;                      // action speed
+    private Levels levels;                          // all possible levels
+    private Level level;                            // current level
+    private int xp;                                 // experience points
+    private double netIncome;                       // hit points
+    private double revenue;                         // health points
+    private double marketShare;                     // defense points
+    private int speed;                              // action speed
     
-    private ArrayList<RecordEntry> financialRecord;
+    private ArrayList<RecordEntry> financialRecord; // log of finances
     
     // Devs ////////////////////////
-    private ArrayList<Developer> devs;      // dev talent
-    private Location location;              // company location
+    private ArrayList<Developer> devs;              // dev talent
+    private Location location;                      // company location
     
     private boolean engagedInCompetition;
     private Competition currentCompetition;
@@ -45,8 +47,12 @@ public class StartUp extends Actor {
         setMarketShare(0.00);
         setSpeed(0);
         
+        setLevels(new Levels());
+        setLevel(levels.getLevel(0));
+        
         devs = new ArrayList<Developer>();
         financialRecord = new ArrayList<RecordEntry>();
+        
         
     }
     
@@ -251,6 +257,22 @@ public class StartUp extends Actor {
         } 
         
         return new RecordEntry(0, 0, 0);
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public Levels getLevels() {
+        return levels;
+    }
+
+    public void setLevels(Levels levels) {
+        this.levels = levels;
     }
 
 
