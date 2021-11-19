@@ -7,16 +7,42 @@ public class Developer extends Actor {
     public final static int SENIOR_DEV_TALENT = 10;
     
     private int talent;
+    private double salary;
+    private double paycheck; 
     
-    public Developer(int talent) {
+    public Developer(int talent, double salary) {
 
+        this.talent = talent;
+        this.salary = salary;
+        this.paycheck = Math.floor((salary / 24) * 100) / 100;
     }
 
     public int getTalent() {
+        
         return talent;
     }
 
     public void setTalent(int talent) {
+        
         this.talent = talent;
     }
+
+    public double getSalary() {
+        
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        
+        this.salary = salary;
+    }
+
+    public double getPaycheck() {
+        return paycheck;
+    }
+
+    public void setPaycheck(double paycheck) {
+        this.paycheck = paycheck;
+    }
+
 }

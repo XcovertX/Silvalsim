@@ -71,9 +71,14 @@ public class StartUp extends Actor {
         Random rand = new Random();
         int max = 5;
         int min = 0;
-        int offset = rand.nextInt(max + 1 - min) + min;
+        int offset;
         for(int i = 0; i < numOfDevs; i++) {
-            Developer dev = new Developer(Developer.JUNIOR_DEV_TALENT + offset);
+            offset = rand.nextInt(max + 1 - min) + min;
+            double salary = 100000;
+            for(int j = 0; j < offset; j++) {
+                salary += 1000;
+            }
+            Developer dev = new Developer(Developer.JUNIOR_DEV_TALENT + offset, salary);
             this.addDev(dev);
         }   
     }
@@ -83,9 +88,14 @@ public class StartUp extends Actor {
         Random rand = new Random();
         int max = 5;
         int min = 0;
-        int offset = rand.nextInt(max + 1 - min) + min;
+        int offset;
         for(int i = 0; i < numOfDevs; i++) {
-            Developer dev = new Developer(Developer.EXPERIENCED_DEV_TALENT + offset);
+            offset = rand.nextInt(max + 1 - min) + min;
+            double salary = 120000;
+            for(int j = 0; j < offset; j++) {
+                salary += 1000;
+            }
+            Developer dev = new Developer(Developer.EXPERIENCED_DEV_TALENT + offset, salary);
             this.addDev(dev);
         }
     }
@@ -95,9 +105,14 @@ public class StartUp extends Actor {
         Random rand = new Random();
         int max = 5;
         int min = 0;
-        int offset = rand.nextInt(max + 1 - min) + min;
+        int offset;
         for(int i = 0; i < numOfDevs; i++) {
-            Developer dev = new Developer(Developer.SENIOR_DEV_TALENT + offset);
+            offset = rand.nextInt(max + 1 - min) + min;
+            double salary = 150000;
+            for(int j = 0; j < offset; j++) {
+                salary += 1000;
+            }
+            Developer dev = new Developer(Developer.SENIOR_DEV_TALENT + offset, salary);
             this.addDev(dev);
         }
     }
@@ -325,9 +340,19 @@ public class StartUp extends Actor {
         this.setRevenue(revenue + amount);       
     }
     
-    public void increaseNetIncome(Developer dev) {
+    public void increaseNetIncome(double amount) {
         
-        this.setNetIncome(this.netIncome + (dev.getTalent()));
+        this.setNetIncome(netIncome + amount);
+    }
+    
+    public void decreaseRevenue(double amount) {
+        
+        this.setRevenue(revenue - amount);       
+    }
+    
+    public void decreaseNetIncome(double amount) {
+        
+        this.setNetIncome(netIncome - amount);
     }
 
     public ArrayList<RecordEntry> getFinancialRecord() {
@@ -521,5 +546,8 @@ public class StartUp extends Actor {
         this.increaseRevenue(payment);
     }
 
-
+    public double payDev(double tempRevenue, Developer dev) {
+        
+        return tempRevenue - dev.getPaycheck();
+    }
 }
