@@ -40,6 +40,7 @@ public class Attack {
                 } else {
                     
                     attacker.addDev(defender.removeLowestDev());
+                    attacker.awardXP();
                     developers++;
                 }
             }
@@ -128,11 +129,11 @@ public class Attack {
             
             if (critical) {
                 
-                defender.setRevenue(defender.getRevenue() / 2);
+//                defender.setRevenue(defender.getRevenue() / 2);
                 
             } else {
                 
-                defender.setRevenue(strength * 10);  
+//                defender.setRevenue(strength * 10);  
             }
             
             Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");

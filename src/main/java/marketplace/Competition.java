@@ -2,8 +2,11 @@ package main.java.marketplace;
 
 import main.java.actor.StartUp;
 import main.java.world.Printer;
+import main.java.world.World;
 
 public class Competition {
+    
+    World world;
     
     // opponent one //////////////////
     private StartUp opponentOne;
@@ -17,7 +20,9 @@ public class Competition {
     private Defense opponentTwoDefense;
     private int counterTwo;
     
-    public Competition(StartUp actorOne, StartUp actorTwo) {
+    public Competition(World world, StartUp actorOne, StartUp actorTwo) {
+        
+        this.world = world;
         
         this.setOpponentOne(actorOne);
         this.setOpponentTwo(actorTwo);
@@ -53,12 +58,11 @@ public class Competition {
             setCounterTwo(0);
         }
         
-        if(opponentOne.getRevenue() <= 0 ) {
+        if (opponentOne.getRevenue() <= 0 ) {
             
             opponentOne.die();
-        }
-        
-        if(opponentTwo.getRevenue() <= 0 ) {
+            
+        } else if (opponentTwo.getRevenue() <= 0 ) {
             
             opponentTwo.die();
         }
@@ -119,7 +123,7 @@ public class Competition {
         
         Printer.print(Printer.ANSI_YELLOW, " XP: " + Integer.toString(su.getXP()));
         
-        Printer.println(Printer.ANSI_YELLOW, " Current Level: " + su.getLevel().getTitle());
+        Printer.println(Printer.ANSI_YELLOW, " Customer count: " + Integer.toString(su.getCustomers().size()));
         
     }
 
@@ -171,10 +175,11 @@ public class Competition {
     
     public void endFight() {
         
-        this.opponentOne.setEngagedInCompetition( false );
-        this.opponentTwo.setEngagedInCompetition( false );
-        this.opponentOne.setCurrentCompetition( null );
-        this.opponentTwo.setCurrentCompetition( null );
+        this.opponentOne.setEngagedInCompetition(false);
+        this.opponentTwo.setEngagedInCompetition(false );
+        this.opponentOne.setCurrentCompetition(null);
+        this.opponentTwo.setCurrentCompetition(null);
+        this.world.setCurrentCompetition(null);   
     }
     
     public int selectAttack(StartUp startup) {

@@ -13,6 +13,7 @@ public class Quarter {
     
     private int currentQuarter; 
     private int currentDay; 
+    private int currentMonth;
     private boolean isEven;
     
     private double taxCutPercent;
@@ -66,7 +67,7 @@ public class Quarter {
         
     }
 
-    public void incrementQuarter() {
+    private void incrementQuarter() {
         
         if(currentQuarter >= Q4) {
             
@@ -82,12 +83,25 @@ public class Quarter {
         }
     }
     
+    private void incrementMonth() {
+        
+        if(currentMonth >= 3) {
+            
+            currentMonth = 1;
+            incrementQuarter();
+            
+        } else {
+            
+            currentMonth++;
+        }
+    }
+    
     public void incrementDay() {
         
-        if(currentDay >= 90) {
+        if(currentDay >= 30) {
             
-            currentDay = 0;
-            incrementQuarter();
+            currentDay = 1;
+            incrementMonth();
             
         } else {
             
@@ -99,13 +113,13 @@ public class Quarter {
     
     private void setCurrentDay(int currentDay) {
         
-        if(!(currentDay < 0 || currentDay >= 90)) {
+        if(!(currentDay < 0 || currentDay >= 30)) {
             
             this.currentDay = currentDay; 
             
         } else {
             
-            this.currentDay = 0;
+            this.currentDay = 1;
         }
         
     }
@@ -148,5 +162,13 @@ public class Quarter {
             
             this.isEven = false;
         }
+    }
+
+    public int getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public void setCurrentMonth(int currentMonth) {
+        this.currentMonth = currentMonth;
     }
 }

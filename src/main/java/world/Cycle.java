@@ -58,10 +58,12 @@ public class Cycle implements Runnable {
     // getters and setters
 
     public Quarter getCurrentQuarter() {
+        
         return currentQuarter;
     }
 
     public void setCurrentQuarter(Quarter currentQuarter) {
+        
         this.currentQuarter = currentQuarter;
     }   
 }

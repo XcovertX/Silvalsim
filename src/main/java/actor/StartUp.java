@@ -53,6 +53,7 @@ public class StartUp extends Actor {
         setRevenue(0.00);
         setMarketShare(0.00);
         setSpeed(0);
+        setServiceCost(0.00);
         
         setLevels(new Levels(this));
         
@@ -106,9 +107,14 @@ public class StartUp extends Actor {
         Random rand = new Random();
         int max = 10;
         int min = 0;
-        int offset = rand.nextInt(max + 1 - min) + min;
+        int offset;
+        int dueDate;
         for(int i = 0; i < numOfCustomers; i++) {
-            Customer customer = new Customer(Customer.LOW_INCOME_AVAILABLE_FUNDS + offset);
+            offset = rand.nextInt(max + 1 - min) + min;
+            max = 30;
+            min = 1;
+            dueDate = rand.nextInt(max + 1 - min) + min;
+            Customer customer = new Customer(Customer.LOW_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
         }   
     }
@@ -118,9 +124,14 @@ public class StartUp extends Actor {
         Random rand = new Random();
         int max = 200;
         int min = 0;
-        int offset = rand.nextInt(max + 1 - min) + min;
+        int offset;
+        int dueDate;
         for(int i = 0; i < numOfCustomers; i++) {
-            Customer customer = new Customer(Customer.MEDIUM_INCOME_AVAILABLE_FUNDS + offset);
+            offset = rand.nextInt(max + 1 - min) + min;
+            max = 30;
+            min = 1;
+            dueDate = rand.nextInt(max + 1 - min) + min;
+            Customer customer = new Customer(Customer.MEDIUM_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
         }
     }
@@ -130,9 +141,14 @@ public class StartUp extends Actor {
         Random rand = new Random();
         int max = 1000;
         int min = 0;
-        int offset = rand.nextInt(max + 1 - min) + min;
+        int offset;
+        int dueDate;
         for(int i = 0; i < numOfCustomers; i++) {
-            Customer customer = new Customer(Customer.HIGH_INCOME_AVAILABLE_FUNDS + offset);
+            offset = rand.nextInt(max + 1 - min) + min;
+            max = 30;
+            min = 1;
+            dueDate = rand.nextInt(max + 1 - min) + min;
+            Customer customer = new Customer(Customer.HIGH_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
         }
     }
@@ -304,9 +320,9 @@ public class StartUp extends Actor {
         setNetIncome(this.netIncome + (dev.getTalent()));
     }
     
-    public void increaseRevenue(Developer dev) {
+    public void increaseRevenue(double amount) {
         
-        this.setRevenue(this.revenue + (dev.getTalent()));       
+        this.setRevenue(revenue + amount);       
     }
     
     public void increaseNetIncome(Developer dev) {
@@ -489,11 +505,20 @@ public class StartUp extends Actor {
     }
 
     public double getServiceCost() {
+        
         return serviceCost;
     }
 
     public void setServiceCost(double serviceCost) {
+        
         this.serviceCost = serviceCost;
+    }
+    
+    public void collectPayment(Customer customer) {
+        
+        customer.setAvailableFunds(customer.getAvailableFunds() - getServiceCost());
+        double payment = getServiceCost();
+        this.increaseRevenue(payment);
     }
 
 
