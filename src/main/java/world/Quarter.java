@@ -13,6 +13,7 @@ public class Quarter {
     
     private int currentQuarter; 
     private int currentDay; 
+    private int currentMonth;
     private boolean isEven;
     
     private double taxCutPercent;
@@ -22,6 +23,8 @@ public class Quarter {
         setCurrentQuarter(currentQuarter);
         setCurrentDay(currentDay);
         calculateCorporateTaxCutPercent();
+        Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
+        
     }
     
     private void calculateCorporateTaxCutPercent() {
@@ -42,11 +45,12 @@ public class Quarter {
         if(currentQuarter == Q1) {
             
             calculateCorporateTaxCutPercent();
-            taxRate = applyCorporateTaxCuts(taxRate);
-             
+            
+            taxRate = applyCorporateTaxCuts(taxRate);   
         }
         
-        adjustedRevenue = deductTaxes(adjustedRevenue, taxRate); 
+        adjustedRevenue = Math.floor(deductTaxes(adjustedRevenue, taxRate) * 100) / 100; 
+        
         startup.setRevenue(adjustedRevenue);
     }
     
@@ -63,24 +67,41 @@ public class Quarter {
         
     }
 
-    public void incrementQuarter() {
+    private void incrementQuarter() {
         
         if(currentQuarter >= Q4) {
             
+            Printer.print(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has ended and ");
             currentQuarter = Q1;
+            Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
             
         } else {
             
+            Printer.print(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has ended and ");
             currentQuarter++;
+            Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
+        }
+    }
+    
+    private void incrementMonth() {
+        
+        if(currentMonth >= 3) {
+            
+            currentMonth = 1;
+            incrementQuarter();
+            
+        } else {
+            
+            currentMonth++;
         }
     }
     
     public void incrementDay() {
         
-        if(currentDay >= 90) {
+        if(currentDay >= 30) {
             
-            currentDay = 0;
-            incrementQuarter();
+            currentDay = 1;
+            incrementMonth();
             
         } else {
             
@@ -92,13 +113,13 @@ public class Quarter {
     
     private void setCurrentDay(int currentDay) {
         
-        if(!(currentDay < 0 || currentDay >= 90)) {
+        if(!(currentDay < 0 || currentDay >= 30)) {
             
             this.currentDay = currentDay; 
             
         } else {
             
-            this.currentDay = 0;
+            this.currentDay = 1;
         }
         
     }
@@ -141,5 +162,13 @@ public class Quarter {
             
             this.isEven = false;
         }
+    }
+
+    public int getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public void setCurrentMonth(int currentMonth) {
+        this.currentMonth = currentMonth;
     }
 }

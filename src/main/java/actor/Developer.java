@@ -2,21 +2,47 @@ package main.java.actor;
 
 public class Developer extends Actor {
     
-    private int talent;
+    public final static int JUNIOR_DEV_TALENT = 1;
+    public final static int EXPERIENCED_DEV_TALENT = 5;
+    public final static int SENIOR_DEV_TALENT = 10;
     
-    public Developer(String name, String description, int talent) {
-        
-        this.setName(name);
-        this.setDescription(description);
-        this.setTalent(talent);
+    private int talent;
+    private double salary;
+    private double paycheck; 
+    
+    public Developer(int talent, double salary) {
+
+        this.talent = talent;
+        this.salary = salary;
+        this.paycheck = Math.floor((salary / 24) * 100) / 100;
     }
 
     public int getTalent() {
+        
         return talent;
     }
 
     public void setTalent(int talent) {
+        
         this.talent = talent;
+    }
+
+    public double getSalary() {
+        
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        
+        this.salary = salary;
+    }
+
+    public double getPaycheck() {
+        return paycheck;
+    }
+
+    public void setPaycheck(double paycheck) {
+        this.paycheck = paycheck;
     }
 
 }

@@ -63,5 +63,4 @@ public class Offense {
         
         return randomNumber;
     }
-    
 }

@@ -46,7 +46,7 @@ public class Cycle implements Runnable {
             
             currentQuarter.incrementDay();
             
-            Thread.sleep(1000); 
+            Thread.sleep(100); 
             
         } catch (InterruptedException e) {
             
@@ -58,10 +58,12 @@ public class Cycle implements Runnable {
     // getters and setters
 
     public Quarter getCurrentQuarter() {
+        
         return currentQuarter;
     }
 
     public void setCurrentQuarter(Quarter currentQuarter) {
+        
         this.currentQuarter = currentQuarter;
     }   
 }
