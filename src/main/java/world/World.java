@@ -164,13 +164,13 @@ public class World {
                         }
                     }
                 }
-                if (su.getName().equals("Instagram")) {
-                    System.out.println(su.getName() + " has made " + Icounter + " collections by day: " + this.getCurrentQuarter().getCurrentDay() + ". rev: " + su.getRevenue());
-                }
-                
-                if (su.getName().equals("Myspace")) {
-                    System.out.println(su.getName() + " has made " + Mcounter + " collections by day: " + this.getCurrentQuarter().getCurrentDay() + ". rev: " + su.getRevenue());
-                }
+//                if (su.getName().equals("Instagram")) {
+//                    System.out.println(su.getName() + " has made " + Icounter + " collections by day: " + this.getCurrentQuarter().getCurrentDay() + ". rev: " + su.getRevenue());
+//                }
+//                
+//                if (su.getName().equals("Myspace")) {
+//                    System.out.println(su.getName() + " has made " + Mcounter + " collections by day: " + this.getCurrentQuarter().getCurrentDay() + ". rev: " + su.getRevenue());
+//                }
                 
                 su.addFinancialRecord();
             }
