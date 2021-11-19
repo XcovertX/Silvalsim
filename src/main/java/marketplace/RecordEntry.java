@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public class RecordEntry {
     
-    private double netIncome;
+    private BigDecimal netIncome;
     private BigDecimal revenue;
-    private double marketShare; 
+    private BigDecimal marketShare; 
     private int numberOfCustomers;
     
-    public RecordEntry(double netIncome, BigDecimal revenue, double marketShare, int numOfCustomers) {
+    public RecordEntry(BigDecimal netIncome, BigDecimal revenue, BigDecimal marketShare, int numOfCustomers) {
         
         this.netIncome = netIncome;
         this.revenue = revenue;
@@ -19,12 +19,12 @@ public class RecordEntry {
     
     // getters and setters
     
-    public double getNetIncome() {
+    public BigDecimal getNetIncome() {
         
         return netIncome;
     }
     
-    public void setNetIncome(double netIncome) {
+    public void setNetIncome(BigDecimal netIncome) {
         
         this.netIncome = netIncome;
     }
@@ -39,12 +39,12 @@ public class RecordEntry {
         this.revenue = revenue;
     }
     
-    public double getMarketShare() {
+    public BigDecimal getMarketShare() {
         
         return marketShare;
     }
     
-    public void setMarketShare(double marketShare) {
+    public void setMarketShare(BigDecimal marketShare) {
         
         this.marketShare = marketShare;
     }

@@ -103,24 +103,24 @@ public class Competition {
         
         Printer.print(" NetIncome: ");
         
-        if (su.getLastEntry().getNetIncome() < su.getSecondToLastEntry().getNetIncome()) {
+        if (su.getLastEntry().getNetIncome().compareTo(su.getSecondToLastEntry().getNetIncome()) < 0) {
             
-            Printer.print(Printer.ANSI_RED, "$" + Double.toString(su.getNetIncome())); 
+            Printer.print(Printer.ANSI_RED, "$" + su.getNetIncome().toString()); 
             
         } else {
             
-            Printer.print(Printer.ANSI_GREEN, "$" + Double.toString(su.getNetIncome()));
+            Printer.print(Printer.ANSI_GREEN, "$" + su.getNetIncome().toString());
         }
         
         Printer.print(" MarketShare: ");
         
-        if (su.getLastEntry().getMarketShare() < su.getSecondToLastEntry().getMarketShare()) {
+        if (su.getLastEntry().getMarketShare().compareTo(su.getSecondToLastEntry().getMarketShare()) < 0) {
             
-            Printer.print(Printer.ANSI_RED, "$" + Double.toString(su.getMarketShare())); 
+            Printer.print(Printer.ANSI_RED, "$" + su.getMarketShare().toString()); 
             
         } else {
             
-            Printer.print(Printer.ANSI_GREEN, "$" + Double.toString(su.getMarketShare()));
+            Printer.print(Printer.ANSI_GREEN, "$" + su.getMarketShare().toString());
         }
         
         Printer.print(Printer.ANSI_YELLOW, " XP: " + Integer.toString(su.getXP()));

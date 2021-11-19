@@ -8,25 +8,32 @@ import main.java.actor.StartUp;
 
 public class Quarter {
     
-    final static int Q1 = 0;
-    final static int Q2 = 1;
-    final static int Q3 = 2;
-    final static int Q4 = 3;
+    final static int Q1 = 1;
+    final static int Q2 = 2;
+    final static int Q3 = 3;
+    final static int Q4 = 4;
+    
+    final static int FIRST_OF_THE_MONTH = 1;
+    final static int LAST_OF_THE_MONTH = 30;
+    final static int FIRST_MONTH_OF_THE_QUARTER = 1;
+    final static int LAST_MONTH_OF_THE_QUARTER = 3;
     
     private int currentQuarter; 
     private int currentDay; 
     private int currentMonth;
     private boolean isEven;
+    private boolean isFirstDayOfQuarter;
     
     private BigDecimal taxCutPercent;
     
-    public Quarter(int currentQuarter, int currentDay) {
+    public Quarter(int currentQuarter, int currentMonth, int currentDay) {
         
         setCurrentQuarter(currentQuarter);
+        setCurrentMonth(currentMonth);
         setCurrentDay(currentDay);
+        setFirstDayOfQuarter(true);
         calculateCorporateTaxCutPercent();
-        Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
-        
+        Printer.println(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has begun.");
     }
     
     private void calculateCorporateTaxCutPercent() {
@@ -34,26 +41,29 @@ public class Quarter {
         Random r = new Random();
         double rangeMin = 1.01;
         double rangeMax = 1.05;
-        taxCutPercent = new BigDecimal(rangeMin + (rangeMax - rangeMin) * r.nextDouble());
-        
+        taxCutPercent = new BigDecimal(rangeMin + (rangeMax - rangeMin) * r.nextDouble());     
     }
 
     public void applyFinancialEvents(StartUp startup){
         
-        
-        BigDecimal adjustedRevenue = startup.getRevenue();
-        BigDecimal taxRate = startup.getLocation().getTaxRate();
-        
-        if(currentQuarter == Q1) {
+        if (isFirstDayOfQuarter()) {
             
-            calculateCorporateTaxCutPercent();
+            BigDecimal adjustedRevenue = startup.getRevenue();
+            BigDecimal taxRate = startup.getLocation().getTaxRate();
             
-            taxRate = applyCorporateTaxCuts(taxRate);   
+            if (currentQuarter == Q1) {
+                
+                calculateCorporateTaxCutPercent();
+                taxRate = applyCorporateTaxCuts(taxRate);   
+            }
+    
+            adjustedRevenue = (deductTaxes(adjustedRevenue, taxRate).setScale(2, RoundingMode.DOWN));  
+            
+            startup.setRevenue(adjustedRevenue);
+
+            System.out.println("first day of quarter");
+
         }
-//        Math.floor(deductTaxes(adjustedRevenue, taxRate) * 100) / 100;
-        adjustedRevenue = (deductTaxes(adjustedRevenue, taxRate).setScale(2, RoundingMode.DOWN));  
-        
-        startup.setRevenue(adjustedRevenue);
     } 
     
     private BigDecimal deductTaxes(BigDecimal adjustedRevenue, BigDecimal taxRate) {
@@ -65,31 +75,32 @@ public class Quarter {
     private BigDecimal applyCorporateTaxCuts(BigDecimal taxRate) {
         
         BigDecimal adjustedTaxRate = taxRate.subtract(taxCutPercent.subtract(new BigDecimal(1)));
-        return adjustedTaxRate;
-        
+        return adjustedTaxRate;     
     }
 
     private void incrementQuarter() {
         
         if(currentQuarter >= Q4) {
             
-            Printer.print(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has ended and ");
+            Printer.print(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has ended and ");
             currentQuarter = Q1;
-            Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
+            Printer.println(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has begun.");
             
         } else {
             
-            Printer.print(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has ended and ");
+            Printer.print(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has ended and ");
             currentQuarter++;
-            Printer.println(Printer.ANSI_YELLOW, "QUARTER " + (currentQuarter + 1) + " has begun.");
+            Printer.println(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has begun.");
         }
+        
+        setFirstDayOfQuarter(true);
     }
     
     private void incrementMonth() {
         
-        if(currentMonth >= 3) {
+        if(currentMonth >= LAST_MONTH_OF_THE_QUARTER) {
             
-            currentMonth = 1;
+            currentMonth = FIRST_MONTH_OF_THE_QUARTER;
             incrementQuarter();
             
         } else {
@@ -100,35 +111,36 @@ public class Quarter {
     
     public void incrementDay() {
         
-        if(currentDay >= 30) {
+        if(currentDay >= LAST_OF_THE_MONTH) {
             
-            currentDay = 1;
+            currentDay = FIRST_OF_THE_MONTH;
             incrementMonth();
             
         } else {
             
             currentDay++;
+            setFirstDayOfQuarter(false);
         }
+        
     }
     
     // getters and setters
     
     private void setCurrentDay(int currentDay) {
         
-        if(!(currentDay < 0 || currentDay >= 30)) {
+        if(!(currentDay < FIRST_OF_THE_MONTH || currentDay >= LAST_OF_THE_MONTH)) {
             
             this.currentDay = currentDay; 
             
         } else {
             
-            this.currentDay = 1;
-        }
-        
+            this.currentDay = FIRST_OF_THE_MONTH;
+        }    
     }
 
     private void setCurrentQuarter(int currentQuarter) {
         
-        if(!(currentQuarter < 0 || currentQuarter >= 3)) {
+        if(!(currentQuarter < Q1 || currentQuarter >= Q4)) {
             
             this.currentQuarter = currentQuarter; 
             
@@ -167,10 +179,22 @@ public class Quarter {
     }
 
     public int getCurrentMonth() {
+        
         return currentMonth;
     }
 
     public void setCurrentMonth(int currentMonth) {
+        
         this.currentMonth = currentMonth;
+    }
+
+    public boolean isFirstDayOfQuarter() {
+        
+        return isFirstDayOfQuarter;
+    }
+
+    public void setFirstDayOfQuarter(boolean isFisrtDayOfQuarter) {
+        
+        this.isFirstDayOfQuarter = isFisrtDayOfQuarter;
     }
 }

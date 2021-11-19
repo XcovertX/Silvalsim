@@ -24,15 +24,17 @@ public class StartUp extends Actor {
     private int xpMax;                              // max awarded xp for successful attacks
     private int xpToNextLevel;                      // xp needed to level up
     private int attackSuccessMultiplier;            // for determining attack success
-    private double netIncome;                       // hit points
+    private BigDecimal netIncome;                       // hit points
     private BigDecimal revenue;                         // health points
-    private double marketShare;                     // defense points
+    private BigDecimal marketShare;                     // defense points
     private int speed;                              // action speed
     private double serviceCost;                     // cost to use the sevice
     private ArrayList<RecordEntry> financialRecord; // log of finances
     
     // Devs ////////////////////////
     private ArrayList<Developer> devs;              // devs employed
+    
+    // Customers ///////////////////
     private ArrayList<Customer> customers;          // number of customers
     private Location location;                      // company location
     
@@ -51,9 +53,9 @@ public class StartUp extends Actor {
         
         setLocation(location);
         setXP(0);
-        setNetIncome(0.00);
+        setNetIncome(new BigDecimal(0.00));
         setRevenue(new BigDecimal(0.00));
-        setMarketShare(0.00);
+        setMarketShare(new BigDecimal(0.00));
         setSpeed(0);
         setServiceCost(0.00);
         
@@ -64,8 +66,7 @@ public class StartUp extends Actor {
         devs = new ArrayList<Developer>();
         financialRecord = new ArrayList<RecordEntry>();
         customers = new ArrayList<Customer>();
-        
-        
+         
     }
     
     public void addJuniorDevs(int numOfDevs) {
@@ -172,14 +173,14 @@ public class StartUp extends Actor {
     
     // getters and setters
 
-    public double getNetIncome() {
+    public BigDecimal getNetIncome() {
         
         return netIncome;
     }
 
-    public void setNetIncome(double netIncome) {
+    public void setNetIncome(BigDecimal netIncome) {
         
-        this.netIncome = Math.floor(netIncome * 100) / 100.00;
+        this.netIncome = netIncome.setScale(2, RoundingMode.DOWN);
     }
 
     public BigDecimal getRevenue() {
@@ -187,21 +188,20 @@ public class StartUp extends Actor {
         return revenue;
     }
 
-    public void setRevenue(BigDecimal bigDecimal) {
+    public void setRevenue(BigDecimal revenue) {
         
-        BigDecimal newValue = bigDecimal.setScale(2, RoundingMode.DOWN);
-        this.revenue = newValue;
-//        this.revenue = new BigDecimal(Math.floor(bigDecimal.multiply(new BigDecimal(100))) / 100.00);
+        this.revenue = revenue.setScale(2, RoundingMode.DOWN);
+       
     }
 
-    public double getMarketShare() {
+    public BigDecimal getMarketShare() {
         
         return marketShare;
     }
 
-    public void setMarketShare(double marketShare) {
+    public void setMarketShare(BigDecimal marketShare) {
         
-        this.marketShare = Math.floor(marketShare * 100) / 100.00;
+        this.marketShare = marketShare.setScale(2, RoundingMode.DOWN);
     }
 
     public Location getLocation() {
@@ -281,7 +281,7 @@ public class StartUp extends Actor {
             if (devs.get(i).equals(dev)) {
                 devs.remove(i);
                 this.speed--;
-                setNetIncome(this.netIncome - (devs.get(0).getTalent()));
+                setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
             }
         }
     }
@@ -305,7 +305,7 @@ public class StartUp extends Actor {
         });
         
         this.speed--;
-        setNetIncome(this.netIncome - (devs.get(0).getTalent()));
+        setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
         return devs.remove(0);
     }
     
@@ -328,7 +328,7 @@ public class StartUp extends Actor {
         });
         
         this.speed--;
-        setNetIncome(this.netIncome - (devs.get(0).getTalent()));
+        setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
         return devs.remove(0);
     }
     
@@ -336,17 +336,19 @@ public class StartUp extends Actor {
         
         devs.add(dev);
         this.speed++;
-        setNetIncome(this.netIncome + (dev.getTalent()));
+        setNetIncome(this.netIncome.add(new BigDecimal(dev.getTalent())));
     }
     
     public void increaseRevenue(BigDecimal amount) {
+        
         BigDecimal total = revenue.add(amount);
         this.setRevenue(total);       
     }
     
-    public void increaseNetIncome(double amount) {
+    public void increaseNetIncome(BigDecimal amount) {
         
-        this.setNetIncome(netIncome + amount);
+        BigDecimal total = netIncome.add(amount);
+        this.setNetIncome(total);
     }
     
     public void decreaseRevenue(BigDecimal amount) {
@@ -354,9 +356,9 @@ public class StartUp extends Actor {
         this.setRevenue(revenue.subtract(amount));       
     }
     
-    public void decreaseNetIncome(double amount) {
+    public void decreaseNetIncome(BigDecimal amount) {
         
-        this.setNetIncome(netIncome - amount);
+        this.setNetIncome(netIncome.subtract(amount));
     }
 
     public ArrayList<RecordEntry> getFinancialRecord() {
@@ -388,7 +390,7 @@ public class StartUp extends Actor {
             return this.financialRecord.get(financialRecord.size() - 2);
         } 
         
-        return new RecordEntry(0, new BigDecimal(0), 0, 0);
+        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0);
     }
     
     public boolean compareXPToNextLevelXP() {

@@ -1,5 +1,6 @@
 package main.java.marketplace;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 import main.java.actor.StartUp;
@@ -146,8 +147,6 @@ public class Attack {
             
         } else {
             
-            
-            
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
             Printer.print( " attempts to undercut thier prieces but,");
             Printer.print( " the maneuver has no effect on");
@@ -169,7 +168,7 @@ public class Attack {
     
     private int calculateAttackStrength() {
         
-        int strength = (int) Math.round(attacker.getNetIncome() / 1000000.00);
+        int strength = attacker.getNetIncome().divide(new BigDecimal(1000000.00)).intValue();
         
         if (strength < 1) {
             

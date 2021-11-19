@@ -27,7 +27,7 @@ public class World {
     public World() {
         
         techGiants = new ArrayList<TechGiant>();
-        currentQuarter = new Quarter(1, 1);
+        currentQuarter = new Quarter(1, 1, 1);
         marketPlace = new MarketPlace();
         
         TechGiant tg1 = new TechGiant("Meta", "Taking over the world one face at a time.");
