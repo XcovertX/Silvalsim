@@ -24,9 +24,11 @@ public class StartUp extends Actor {
     private int xpMax;                              // max awarded xp for successful attacks
     private int xpToNextLevel;                      // xp needed to level up
     private int attackSuccessMultiplier;            // for determining attack success
-    private BigDecimal netIncome;                       // hit points
-    private BigDecimal revenue;                         // health points
-    private BigDecimal marketShare;                     // defense points
+    private int talentMultiplier;                   // for attracting customers
+    private BigDecimal totalRevenue;                // for track total revenue collected
+    private BigDecimal netIncome;                   // hit points
+    private BigDecimal revenue;                     // health points
+    private BigDecimal marketShare;                 // defense points
     private int speed;                              // action speed
     private double serviceCost;                     // cost to use the sevice
     private ArrayList<RecordEntry> financialRecord; // log of finances
@@ -55,6 +57,7 @@ public class StartUp extends Actor {
         setXP(0);
         setNetIncome(new BigDecimal(0.00));
         setRevenue(new BigDecimal(0.00));
+        setTotalRevenue(new BigDecimal(0.00));
         setMarketShare(new BigDecimal(0.00));
         setSpeed(0);
         setServiceCost(0.00);
@@ -342,7 +345,9 @@ public class StartUp extends Actor {
     public void increaseRevenue(BigDecimal amount) {
         
         BigDecimal total = revenue.add(amount);
-        this.setRevenue(total);       
+        this.setRevenue(total);
+        total = totalRevenue.add(amount);
+        this.setTotalRevenue(total);
     }
     
     public void increaseNetIncome(BigDecimal amount) {
@@ -373,7 +378,7 @@ public class StartUp extends Actor {
     
     public void addFinancialRecord() {
         
-        RecordEntry re = new RecordEntry(netIncome, revenue, marketShare, customers.size());
+        RecordEntry re = new RecordEntry(netIncome, revenue, totalRevenue, marketShare, customers.size());
         
         this.financialRecord.add(re);
     }
@@ -390,7 +395,7 @@ public class StartUp extends Actor {
             return this.financialRecord.get(financialRecord.size() - 2);
         } 
         
-        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0);
+        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0);
     }
     
     public boolean compareXPToNextLevelXP() {
@@ -555,5 +560,21 @@ public class StartUp extends Actor {
     public BigDecimal payDev(BigDecimal tempRevenue, Developer dev) {
         
         return tempRevenue.subtract(dev.getPaycheck());
+    }
+
+    public int getTalentMultiplier() {
+        return talentMultiplier;
+    }
+
+    public void setTalentMultiplier(int talentMultiplier) {
+        this.talentMultiplier = talentMultiplier;
+    }
+
+    public BigDecimal getTotalRevenue() {
+        return totalRevenue;
+    }
+
+    public void setTotalRevenue(BigDecimal totalRevenue) {
+        this.totalRevenue = totalRevenue.setScale(2, RoundingMode.DOWN);
     }
 }

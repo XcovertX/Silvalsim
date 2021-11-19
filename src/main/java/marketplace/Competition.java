@@ -88,17 +88,27 @@ public class Competition {
     
     private void printScore(StartUp su) {
         
-        Printer.println("");
         Printer.print(Printer.ANSI_CYAN, su.getName());
-        Printer.print(" Revenue: ");
+        Printer.print(" Monthly Revenue: ");
         
-        if (su.getLastEntry().getRevenue().compareTo(su.getSecondToLastEntry().getRevenue()) < 0) {
+        if (su.getLastEntry().getMonthlyRevenue().compareTo(su.getSecondToLastEntry().getMonthlyRevenue()) < 0) {
             
             Printer.print(Printer.ANSI_RED, "$" + su.getRevenue().toString()); 
             
         } else {
             
             Printer.print(Printer.ANSI_GREEN, "$" + su.getRevenue().toString());
+        }
+        
+        Printer.print(" Total Revenue: ");
+        
+        if (su.getLastEntry().getTotalRevenue().compareTo(su.getSecondToLastEntry().getTotalRevenue()) < 0) {
+            
+            Printer.print(Printer.ANSI_RED, "$" + su.getTotalRevenue().toString()); 
+            
+        } else {
+            
+            Printer.print(Printer.ANSI_GREEN, "$" + su.getTotalRevenue().toString());
         }
         
         Printer.print(" NetIncome: ");

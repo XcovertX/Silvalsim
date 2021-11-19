@@ -48,15 +48,15 @@ public class World {
         su1.addMediumIncomeCustomers(150);
         su1.addHighIncomeCustomers(10);
         
-        su2.addLowIncomeCustomers(30);
-        su2.addMediumIncomeCustomers(15);
-        su2.addHighIncomeCustomers(10);
+        su2.addLowIncomeCustomers(2);
+        su2.addMediumIncomeCustomers(1);
+        su2.addHighIncomeCustomers(1);
         
         su1.setServiceCost(15.99);
         su2.setServiceCost(13.99);
         
-        su1.setRevenue(new BigDecimal(100.00));
-        su2.setRevenue(new BigDecimal(100.00));
+        su1.setRevenue(new BigDecimal(1000000.00));
+        su2.setRevenue(new BigDecimal(1000000.00));
         
         tg1.getStartups().add(su1);
         tg2.getStartups().add(su2);
@@ -80,11 +80,16 @@ public class World {
             System.exit(1);
         }
         
+
+        
         updateCustomers();
         updateFinancialEvents();
         updateStartUps();
         updateMarketPlace();
-
+        
+        if (this.currentCompetition == null) {
+            System.exit(1);
+        }
     }
 
     private void updateFinancialEvents() {
@@ -117,8 +122,8 @@ public class World {
                 StartUp su = tg.getStartups().get(j);
                 
                 BigDecimal tempRevenue = su.getRevenue();
+                
                 for(int k = 0; k < su.getDevs().size(); k++) {
-                    
                     
                     if (currentQuarter.getCurrentDay() == 1 ||
                         currentQuarter.getCurrentDay() == 15) {
@@ -127,7 +132,7 @@ public class World {
                         tempRevenue = su.payDev(tempRevenue, dev);
                     }
                 }
-//                su.increaseNetIncome(tempRevenue);
+                su.setRevenue(tempRevenue);
                 su.addFinancialRecord();
             }
         }
@@ -152,29 +157,11 @@ public class World {
                         customer.payDay();
                     }
                     
-                    
-                    
                     if (customer.getDueDate() == currentQuarter.getCurrentDay() ) {
                         
                         su.collectPayment(customer);
-                        
-//                        if (su.getName().equals("Instagram")) {
-//                            Icounter++;
-//                        }
-//                        
-//                        if (su.getName().equals("Myspace")) {
-//                            Mcounter++;
-//                        }
                     }
                 }
-//                if (su.getName().equals("Instagram")) {
-//                    System.out.println(su.getName() + " has made " + Icounter + " collections by day: " + this.getCurrentQuarter().getCurrentDay() + ". rev: " + su.getRevenue());
-//                }
-//                
-//                if (su.getName().equals("Myspace")) {
-//                    System.out.println(su.getName() + " has made " + Mcounter + " collections by day: " + this.getCurrentQuarter().getCurrentDay() + ". rev: " + su.getRevenue());
-//                }
-                
                 su.addFinancialRecord();
             }
         }

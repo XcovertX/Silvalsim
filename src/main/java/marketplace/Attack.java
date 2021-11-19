@@ -130,20 +130,28 @@ public class Attack {
             
             if (critical) {
                 
-//                defender.setRevenue(defender.getRevenue() / 2);
+                strength = calculateCriticalAttack(strength);
+                
+                Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
+                Printer.print(Printer.ANSI_RED, "UNDERCUTS");
+                Printer.print(" their prices, ");
+                Printer.print(Printer.ANSI_RED, "GOUGING");
+                Printer.print(" the overall revenue of ");
+                Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
+                Printer.println("!!");
                 
             } else {
                 
-//                defender.setRevenue(strength * 10);  
+                Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
+                Printer.print(Printer.ANSI_RED, "UNDERCUTS");
+                Printer.print(" their prices, ");
+                Printer.print(Printer.ANSI_RED, "GOUGING");
+                Printer.print(" the overall revenue of ");
+                Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
+                Printer.println("!!");
             }
             
-            Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
-            Printer.print(Printer.ANSI_RED, "UNDERCUTS");
-            Printer.print(" their prices, ");
-            Printer.print(Printer.ANSI_RED, "GOUGING");
-            Printer.print(" the overall revenue of ");
-            Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
-            Printer.println("!!");
+
             
         } else {
             
@@ -179,10 +187,11 @@ public class Attack {
         
     }
     
-//    private int calculateCriticalAttack() {
-//        
-//    }
-//    
+    private int calculateCriticalAttack(int attackStrength) {
+        
+        return attackStrength * 2;
+    }
+    
 //    private int calculateDefenseStrength() {
 //        
 //    }

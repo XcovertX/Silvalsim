@@ -5,14 +5,16 @@ import java.math.BigDecimal;
 public class RecordEntry {
     
     private BigDecimal netIncome;
-    private BigDecimal revenue;
+    private BigDecimal monthlyRevenue;
+    private BigDecimal totalRevenue;
     private BigDecimal marketShare; 
     private int numberOfCustomers;
     
-    public RecordEntry(BigDecimal netIncome, BigDecimal revenue, BigDecimal marketShare, int numOfCustomers) {
+    public RecordEntry(BigDecimal netIncome, BigDecimal monthlyRevenue, BigDecimal totalRevenue, BigDecimal marketShare, int numOfCustomers) {
         
         this.netIncome = netIncome;
-        this.revenue = revenue;
+        this.monthlyRevenue = monthlyRevenue;
+        this.setTotalRevenue(totalRevenue);
         this.marketShare = marketShare;
         this.numberOfCustomers = numOfCustomers;
     }
@@ -29,14 +31,14 @@ public class RecordEntry {
         this.netIncome = netIncome;
     }
     
-    public BigDecimal getRevenue() {
+    public BigDecimal getMonthlyRevenue() {
         
-        return revenue;
+        return monthlyRevenue;
     }
     
-    public void setRevenue(BigDecimal revenue) {
+    public void setMonthlyRevenue(BigDecimal revenue) {
         
-        this.revenue = revenue;
+        this.monthlyRevenue = revenue;
     }
     
     public BigDecimal getMarketShare() {
@@ -57,5 +59,15 @@ public class RecordEntry {
     public void setNumberOfCustomers(int numberOfCustomers) {
         
         this.numberOfCustomers = numberOfCustomers;
+    }
+
+    public BigDecimal getTotalRevenue() {
+        
+        return totalRevenue;
+    }
+
+    public void setTotalRevenue(BigDecimal totalRevenue) {
+        
+        this.totalRevenue = totalRevenue;
     }
 }

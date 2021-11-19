@@ -60,9 +60,6 @@ public class Quarter {
             adjustedRevenue = (deductTaxes(adjustedRevenue, taxRate).setScale(2, RoundingMode.DOWN));  
             
             startup.setRevenue(adjustedRevenue);
-
-            System.out.println("first day of quarter");
-
         }
     } 
     
