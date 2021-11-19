@@ -1,12 +1,14 @@
 package main.java.world;
 
+import java.math.BigDecimal;
+
 public class California extends Location {
     
     public California() {
         
         this.setStateName("California");
         this.setStateAbbreviation("CA");
-        this.setTaxRate(1.088);
+        this.setTaxRate(new BigDecimal(1.088));
     }
 
 }

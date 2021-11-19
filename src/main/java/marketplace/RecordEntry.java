@@ -1,13 +1,15 @@
 package main.java.marketplace;
 
+import java.math.BigDecimal;
+
 public class RecordEntry {
     
     private double netIncome;
-    private double revenue;
+    private BigDecimal revenue;
     private double marketShare; 
     private int numberOfCustomers;
     
-    public RecordEntry(double netIncome, double revenue, double marketShare, int numOfCustomers) {
+    public RecordEntry(double netIncome, BigDecimal revenue, double marketShare, int numOfCustomers) {
         
         this.netIncome = netIncome;
         this.revenue = revenue;
@@ -27,12 +29,12 @@ public class RecordEntry {
         this.netIncome = netIncome;
     }
     
-    public double getRevenue() {
+    public BigDecimal getRevenue() {
         
         return revenue;
     }
     
-    public void setRevenue(double revenue) {
+    public void setRevenue(BigDecimal revenue) {
         
         this.revenue = revenue;
     }

@@ -1,5 +1,7 @@
 package main.java.marketplace;
 
+import java.math.BigDecimal;
+
 import main.java.actor.StartUp;
 import main.java.world.Printer;
 import main.java.world.World;
@@ -58,11 +60,11 @@ public class Competition {
             setCounterTwo(0);
         }
         
-        if (opponentOne.getRevenue() <= 0 ) {
+        if (opponentOne.getRevenue().compareTo(new BigDecimal(0)) <= 0 ) {
             
             opponentOne.die();
             
-        } else if (opponentTwo.getRevenue() <= 0 ) {
+        } else if (opponentTwo.getRevenue().compareTo(new BigDecimal(0)) <= 0 ) {
             
             opponentTwo.die();
         }
@@ -90,13 +92,13 @@ public class Competition {
         Printer.print(Printer.ANSI_CYAN, su.getName());
         Printer.print(" Revenue: ");
         
-        if (su.getLastEntry().getRevenue() < su.getSecondToLastEntry().getRevenue()) {
+        if (su.getLastEntry().getRevenue().compareTo(su.getSecondToLastEntry().getRevenue()) < 0) {
             
-            Printer.print(Printer.ANSI_RED, "$" + Double.toString(su.getRevenue())); 
+            Printer.print(Printer.ANSI_RED, "$" + su.getRevenue().toString()); 
             
         } else {
             
-            Printer.print(Printer.ANSI_GREEN, "$" + Double.toString(su.getRevenue()));
+            Printer.print(Printer.ANSI_GREEN, "$" + su.getRevenue().toString());
         }
         
         Printer.print(" NetIncome: ");

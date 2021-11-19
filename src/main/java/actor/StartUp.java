@@ -1,5 +1,7 @@
 package main.java.actor;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,7 +25,7 @@ public class StartUp extends Actor {
     private int xpToNextLevel;                      // xp needed to level up
     private int attackSuccessMultiplier;            // for determining attack success
     private double netIncome;                       // hit points
-    private double revenue;                         // health points
+    private BigDecimal revenue;                         // health points
     private double marketShare;                     // defense points
     private int speed;                              // action speed
     private double serviceCost;                     // cost to use the sevice
@@ -50,7 +52,7 @@ public class StartUp extends Actor {
         setLocation(location);
         setXP(0);
         setNetIncome(0.00);
-        setRevenue(0.00);
+        setRevenue(new BigDecimal(0.00));
         setMarketShare(0.00);
         setSpeed(0);
         setServiceCost(0.00);
@@ -180,14 +182,16 @@ public class StartUp extends Actor {
         this.netIncome = Math.floor(netIncome * 100) / 100.00;
     }
 
-    public double getRevenue() {
+    public BigDecimal getRevenue() {
         
         return revenue;
     }
 
-    public void setRevenue(double revenue) {
+    public void setRevenue(BigDecimal bigDecimal) {
         
-        this.revenue = Math.floor(revenue * 100) / 100.00;
+        BigDecimal newValue = bigDecimal.setScale(2, RoundingMode.DOWN);
+        this.revenue = newValue;
+//        this.revenue = new BigDecimal(Math.floor(bigDecimal.multiply(new BigDecimal(100))) / 100.00);
     }
 
     public double getMarketShare() {
@@ -335,9 +339,9 @@ public class StartUp extends Actor {
         setNetIncome(this.netIncome + (dev.getTalent()));
     }
     
-    public void increaseRevenue(double amount) {
-        
-        this.setRevenue(revenue + amount);       
+    public void increaseRevenue(BigDecimal amount) {
+        BigDecimal total = revenue.add(amount);
+        this.setRevenue(total);       
     }
     
     public void increaseNetIncome(double amount) {
@@ -345,9 +349,9 @@ public class StartUp extends Actor {
         this.setNetIncome(netIncome + amount);
     }
     
-    public void decreaseRevenue(double amount) {
+    public void decreaseRevenue(BigDecimal amount) {
         
-        this.setRevenue(revenue - amount);       
+        this.setRevenue(revenue.subtract(amount));       
     }
     
     public void decreaseNetIncome(double amount) {
@@ -384,7 +388,7 @@ public class StartUp extends Actor {
             return this.financialRecord.get(financialRecord.size() - 2);
         } 
         
-        return new RecordEntry(0, 0, 0, 0);
+        return new RecordEntry(0, new BigDecimal(0), 0, 0);
     }
     
     public boolean compareXPToNextLevelXP() {
@@ -542,12 +546,12 @@ public class StartUp extends Actor {
     public void collectPayment(Customer customer) {
         
         customer.setAvailableFunds(customer.getAvailableFunds() - getServiceCost());
-        double payment = getServiceCost();
+        BigDecimal payment = new BigDecimal(getServiceCost());
         this.increaseRevenue(payment);
     }
 
-    public double payDev(double tempRevenue, Developer dev) {
+    public BigDecimal payDev(BigDecimal tempRevenue, Developer dev) {
         
-        return tempRevenue - dev.getPaycheck();
+        return tempRevenue.subtract(dev.getPaycheck());
     }
 }

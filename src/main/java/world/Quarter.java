@@ -1,5 +1,7 @@
 package main.java.world;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 import main.java.actor.StartUp;
@@ -16,7 +18,7 @@ public class Quarter {
     private int currentMonth;
     private boolean isEven;
     
-    private double taxCutPercent;
+    private BigDecimal taxCutPercent;
     
     public Quarter(int currentQuarter, int currentDay) {
         
@@ -32,15 +34,15 @@ public class Quarter {
         Random r = new Random();
         double rangeMin = 1.01;
         double rangeMax = 1.05;
-        taxCutPercent = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
+        taxCutPercent = new BigDecimal(rangeMin + (rangeMax - rangeMin) * r.nextDouble());
         
     }
 
     public void applyFinancialEvents(StartUp startup){
         
         
-        double adjustedRevenue = startup.getRevenue();
-        double taxRate = startup.getLocation().getTaxRate();
+        BigDecimal adjustedRevenue = startup.getRevenue();
+        BigDecimal taxRate = startup.getLocation().getTaxRate();
         
         if(currentQuarter == Q1) {
             
@@ -48,21 +50,21 @@ public class Quarter {
             
             taxRate = applyCorporateTaxCuts(taxRate);   
         }
-        
-        adjustedRevenue = Math.floor(deductTaxes(adjustedRevenue, taxRate) * 100) / 100; 
+//        Math.floor(deductTaxes(adjustedRevenue, taxRate) * 100) / 100;
+        adjustedRevenue = (deductTaxes(adjustedRevenue, taxRate).setScale(2, RoundingMode.DOWN));  
         
         startup.setRevenue(adjustedRevenue);
+    } 
+    
+    private BigDecimal deductTaxes(BigDecimal adjustedRevenue, BigDecimal taxRate) {
+        
+        return adjustedRevenue.subtract((adjustedRevenue.multiply((taxRate.multiply(new BigDecimal(0.01))))));
+        
     }
     
-    private double deductTaxes(double revenue, double taxRate) {
+    private BigDecimal applyCorporateTaxCuts(BigDecimal taxRate) {
         
-        return revenue - (revenue * (taxRate * 0.01));
-        
-    }
-    
-    private double applyCorporateTaxCuts(double taxRate) {
-        
-        double adjustedTaxRate = taxRate - (taxCutPercent - 1);
+        BigDecimal adjustedTaxRate = taxRate.subtract(taxCutPercent.subtract(new BigDecimal(1)));
         return adjustedTaxRate;
         
     }

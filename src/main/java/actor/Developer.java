@@ -1,5 +1,7 @@
 package main.java.actor;
 
+import java.math.BigDecimal;
+
 public class Developer extends Actor {
     
     public final static int JUNIOR_DEV_TALENT = 1;
@@ -37,8 +39,8 @@ public class Developer extends Actor {
         this.salary = salary;
     }
 
-    public double getPaycheck() {
-        return paycheck;
+    public BigDecimal getPaycheck() {
+        return new BigDecimal(paycheck);
     }
 
     public void setPaycheck(double paycheck) {

@@ -1,10 +1,12 @@
 package main.java.world;
 
+import java.math.BigDecimal;
+
 public abstract class Location {
     
     private String stateName;
     private String stateAbbreviation;
-    private double taxRate;
+    private BigDecimal taxRate;
     
     public String getStateName() {
         return stateName;
@@ -18,10 +20,10 @@ public abstract class Location {
     public void setStateAbbreviation(String stateAbbreviation) {
         this.stateAbbreviation = stateAbbreviation;
     }
-    public double getTaxRate() {
+    public BigDecimal getTaxRate() {
         return taxRate;
     }
-    public void setTaxRate(double taxRate) {
+    public void setTaxRate(BigDecimal taxRate) {
         this.taxRate = taxRate;
     }
 
