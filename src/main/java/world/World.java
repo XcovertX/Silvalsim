@@ -48,12 +48,12 @@ public class World {
         su1.addMediumIncomeCustomers(150);
         su1.addHighIncomeCustomers(10);
         
-        su2.addLowIncomeCustomers(2);
-        su2.addMediumIncomeCustomers(1);
-        su2.addHighIncomeCustomers(1);
+        su2.addLowIncomeCustomers(30000);
+        su2.addMediumIncomeCustomers(100);
+        su2.addHighIncomeCustomers(130);
         
         su1.setServiceCost(15.99);
-        su2.setServiceCost(13.99);
+        su2.setServiceCost(20.99);
         
         su1.setRevenue(new BigDecimal(1000000.00));
         su2.setRevenue(new BigDecimal(1000000.00));
@@ -72,15 +72,13 @@ public class World {
 
     public void updateWorld(int currentQuarter, int currentDay) {
 
-        if (techGiants.get(0).getStartups().get(0).getRevenue().compareTo(new BigDecimal(10000000)) > 0) {
-            System.exit(1);
-        }
-        
-        if (Icounter > 100000) {
-            System.exit(1);
-        }
-        
-
+//        if (techGiants.get(0).getStartups().get(0).getRevenue().compareTo(new BigDecimal(100000000)) > 0) {
+//            System.exit(1);
+//        }
+//        
+//        if (Icounter > 100000) {
+//            System.exit(1);
+//        }
         
         updateCustomers();
         updateFinancialEvents();
@@ -148,8 +146,11 @@ public class World {
                 
                 StartUp su = tg.getStartups().get(j);
                 
-                for(int k = 0; k < su.getCustomers().size(); k++) {
+//                for(int k = 0; k < su.getCustomers().size(); k++) {
+                int k = 0;
+                while (k < su.getCustomers().size()) {
                     
+//                    System.out.println("k = " + k);
                     Customer customer = su.getCustomers().get(k);
                     
                     if (currentQuarter.getCurrentDay() == 1) {
@@ -159,8 +160,34 @@ public class World {
                     
                     if (customer.getDueDate() == currentQuarter.getCurrentDay() ) {
                         
-                        su.collectPayment(customer);
+                        if (su.equals(currentCompetition.getOpponentOne())) {
+
+                            boolean shouldSwitchService = customer.assessSubscription(currentCompetition.getOpponentTwo());
+                        
+                            if (shouldSwitchService) {
+                                
+                                Customer transferingCustomer = su.getCustomers().remove(k);
+                                currentCompetition.getOpponentTwo().addCustomer(transferingCustomer);
+                                k--;
+                                
+                            }
+                            
+                        } else if (su.equals(currentCompetition.getOpponentTwo())) {
+                            
+                            boolean shouldSwitchService = customer.assessSubscription(currentCompetition.getOpponentOne());
+                           
+                            if (shouldSwitchService) {
+                                
+                                Customer transferingCustomer = su.getCustomers().remove(k);
+                                currentCompetition.getOpponentOne().addCustomer(transferingCustomer);
+                                k--;
+                                
+                            }
+                        
+                        }
                     }
+                    su.collectPayment(customer);
+                    k++; 
                 }
                 su.addFinancialRecord();
             }
@@ -171,7 +198,10 @@ public class World {
         
         if (currentCompetition != null) {
             
-            currentCompetition.combatCycle();
+//            if (this.currentQuarter.getCurrentDay() == 1) {
+                
+                currentCompetition.combatCycle();
+//            }
         }
     }
     

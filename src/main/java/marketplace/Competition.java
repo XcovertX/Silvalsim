@@ -54,9 +54,9 @@ public class Competition {
         
         if (counterTwo / (opponentTwo.getSpeed()) > 1) {
  
-            opponentTwoOffense.attack();  
-            printScore(getOpponentTwo());      
-            printScore(getOpponentOne());
+            opponentTwoOffense.attack();     
+            printScore(getOpponentOne()); 
+            printScore(getOpponentTwo());  
             setCounterTwo(0);
         }
         

@@ -99,10 +99,13 @@ public class Attack {
         
         if (critical) {
             
-            
+            defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
+            defender.setServiceCost(defender.getServiceCost() * 2);
             
         } else {
             
+            defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(4)));
+            defender.setServiceCost(defender.getServiceCost() * 1.4);
         }
         
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
@@ -132,6 +135,8 @@ public class Attack {
                 
                 strength = calculateCriticalAttack(strength);
                 
+                attacker.setServiceCost(defender.getServiceCost() / 2);
+                
                 Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
                 Printer.print(Printer.ANSI_RED, "UNDERCUTS");
                 Printer.print(" their prices, ");
@@ -142,6 +147,7 @@ public class Attack {
                 
             } else {
                 
+                attacker.setServiceCost(defender.getServiceCost() - (defender.getServiceCost() / 4));
                 Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
                 Printer.print(Printer.ANSI_RED, "UNDERCUTS");
                 Printer.print(" their prices, ");

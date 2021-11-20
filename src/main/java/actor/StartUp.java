@@ -23,13 +23,15 @@ public class StartUp extends Actor {
     private int xpMin;                              // min awarded xp for successful attacks
     private int xpMax;                              // max awarded xp for successful attacks
     private int xpToNextLevel;                      // xp needed to level up
-    private int attackSuccessMultiplier;            // for determining attack success
-    private int talentMultiplier;                   // for attracting customers
     private BigDecimal totalRevenue;                // for track total revenue collected
     private BigDecimal netIncome;                   // hit points
     private BigDecimal revenue;                     // health points
     private BigDecimal marketShare;                 // defense points
+    
+    // Variables ///////////////////
     private int speed;                              // action speed
+    private int attackSuccessMultiplier;            // for determining attack success
+    private int talentMultiplier;                   // for attracting customers
     private double serviceCost;                     // cost to use the sevice
     private ArrayList<RecordEntry> financialRecord; // log of finances
     
@@ -135,7 +137,7 @@ public class StartUp extends Actor {
             max = 30;
             min = 1;
             dueDate = rand.nextInt(max + 1 - min) + min;
-            Customer customer = new Customer(Customer.LOW_INCOME_AVAILABLE_FUNDS + offset, dueDate);
+            Customer customer = new Customer(this, Customer.LOW_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
         }   
     }
@@ -152,7 +154,7 @@ public class StartUp extends Actor {
             max = 30;
             min = 1;
             dueDate = rand.nextInt(max + 1 - min) + min;
-            Customer customer = new Customer(Customer.MEDIUM_INCOME_AVAILABLE_FUNDS + offset, dueDate);
+            Customer customer = new Customer(this, Customer.MEDIUM_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
         }
     }
@@ -169,7 +171,7 @@ public class StartUp extends Actor {
             max = 30;
             min = 1;
             dueDate = rand.nextInt(max + 1 - min) + min;
-            Customer customer = new Customer(Customer.HIGH_INCOME_AVAILABLE_FUNDS + offset, dueDate);
+            Customer customer = new Customer(this, Customer.HIGH_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
         }
     }
@@ -284,7 +286,8 @@ public class StartUp extends Actor {
             if (devs.get(i).equals(dev)) {
                 devs.remove(i);
                 this.speed--;
-                setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
+                this.decreaseTalentMultiplier(dev.getTalent());
+//                setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
             }
         }
     }
@@ -307,9 +310,11 @@ public class StartUp extends Actor {
             }
         });
         
+        Developer dev = devs.remove(0);
         this.speed--;
-        setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
-        return devs.remove(0);
+        this.decreaseTalentMultiplier(dev.getTalent());
+//        setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
+        return dev;
     }
     
     public Developer removeLowestDev() {
@@ -330,16 +335,19 @@ public class StartUp extends Actor {
             }
         });
         
+        Developer dev = devs.remove(0);
         this.speed--;
-        setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
-        return devs.remove(0);
+        this.decreaseTalentMultiplier(dev.getTalent());
+//        setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
+        return dev;
     }
     
     public void addDev(Developer dev) {
         
         devs.add(dev);
         this.speed++;
-        setNetIncome(this.netIncome.add(new BigDecimal(dev.getTalent())));
+        this.increaseTalentMultiplier(dev.getTalent());
+//        setNetIncome(this.netIncome.add(new BigDecimal(dev.getTalent())));
     }
     
     public void increaseRevenue(BigDecimal amount) {
@@ -364,6 +372,16 @@ public class StartUp extends Actor {
     public void decreaseNetIncome(BigDecimal amount) {
         
         this.setNetIncome(netIncome.subtract(amount));
+    }
+    
+    public void increaseTalentMultiplier(int amount) {
+        
+        this.talentMultiplier += amount;
+    }
+    
+    public void decreaseTalentMultiplier(int amount) {
+        
+        this.talentMultiplier -= amount;
     }
 
     public ArrayList<RecordEntry> getFinancialRecord() {
@@ -390,9 +408,9 @@ public class StartUp extends Actor {
     
     public RecordEntry getSecondToLastEntry() {
         
-        if (financialRecord.size() - 2 >= 0) {
+        if (financialRecord.size() - 30 >= 0) {
             
-            return this.financialRecord.get(financialRecord.size() - 2);
+            return this.financialRecord.get(financialRecord.size() - 30);
         } 
         
         return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0);
