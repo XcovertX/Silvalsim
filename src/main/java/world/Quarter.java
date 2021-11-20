@@ -18,16 +18,21 @@ public class Quarter {
     final static int FIRST_MONTH_OF_THE_QUARTER = 1;
     final static int LAST_MONTH_OF_THE_QUARTER = 3;
     
+    private World world;
+    
     private int currentQuarter; 
     private int currentDay; 
     private int currentMonth;
     private boolean isEven;
     private boolean isFirstDayOfQuarter;
+    private boolean isLastDayOfMonth;
+    private boolean finalMoment;
     
     private BigDecimal taxCutPercent;
     
-    public Quarter(int currentQuarter, int currentMonth, int currentDay) {
+    public Quarter(World world, int currentQuarter, int currentMonth, int currentDay) {
         
+        setWorld(world);
         setCurrentQuarter(currentQuarter);
         setCurrentMonth(currentMonth);
         setCurrentDay(currentDay);
@@ -95,7 +100,7 @@ public class Quarter {
     
     private void incrementMonth() {
         
-        if(currentMonth >= LAST_MONTH_OF_THE_QUARTER) {
+        if (currentMonth >= LAST_MONTH_OF_THE_QUARTER) {
             
             currentMonth = FIRST_MONTH_OF_THE_QUARTER;
             incrementQuarter();
@@ -110,10 +115,17 @@ public class Quarter {
         
         if(currentDay >= LAST_OF_THE_MONTH) {
             
+            getWorld().setPrintTime(true);
             currentDay = FIRST_OF_THE_MONTH;
             incrementMonth();
+            this.setLastDayOfMonth(false);
             
         } else {
+            
+            if (currentDay + 1 >= LAST_OF_THE_MONTH) {
+                
+                this.setLastDayOfMonth(true);
+            }
             
             currentDay++;
             setFirstDayOfQuarter(false);
@@ -193,5 +205,29 @@ public class Quarter {
     public void setFirstDayOfQuarter(boolean isFisrtDayOfQuarter) {
         
         this.isFirstDayOfQuarter = isFisrtDayOfQuarter;
+    }
+
+    public boolean isLastDayOfMonth() {
+        return isLastDayOfMonth;
+    }
+
+    public void setLastDayOfMonth(boolean isLastDayOfMonth) {
+        this.isLastDayOfMonth = isLastDayOfMonth;
+    }
+
+    public boolean isFinalMoment() {
+        return finalMoment;
+    }
+
+    public void setFinalMoment(boolean finalMoment) {
+        this.finalMoment = finalMoment;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
     }
 }

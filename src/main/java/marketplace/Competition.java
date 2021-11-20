@@ -47,16 +47,16 @@ public class Competition {
         if (counterOne / (opponentOne.getSpeed()) > 1) {
   
             opponentOneOffense.attack();        
-            printScore(getOpponentOne());
-            printScore(getOpponentTwo());
+//            printScore(getOpponentOne());
+//            printScore(getOpponentTwo());
             setCounterOne(0);
         }
         
         if (counterTwo / (opponentTwo.getSpeed()) > 1) {
  
             opponentTwoOffense.attack();     
-            printScore(getOpponentOne()); 
-            printScore(getOpponentTwo());  
+//            printScore(getOpponentOne()); 
+//            printScore(getOpponentTwo());  
             setCounterTwo(0);
         }
         
@@ -86,23 +86,24 @@ public class Competition {
         incrementCounters();
     }
     
-    private void printScore(StartUp su) {
+    public void printScore(StartUp su) {
         
         Printer.print(Printer.ANSI_CYAN, su.getName());
         Printer.print(" Monthly Revenue: ");
         
-        if (su.getLastEntry().getMonthlyRevenue().compareTo(su.getSecondToLastEntry().getMonthlyRevenue()) < 0) {
+        if (su.getRevenue().compareTo(su.getPreviousMonthRevenue(this.world.getCurrentQuarter().getCurrentDay())) < 0) {
             
             Printer.print(Printer.ANSI_RED, "$" + su.getRevenue().toString()); 
             
         } else {
             
             Printer.print(Printer.ANSI_GREEN, "$" + su.getRevenue().toString());
+        
         }
         
         Printer.print(" Total Revenue: ");
         
-        if (su.getLastEntry().getTotalRevenue().compareTo(su.getSecondToLastEntry().getTotalRevenue()) < 0) {
+        if (su.getLastEntry().getTotalRevenue().compareTo(su.getPreviousMonthRevenue(this.world.getCurrentQuarter().getCurrentDay())) < 0) {
             
             Printer.print(Printer.ANSI_RED, "$" + su.getTotalRevenue().toString()); 
             
@@ -113,7 +114,7 @@ public class Competition {
         
         Printer.print(" NetIncome: ");
         
-        if (su.getLastEntry().getNetIncome().compareTo(su.getSecondToLastEntry().getNetIncome()) < 0) {
+        if (su.getLastEntry().getNetIncome().compareTo(su.getPreviousMonthRevenue(this.world.getCurrentQuarter().getCurrentDay())) < 0) {
             
             Printer.print(Printer.ANSI_RED, "$" + su.getNetIncome().toString()); 
             

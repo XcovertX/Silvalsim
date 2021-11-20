@@ -14,20 +14,26 @@ import main.java.marketplace.MarketPlace;
 
 public class World {
     
+    public static World world;
+    
     final static int FIRST_OF_THE_MONTH = 1;
     
     private ArrayList<TechGiant> techGiants;
     private Quarter currentQuarter;
+    private int currentDay;
     private MarketPlace marketPlace;
     private Competition currentCompetition;
+    private boolean printTime;
     
     public int Icounter = 0;
     public int Mcounter = 0;
     
     public World() {
         
+        world = this;
+        
         techGiants = new ArrayList<TechGiant>();
-        currentQuarter = new Quarter(1, 1, 1);
+        currentQuarter = new Quarter(this, 1, 1, 1);
         marketPlace = new MarketPlace();
         
         TechGiant tg1 = new TechGiant("Meta", "Taking over the world one face at a time.");
@@ -58,6 +64,11 @@ public class World {
         su1.setRevenue(new BigDecimal(1000000.00));
         su2.setRevenue(new BigDecimal(1000000.00));
         
+        su1.addExpense("fee", "Fee", 150000, 5, 24);
+        su1.addExpense("fee", "Fee", 75000, 7, 24);
+        su1.addExpense("fee", "Fee", 1000, 2, 3);
+        su1.addExpense("fee", "Fee", 50000, 14, 36);
+        
         tg1.getStartups().add(su1);
         tg2.getStartups().add(su2);
         
@@ -67,6 +78,7 @@ public class World {
         this.updateStartUps();
         
         currentCompetition = new Competition(this, su1, su2);
+        setCurrentDay(0);
         
     }
 
@@ -79,6 +91,7 @@ public class World {
 //        if (Icounter > 100000) {
 //            System.exit(1);
 //        }
+        setCurrentDay(currentDay);
         
         updateCustomers();
         updateFinancialEvents();
@@ -104,6 +117,7 @@ public class World {
                     
                     this.currentQuarter.applyFinancialEvents(su);
                     
+                    su.deductExpenses();   
                 }
             }
         }
@@ -194,14 +208,18 @@ public class World {
         }
     }
     
-    private void updateMarketPlace() {
+    public void updateMarketPlace() {
         
         if (currentCompetition != null) {
-            
-//            if (this.currentQuarter.getCurrentDay() == 1) {
                 
-                currentCompetition.combatCycle();
-//            }
+            currentCompetition.combatCycle();
+            
+            if (isPrintTime()) {
+                
+                currentCompetition.printScore(currentCompetition.getOpponentOne());
+                currentCompetition.printScore(currentCompetition.getOpponentTwo());
+                setPrintTime(false);
+            }
         }
     }
     
@@ -236,5 +254,21 @@ public class World {
     public Competition getCurrentCompetition() {
         
         return this.currentCompetition;
+    }
+
+    public boolean isPrintTime() {
+        return printTime;
+    }
+
+    public void setPrintTime(boolean printTime) {
+        this.printTime = printTime;
+    }
+
+    public int getCurrentDay() {
+        return currentDay;
+    }
+
+    public void setCurrentDay(int currentDay) {
+        this.currentDay = currentDay;
     }
 }

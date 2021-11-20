@@ -8,10 +8,13 @@ import java.util.Comparator;
 import java.util.Random;
 
 import main.java.marketplace.Competition;
+import main.java.marketplace.Expense;
+import main.java.marketplace.Fee;
 import main.java.marketplace.Level;
 import main.java.marketplace.Levels;
 import main.java.marketplace.RecordEntry;
 import main.java.world.Location;
+import main.java.world.World;
 
 public class StartUp extends Actor {
     
@@ -32,7 +35,9 @@ public class StartUp extends Actor {
     private int speed;                              // action speed
     private int attackSuccessMultiplier;            // for determining attack success
     private int talentMultiplier;                   // for attracting customers
-    private double serviceCost;                     // cost to use the sevice
+    private double serviceCost;                     // cost to use the service
+    private Location location;                      // company location, holds tax info
+    private ArrayList<Expense> expenses;            // costs for running business
     private ArrayList<RecordEntry> financialRecord; // log of finances
     
     // Devs ////////////////////////
@@ -40,7 +45,6 @@ public class StartUp extends Actor {
     
     // Customers ///////////////////
     private ArrayList<Customer> customers;          // number of customers
-    private Location location;                      // company location
     
     private boolean engagedInCompetition;
     private Competition currentCompetition;
@@ -71,6 +75,7 @@ public class StartUp extends Actor {
         devs = new ArrayList<Developer>();
         financialRecord = new ArrayList<RecordEntry>();
         customers = new ArrayList<Customer>();
+        expenses =  new ArrayList<Expense>();
          
     }
     
@@ -173,6 +178,39 @@ public class StartUp extends Actor {
             dueDate = rand.nextInt(max + 1 - min) + min;
             Customer customer = new Customer(this, Customer.HIGH_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
+        }
+    }
+    
+    public void deductExpenses() {
+        
+        for(int i = 0; i < expenses.size(); i++) {
+            
+            Expense expense = expenses.get(i);
+            
+            if (expense.getDueDate() == World.world.getCurrentDay() )
+            
+            if (expense.getType() == "Fee") {
+                
+                Fee fee = (Fee) expense;
+                decreaseRevenue(new BigDecimal(fee.getCost()));
+            }
+        }
+        removeExpiredExpenses();
+    }
+    
+    private void removeExpiredExpenses() {
+        
+        int i = 0;
+        while (i < expenses.size()) {
+            
+            if (expenses.get(i).getDuration() <= expenses.get(i).getNumberOfTimesPaid()) {
+                
+                expenses.remove(i);
+                
+            } else {
+                
+                i++;
+            }
         }
     }
     
@@ -408,12 +446,22 @@ public class StartUp extends Actor {
     
     public RecordEntry getSecondToLastEntry() {
         
-        if (financialRecord.size() - 30 >= 0) {
+        if (financialRecord.size() - 2 >= 0) {
             
-            return this.financialRecord.get(financialRecord.size() - 30);
+            return this.financialRecord.get(financialRecord.size() - 2);
         } 
         
         return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0);
+    }
+    
+    public BigDecimal getPreviousMonthRevenue(int day) {
+        
+        if (financialRecord.size() - 29 - day >= 1) {
+            
+            return this.financialRecord.get(financialRecord.size() - 29 - day).getMonthlyRevenue();
+        } 
+        
+        return new BigDecimal(0);
     }
     
     public boolean compareXPToNextLevelXP() {
@@ -594,5 +642,18 @@ public class StartUp extends Actor {
 
     public void setTotalRevenue(BigDecimal totalRevenue) {
         this.totalRevenue = totalRevenue.setScale(2, RoundingMode.DOWN);
+    }
+
+    public ArrayList<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(ArrayList<Expense> expenses) {
+        this.expenses = expenses;
+    }
+    
+    public void addExpense(String name, String type, double cost, int dueDate, int duration) {
+        
+//        do domething hashmap for key = type and returns a king of expense
     }
 }

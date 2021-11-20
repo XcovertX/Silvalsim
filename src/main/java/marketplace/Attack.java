@@ -5,6 +5,7 @@ import java.util.Random;
 
 import main.java.actor.StartUp;
 import main.java.world.Printer;
+import main.java.world.World;
 
 public class Attack {
     
@@ -24,7 +25,7 @@ public class Attack {
         
         calculateAttackOutcome();
         
-        int strength = calculateAttackStrength();
+        int strength = calculateAttackStrength(attacker);
         boolean critical = calculateCriticalAttackSuccess();
         
         int developers = 0;
@@ -57,7 +58,7 @@ public class Attack {
         Printer.print(Printer.ANSI_CYAN, attacker.getName());
         Printer.print(" now has ");
         Printer.print(Printer.ANSI_GREEN, Integer.toString(attacker.getDevs().size()));
-        Printer.println(" developers.");
+        Printer.print(" developers. ");
         
         Printer.print(Printer.ANSI_CYAN, defender.getName());
         Printer.print(" now has ");
@@ -94,18 +95,24 @@ public class Attack {
         
         calculateAttackOutcome();
         
-        int strength = calculateAttackStrength();
+        int strength = calculateAttackStrength(attacker);
         boolean critical = calculateCriticalAttackSuccess();
         
         if (critical) {
             
+            System.out.println("Strength: " + strength);
             defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
             defender.setServiceCost(defender.getServiceCost() * 2);
+            defender.addExpense("fee", "Fee", strength * 100000, 
+                    World.world.getCurrentDay(), strength * 10);
             
         } else {
             
+            System.out.println("Strength: " + strength);
             defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(4)));
             defender.setServiceCost(defender.getServiceCost() * 1.4);
+            defender.addExpense("fee", "Fee", strength * 100000, 
+                    World.world.getCurrentDay(), strength * 5);
         }
         
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
@@ -128,7 +135,7 @@ public class Attack {
         
         if (success) {
             
-            int strength = calculateAttackStrength();
+            int strength = calculateAttackStrength(attacker);
             boolean critical = calculateCriticalAttackSuccess();
             
             if (critical) {
@@ -180,9 +187,14 @@ public class Attack {
          
     }
     
-    private int calculateAttackStrength() {
+    private int calculateAttackStrength(StartUp attacker) {
         
-        int strength = attacker.getNetIncome().divide(new BigDecimal(1000000.00)).intValue();
+        int strength;
+        
+        Random rand = new Random();
+        int min = attacker.getLevel().getXPMin();
+        int max = attacker.getLevel().getXPMax();;
+        strength = rand.nextInt(max + 1 - min) + min;
         
         if (strength < 1) {
             
