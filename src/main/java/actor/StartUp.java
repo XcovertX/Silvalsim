@@ -195,7 +195,6 @@ public class StartUp extends Actor {
                     
                     Fee fee = (Fee) expense;
                     decreaseRevenue(new BigDecimal(fee.getCost()));
-                    System.out.println("-" + fee.getCost());
                 }
             }
         }
@@ -328,6 +327,7 @@ public class StartUp extends Actor {
             if (devs.get(i).equals(dev)) {
                 devs.remove(i);
                 this.speed--;
+                this.desirability--;
                 this.decreaseTalentMultiplier(dev.getTalent());
             }
         }
@@ -353,6 +353,7 @@ public class StartUp extends Actor {
         
         Developer dev = devs.remove(0);
         this.speed--;
+        this.desirability--;
         this.decreaseTalentMultiplier(dev.getTalent());
 
         return dev;
@@ -378,6 +379,7 @@ public class StartUp extends Actor {
         
         Developer dev = devs.remove(0);
         this.speed--;
+        this.desirability--;
         this.decreaseTalentMultiplier(dev.getTalent());
         return dev;
     }
@@ -386,6 +388,7 @@ public class StartUp extends Actor {
         
         devs.add(dev);
         this.speed++;
+        this.desirability++;
         this.increaseTalentMultiplier(dev.getTalent());
     }
     
@@ -614,6 +617,9 @@ public class StartUp extends Actor {
 
     public int getDesirability() {
         
+        if (desirability <= 0) {
+            return 1;
+        }
         return desirability;
     }
 

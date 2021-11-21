@@ -75,6 +75,10 @@ public class Attack {
         this.defender = defender;
         
         calculateAttackOutcome();
+        
+        int desirability = defender.getDesirability() / 2;
+        attacker.increaseDesirability(desirability);
+        defender.decreaseDesirability(desirability);
 
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
         Printer.print(Printer.ANSI_RED, "STEALS");
@@ -104,9 +108,10 @@ public class Attack {
                 
                 int amount = strength * 10000000;
                 int duration = strength * 10;
+                defender.decreaseDesirability(defender.getLevel().getLevelNumber());
                 
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
-                defender.setServiceCost(defender.getServiceCost() * 2);
+                defender.setServiceCost(Math.floor(defender.getServiceCost() * 2));
                 defender.addExpense("fee", "Fee", amount,World.world.getCurrentDay(), duration);
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
@@ -127,9 +132,8 @@ public class Attack {
                 int amount = strength * 1000000;
                 int duration = strength * 5;
                 
-                System.out.println("Strength: " + strength);
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(4)));
-                defender.setServiceCost(defender.getServiceCost() * 1.4);
+                defender.setServiceCost(Math.floor(defender.getServiceCost() * 1.4));
                 defender.addExpense("fee", "Fee", amount, World.world.getCurrentDay(), duration);
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
@@ -145,10 +149,11 @@ public class Attack {
                 Printer.print(Printer.ANSI_RED, Integer.toString(duration));
                 Printer.println(" months!!");
             }
+            
         } else {
             
-            Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
-            Printer.print(" attempts to bribe a corrupt politician, ");
+            Printer.print(Printer.ANSI_CYAN, attacker.getName());
+            Printer.print(" attempts to bribe a corrupt politician,");
             Printer.println(" but fails.");
         }
         
@@ -174,38 +179,45 @@ public class Attack {
                 
                 strength = calculateCriticalAttack(strength);
                 
-                attacker.setServiceCost(defender.getServiceCost() / 2);
+                attacker.setServiceCost(Math.floor(defender.getServiceCost() / 2) + .99);
                 
-                Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
-                Printer.print(Printer.ANSI_RED, "UNDERCUTS");
-                Printer.print(" their prices, ");
-                Printer.print(Printer.ANSI_RED, "GOUGING");
+                Printer.print(Printer.ANSI_CYAN, attacker.getName());
+                Printer.print(" lands a ");
+                Printer.print(Printer.ANSI_RED, "CRITICAL");
+                Printer.print(" attack by ");
+                Printer.print(Printer.ANSI_RED, "UNDERCUTTING");
+                Printer.print(" their prices, gouging");
                 Printer.print(" the overall revenue of ");
-                Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
+                Printer.print(Printer.ANSI_CYAN, defender.getName());
                 Printer.println("!!");
+                
+                Printer.print(Printer.ANSI_CYAN, attacker.getName());
+                Printer.print(" service cost is now $");
+                Printer.print(Printer.ANSI_RED, Double.toString(attacker.getServiceCost()));
+                Printer.println(".");
                 
             } else {
                 
-                attacker.setServiceCost(defender.getServiceCost() - (defender.getServiceCost() / 4));
-                Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
-                Printer.print(Printer.ANSI_RED, "UNDERCUTS");
-                Printer.print(" their prices, ");
-                Printer.print(Printer.ANSI_RED, "GOUGING");
-                Printer.print(" the overall revenue of ");
-                Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
-                Printer.println("!!");
+                attacker.setServiceCost(Math.floor(defender.getServiceCost() - (defender.getServiceCost() / 4)) + .99);
+                
+                Printer.print(Printer.ANSI_CYAN, attacker.getName());
+                Printer.print(" attacks ");
+                Printer.print(Printer.ANSI_CYAN, defender.getName());
+                Printer.print(" by ");
+                Printer.print(Printer.ANSI_RED, "UNDERCUTTING");
+                Printer.print(" their prices. ");
+                
+                Printer.print(Printer.ANSI_CYAN, attacker.getName());
+                Printer.print(" service cost is now $");
+                Printer.print(Printer.ANSI_RED, Double.toString(attacker.getServiceCost()));
+                Printer.println(".");
             }
-            
-
-            
+           
         } else {
             
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
-            Printer.print( " attempts to undercut thier prieces but,");
-            Printer.print( " the maneuver has no effect on");
-            Printer.print(" the revenue of ");
-            Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
-            Printer.println(".");
+            Printer.print(" attempts to undercut thier prices, but");
+            Printer.println(" abandons the measure midway through the effort.");
         }
         
     }

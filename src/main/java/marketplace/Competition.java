@@ -39,6 +39,9 @@ public class Competition {
         this.opponentOneOffense = new Offense(opponentOne, opponentTwo);
         this.opponentTwoOffense = new Offense(opponentTwo, opponentOne);
         
+        printScore(opponentOne);
+        printScore(opponentTwo);
+        
         combatCycle();
     }
     

@@ -69,6 +69,14 @@ public class World {
         su1.addExpense("fee", "Fee", 1000, 2, 3);
         su1.addExpense("fee", "Fee", 50000, 14, 36);
         
+        su2.addExpense("fee", "Fee", 1000000, 9, 24);
+        su2.addExpense("fee", "Fee", 75000, 21, 24);
+        su2.addExpense("fee", "Fee", 800000, 22, 3);
+        su2.addExpense("fee", "Fee", 50000, 29, 36);
+        
+        su1.setDesirability(100);
+        su2.setDesirability(100);
+        
         tg1.getStartups().add(su1);
         tg2.getStartups().add(su2);
         

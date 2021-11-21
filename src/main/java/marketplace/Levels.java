@@ -52,6 +52,7 @@ public class Levels {
         this.su.setAttackSuccessMultiplier(nextLevel.getSuccessMultiplier());
         this.su.setXPMin(nextLevel.getXPMin());
         this.su.setXPMax(nextLevel.getXPMax());
+        this.su.increaseDesirability(nextLevel.getLevelNumber());
         
         Printer.print(Printer.ANSI_CYAN, su.getName());
         Printer.print(Printer.ANSI_YELLOW, " leveled up to ");

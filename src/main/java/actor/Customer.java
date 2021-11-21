@@ -35,6 +35,7 @@ public class Customer extends Actor {
         int chance = total * 10;
         int min = 1;
         int max = 100;
+        
         Random rand = new Random();
         
         int randomNumber = rand.nextInt(max + 1 - min) + min;
