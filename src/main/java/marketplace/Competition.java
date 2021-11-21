@@ -39,8 +39,15 @@ public class Competition {
         this.opponentOneOffense = new Offense(opponentOne, opponentTwo);
         this.opponentTwoOffense = new Offense(opponentTwo, opponentOne);
         
+        Printer.println(Printer.ANSI_PURPLE, "*************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "*               Starting Summary                *");
+        Printer.println(Printer.ANSI_PURPLE, "*************************************************");
+        
         printScore(opponentOne);
         printScore(opponentTwo);
+        
+        Printer.println(Printer.ANSI_PURPLE, "*************************************************");
+        Printer.println("");
         
         combatCycle();
     }
@@ -49,17 +56,15 @@ public class Competition {
         
         if (counterOne / (opponentOne.getSpeed()) > 1) {
   
-            opponentOneOffense.attack();        
-//            printScore(getOpponentOne());
-//            printScore(getOpponentTwo());
+            opponentOneOffense.attack();    
+            opponentTwoDefense.Defend();
             setCounterOne(0);
         }
         
         if (counterTwo / (opponentTwo.getSpeed()) > 1) {
  
-            opponentTwoOffense.attack();     
-//            printScore(getOpponentOne()); 
-//            printScore(getOpponentTwo());  
+            opponentTwoOffense.attack();    
+            opponentOneDefense.Defend();  
             setCounterTwo(0);
         }
         
@@ -104,17 +109,6 @@ public class Competition {
         
         }
         
-        Printer.print(" Total Revenue: ");
-        
-        if (su.getLastEntry().getTotalRevenue().compareTo(su.getPreviousMonthRevenue(this.world.getCurrentQuarter().getCurrentDay())) < 0) {
-            
-            Printer.print(Printer.ANSI_RED, "$" + su.getTotalRevenue().toString()); 
-            
-        } else {
-            
-            Printer.print(Printer.ANSI_GREEN, "$" + su.getTotalRevenue().toString());
-        }
-        
         Printer.print(" NetIncome: ");
         
         if (su.getLastEntry().getNetIncome().compareTo(su.getPreviousMonthRevenue(this.world.getCurrentQuarter().getCurrentDay())) < 0) {
@@ -139,7 +133,9 @@ public class Competition {
         
         Printer.print(Printer.ANSI_YELLOW, " XP: " + Integer.toString(su.getXP()));
         
-        Printer.println(Printer.ANSI_YELLOW, " Customer count: " + Integer.toString(su.getCustomers().size()));
+        Printer.print(Printer.ANSI_YELLOW, " Customer count: " + Integer.toString(su.getCustomers().size()));
+        
+        Printer.println(Printer.ANSI_BLUE, " Office Level: " + su.getLevel().getTitle());
         
     }
 

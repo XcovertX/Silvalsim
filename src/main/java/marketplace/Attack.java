@@ -76,17 +76,72 @@ public class Attack {
         
         calculateAttackOutcome();
         
-        int desirability = defender.getDesirability() / 2;
-        attacker.increaseDesirability(desirability);
-        defender.decreaseDesirability(desirability);
-
-        Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
-        Printer.print(Printer.ANSI_RED, "STEALS");
-        Printer.print(" a vital ");
-        Printer.print(Printer.ANSI_RED, "TRADE SECRET");
-        Printer.print(" from ");
-        Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
-        Printer.println("!!");
+        boolean attackSuccess = calculateAttackSuccess();
+        
+        if (attackSuccess) {
+        
+            int desirability = defender.getDesirability() / 2;
+            attacker.increaseDesirability(desirability);
+            defender.decreaseDesirability(desirability);
+            
+            boolean critical = calculateCriticalAttackSuccess();
+            
+                if (critical) {
+                
+                int strength = calculateAttackStrength(attacker) * 1000000;
+                int duration = strength * attacker.getLevelNumber() * 10;
+                
+                defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
+                        World.world.getCurrentQuarter().getCurrentDay(), duration);
+        
+                Printer.print(Printer.ANSI_CYAN, attacker.getName()); 
+                Printer.print(" delivers a ");
+                Printer.print(Printer.ANSI_RED, "CRITICAL");
+                Printer.print(" attack by ");
+                Printer.print(Printer.ANSI_RED, "STEALING");
+                Printer.print(" a vital ");
+                Printer.print(Printer.ANSI_RED, "TRADE SECRET");
+                Printer.print(" from ");
+                Printer.print(Printer.ANSI_CYAN, defender.getName());
+                Printer.println("!!");
+                
+                Printer.print(Printer.ANSI_CYAN, defender.getName());
+                Printer.print(" will have to pay monthly legal expenses of ");
+                Printer.print(Printer.ANSI_RED, "$" + Integer.toString(strength));
+                Printer.print(" for the next ");
+                Printer.print(Printer.ANSI_RED, Integer.toString(duration));
+                Printer.println(" months!!");
+                
+            } else {
+                
+                int strength = calculateAttackStrength(attacker) * 100000;
+                int duration = strength * attacker.getLevelNumber();
+                
+                defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
+                        World.world.getCurrentQuarter().getCurrentDay(), duration);
+        
+                Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
+                Printer.print(Printer.ANSI_RED, "STEALS");
+                Printer.print(" a vital ");
+                Printer.print(Printer.ANSI_RED, "TRADE SECRET");
+                Printer.print(" from ");
+                Printer.print(Printer.ANSI_CYAN, defender.getName());
+                Printer.println("!!");
+                
+                Printer.print(Printer.ANSI_CYAN, defender.getName());
+                Printer.print(" will have to pay monthly legal expenses of ");
+                Printer.print(Printer.ANSI_RED, "$" + Integer.toString(strength));
+                Printer.print(" for the next ");
+                Printer.print(Printer.ANSI_RED, Integer.toString(duration));
+                Printer.println(" months!!");
+            }
+            
+        } else {
+            
+            Printer.print(Printer.ANSI_CYAN, attacker.getName());
+            Printer.print(" attempts to steal trade secrets,");
+            Printer.println(" but fails.");
+        }
         
     }
     
@@ -107,7 +162,7 @@ public class Attack {
             if (attackCritical) {
                 
                 int amount = strength * 10000000;
-                int duration = strength * 10;
+                int duration = strength * 19;
                 defender.decreaseDesirability(defender.getLevel().getLevelNumber());
                 
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));

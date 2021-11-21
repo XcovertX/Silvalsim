@@ -40,23 +40,23 @@ public class World {
         TechGiant tg2 = new TechGiant("Microhard", "Very tiny; Super hard.");
         
         StartUp su1 = new StartUp("Instagram", "Addicting Pictures", new NewYork());
-        StartUp su2 = new StartUp("Myspace", "Jenky Pictures", new Washington());
+        StartUp su2 = new StartUp("Myssspace", "Jenky Pictures", new Washington());
         
-        su1.addJuniorDevs(10);
-        su1.addExperiencedDevs(8);
-        su1.addSeniorDevs(4);
+        su1.addJuniorDevs(1);
+        su1.addExperiencedDevs(2);
+        su1.addSeniorDevs(1);
         
-        su2.addJuniorDevs(14);
+        su2.addJuniorDevs(2);
         su2.addExperiencedDevs(2);
         su2.addSeniorDevs(3);
         
         su1.addLowIncomeCustomers(30000);
-        su1.addMediumIncomeCustomers(150);
-        su1.addHighIncomeCustomers(10);
+        su1.addMediumIncomeCustomers(1500);
+        su1.addHighIncomeCustomers(1000);
         
-        su2.addLowIncomeCustomers(30000);
-        su2.addMediumIncomeCustomers(100);
-        su2.addHighIncomeCustomers(130);
+        su2.addLowIncomeCustomers(20000);
+        su2.addMediumIncomeCustomers(12000);
+        su2.addHighIncomeCustomers(10300);
         
         su1.setServiceCost(15.99);
         su2.setServiceCost(20.99);
@@ -64,14 +64,14 @@ public class World {
         su1.setRevenue(new BigDecimal(1000000.00));
         su2.setRevenue(new BigDecimal(1000000.00));
         
-        su1.addExpense("fee", "Fee", 150000, 5, 24);
-        su1.addExpense("fee", "Fee", 75000, 7, 24);
+        su1.addExpense("fee", "Fee", 1500, 5, 24);
+        su1.addExpense("fee", "Fee", 7500, 7, 24);
         su1.addExpense("fee", "Fee", 1000, 2, 3);
-        su1.addExpense("fee", "Fee", 50000, 14, 36);
+        su1.addExpense("fee", "Fee", 5000, 14, 36);
         
-        su2.addExpense("fee", "Fee", 1000000, 9, 24);
-        su2.addExpense("fee", "Fee", 75000, 21, 24);
-        su2.addExpense("fee", "Fee", 800000, 22, 3);
+        su2.addExpense("fee", "Fee", 1000, 9, 24);
+        su2.addExpense("fee", "Fee", 7500, 21, 24);
+        su2.addExpense("fee", "Fee", 800, 22, 3);
         su2.addExpense("fee", "Fee", 50000, 29, 36);
         
         su1.setDesirability(100);
@@ -92,13 +92,6 @@ public class World {
 
     public void updateWorld(int currentQuarter, int currentDay) {
 
-//        if (techGiants.get(0).getStartups().get(0).getRevenue().compareTo(new BigDecimal(100000000)) > 0) {
-//            System.exit(1);
-//        }
-//        
-//        if (Icounter > 100000) {
-//            System.exit(1);
-//        }
         setCurrentDay(currentDay);
         
         updateCustomers();
@@ -220,9 +213,17 @@ public class World {
             
             if (isPrintTime()) {
                 
+                Printer.println("");
+                Printer.println(Printer.ANSI_PURPLE, "*************************************************");
+                Printer.println(Printer.ANSI_PURPLE, "*                Monthly Summary                *");
+                Printer.println(Printer.ANSI_PURPLE, "*************************************************");
+                
                 currentCompetition.printScore(currentCompetition.getOpponentOne());
                 currentCompetition.printScore(currentCompetition.getOpponentTwo());
+                Printer.println(Printer.ANSI_PURPLE, "*************************************************");
+                Printer.println("");
                 setPrintTime(false);
+                
             }
         }
     }

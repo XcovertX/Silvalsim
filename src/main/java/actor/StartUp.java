@@ -10,6 +10,7 @@ import java.util.Random;
 import main.java.marketplace.Competition;
 import main.java.marketplace.Expense;
 import main.java.marketplace.Fee;
+import main.java.marketplace.LegalBattleExpense;
 import main.java.marketplace.Level;
 import main.java.marketplace.Levels;
 import main.java.marketplace.RecordEntry;
@@ -195,6 +196,14 @@ public class StartUp extends Actor {
                     
                     Fee fee = (Fee) expense;
                     decreaseRevenue(new BigDecimal(fee.getCost()));
+                    fee.incrementNumberOfTimesApplied();
+                }
+                
+                if (expense.getType().equals("Legal Battle Expense")) {
+                    
+                    LegalBattleExpense lbe= (LegalBattleExpense) expense;
+                    decreaseRevenue(new BigDecimal(lbe.getCost()));
+                    lbe.incrementNumberOfTimesApplied();
                 }
             }
         }
@@ -610,7 +619,13 @@ public class StartUp extends Actor {
         
         if (type.equals("Fee")) {
             
-            Fee fee = new Fee(name, type, cost, dueDate, duration);
+            Fee fee = new Fee(name, cost, dueDate, duration);
+            expenses.add(fee);
+        }
+        
+        if (type.equals("Legal Battle Expense")) {
+            
+            Fee fee = new Fee(name, cost, dueDate, duration);
             expenses.add(fee);
         }
     }

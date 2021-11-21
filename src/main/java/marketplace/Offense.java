@@ -21,7 +21,7 @@ public class Offense {
         
         if (attackSelection == 0) {
         
-            new DrainTalentCommand(attacker, recipient).execute();
+            new BribePoliticianCommand(attacker, recipient).execute();
             
         } else if (attackSelection == 1) {
             
@@ -29,7 +29,7 @@ public class Offense {
             
         } else if (attackSelection == 2) {
             
-            new BribePoliticianCommand(attacker, recipient).execute();
+            new DrainTalentCommand(attacker, recipient).execute();
             
         } else if (attackSelection == 3) {
             
