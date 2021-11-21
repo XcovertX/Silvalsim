@@ -89,7 +89,7 @@ public class Attack {
                 if (critical) {
                 
                 int strength = calculateAttackStrength(attacker) * 1000000;
-                int duration = strength * attacker.getLevelNumber() * 10;
+                int duration = strength * (attacker.getLevelNumber() + 1) * 10;
                 
                 defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
                         World.world.getCurrentQuarter().getCurrentDay(), duration);
@@ -115,7 +115,7 @@ public class Attack {
             } else {
                 
                 int strength = calculateAttackStrength(attacker) * 100000;
-                int duration = strength * attacker.getLevelNumber();
+                int duration = strength * (attacker.getLevelNumber() + 1);
                 
                 defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
                         World.world.getCurrentQuarter().getCurrentDay(), duration);
@@ -163,7 +163,7 @@ public class Attack {
                 
                 int amount = strength * 10000000;
                 int duration = strength * 19;
-                defender.decreaseDesirability(defender.getLevel().getLevelNumber());
+                defender.decreaseDesirability(defender.getLevel().getLevelNumber() + 1);
                 
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
                 defender.setServiceCost(Math.floor(defender.getServiceCost() * 2));
@@ -210,10 +210,7 @@ public class Attack {
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
             Printer.print(" attempts to bribe a corrupt politician,");
             Printer.println(" but fails.");
-        }
-        
-
-        
+        }      
     }
     
     public void undercutPrices(StartUp attacker, StartUp defender) {

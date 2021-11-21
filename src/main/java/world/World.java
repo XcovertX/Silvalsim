@@ -99,9 +99,9 @@ public class World {
         updateStartUps();
         updateMarketPlace();
         
-        if (this.currentCompetition == null) {
-            System.exit(1);
-        }
+//        if (this.currentCompetition == null) {
+//            System.exit(1);
+//        }
     }
 
     private void updateFinancialEvents() {
