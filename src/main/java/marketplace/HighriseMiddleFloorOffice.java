@@ -7,7 +7,7 @@ public class HighriseMiddleFloorOffice extends Level {
         this.setTitle("middle floor highrise office floor");
         this.setLevelNumber(3);
         this.setSuccessMultiplier(5);
-        this.setBaseNumber(150);
+        this.setBaseNumber(4000);
         this.setXPMin(8);
         this.setXPMax(24);
     }

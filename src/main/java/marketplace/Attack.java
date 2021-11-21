@@ -75,8 +75,6 @@ public class Attack {
         this.defender = defender;
         
         calculateAttackOutcome();
-        
-        
 
         Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
         Printer.print(Printer.ANSI_RED, "STEALS");
@@ -96,31 +94,65 @@ public class Attack {
         calculateAttackOutcome();
         
         int strength = calculateAttackStrength(attacker);
-        boolean critical = calculateCriticalAttackSuccess();
+        boolean attackSuccess = calculateAttackSuccess();
         
-        if (critical) {
+        if (attackSuccess) {
             
-            System.out.println("Strength: " + strength);
-            defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
-            defender.setServiceCost(defender.getServiceCost() * 2);
-            defender.addExpense("fee", "Fee", strength * 100000, 
-                    World.world.getCurrentDay(), strength * 10);
+            boolean attackCritical = calculateCriticalAttackSuccess();
             
+            if (attackCritical) {
+                
+                int amount = strength * 10000000;
+                int duration = strength * 10;
+                
+                defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
+                defender.setServiceCost(defender.getServiceCost() * 2);
+                defender.addExpense("fee", "Fee", amount,World.world.getCurrentDay(), duration);
+                
+                Printer.print(Printer.ANSI_CYAN, attacker.getName());
+                Printer.print(" delivers a ");
+                Printer.print(Printer.ANSI_RED, "CRITICAL");
+                Printer.print(" attack by ");
+                Printer.print(Printer.ANSI_RED, "BRIBING");
+                Printer.println(" a corrupt politician! ");
+                Printer.print(Printer.ANSI_CYAN, defender.getName());
+                Printer.print(" will now have to pay monthly fees in the amount of ");
+                Printer.print(Printer.ANSI_RED, "$" + amount);
+                Printer.print(" for a total of ");
+                Printer.print(Printer.ANSI_RED, Integer.toString(duration));
+                Printer.println(" months!!");
+                
+            } else {
+                
+                int amount = strength * 1000000;
+                int duration = strength * 5;
+                
+                System.out.println("Strength: " + strength);
+                defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(4)));
+                defender.setServiceCost(defender.getServiceCost() * 1.4);
+                defender.addExpense("fee", "Fee", amount, World.world.getCurrentDay(), duration);
+                
+                Printer.print(Printer.ANSI_CYAN, attacker.getName());
+                Printer.print(" delivers a ");
+                Printer.print(Printer.ANSI_RED, "CRITICAL");
+                Printer.print(" attack by ");
+                Printer.print(Printer.ANSI_RED, "BRIBING");
+                Printer.println(" a corrupt politician! ");
+                Printer.print(Printer.ANSI_CYAN, defender.getName());
+                Printer.print(" will now have to pay monthly fees in the amount of ");
+                Printer.print(Printer.ANSI_RED, "$" + amount);
+                Printer.print(" for a total of ");
+                Printer.print(Printer.ANSI_RED, Integer.toString(duration));
+                Printer.println(" months!!");
+            }
         } else {
             
-            System.out.println("Strength: " + strength);
-            defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(4)));
-            defender.setServiceCost(defender.getServiceCost() * 1.4);
-            defender.addExpense("fee", "Fee", strength * 100000, 
-                    World.world.getCurrentDay(), strength * 5);
+            Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
+            Printer.print(" attempts to bribe a corrupt politician, ");
+            Printer.println(" but fails.");
         }
         
-        Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
-        Printer.print(Printer.ANSI_RED, "BRIBES");
-        Printer.print(" a corrupt politician, ");
-        Printer.print(Printer.ANSI_RED, "TEMPORARILY RESTRICTING");
-        Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
-        Printer.println(" from utilizing their corporate tax deductions!!");
+
         
     }
     

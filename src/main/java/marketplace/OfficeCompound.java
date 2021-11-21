@@ -7,7 +7,7 @@ public class OfficeCompound extends Level {
         this.setTitle("office compound");
         this.setLevelNumber(6);
         this.setSuccessMultiplier(8);
-        this.setBaseNumber(1270);
+        this.setBaseNumber(32000);
         this.setXPMin(64);
         this.setXPMax(192);
     }

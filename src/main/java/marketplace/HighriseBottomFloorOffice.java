@@ -7,7 +7,7 @@ public class HighriseBottomFloorOffice extends Level {
         this.setTitle("highrise office on the bottom floor");
         this.setLevelNumber(2);
         this.setSuccessMultiplier(4);
-        this.setBaseNumber(70);
+        this.setBaseNumber(2000);
         this.setXPMin(4);
         this.setXPMax(12);
     }

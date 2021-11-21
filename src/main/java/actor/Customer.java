@@ -29,7 +29,6 @@ public class Customer extends Actor {
         int priceDifference = determinePriceDifference(competition);
         int desirability = determineDesirability(competition);
         
-//        System.out.println(priceDifference + desirability);
         
         int total = priceDifference + desirability;
         
@@ -54,8 +53,14 @@ public class Customer extends Actor {
     
     private int determineDesirability(StartUp competition) {
         
+        return (int) Math.round(subscription.getDesirability() / competition.getDesirability());
+    }
+    
+    private int determineTalent(StartUp competition) {
+        
         return (int) Math.round(subscription.getTalentMultiplier() / competition.getTalentMultiplier());
     }
+    
     
     public double getAvailableFunds() {
         

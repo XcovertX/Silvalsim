@@ -115,9 +115,7 @@ public class World {
                     
                     StartUp su = tg.getStartups().get(j);
                     
-                    this.currentQuarter.applyFinancialEvents(su);
-                    
-                    su.deductExpenses();   
+                    this.currentQuarter.applyFinancialEvents(su);   
                 }
             }
         }
@@ -133,18 +131,16 @@ public class World {
                 
                 StartUp su = tg.getStartups().get(j);
                 
-                BigDecimal tempRevenue = su.getRevenue();
-                
                 for(int k = 0; k < su.getDevs().size(); k++) {
                     
                     if (currentQuarter.getCurrentDay() == 1 ||
                         currentQuarter.getCurrentDay() == 15) {
                         
                         Developer dev = su.getDevs().get(k);
-                        tempRevenue = su.payDev(tempRevenue, dev);
+                        su.decreaseRevenue(dev.getPaycheck());
                     }
                 }
-                su.setRevenue(tempRevenue);
+                su.deductExpenses();
                 su.addFinancialRecord();
             }
         }

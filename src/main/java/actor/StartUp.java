@@ -14,6 +14,7 @@ import main.java.marketplace.Level;
 import main.java.marketplace.Levels;
 import main.java.marketplace.RecordEntry;
 import main.java.world.Location;
+import main.java.world.Printer;
 import main.java.world.World;
 
 public class StartUp extends Actor {
@@ -36,6 +37,7 @@ public class StartUp extends Actor {
     private int attackSuccessMultiplier;            // for determining attack success
     private int talentMultiplier;                   // for attracting customers
     private double serviceCost;                     // cost to use the service
+    private int desirability;
     private Location location;                      // company location, holds tax info
     private ArrayList<Expense> expenses;            // costs for running business
     private ArrayList<RecordEntry> financialRecord; // log of finances
@@ -187,12 +189,14 @@ public class StartUp extends Actor {
             
             Expense expense = expenses.get(i);
             
-            if (expense.getDueDate() == World.world.getCurrentDay() )
+            if (expense.getDueDate() == World.world.getCurrentDay() ) {
             
-            if (expense.getType() == "Fee") {
-                
-                Fee fee = (Fee) expense;
-                decreaseRevenue(new BigDecimal(fee.getCost()));
+                if (expense.getType().equals("Fee")) {
+                    
+                    Fee fee = (Fee) expense;
+                    decreaseRevenue(new BigDecimal(fee.getCost()));
+                    System.out.println("-" + fee.getCost());
+                }
             }
         }
         removeExpiredExpenses();
@@ -325,7 +329,6 @@ public class StartUp extends Actor {
                 devs.remove(i);
                 this.speed--;
                 this.decreaseTalentMultiplier(dev.getTalent());
-//                setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
             }
         }
     }
@@ -351,7 +354,7 @@ public class StartUp extends Actor {
         Developer dev = devs.remove(0);
         this.speed--;
         this.decreaseTalentMultiplier(dev.getTalent());
-//        setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
+
         return dev;
     }
     
@@ -376,7 +379,6 @@ public class StartUp extends Actor {
         Developer dev = devs.remove(0);
         this.speed--;
         this.decreaseTalentMultiplier(dev.getTalent());
-//        setNetIncome(this.netIncome.subtract(new BigDecimal(devs.get(0).getTalent())));
         return dev;
     }
     
@@ -385,7 +387,6 @@ public class StartUp extends Actor {
         devs.add(dev);
         this.speed++;
         this.increaseTalentMultiplier(dev.getTalent());
-//        setNetIncome(this.netIncome.add(new BigDecimal(dev.getTalent())));
     }
     
     public void increaseRevenue(BigDecimal amount) {
@@ -404,7 +405,7 @@ public class StartUp extends Actor {
     
     public void decreaseRevenue(BigDecimal amount) {
         
-        this.setRevenue(revenue.subtract(amount));       
+        this.setRevenue(revenue.subtract(amount));
     }
     
     public void decreaseNetIncome(BigDecimal amount) {
@@ -547,63 +548,13 @@ public class StartUp extends Actor {
         for(int i = 0; i < customers.size(); i++) {
             if (customers.get(i).equals(customer)) {
                 customers.remove(i);
-//                this.speed--;
-//                setNetIncome(this.netIncome - (devs.get(0).getTalent()));
             }
         }
     }
     
-//    public Developer removeHighIncomeCustomer() {
-//        
-//        Collections.sort(devs, new Comparator<Developer>() {
-//            
-//            @Override
-//            public int compare(Developer d1, Developer d2) {
-//                
-//                if (d1.getTalent() > d2.getTalent()) {
-//                    return 1;
-//                }
-//                
-//                if (d1.getTalent() < d2.getTalent()) {
-//                    return -1;
-//                }
-//                return 0;
-//            }
-//        });
-//        
-//        this.speed--;
-//        setNetIncome(this.netIncome - (devs.get(0).getTalent()));
-//        return devs.remove(0);
-//    }
-//    
-//    public Developer removeLowestDev() {
-//        
-//        Collections.sort(devs, new Comparator<Developer>() {
-//            
-//            @Override
-//            public int compare(Developer d1, Developer d2) {
-//                
-//                if (d1.getTalent() < d2.getTalent()) {
-//                    return 1;
-//                }
-//                
-//                if (d1.getTalent() > d2.getTalent()) {
-//                    return -1;
-//                }
-//                return 0;
-//            }
-//        });
-//        
-//        this.speed--;
-//        setNetIncome(this.netIncome - (devs.get(0).getTalent()));
-//        return devs.remove(0);
-//    }
-    
     public void addCustomer(Customer customer) {
         
         customers.add(customer);
-//        this.speed++;
-//        setNetIncome(this.netIncome + (dev.getTalent()));
     }
 
     public double getServiceCost() {
@@ -654,6 +605,30 @@ public class StartUp extends Actor {
     
     public void addExpense(String name, String type, double cost, int dueDate, int duration) {
         
-//        do domething hashmap for key = type and returns a king of expense
+        if (type.equals("Fee")) {
+            
+            Fee fee = new Fee(name, type, cost, dueDate, duration);
+            expenses.add(fee);
+        }
+    }
+
+    public int getDesirability() {
+        
+        return desirability;
+    }
+
+    public void setDesirability(int desirability) {
+        
+        this.desirability = desirability;
+    }
+    
+    public void increaseDesirability(int amount) {
+        
+        this.desirability += amount;
+    }
+    
+    public void decreaseDesirability(int amount) {
+        
+        this.desirability -= amount;
     }
 }
