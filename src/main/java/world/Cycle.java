@@ -40,19 +40,19 @@ public class Cycle implements Runnable {
         
     private void update() {
         
-        try {
+//        try {
             
             world.updateWorld(currentQuarter.getCurrentQuarter(), currentQuarter.getCurrentDay());
             
             currentQuarter.incrementDay();
             
-            Thread.sleep(100); 
+//            Thread.sleep(100); 
             
-        } catch (InterruptedException e) {
+//        } catch (InterruptedException e) {
+//            
+//            e.printStackTrace();
             
-            e.printStackTrace();
-            
-        }
+//        }
     }
     
     // getters and setters

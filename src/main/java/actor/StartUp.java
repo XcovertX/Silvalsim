@@ -20,6 +20,8 @@ import main.java.world.World;
 
 public class StartUp extends Actor {
     
+    private TechGiant techGiant;                    // techgiant that owns the startup
+    
     // Stats ///////////////////////
     private Levels levels;                          // all possible levels
     private Level level;                            // current level
@@ -56,10 +58,11 @@ public class StartUp extends Actor {
     private static final double REVENUE_MULTIPLIER = 1000000.00;
 
     
-    public StartUp(String name, String description, Location location) {
+    public StartUp(String name, String description, Location location, TechGiant techGiant) {
         
         setName(name);
         setDescription(description);
+        setTechGiant(techGiant);
         setAlive(true);
         
         setLocation(location);
@@ -216,6 +219,38 @@ public class StartUp extends Actor {
         while (i < expenses.size()) {
             
             if (expenses.get(i).getDuration() <= expenses.get(i).getNumberOfTimesPaid()) {
+                
+                expenses.remove(i);
+                
+            } else {
+                
+                i++;
+            }
+        }
+    }
+    
+    public void removeaAllFees() {
+        
+        int i = 0;
+        while (i < expenses.size()) {
+            
+            if (expenses.get(i).equals("Fee")) {
+                
+                expenses.remove(i);
+                
+            } else {
+                
+                i++;
+            }
+        }
+    }
+    
+    public void removeaAllLegalBettleExpenses() {
+        
+        int i = 0;
+        while (i < expenses.size()) {
+            
+            if (expenses.get(i).getType().equals("Legal Battle Expense")) {
                 
                 expenses.remove(i);
                 
@@ -651,5 +686,13 @@ public class StartUp extends Actor {
     public void decreaseDesirability(int amount) {
         
         this.desirability -= amount;
+    }
+
+    public TechGiant getTechGiant() {
+        return techGiant;
+    }
+
+    public void setTechGiant(TechGiant techGiant) {
+        this.techGiant = techGiant;
     }
 }

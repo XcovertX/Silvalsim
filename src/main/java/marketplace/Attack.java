@@ -80,6 +80,7 @@ public class Attack {
         
         if (attackSuccess) {
         
+            int strength = calculateAttackStrength(attacker);
             int desirability = defender.getDesirability() / 2;
             attacker.increaseDesirability(desirability);
             defender.decreaseDesirability(desirability);
@@ -88,8 +89,8 @@ public class Attack {
             
                 if (critical) {
                 
-                int strength = calculateAttackStrength(attacker) * 1000000;
-                int duration = strength * (attacker.getLevelNumber() + 1) * 10;
+                int amount = strength * 10000000;
+                int duration = strength * 19;
                 
                 defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
                         World.world.getCurrentQuarter().getCurrentDay(), duration);
@@ -107,15 +108,15 @@ public class Attack {
                 
                 Printer.print(Printer.ANSI_CYAN, defender.getName());
                 Printer.print(" will have to pay monthly legal expenses of ");
-                Printer.print(Printer.ANSI_RED, "$" + Integer.toString(strength));
+                Printer.print(Printer.ANSI_RED, "$" + Integer.toString(amount));
                 Printer.print(" for the next ");
                 Printer.print(Printer.ANSI_RED, Integer.toString(duration));
                 Printer.println(" months!!");
                 
             } else {
                 
-                int strength = calculateAttackStrength(attacker) * 100000;
-                int duration = strength * (attacker.getLevelNumber() + 1);
+                int amount = strength * 1000000;
+                int duration = strength * 7;
                 
                 defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
                         World.world.getCurrentQuarter().getCurrentDay(), duration);
@@ -130,7 +131,7 @@ public class Attack {
                 
                 Printer.print(Printer.ANSI_CYAN, defender.getName());
                 Printer.print(" will have to pay monthly legal expenses of ");
-                Printer.print(Printer.ANSI_RED, "$" + Integer.toString(strength));
+                Printer.print(Printer.ANSI_RED, "$" + Integer.toString(amount));
                 Printer.print(" for the next ");
                 Printer.print(Printer.ANSI_RED, Integer.toString(duration));
                 Printer.println(" months!!");
@@ -231,7 +232,7 @@ public class Attack {
                 
                 strength = calculateCriticalAttack(strength);
                 
-                attacker.setServiceCost(Math.floor(defender.getServiceCost() / 2) + .99);
+                attacker.setServiceCost(Math.floor(defender.getServiceCost() / 10) + .99);
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" lands a ");
@@ -250,7 +251,7 @@ public class Attack {
                 
             } else {
                 
-                attacker.setServiceCost(Math.floor(defender.getServiceCost() - (defender.getServiceCost() / 4)) + .99);
+                attacker.setServiceCost(Math.floor(defender.getServiceCost() - (defender.getServiceCost() / 5)) + .99);
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" attacks ");

@@ -19,19 +19,19 @@ public class Defense {
         
         int defenseSelection = selectDefense();
         
-        if (defenseSelection >= 0 || defenseSelection < 3) {
+        if (defenseSelection >= 0 || defenseSelection < 2) {
         
             new AdvertiseCommand(defender, recipient).execute();
             
-        } else if (defenseSelection >= 3 || defenseSelection < 6) {
+        } else if (defenseSelection >= 3 || defenseSelection < 4) {
             
             new RecruitTalentCommand(defender, recipient).execute();
             
-        } else if (defenseSelection == 7) {
+        } else if (defenseSelection >= 4 || defenseSelection < 7) {
             
             new LiquidateCommand(defender, recipient).execute();
             
-        } else if (defenseSelection > 7) {
+        } else if (defenseSelection >= 7) {
             
 //            new AdvertiseCommand(defender).execute();
         }

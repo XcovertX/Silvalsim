@@ -3,6 +3,7 @@ package main.java.marketplace;
 import java.math.BigDecimal;
 
 import main.java.actor.StartUp;
+import main.java.actor.TechGiant;
 import main.java.world.Printer;
 import main.java.world.World;
 
@@ -39,15 +40,7 @@ public class Competition {
         this.opponentOneOffense = new Offense(opponentOne, opponentTwo);
         this.opponentTwoOffense = new Offense(opponentTwo, opponentOne);
         
-        Printer.println(Printer.ANSI_PURPLE, "*************************************************");
-        Printer.println(Printer.ANSI_PURPLE, "*               Starting Summary                *");
-        Printer.println(Printer.ANSI_PURPLE, "*************************************************");
-        
-        printScore(opponentOne);
-        printScore(opponentTwo);
-        
-        Printer.println(Printer.ANSI_PURPLE, "*************************************************");
-        Printer.println("");
+        printChallengeStart(opponentOne, opponentTwo);
         
         combatCycle();
     }
@@ -128,15 +121,18 @@ public class Competition {
             
         } else {
             
-            Printer.print(Printer.ANSI_GREEN, "$" + su.getMarketShare().toString());
+            Printer.println(Printer.ANSI_GREEN, "$" + su.getMarketShare().toString());
         }
         
-        Printer.print(Printer.ANSI_YELLOW, " XP: " + Integer.toString(su.getXP()));
+        Printer.print(Printer.ANSI_YELLOW, "XP: " + Integer.toString(su.getXP()));
         
-        Printer.print(Printer.ANSI_YELLOW, " Customer count: " + Integer.toString(su.getCustomers().size()));
+        Printer.print(Printer.ANSI_BLUE, " Office Level: " + su.getLevel().getTitle());
         
-        Printer.println(Printer.ANSI_BLUE, " Office Level: " + su.getLevel().getTitle());
+        Printer.print(Printer.ANSI_YELLOW, " Customer Count: " + Integer.toString(su.getCustomers().size()));
         
+        Printer.println(Printer.ANSI_BLUE, " Dev Count: " + su.getDevs().size());
+        
+        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
     }
 
     public StartUp getOpponentOne() {
@@ -187,15 +183,75 @@ public class Competition {
     
     public void endFight() {
         
+        if (opponentOne.isAlive()) {
+            
+            awardStartUp(opponentOne, opponentTwo);
+            printResults(opponentOne, opponentTwo);
+            
+        } else {
+            
+            awardStartUp(opponentTwo, opponentOne);  
+            printResults(opponentTwo, opponentOne);
+        }
+        
+        this.opponentOne.removeaAllFees();
+        this.opponentOne.removeaAllLegalBettleExpenses();
+        this.opponentTwo.removeaAllFees();
+        this.opponentTwo.removeaAllLegalBettleExpenses();
+        
         this.opponentOne.setEngagedInCompetition(false);
         this.opponentTwo.setEngagedInCompetition(false );
         this.opponentOne.setCurrentCompetition(null);
         this.opponentTwo.setCurrentCompetition(null);
-        this.world.setCurrentCompetition(null);   
+        this.world.setCurrentCompetition(null); 
     }
     
     public int selectAttack(StartUp startup) {
         
         return 0;
+    }
+    
+    public void awardStartUp(StartUp winningStartUp, StartUp losingStartUp) {
+        
+        TechGiant winningTechGiant = winningStartUp.getTechGiant();
+        TechGiant losingTechGiant = losingStartUp.getTechGiant();
+        
+        winningTechGiant.getStartups().add(losingStartUp);
+        losingTechGiant.getStartups().remove(losingStartUp);
+    }
+    
+    public void printResults(StartUp winningStartUp, StartUp losingStartUp) {
+        
+        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "*                              Competition Results                             *");
+        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        
+        Printer.print(Printer.ANSI_CYAN, winningStartUp.getName());
+        Printer.println(" has won the competition!!");
+        Printer.print(Printer.ANSI_CYAN, winningStartUp.getTechGiant().getName());
+        Printer.print(" has now aquired ");
+        Printer.print(Printer.ANSI_CYAN, losingStartUp.getName());
+        Printer.println("!!");
+        
+        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+    }
+    
+    public void printChallengeStart(StartUp su1, StartUp su2) {
+        
+        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "*                                Starting Summary                              *");
+        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        
+        Printer.print(Printer.ANSI_CYAN, su1.getName());
+        Printer.print(" is now competing against ");
+        Printer.print(Printer.ANSI_CYAN, su2.getName());
+        Printer.println("!!");
+        
+        Printer.println("");
+        
+        printScore(opponentOne);
+        printScore(opponentTwo);
+        
+        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
     }
 }
