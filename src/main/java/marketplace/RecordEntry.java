@@ -9,14 +9,17 @@ public class RecordEntry {
     private BigDecimal totalRevenue;
     private BigDecimal marketShare; 
     private int numberOfCustomers;
+    private int numberOfDevs;
     
-    public RecordEntry(BigDecimal netIncome, BigDecimal monthlyRevenue, BigDecimal totalRevenue, BigDecimal marketShare, int numOfCustomers) {
+    public RecordEntry(BigDecimal netIncome, BigDecimal monthlyRevenue, 
+            BigDecimal totalRevenue, BigDecimal marketShare, int numOfCustomers, int numOfDevs) {
         
         this.netIncome = netIncome;
         this.monthlyRevenue = monthlyRevenue;
-        this.setTotalRevenue(totalRevenue);
+        this.totalRevenue = totalRevenue;
         this.marketShare = marketShare;
         this.numberOfCustomers = numOfCustomers;
+        this.numberOfDevs = numOfDevs;
     }
     
     // getters and setters
@@ -69,5 +72,13 @@ public class RecordEntry {
     public void setTotalRevenue(BigDecimal totalRevenue) {
         
         this.totalRevenue = totalRevenue;
+    }
+
+    public int getNumberOfDevs() {
+        return numberOfDevs;
+    }
+
+    public void setNumberOfDevs(int numberOfDevs) {
+        this.numberOfDevs = numberOfDevs;
     }
 }

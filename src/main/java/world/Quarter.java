@@ -20,6 +20,7 @@ public class Quarter {
     
     private World world;
     
+    private int currentCycle;
     private int currentQuarter; 
     private int currentDay; 
     private int currentMonth;
@@ -33,6 +34,7 @@ public class Quarter {
     public Quarter(World world, int currentQuarter, int currentMonth, int currentDay) {
         
         setWorld(world);
+        setCurrentCycle(0);
         setCurrentQuarter(currentQuarter);
         setCurrentMonth(currentMonth);
         setCurrentDay(currentDay);
@@ -84,8 +86,10 @@ public class Quarter {
         
         if(currentQuarter >= Q4) {
             
+            Printer.println("");
             Printer.print(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has ended and ");
             currentQuarter = Q1;
+            currentCycle++;
             Printer.println(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has begun.");
             
         } else {
@@ -229,5 +233,13 @@ public class Quarter {
 
     public void setWorld(World world) {
         this.world = world;
+    }
+
+    public int getCurrentCycle() {
+        return currentCycle;
+    }
+
+    public void setCurrentCycle(int currentCycle) {
+        this.currentCycle = currentCycle;
     }
 }

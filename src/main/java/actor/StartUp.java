@@ -38,7 +38,7 @@ public class StartUp extends Actor {
     // Variables ///////////////////
     private int speed;                              // action speed
     private int attackSuccessMultiplier;            // for determining attack success
-    private int talentMultiplier;                   // for attracting customers
+    private int talentMultiplier;                   // for adjusting xp gains
     private double serviceCost;                     // cost to use the service
     private int desirability;
     private Location location;                      // company location, holds tax info
@@ -150,6 +150,7 @@ public class StartUp extends Actor {
             dueDate = rand.nextInt(max + 1 - min) + min;
             Customer customer = new Customer(this, Customer.LOW_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
+            
         }   
     }
     
@@ -229,7 +230,7 @@ public class StartUp extends Actor {
         }
     }
     
-    public void removeaAllFees() {
+    public void removeAllFees() {
         
         int i = 0;
         while (i < expenses.size()) {
@@ -245,7 +246,7 @@ public class StartUp extends Actor {
         }
     }
     
-    public void removeaAllLegalBettleExpenses() {
+    public void removeAllLegalBattleExpenses() {
         
         int i = 0;
         while (i < expenses.size()) {
@@ -332,11 +333,6 @@ public class StartUp extends Actor {
     private void setSpeed(int speed) {
         
         this.speed = speed;
-    }
-    
-    public void awardXP() {
-        
-        xp = xp + level.getXP();
     }
 
     public int getXP() {
@@ -482,7 +478,8 @@ public class StartUp extends Actor {
     
     public void addFinancialRecord() {
         
-        RecordEntry re = new RecordEntry(netIncome, revenue, totalRevenue, marketShare, customers.size());
+        RecordEntry re = new RecordEntry(netIncome, revenue, totalRevenue, 
+                marketShare, customers.size(), devs.size());
         
         this.financialRecord.add(re);
     }
@@ -499,7 +496,7 @@ public class StartUp extends Actor {
             return this.financialRecord.get(financialRecord.size() - 2);
         } 
         
-        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0);
+        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0, 0);
     }
     
     public BigDecimal getPreviousMonthRevenue(int day) {
@@ -510,6 +507,26 @@ public class StartUp extends Actor {
         } 
         
         return new BigDecimal(0);
+    }
+    
+    public int getPreviousMonthCustomerCount(int day) {
+        
+        if (financialRecord.size() - 29 - day >= 1) {
+            
+            return this.financialRecord.get(financialRecord.size() - 29 - day).getNumberOfCustomers();
+        } 
+        
+        return 0;
+    }
+    
+    public int getPreviousMonthDevCount(int day) {
+        
+        if (financialRecord.size() - 29 - day >= 1) {
+            
+            return this.financialRecord.get(financialRecord.size() - 29 - day).getNumberOfDevs();
+        } 
+        
+        return 0;
     }
     
     public boolean compareXPToNextLevelXP() {

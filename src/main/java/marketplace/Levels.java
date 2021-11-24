@@ -54,10 +54,29 @@ public class Levels {
         this.su.setXPMax(nextLevel.getXPMax());
         this.su.increaseDesirability(nextLevel.getLevelNumber());
         
+        Printer.println("");
         Printer.print(Printer.ANSI_CYAN, su.getName());
-        Printer.print(Printer.ANSI_YELLOW, " leveled up to ");
+        Printer.println(" is now leveling up... ");
+        Printer.println("");
+        
+        for (int j = 0; j < 50; j++) {
+            
+            Printer.print("=");
+            try {
+                
+                Thread.sleep(50);
+                
+            } catch (InterruptedException e) {
+                
+                e.printStackTrace();
+            }
+        }
+
+        Printer.print(Printer.ANSI_CYAN, " " + su.getName());
+        Printer.print(" has leveled up to ");
         Printer.print(Printer.ANSI_GREEN, nextLevel.getTitle());
-        Printer.println(Printer.ANSI_YELLOW, "!!!");
+        Printer.println("!!!");
+        Printer.println("");
     }
 
     public StartUp getSu() {

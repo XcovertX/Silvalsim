@@ -10,6 +10,7 @@ public class TechGiant extends Actor {
         setName(name);
         setDescription(description);
         startups = new ArrayList<StartUp>();
+        setAlive(true);
     }
 
     // getters and setters
