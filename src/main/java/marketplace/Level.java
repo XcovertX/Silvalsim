@@ -1,8 +1,6 @@
 package main.java.marketplace;
 
-import java.util.Random;
-
-import main.java.world.Printer;
+import main.java.world.RandomNumber;
 
 public abstract class Level {
     
@@ -23,10 +21,8 @@ public abstract class Level {
     }
     
     public int getXP() {
-        
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(xpMax + 1 - xpMin) + xpMin;
-        return randomNumber;
+
+        return RandomNumber.getRandomBetween(xpMin, xpMax);
     }
 
     public String getTitle() {

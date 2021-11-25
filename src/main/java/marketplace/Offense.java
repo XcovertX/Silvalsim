@@ -1,8 +1,7 @@
 package main.java.marketplace;
 
-import java.util.Random;
-
 import main.java.actor.StartUp;
+import main.java.world.RandomNumber;
 
 public class Offense {
     
@@ -58,8 +57,7 @@ public class Offense {
         
         int min = 0;
         int max = 3;
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(max + 1 - min) + min;
+        int randomNumber = RandomNumber.getRandomBetween(min, max);
         
         return randomNumber;
     }

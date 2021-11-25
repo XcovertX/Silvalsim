@@ -5,6 +5,7 @@ import java.util.Random;
 
 import main.java.actor.StartUp;
 import main.java.world.Printer;
+import main.java.world.RandomNumber;
 import main.java.world.World;
 
 public class Attack {
@@ -48,6 +49,8 @@ public class Attack {
         }
 
         if (critical) {
+            
+            defender.setXP(defender.getXP() / 2);
             
             attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
             
@@ -159,8 +162,10 @@ public class Attack {
         } else {
             
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
-            Printer.print(" attempts to steal trade secrets,");
-            Printer.println(" but fails.");
+            Printer.print(Printer.ANSI_RED, " attempts ");
+            Printer.print("to steal trade secrets, but");
+            Printer.print(Printer.ANSI_RED, " fails");
+            Printer.println(".");
         }
         
     }
@@ -232,8 +237,10 @@ public class Attack {
         } else {
             
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
-            Printer.print(" attempts to bribe a corrupt politician,");
-            Printer.println(" but fails.");
+            Printer.print(Printer.ANSI_RED, " attempts ");
+            Printer.print("to bribe a corrupt politician, but");
+            Printer.print(Printer.ANSI_RED, " fails");
+            Printer.println(".");
         }      
     }
     
@@ -282,7 +289,7 @@ public class Attack {
                 Printer.print(Printer.ANSI_CYAN, defender.getName());
                 Printer.print(" by ");
                 Printer.print(Printer.ANSI_RED, "UNDERCUTTING");
-                Printer.print(" their prices. ");
+                Printer.println(" their prices. ");
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" service cost is now $");
@@ -293,8 +300,10 @@ public class Attack {
         } else {
             
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
-            Printer.print(" attempts to undercut thier prices, but");
-            Printer.println(" abandons the measure midway through the effort.");
+            Printer.print(Printer.ANSI_RED, " attempts ");
+            Printer.print("attempts to undercut thier prices, but");
+            Printer.print(Printer.ANSI_RED, " fails");
+            Printer.println(".");
         }
         
     }
@@ -311,11 +320,9 @@ public class Attack {
     private int calculateAttackStrength(StartUp attacker) {
         
         int strength;
-        
-        Random rand = new Random();
         int min = attacker.getLevel().getXPMin();
         int max = attacker.getLevel().getXPMax();;
-        strength = rand.nextInt(max + 1 - min) + min;
+        strength = RandomNumber.getRandomBetween(min, max);
         
         if (strength < 1) {
             
@@ -341,12 +348,11 @@ public class Attack {
     
     private boolean calculateAttackSuccess() {
         
-        Random rand = new Random();
         int min = 0;
         int max = 10;
         int offset = attacker.getLevelNumber() - defender.getLevelNumber();
         int probability = attacker.getAttackSuccessMultiplier() + offset;
-        int role = rand.nextInt(max + 1 - min) + min + offset;
+        int role = RandomNumber.getRandomBetween(min, max) + offset;
         
         if (role <= probability) {
             return true;
@@ -356,12 +362,11 @@ public class Attack {
     
     private boolean calculateCriticalAttackSuccess() {
         
-        Random rand = new Random();
         int min = 0;
         int max = 10;
         int offset = attacker.getLevelNumber() - defender.getLevelNumber();
         int probability = attacker.getAttackSuccessMultiplier() + offset;
-        int role = rand.nextInt(max + 1 - min) + min + offset;
+        int role = RandomNumber.getRandomBetween(min, max) + offset;
         
         if (role <= probability) {
             return true;

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import main.java.actor.StartUp;
 import main.java.world.Printer;
+import main.java.world.RandomNumber;
 import main.java.world.World;
 
 public class Defend {
@@ -41,8 +42,11 @@ public class Defend {
         } else {
             
             Printer.print(Printer.ANSI_CYAN, defender.getName());
-            Printer.print(" attempted to defend against inbound attacks");
-            Printer.println(" but the defense failed.");
+            Printer.print(Printer.ANSI_RED, " attempts ");
+            Printer.print("to defend against inbound attacks");
+            Printer.print(" but the defense ");
+            Printer.print(Printer.ANSI_RED, "fails");
+            Printer.println(".");
         }
     }
     public void recruitTalent(StartUp defender, StartUp attacker) {
@@ -67,10 +71,13 @@ public class Defend {
             Printer.println(" new developers!!");
         
         } else {
-            
+
             Printer.print(Printer.ANSI_CYAN, defender.getName());
-            Printer.print(" attempted to defend against inbound attacks");
-            Printer.println(" but the defense failed.");
+            Printer.print(Printer.ANSI_RED, " attempts ");
+            Printer.print("to defend against inbound attacks");
+            Printer.print(" but the defense ");
+            Printer.print(Printer.ANSI_RED, "fails");
+            Printer.println(".");
         }
     }
     
@@ -99,8 +106,11 @@ public class Defend {
         } else {
             
             Printer.print(Printer.ANSI_CYAN, defender.getName());
-            Printer.print(" attempted to defend against inbound attacks");
-            Printer.println(" but the defense failed.");
+            Printer.print(Printer.ANSI_RED, " attempts ");
+            Printer.print("to defend against inbound attacks");
+            Printer.print(" but the defense ");
+            Printer.print(Printer.ANSI_RED, "fails");
+            Printer.println(".");
         }
     }
     
@@ -117,10 +127,9 @@ public class Defend {
         
         int strength;
         
-        Random rand = new Random();
         int min = attacker.getLevel().getXPMin();
         int max = attacker.getLevel().getXPMax();;
-        strength = rand.nextInt(max + 1 - min) + min;
+        strength = RandomNumber.getRandomBetween(min, max);
         
         if (strength < 1) {
             
@@ -131,9 +140,9 @@ public class Defend {
         
     }
     
-    private int calculateCriticalAttack(int attackStrength) {
+    private int calculateCriticalDefenseStrength(int defenseStrength) {
         
-        return attackStrength * 2;
+        return defenseStrength * RandomNumber.getRandomBetween(1, 3);
     }
     
 //    private int calculateDefenseStrength() {
@@ -146,12 +155,11 @@ public class Defend {
     
     private boolean calculateDefenseSuccess() {
         
-        Random rand = new Random();
         int min = 0;
         int max = 10;
         int offset = attacker.getLevelNumber() - defender.getLevelNumber();
         int probability = attacker.getAttackSuccessMultiplier() + offset;
-        int role = rand.nextInt(max + 1 - min) + min + offset;
+        int role = RandomNumber.getRandomBetween(min, max) + offset;
         
         if (role <= probability) {
             return true;
@@ -161,12 +169,11 @@ public class Defend {
     
     private boolean calculateCriticalAttackSuccess() {
         
-        Random rand = new Random();
         int min = 0;
         int max = 10;
         int offset = attacker.getLevelNumber() - defender.getLevelNumber();
         int probability = attacker.getAttackSuccessMultiplier() + offset;
-        int role = rand.nextInt(max + 1 - min) + min + offset;
+        int role = RandomNumber.getRandomBetween(min, max) + offset;
         
         if (role <= probability) {
             return true;

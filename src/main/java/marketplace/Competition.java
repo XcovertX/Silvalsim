@@ -255,6 +255,7 @@ public class Competition {
         this.opponentOne.setCurrentCompetition(null);
         this.opponentTwo.setCurrentCompetition(null);
         this.world.setCurrentCompetition(null); 
+        System.out.println("heresasd1");
     }
     
     private void printOwnership() {
@@ -271,7 +272,11 @@ public class Competition {
             for (int j = 0; j < tg.getStartups().size(); j++) {
                 
                 StartUp su = tg.getStartups().get(j);
-                Printer.print(Printer.ANSI_CYAN, su.getName() + " ");
+                Printer.print(Printer.ANSI_CYAN, su.getName());
+                if (j + 1 < tg.getStartups().size()) {
+                    
+                    Printer.print(", ");
+                }
             }
             Printer.println("");
         }  

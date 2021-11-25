@@ -10,6 +10,7 @@ import java.util.Random;
 import main.java.marketplace.Competition;
 import main.java.marketplace.Expense;
 import main.java.marketplace.Fee;
+import main.java.marketplace.GeneralExpense;
 import main.java.marketplace.LegalBattleExpense;
 import main.java.marketplace.Level;
 import main.java.marketplace.Levels;
@@ -18,9 +19,10 @@ import main.java.world.Location;
 import main.java.world.Printer;
 import main.java.world.World;
 
-public class StartUp extends Actor {
+public abstract class StartUp extends Actor {
     
     private TechGiant techGiant;                    // techgiant that owns the startup
+    private String type;                            // type used to identify for factory build
     
     // Stats ///////////////////////
     private Levels levels;                          // all possible levels
@@ -64,6 +66,7 @@ public class StartUp extends Actor {
         setDescription(description);
         setTechGiant(techGiant);
         setAlive(true);
+        setType(type);
         
         setLocation(location);
         setXP(0);
@@ -680,6 +683,12 @@ public class StartUp extends Actor {
             Fee fee = new Fee(name, cost, dueDate, duration);
             expenses.add(fee);
         }
+        
+        if (type.equals("General Expense")) {
+            
+            GeneralExpense ge = new GeneralExpense(name, cost, dueDate, duration);
+            expenses.add(ge);
+        }
     }
 
     public int getDesirability() {
@@ -711,5 +720,13 @@ public class StartUp extends Actor {
 
     public void setTechGiant(TechGiant techGiant) {
         this.techGiant = techGiant;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
