@@ -110,15 +110,38 @@ public class StartUpFactory {
         
         names.add("X-");
         names.add("Dun");
-        names.add("Jamm");
+        names.add("Jam");
         names.add("Pan");
         names.add("Coda");
-        names.add("Mif");
+        names.add("Mite");
         names.add("Sabe");
         names.add("MSPC");
         names.add("Rec");
-        names.add("Cov");
-        names.add("Laz ");
+        names.add("Con");
+        names.add("Laz");
+        names.add("Tet");
+        names.add("Na");
+        names.add("La");
+        names.add("Ko");
+        names.add("Ra");
+        names.add("Me");
+        names.add("Sint");
+        names.add("Quo");
+        names.add("Fi");
+        names.add("Ga");
+        names.add("Gram");
+        names.add("Ve");
+        names.add("Vi");
+        names.add("Ze");
+        names.add("Ce");
+        names.add("Ci");
+        names.add("Q-");
+        names.add("Ba");
+        names.add("Bot");
+        names.add("Bi");
+        names.add("Es");
+        names.add("Trans");
+        names.add("Quan");
 
     }
     
@@ -131,12 +154,18 @@ public class StartUpFactory {
         generalExtenders.add("techno ");
         generalExtenders.add("zio");
         generalExtenders.add("bionic ");
-        generalExtenders.add("aug ");
+        generalExtenders.add("augment ");
         generalExtenders.add("state ");
         generalExtenders.add("tron ");
         generalExtenders.add("lite ");
-        generalExtenders.add("icro ");
+        generalExtenders.add("micro ");
         generalExtenders.add("quantum ");
+        generalExtenders.add("rem ");
+        generalExtenders.add("lorn ");
+        generalExtenders.add("tess ");
+        generalExtenders.add("circuit ");
+        generalExtenders.add("solo ");
+        generalExtenders.add("fiat ");
   
     }
     
@@ -154,9 +183,9 @@ public class StartUpFactory {
         phoneExtenders = new ArrayList<String>();
         
         phoneExtenders.add("Phones");
-        phoneExtenders.add("S-Phones");
+        phoneExtenders.add("Telecommunications");
         phoneExtenders.add("Communications");
-        phoneExtenders.add("");
+        phoneExtenders.add("CMS");
         
     }
     
@@ -167,7 +196,7 @@ public class StartUpFactory {
         gameExtenders.add("Games");
         gameExtenders.add("Apps");
         gameExtenders.add("Entertainment");
-        gameExtenders.add("");
+        gameExtenders.add("Ent");
           
     }
     
@@ -178,7 +207,7 @@ public class StartUpFactory {
         osExtenders.add("O.Systems");
         osExtenders.add("Systems");
         osExtenders.add("OS");
-        osExtenders.add("");
+        osExtenders.add("O.S.");
 
     }
     
@@ -187,7 +216,7 @@ public class StartUpFactory {
         socialMediaExtenders = new ArrayList<String>();
         
         socialMediaExtenders.add("Media");
-        socialMediaExtenders.add("");
+        socialMediaExtenders.add("Apps");
         socialMediaExtenders.add("Platforms");    
     }
     
@@ -197,7 +226,7 @@ public class StartUpFactory {
         
         financialExtenders.add("Finances");
         financialExtenders.add("Applications");
-        financialExtenders.add("");
+        financialExtenders.add("Capital");
     }
     
     private String getName(int selectIndex) {

@@ -1,7 +1,5 @@
 package main.java.actor;
 
-import main.java.world.Printer;
-
 public abstract class Actor {
 
     private String name;
@@ -10,8 +8,6 @@ public abstract class Actor {
     
     public void die() {
         setAlive(false);
-        Printer.print(Printer.ANSI_RED, getName());
-        Printer.println(Printer.ANSI_RED, " has been defeated!!");
     }
     
     // getters and setters

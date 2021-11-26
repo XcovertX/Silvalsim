@@ -45,6 +45,11 @@ public class Levels {
         
         int i = index + 1;
         
+        if (i >= levels.size()) {
+            
+            return;
+        }
+        
         Level nextLevel = levels.get(i);
         this.su.setLevel(nextLevel);
         this.su.setXpToNextLevel(nextLevel.getBaseNumber());

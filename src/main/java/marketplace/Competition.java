@@ -65,9 +65,19 @@ public class Competition {
             
             opponentOne.die();
             
+            Printer.println("");
+            Printer.print(Printer.ANSI_RED, opponentOne.getName());
+            Printer.println(Printer.ANSI_RED, " has been defeated!!");
+            Printer.println("");
+            
         } else if (opponentTwo.getRevenue().compareTo(new BigDecimal(0)) <= 0 ) {
             
             opponentTwo.die();
+            
+            Printer.println("");
+            Printer.print(Printer.ANSI_RED, opponentTwo.getName());
+            Printer.println(Printer.ANSI_RED, " has been defeated!!");
+            Printer.println("");
         }
         
         if (opponentOne.compareXPToNextLevelXP()) {
@@ -89,9 +99,12 @@ public class Competition {
     
     public void printScore(StartUp su) {
         
+        Printer.print("Tech Giant: ");
         Printer.print(Printer.ANSI_CYAN, su.getTechGiant().getName() + " --- ");
         
+        Printer.print("Startup: ");
         Printer.println(Printer.ANSI_CYAN, su.getName());
+        
         Printer.print("Revenue: ");
         
         if (su.getRevenue().compareTo(su.getPreviousMonthRevenue(world.getCurrentDay())) < 0) {
@@ -213,7 +226,6 @@ public class Competition {
     
     public void endFight() {
         
-        System.out.println("here");
         if (!opponentTwo.isAlive()) {
             
             award(opponentOne, opponentTwo);
@@ -225,7 +237,6 @@ public class Competition {
             
             opponentTwo.setXP(0);
             
-            printOwnership();
             printResults(opponentOne, opponentTwo);
             
         } 
@@ -240,8 +251,7 @@ public class Competition {
             }
             
             opponentOne.setXP(0);
-            
-            printOwnership();
+
             printResults(opponentTwo, opponentOne);
         }
         
@@ -255,7 +265,6 @@ public class Competition {
         this.opponentOne.setCurrentCompetition(null);
         this.opponentTwo.setCurrentCompetition(null);
         this.world.setCurrentCompetition(null); 
-        System.out.println("heresasd1");
     }
     
     private void printOwnership() {
@@ -300,7 +309,7 @@ public class Competition {
         TechGiant losingTechGiant = losingStartUp.getTechGiant();
         
         for (int i = 0; i < losingTechGiant.getStartups().size(); i++) {
-            Printer.println("name: " + losingTechGiant.getStartups().get(i).getName());
+            
             if(losingTechGiant.getStartups().get(i).getName().equals(losingStartUp.getName())) {
                 losingTechGiant.getStartups().get(i).setAlive(true);
                 losingTechGiant.getStartups().get(i).setTechGiant(winningTechGiant);
@@ -350,10 +359,13 @@ public class Competition {
         
         Printer.print(Printer.ANSI_CYAN, winningStartUp.getName());
         Printer.println(" has won the competition!!");
+        Printer.println("");
         Printer.print(Printer.ANSI_CYAN, winningStartUp.getTechGiant().getName());
         Printer.print(" has now aquired ");
         Printer.print(Printer.ANSI_CYAN, losingStartUp.getName());
         Printer.println("!!");
+        
+        printOwnership();
         
         Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
     }

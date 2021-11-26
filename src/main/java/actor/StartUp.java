@@ -42,7 +42,8 @@ public abstract class StartUp extends Actor {
     private int attackSuccessMultiplier;            // for determining attack success
     private int talentMultiplier;                   // for adjusting xp gains
     private double serviceCost;                     // cost to use the service
-    private int desirability;
+    private int desirability;                       // determines desire level, effects customer gains
+    private boolean dodge;                          // determines if next attack will be dodged
     private Location location;                      // company location, holds tax info
     private ArrayList<Expense> expenses;            // costs for running business
     private ArrayList<RecordEntry> financialRecord; // log of finances
@@ -55,9 +56,6 @@ public abstract class StartUp extends Actor {
     
     private boolean engagedInCompetition;
     private Competition currentCompetition;
-    
-    private static final double NET_INCOME_MULTIPLIER = 100000.00;
-    private static final double REVENUE_MULTIPLIER = 1000000.00;
 
     
     public StartUp(String name, String description, Location location, TechGiant techGiant) {
@@ -211,6 +209,13 @@ public abstract class StartUp extends Actor {
                     LegalBattleExpense lbe= (LegalBattleExpense) expense;
                     decreaseRevenue(new BigDecimal(lbe.getCost()));
                     lbe.incrementNumberOfTimesApplied();
+                }
+                
+                if (expense.getType().equals("General Expense")) {
+                    
+                    GeneralExpense ge= (GeneralExpense) expense;
+                    decreaseRevenue(new BigDecimal(ge.getCost()));
+                    ge.incrementNumberOfTimesApplied();
                 }
             }
         }
@@ -728,5 +733,13 @@ public abstract class StartUp extends Actor {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean dodgeSuccess() {
+        return dodge;
+    }
+
+    public void setDodge(boolean dodge) {
+        this.dodge = dodge;
     }
 }

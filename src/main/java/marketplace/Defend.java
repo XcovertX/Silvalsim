@@ -1,18 +1,12 @@
 package main.java.marketplace;
 
-import java.math.BigDecimal;
-import java.util.Random;
-
 import main.java.actor.StartUp;
 import main.java.world.Printer;
 import main.java.world.RandomNumber;
-import main.java.world.World;
 
 public class Defend {
     private StartUp attacker;
     private StartUp defender;
-    
-    private int[] results = new int[4];
     
     public Defend() {
         
@@ -22,8 +16,6 @@ public class Defend {
         
         this.defender = defender;
         this.attacker = attacker;
-        
-        calculateAttackOutcome();
         
         boolean defenseSuccess = calculateDefenseSuccess();
         
@@ -41,12 +33,7 @@ public class Defend {
         
         } else {
             
-            Printer.print(Printer.ANSI_CYAN, defender.getName());
-            Printer.print(Printer.ANSI_RED, " attempts ");
-            Printer.print("to defend against inbound attacks");
-            Printer.print(" but the defense ");
-            Printer.print(Printer.ANSI_RED, "fails");
-            Printer.println(".");
+            printFail();
         }
     }
     public void recruitTalent(StartUp defender, StartUp attacker) {
@@ -58,7 +45,7 @@ public class Defend {
         
         if (defenseSuccess) {
             
-            int strength = calculateDefenseStrength(defender) * defender.getTalentMultiplier();
+            int strength = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
                 
             defender.addJuniorDevs(strength / 2);
             defender.addExperiencedDevs(strength / 4);
@@ -70,14 +57,6 @@ public class Defend {
             Printer.print(Printer.ANSI_GREEN, Integer.toString(strength));
             Printer.println(" new developers!!");
         
-        } else {
-
-            Printer.print(Printer.ANSI_CYAN, defender.getName());
-            Printer.print(Printer.ANSI_RED, " attempts ");
-            Printer.print("to defend against inbound attacks");
-            Printer.print(" but the defense ");
-            Printer.print(Printer.ANSI_RED, "fails");
-            Printer.println(".");
         }
     }
     
@@ -90,11 +69,20 @@ public class Defend {
         
         if (defenseSuccess) {
             
-            int strength = calculateDefenseStrength(defender) * defender.getTalentMultiplier();
-                
+            int strength = RandomNumber.getRandomBetween(1, 3);
+            
+            int counter = 0;
             for(int i = 0; i < defender.getDevs().size(); i++) {
                 
-                defender.removeTopDev();
+                if (counter < strength) {
+                    
+                    defender.removeLowestDev();
+                    counter++;
+                    
+                } else {
+                    
+                    break;
+                }
             }
             
             Printer.print(Printer.ANSI_CYAN, defender.getName() + " ");
@@ -105,22 +93,30 @@ public class Defend {
         
         } else {
             
-            Printer.print(Printer.ANSI_CYAN, defender.getName());
-            Printer.print(Printer.ANSI_RED, " attempts ");
-            Printer.print("to defend against inbound attacks");
-            Printer.print(" but the defense ");
-            Printer.print(Printer.ANSI_RED, "fails");
-            Printer.println(".");
+            printFail();
         }
     }
     
-    private void calculateAttackOutcome() {
-
-//        results[0] = calculateAttackStrength();
-//        results[1] = calculateCriticalAttack();
-//        results[2] = calculateDefenseStrength();
-//        results[3] = calculateDodgeStrength();
-         
+    public void dodge(StartUp defender, StartUp attacker) {
+        
+        this.defender = defender;
+        this.attacker = attacker;
+        
+        boolean defenseSuccess = calculateDefenseSuccess();
+        
+        if (defenseSuccess) {
+            
+            defender.setDodge(true);
+            
+            Printer.print(Printer.ANSI_CYAN, defender.getName());
+            Printer.print(" positions themselves to ");
+            Printer.print(Printer.ANSI_GREEN, "DEFEND");
+            Printer.println(" against the next attack!!");
+        
+        } else {
+            
+            printFail();
+        }
     }
     
     private int calculateDefenseStrength(StartUp attacker) {
@@ -140,26 +136,15 @@ public class Defend {
         
     }
     
-    private int calculateCriticalDefenseStrength(int defenseStrength) {
-        
-        return defenseStrength * RandomNumber.getRandomBetween(1, 3);
-    }
-    
-//    private int calculateDefenseStrength() {
-//        
-//    }
-//    
-//    private int calculateDodgeStrength() {
-//        
-//    }
-    
     private boolean calculateDefenseSuccess() {
         
         int min = 0;
         int max = 10;
-        int offset = attacker.getLevelNumber() - defender.getLevelNumber();
-        int probability = attacker.getAttackSuccessMultiplier() + offset;
-        int role = RandomNumber.getRandomBetween(min, max) + offset;
+        int offset = defender.getLevelNumber() - defender.getLevelNumber();
+        int probability = 5 + offset;
+        int role = RandomNumber.getRandomBetween(min, max);
+        
+        System.out.println("defense success: role: " + role + " prob: " + probability);
         
         if (role <= probability) {
             return true;
@@ -167,25 +152,13 @@ public class Defend {
         return false;    
     }
     
-    private boolean calculateCriticalAttackSuccess() {
+    private void printFail() {
         
-        int min = 0;
-        int max = 10;
-        int offset = attacker.getLevelNumber() - defender.getLevelNumber();
-        int probability = attacker.getAttackSuccessMultiplier() + offset;
-        int role = RandomNumber.getRandomBetween(min, max) + offset;
-        
-        if (role <= probability) {
-            return true;
-        }
-        return false; 
+        Printer.print(Printer.ANSI_CYAN, defender.getName());
+        Printer.print(Printer.ANSI_RED, " attempts ");
+        Printer.print("to defend against inbound attacks,");
+        Printer.print(" but the defense ");
+        Printer.print(Printer.ANSI_RED, "fails");
+        Printer.println(".");  
     }
-    
-//    private boolean calculateDefenseSuccess() {
-//        
-//    }
-//    
-//    private boolean calculateDodgeSuccess() {
-//        
-//    }
 }

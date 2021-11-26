@@ -18,21 +18,21 @@ public class Defense {
         
         int defenseSelection = selectDefense();
         
-        if (defenseSelection >= 0 || defenseSelection < 2) {
+        if (defenseSelection == 0) {
         
             new AdvertiseCommand(defender, recipient).execute();
             
-        } else if (defenseSelection >= 3 || defenseSelection < 4) {
+        } else if (defenseSelection == 1) {
             
             new RecruitTalentCommand(defender, recipient).execute();
             
-        } else if (defenseSelection >= 4 || defenseSelection < 7) {
+        } else if (defenseSelection == 2) {
             
             new LiquidateCommand(defender, recipient).execute();
             
-        } else if (defenseSelection >= 7) {
+        } else if (defenseSelection == 3) {
             
-//            new AdvertiseCommand(defender).execute();
+            new DodgeCommand(defender, recipient).execute();
         }
     }
 
@@ -56,7 +56,7 @@ public class Defense {
     public int selectDefense() {
         
         int min = 0;
-        int max = 14;
+        int max = 3;
         int randomNumber = RandomNumber.getRandomBetween(min, max);
         
         return randomNumber;

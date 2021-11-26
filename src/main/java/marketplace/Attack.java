@@ -13,8 +13,6 @@ public class Attack {
     private StartUp attacker;
     private StartUp defender;
     
-    private int[] results = new int[4];
-    
     public Attack() {
         
     }
@@ -24,75 +22,95 @@ public class Attack {
         this.attacker = attacker;
         this.defender = defender;
         
-        calculateAttackOutcome();
-        
         int strength = calculateAttackStrength(attacker);
-        boolean critical = calculateCriticalAttackSuccess();
+        boolean attackSuccess = calculateAttackSuccess();
         
-        int developers = 0;
-        
-        for(int i = 0; i < strength; i++) {
+        if (attackSuccess) {
             
-            if (defender.getDevs().size() > 1) {
+            boolean critical = calculateCriticalAttackSuccess();
+            
+            int developers = 0;
+            
+            for(int i = 0; i < strength; i++) {
                 
-                if (critical) {
+                if (defender.getDevs().size() > 1) {
                     
-                    attacker.addDev(defender.removeTopDev());
-                    developers++;
-                    
-                } else {
-                    
-                    attacker.addDev(defender.removeLowestDev());
-                    developers++;
+                    if (critical) {
+                        
+                        attacker.addDev(defender.removeTopDev());
+                        developers++;
+                        
+                    } else {
+                        
+                        attacker.addDev(defender.removeLowestDev());
+                        developers++;
+                    }
                 }
+                
             }
-        }
-
-        if (critical) {
-            
-            defender.setXP(defender.getXP() / 2);
-            
-            attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
+    
+            if (critical) {
+                
+                defender.setXP(defender.getXP() / 2);
+                
+                attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
+                
+                Printer.print(Printer.ANSI_CYAN, attacker.getName());
+                Printer.print(" delivers a  ");
+                Printer.print(Printer.ANSI_RED, "CRITICAL");
+                Printer.print(" blow by ");
+                Printer.print(Printer.ANSI_RED, "DRAINING");
+                Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
+                Printer.print(" of valuable talent through stealing ");
+                Printer.print(Printer.ANSI_RED, Integer.toString(developers));
+                Printer.println(" senior developers!!");
+                
+            } else {
+                
+                attacker.getCurrentCompetition().awardXP(attacker, defender);
+                
+                Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
+                Printer.print(Printer.ANSI_RED, "DRAINS");
+                Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
+                Printer.print(" of talent by stealing ");
+                Printer.print(Printer.ANSI_RED, Integer.toString(developers));
+                Printer.println(" junior developers!!");
+            }
             
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
-            Printer.print(" delivers a  ");
-            Printer.print(Printer.ANSI_RED, "CRITICAL");
-            Printer.print(" blow by ");
-            Printer.print(Printer.ANSI_RED, "DRAINING");
-            Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
-            Printer.print(" of valuable talent through stealing ");
-            Printer.print(Printer.ANSI_RED, Integer.toString(developers));
-            Printer.println(" senior developers!!");
+            Printer.print(" now has ");
+            Printer.print(Printer.ANSI_GREEN, Integer.toString(attacker.getDevs().size()));
+            Printer.print(" developers. ");
             
+            Printer.print(Printer.ANSI_CYAN, defender.getName());
+            Printer.print(" now has ");
+            Printer.print(Printer.ANSI_RED, Integer.toString(defender.getDevs().size()));
+            Printer.println(" developers.");
+        
         } else {
             
-            attacker.getCurrentCompetition().awardXP(attacker, defender);
+            Printer.print(Printer.ANSI_CYAN, attacker.getName());
+            Printer.print(Printer.ANSI_RED, " attempts ");
+            Printer.print("to to drain the talent of their competition, but");
             
-            Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
-            Printer.print(Printer.ANSI_RED, "DRAINS");
-            Printer.print(Printer.ANSI_CYAN, " " + defender.getName());
-            Printer.print(" of talent by stealing ");
-            Printer.print(Printer.ANSI_RED, Integer.toString(developers));
-            Printer.println(" junior developers!!");
+            if (defender.dodgeSuccess()) {
+                
+                printDodge();
+            
+            } else {
+                
+                Printer.print(Printer.ANSI_RED, " fails");
+                Printer.println(".");
+            }
         }
         
-        Printer.print(Printer.ANSI_CYAN, attacker.getName());
-        Printer.print(" now has ");
-        Printer.print(Printer.ANSI_GREEN, Integer.toString(attacker.getDevs().size()));
-        Printer.print(" developers. ");
-        
-        Printer.print(Printer.ANSI_CYAN, defender.getName());
-        Printer.print(" now has ");
-        Printer.print(Printer.ANSI_RED, Integer.toString(defender.getDevs().size()));
-        Printer.println(" developers.");
     }
+        
     
     public void tradeSecretTheft(StartUp attacker, StartUp defender) {
         
         this.attacker = attacker;
         this.defender = defender;
-        
-        calculateAttackOutcome();
         
         boolean attackSuccess = calculateAttackSuccess();
         
@@ -164,8 +182,16 @@ public class Attack {
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
             Printer.print(Printer.ANSI_RED, " attempts ");
             Printer.print("to steal trade secrets, but");
-            Printer.print(Printer.ANSI_RED, " fails");
-            Printer.println(".");
+            
+            if (defender.dodgeSuccess()) {
+                
+                printDodge();
+            
+            } else {
+                
+                Printer.print(Printer.ANSI_RED, " fails");
+                Printer.println(".");
+            }
         }
         
     }
@@ -174,8 +200,6 @@ public class Attack {
         
         this.attacker = attacker;
         this.defender = defender;
-        
-        calculateAttackOutcome();
         
         int strength = calculateAttackStrength(attacker);
         boolean attackSuccess = calculateAttackSuccess();
@@ -239,8 +263,16 @@ public class Attack {
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
             Printer.print(Printer.ANSI_RED, " attempts ");
             Printer.print("to bribe a corrupt politician, but");
-            Printer.print(Printer.ANSI_RED, " fails");
-            Printer.println(".");
+
+            if (defender.dodgeSuccess()) {
+                
+                printDodge();
+            
+            } else {
+                
+                Printer.print(Printer.ANSI_RED, " fails");
+                Printer.println(".");
+            }
         }      
     }
     
@@ -248,9 +280,6 @@ public class Attack {
         
         this.attacker = attacker;
         this.defender = defender;
-        
-        calculateAttackOutcome();
-        
         boolean success = calculateAttackSuccess();
         
         if (success) {
@@ -302,19 +331,18 @@ public class Attack {
             Printer.print(Printer.ANSI_CYAN, attacker.getName());
             Printer.print(Printer.ANSI_RED, " attempts ");
             Printer.print("attempts to undercut thier prices, but");
-            Printer.print(Printer.ANSI_RED, " fails");
-            Printer.println(".");
+
+            if (defender.dodgeSuccess()) {
+                
+                printDodge();
+            
+            } else {
+                
+                Printer.print(Printer.ANSI_RED, " fails");
+                Printer.println(".");
+            }
         }
         
-    }
-    
-    private void calculateAttackOutcome() {
-
-//        results[0] = calculateAttackStrength();
-//        results[1] = calculateCriticalAttack();
-//        results[2] = calculateDefenseStrength();
-//        results[3] = calculateDodgeStrength();
-         
     }
     
     private int calculateAttackStrength(StartUp attacker) {
@@ -333,28 +361,18 @@ public class Attack {
         
     }
     
-    private int calculateCriticalAttack(int attackStrength) {
-        
-        return attackStrength * 2;
-    }
-    
-//    private int calculateDefenseStrength() {
-//        
-//    }
-//    
-//    private int calculateDodgeStrength() {
-//        
-//    }
-    
     private boolean calculateAttackSuccess() {
         
         int min = 0;
         int max = 10;
         int offset = attacker.getLevelNumber() - defender.getLevelNumber();
-        int probability = attacker.getAttackSuccessMultiplier() + offset;
-        int role = RandomNumber.getRandomBetween(min, max) + offset;
+        int probability = 5 + offset;
+        int role = RandomNumber.getRandomBetween(min, max);
+        
+        System.out.println("attack success: role: " + role + " prob: " + probability);
         
         if (role <= probability) {
+            
             return true;
         }
         return false;    
@@ -365,8 +383,8 @@ public class Attack {
         int min = 0;
         int max = 10;
         int offset = attacker.getLevelNumber() - defender.getLevelNumber();
-        int probability = attacker.getAttackSuccessMultiplier() + offset;
-        int role = RandomNumber.getRandomBetween(min, max) + offset;
+        int probability = 5 + offset;
+        int role = RandomNumber.getRandomBetween(min, max);
         
         if (role <= probability) {
             return true;
@@ -374,11 +392,11 @@ public class Attack {
         return false; 
     }
     
-//    private boolean calculateDefenseSuccess() {
-//        
-//    }
-//    
-//    private boolean calculateDodgeSuccess() {
-//        
-//    }
+    private void printDodge() {
+        
+        Printer.print(Printer.ANSI_CYAN, " " + attacker.getName());
+        Printer.print(Printer.ANSI_GREEN, " DODGES");
+        Printer.println(" the attack!!!");
+        defender.setDodge(false);
+    }
 }
