@@ -48,16 +48,16 @@ public class World {
         
         StartUpFactory suf = new StartUpFactory();
         suf.generateStartUp("PhoneTech");
-//        suf.generateStartUp("PhoneTech");
-//        suf.generateStartUp("OperatingSystems");
-        suf.generateStartUp("GameTech");
-        suf.generateStartUp("SocialMedia");
-//        suf.generateStartUp("GameTech");
         suf.generateStartUp("PhoneTech");
         suf.generateStartUp("OperatingSystems");
-//        suf.generateStartUp("GameTech");
+        suf.generateStartUp("GameTech");
+        suf.generateStartUp("SocialMedia");
+        suf.generateStartUp("GameTech");
+        suf.generateStartUp("PhoneTech");
+        suf.generateStartUp("OperatingSystems");
+        suf.generateStartUp("GameTech");
         suf.generateStartUp("FinancialTech");
-//        suf.generateStartUp("FinancialTech");
+        suf.generateStartUp("FinancialTech");
         
         this.updateStartUps();
     }
