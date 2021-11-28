@@ -202,12 +202,8 @@ public class World {
                         su.decreaseNetIncome(dev.getPaycheck());
                     }
                 }
-                su.deductExpenses();
-                
-//                if (getCurrentDay() == Quarter.LAST_OF_THE_MONTH) {
-                    
-                    su.addFinancialRecord();
-//                }
+                su.deductExpenses(); 
+                su.addFinancialRecord();
             }
         }
     }
@@ -265,10 +261,6 @@ public class World {
                     su.collectPayment(customer);
                     k++; 
                 }
-//                if(getCurrentDay() == Quarter.FIRST_OF_THE_MONTH) {
-//                    
-//                    su.addFinancialRecord();
-//                }
             }
         }
     }
@@ -294,7 +286,7 @@ public class World {
                 Printer.println("");
                 Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
                 Printer.print(Printer.ANSI_PURPLE, "*");
-                Printer.print                        ("                               Monthly Summary                                ");
+                Printer.print                        ("                                   Summary                                    ");
                 Printer.println(Printer.ANSI_PURPLE, "*");
                 Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
                 

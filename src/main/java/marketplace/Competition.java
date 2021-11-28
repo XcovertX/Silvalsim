@@ -57,6 +57,12 @@ public class Competition {
             setCounterOne(0);
             noAction = false;
             Printer.println("");
+            
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         
         if (counterTwo > opponentTwo.getSpeed() - opponentTwo.getLevelNumber()) {
@@ -72,6 +78,12 @@ public class Competition {
             setCounterTwo(0);
             noAction = false;
             Printer.println("");
+            
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         
         if (noAction) {
