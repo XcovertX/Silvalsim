@@ -1,8 +1,6 @@
 package main.java.actor;
 
-import java.util.Random;
-
-import main.java.marketplace.Competition;
+import main.java.world.RandomNumber;
 
 public class Customer extends Actor {
     
@@ -28,17 +26,14 @@ public class Customer extends Actor {
 
         int priceDifference = determinePriceDifference(competition);
         int desirability = determineDesirability(competition);
+        int talent = determineTalent(competition);
+        int total = priceDifference + talent + desirability;
         
-        
-        int total = priceDifference + desirability;
-        
-        int chance = total * 10;
+        int chance = total * 20;
         int min = 1;
         int max = 100;
         
-        Random rand = new Random();
-        
-        int randomNumber = rand.nextInt(max + 1 - min) + min;
+        int randomNumber = RandomNumber.getRandomBetween(min, max);
         
         if (randomNumber < chance) {
             
@@ -59,7 +54,13 @@ public class Customer extends Actor {
     
     private int determineTalent(StartUp competition) {
         
-        return (int) Math.round(subscription.getTalentMultiplier() / competition.getTalentMultiplier());
+        int competitionTalent = competition.getTalentMultiplier();
+        
+        if (competitionTalent <= 0) {
+            
+            competitionTalent = 1;
+        }
+        return (int) Math.round(subscription.getTalentMultiplier() / competitionTalent);
     }
     
     

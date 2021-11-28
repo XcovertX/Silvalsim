@@ -43,7 +43,7 @@ public class Levels {
     
     public void levelUp(int index) {
         
-        int i = index + 1;
+        int i = index;
         
         if (i >= levels.size()) {
             

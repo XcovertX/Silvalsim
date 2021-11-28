@@ -5,8 +5,10 @@ public class HighriseMiddleFloorOffice extends Level {
     public HighriseMiddleFloorOffice() {
         
         this.setTitle("middle floor highrise office floor");
-        this.setLevelNumber(3);
+        this.setLevelNumber(4);
         this.setSuccessMultiplier(5);
+        this.setAttackCostMultiplier(4);
+        this.setDefendCostMultiplier(4);
         this.setBaseNumber(4000);
         this.setXPMin(8);
         this.setXPMax(24);

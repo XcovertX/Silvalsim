@@ -8,6 +8,8 @@ public abstract class Level {
     private int levelNumber;
     private int successMultiplier; 
     private int baseNumber;
+    private int attackCostMultiplier;
+    private int defendCostMultiplier;
     private int xpMin;
     private int xpMax;
     
@@ -83,5 +85,23 @@ public abstract class Level {
     public void setXPMax(int xpMax) {
         
         this.xpMax = xpMax;
+    }
+
+    public int getAttackCostMultiplier() {
+        
+        return attackCostMultiplier;
+    }
+
+    public void setAttackCostMultiplier(int attackCostMultiplier) {
+        
+        this.attackCostMultiplier = attackCostMultiplier;
+    }
+
+    public int getDefendCostMultiplier() {
+        return defendCostMultiplier;
+    }
+
+    public void setDefendCostMultiplier(int defendCostMultiplier) {
+        this.defendCostMultiplier = defendCostMultiplier;
     }
 }

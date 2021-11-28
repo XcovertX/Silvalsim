@@ -7,7 +7,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
+import main.java.marketplace.AttackExpense;
 import main.java.marketplace.Competition;
+import main.java.marketplace.DefenseExpense;
 import main.java.marketplace.Expense;
 import main.java.marketplace.Fee;
 import main.java.marketplace.GeneralExpense;
@@ -17,6 +19,7 @@ import main.java.marketplace.Levels;
 import main.java.marketplace.RecordEntry;
 import main.java.world.Location;
 import main.java.world.Printer;
+import main.java.world.RandomNumber;
 import main.java.world.World;
 
 public abstract class StartUp extends Actor {
@@ -40,6 +43,8 @@ public abstract class StartUp extends Actor {
     // Variables ///////////////////
     private int speed;                              // action speed
     private int attackSuccessMultiplier;            // for determining attack success
+    private int attackCostMultiplier;               // for determining the cost to attack
+    private int defendCostMultiplier;               // for determining the cost to defend
     private int talentMultiplier;                   // for adjusting xp gains
     private double serviceCost;                     // cost to use the service
     private int desirability;                       // determines desire level, effects customer gains
@@ -83,6 +88,31 @@ public abstract class StartUp extends Actor {
         financialRecord = new ArrayList<RecordEntry>();
         customers = new ArrayList<Customer>();
         expenses =  new ArrayList<Expense>();
+        
+        this.addJuniorDevs(RandomNumber.getRandomBetween(1, 3));
+        this.addExperiencedDevs(RandomNumber.getRandomBetween(1, 3));
+        this.addSeniorDevs(RandomNumber.getRandomBetween(1, 3));
+        
+        this.addLowIncomeCustomers(RandomNumber.getRandomBetween(10000, 30000));
+        this.addMediumIncomeCustomers(RandomNumber.getRandomBetween(100, 2000));
+        this.addHighIncomeCustomers(RandomNumber.getRandomBetween(100, 2000));
+        
+        this.setServiceCost(RandomNumber.getRandomBetween(5, 20) + .99);
+        
+        this.setRevenue(new BigDecimal(RandomNumber.getRandomBetween(10000000, 20000000)));
+        
+        int numberOfExpense = RandomNumber.getRandomBetween(10, 20);
+        int cost = 0;
+        int numberOfMonths = 0;
+        int dueDay = 1;
+        for (int i = 0; i < numberOfExpense; i++) {
+            cost = RandomNumber.getRandomBetween(300, 2000);
+            numberOfMonths = RandomNumber.getRandomBetween(500, 600);
+            dueDay = RandomNumber.getRandomBetween(1, 30);
+            this.addExpense("expense", "General Expense", cost, dueDay, numberOfMonths);
+        }
+        
+        this.setDesirability(RandomNumber.getRandomBetween(100, 200));
          
     }
     
@@ -216,6 +246,20 @@ public abstract class StartUp extends Actor {
                     GeneralExpense ge= (GeneralExpense) expense;
                     decreaseRevenue(new BigDecimal(ge.getCost()));
                     ge.incrementNumberOfTimesApplied();
+                }
+                
+                if (expense.getType().equals("Attack Expense")) {
+                    
+                    AttackExpense ae = (AttackExpense) expense;
+                    decreaseNetIncome(new BigDecimal(ae.getCost()));
+                    ae.incrementNumberOfTimesApplied();
+                }
+                
+                if (expense.getType().equals("Defense Expense")) {
+                    
+                    DefenseExpense de= (DefenseExpense) expense;
+                    decreaseMarketShare(new BigDecimal(de.getCost()));
+                    de.incrementNumberOfTimesApplied();
                 }
             }
         }
@@ -372,7 +416,9 @@ public abstract class StartUp extends Actor {
     public void removeDev(Developer dev) {
         
         for(int i = 0; i < devs.size(); i++) {
+            
             if (devs.get(i).equals(dev)) {
+                
                 devs.remove(i);
                 this.speed--;
                 this.desirability--;
@@ -389,10 +435,12 @@ public abstract class StartUp extends Actor {
             public int compare(Developer d1, Developer d2) {
                 
                 if (d1.getTalent() > d2.getTalent()) {
+                    
                     return 1;
                 }
                 
                 if (d1.getTalent() < d2.getTalent()) {
+                    
                     return -1;
                 }
                 return 0;
@@ -415,10 +463,12 @@ public abstract class StartUp extends Actor {
             public int compare(Developer d1, Developer d2) {
                 
                 if (d1.getTalent() < d2.getTalent()) {
+                    
                     return 1;
                 }
                 
                 if (d1.getTalent() > d2.getTalent()) {
+                    
                     return -1;
                 }
                 return 0;
@@ -454,6 +504,17 @@ public abstract class StartUp extends Actor {
         this.setNetIncome(total);
     }
     
+    public void increaseMarketShare(BigDecimal amount) {
+        
+        BigDecimal total = marketShare.add(amount);
+        this.setMarketShare(total);
+    }
+    
+    public void transferEndOfMonthNetIncome() {
+        
+        increaseNetIncome(revenue);
+    }
+    
     public void decreaseRevenue(BigDecimal amount) {
         
         this.setRevenue(revenue.subtract(amount));
@@ -462,6 +523,11 @@ public abstract class StartUp extends Actor {
     public void decreaseNetIncome(BigDecimal amount) {
         
         this.setNetIncome(netIncome.subtract(amount));
+    }
+    
+    public void decreaseMarketShare(BigDecimal amount) {
+        
+        this.setMarketShare(marketShare.subtract(amount));
     }
     
     public void increaseTalentMultiplier(int amount) {
@@ -492,9 +558,26 @@ public abstract class StartUp extends Actor {
         this.financialRecord.add(re);
     }
     
+//    public void editLastFinancialRecord() {
+//        
+//        RecordEntry re = this.getLastEntry();
+//        
+//        
+//                
+//                new RecordEntry(netIncome, revenue, totalRevenue, 
+//                marketShare, customers.size(), devs.size());
+//        
+//        this.financialRecord.add(re);
+//    }
+    
     public RecordEntry getLastEntry() {
         
-        return this.financialRecord.get(financialRecord.size() - 1);
+        if (financialRecord.size() - 1 >= 0) {
+            
+            return this.financialRecord.get(financialRecord.size() - 1);
+        } 
+       
+        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0, 0);
     }
     
     public RecordEntry getSecondToLastEntry() {
@@ -643,7 +726,10 @@ public abstract class StartUp extends Actor {
         
         customer.setAvailableFunds(customer.getAvailableFunds() - getServiceCost());
         BigDecimal payment = new BigDecimal(getServiceCost());
+        BigDecimal quarterPayment = payment.divide(new BigDecimal(4));
         this.increaseRevenue(payment);
+        this.increaseNetIncome(quarterPayment);
+        this.increaseMarketShare(quarterPayment);
     }
 
     public BigDecimal payDev(BigDecimal tempRevenue, Developer dev) {
@@ -694,6 +780,18 @@ public abstract class StartUp extends Actor {
             GeneralExpense ge = new GeneralExpense(name, cost, dueDate, duration);
             expenses.add(ge);
         }
+        
+        if (type.equals("Attack Expense")) {
+            
+            AttackExpense ae = new AttackExpense(name, cost, dueDate, duration);
+            expenses.add(ae);
+        }
+        
+        if (type.equals("Defense Expense")) {
+            
+            DefenseExpense de = new DefenseExpense(name, cost, dueDate, duration);
+            expenses.add(de);
+        }
     }
 
     public int getDesirability() {
@@ -741,5 +839,21 @@ public abstract class StartUp extends Actor {
 
     public void setDodge(boolean dodge) {
         this.dodge = dodge;
+    }
+
+    public int getAttackCostMultiplier() {
+        return attackCostMultiplier;
+    }
+
+    public void setAttackCostMultiplier(int attackCostMultiplier) {
+        this.attackCostMultiplier = attackCostMultiplier;
+    }
+
+    public int getDefendCostMultiplier() {
+        return defendCostMultiplier;
+    }
+
+    public void setDefendCostMultiplier(int defendCostMultiplier) {
+        this.defendCostMultiplier = defendCostMultiplier;
     }
 }

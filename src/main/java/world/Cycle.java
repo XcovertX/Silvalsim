@@ -3,7 +3,7 @@ package main.java.world;
 public class Cycle implements Runnable {
     
     private boolean running;
-    private final double updateRate = 1.0d/60.0d;
+    private final double updateRate = 30.0d/60.0d;
     
     private Quarter currentQuarter;
     
@@ -26,7 +26,7 @@ public class Cycle implements Runnable {
         while(running) {
             
             currentTime = System.currentTimeMillis();
-            double lastRenderTimeInSeconds = ( currentTime - lastUpdate ) / 1000d;
+            double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
             accumulator += lastRenderTimeInSeconds;
             lastUpdate = currentTime;
             
@@ -39,20 +39,10 @@ public class Cycle implements Runnable {
     }
         
     private void update() {
-        
-//        try {
+
+        currentQuarter.incrementDay();
             
-            world.updateWorld(currentQuarter.getCurrentQuarter(), currentQuarter.getCurrentDay());
-            
-            currentQuarter.incrementDay();
-            
-//            Thread.sleep(100); 
-            
-//        } catch (InterruptedException e) {
-//            
-//            e.printStackTrace();
-            
-//        }
+        world.updateWorld(currentQuarter.getCurrentQuarter(), currentQuarter.getCurrentDay());
     }
     
     // getters and setters

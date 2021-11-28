@@ -48,16 +48,16 @@ public class World {
         
         StartUpFactory suf = new StartUpFactory();
         suf.generateStartUp("PhoneTech");
-        suf.generateStartUp("PhoneTech");
-        suf.generateStartUp("OperatingSystems");
+//        suf.generateStartUp("PhoneTech");
+//        suf.generateStartUp("OperatingSystems");
         suf.generateStartUp("GameTech");
         suf.generateStartUp("SocialMedia");
-        suf.generateStartUp("GameTech");
+//        suf.generateStartUp("GameTech");
         suf.generateStartUp("PhoneTech");
         suf.generateStartUp("OperatingSystems");
-        suf.generateStartUp("GameTech");
+//        suf.generateStartUp("GameTech");
         suf.generateStartUp("FinancialTech");
-        suf.generateStartUp("FinancialTech");
+//        suf.generateStartUp("FinancialTech");
         
         this.updateStartUps();
     }
@@ -70,11 +70,6 @@ public class World {
         updateFinancialEvents();
         updateStartUps();
         updateMarketPlace();
-    
-        if (this.currentCompetition == null) {
-     
-            findCompetitors();
-        }
     }
 
     private void findCompetitors() {
@@ -124,10 +119,10 @@ public class World {
    
         Printer.println("");
         Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
-        Printer.println(Printer.ANSI_PURPLE, "*                       Total Domination Achieved                              *");
+        Printer.print(Printer.ANSI_PURPLE, "*");
+        Printer.print                        ("                         Total Domination Achieved                            ");
+        Printer.println(Printer.ANSI_PURPLE, "*");
         Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
-        
-        Printer.println("");
         for (int i = 0; i < world.getTechGiants().size(); i++) {
             
             TechGiant tg = world.getTechGiants().get(i);
@@ -152,7 +147,7 @@ public class World {
         }  
 
         Printer.println("");
-        Printer.println(Printer.ANSI_YELLOW, "Exiting SILVALSIM......");
+        Printer.println("Exiting SILVALSIM......");
         Printer.println("");
         
         Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
@@ -204,11 +199,15 @@ public class World {
                         currentQuarter.getCurrentDay() == 15) {
                         
                         Developer dev = su.getDevs().get(k);
-                        su.decreaseRevenue(dev.getPaycheck());
+                        su.decreaseNetIncome(dev.getPaycheck());
                     }
                 }
                 su.deductExpenses();
-                su.addFinancialRecord();
+                
+//                if (getCurrentDay() == Quarter.LAST_OF_THE_MONTH) {
+                    
+                    su.addFinancialRecord();
+//                }
             }
         }
     }
@@ -266,12 +265,20 @@ public class World {
                     su.collectPayment(customer);
                     k++; 
                 }
-                su.addFinancialRecord();
+//                if(getCurrentDay() == Quarter.FIRST_OF_THE_MONTH) {
+//                    
+//                    su.addFinancialRecord();
+//                }
             }
         }
     }
     
     public void updateMarketPlace() {
+        
+        if (this.currentCompetition == null) {
+            
+            findCompetitors();
+        }
     
         if (currentCompetition != null) {
             
@@ -280,11 +287,15 @@ public class World {
         
         if (currentCompetition != null) {
             
-            if (isPrintTime()) {
+//            if (isPrintTime()) {
+                
+                
                 
                 Printer.println("");
                 Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
-                Printer.println(Printer.ANSI_PURPLE, "*                              Monthly Summary                                 *");
+                Printer.print(Printer.ANSI_PURPLE, "*");
+                Printer.print                        ("                               Monthly Summary                                ");
+                Printer.println(Printer.ANSI_PURPLE, "*");
                 Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
                 
                 Printer.print("Cycle: " + getCurrentQuarter().getCurrentCycle());
@@ -298,7 +309,7 @@ public class World {
                 currentCompetition.printScore(currentCompetition.getOpponentTwo());
                 Printer.println("");
                 setPrintTime(false);  
-            }
+//            }
         }
         
         int i = 0;

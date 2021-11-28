@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import main.java.actor.StartUp;
 import main.java.actor.TechGiant;
 import main.java.world.Printer;
+import main.java.world.Quarter;
 import main.java.world.World;
 
 public class Competition {
@@ -41,29 +42,53 @@ public class Competition {
         this.opponentTwoOffense = new Offense(opponentTwo, opponentOne);
         
         printChallengeStart(opponentOne, opponentTwo);
-        
-        combatCycle();
     }
     
     public void combatCycle() {
         
-        if (counterOne / (opponentOne.getSpeed()) > 1) {
+        boolean noAction = true;
+        
+        if (counterOne > opponentOne.getSpeed() - opponentOne.getLevelNumber()) {
   
+            Printer.println("");
+            World.world.getCurrentQuarter().printTimeStamp();
             opponentOneOffense.attack();    
             opponentTwoDefense.Defend();
             setCounterOne(0);
+            noAction = false;
+            Printer.println("");
         }
         
-        if (counterTwo / (opponentTwo.getSpeed()) > 1) {
+        if (counterTwo > opponentTwo.getSpeed() - opponentTwo.getLevelNumber()) {
  
+            if (counterOne != 0) {
+                
+                Printer.println("");
+            }
+            
+            World.world.getCurrentQuarter().printTimeStamp();
             opponentTwoOffense.attack();    
             opponentOneDefense.Defend();
             setCounterTwo(0);
+            noAction = false;
+            Printer.println("");
+        }
+        
+        if (noAction) {
+            
+//            if (!(World.world.getCurrentDay() == 1)) {
+//                
+//                Printer.println("Day: " + World.world.getCurrentDay() + " no combat recorded.");
+//            }
+//            if (World.world.getCurrentDay() >= 30) {
+//                
+//                Printer.println("");
+//            }
         }
         
         if (opponentOne.getRevenue().compareTo(new BigDecimal(0)) <= 0 ) {
             
-            opponentOne.die();
+             opponentOne.die();
             
             Printer.println("");
             Printer.print(Printer.ANSI_RED, opponentOne.getName());
@@ -107,8 +132,8 @@ public class Competition {
         
         Printer.print("Revenue: ");
         
-        if (su.getRevenue().compareTo(su.getPreviousMonthRevenue(world.getCurrentDay())) < 0) {
-            
+        if (su.getRevenue().compareTo(su.getSecondToLastEntry().getMonthlyRevenue()) < 0) {
+             
             Printer.print(Printer.ANSI_RED, "$" + su.getRevenue().toString()); 
             
         } else {
@@ -119,7 +144,7 @@ public class Competition {
         
         Printer.print(" NetIncome: ");
         
-        if (su.getLastEntry().getNetIncome().compareTo(su.getPreviousMonthRevenue(world.getCurrentDay())) < 0) {
+        if (su.getLastEntry().getNetIncome().compareTo(su.getSecondToLastEntry().getNetIncome()) < 0) {
             
             Printer.print(Printer.ANSI_RED, "$" + su.getNetIncome().toString()); 
             
@@ -143,11 +168,11 @@ public class Competition {
         Printer.print(Integer.toString(su.getXP()));
 
         Printer.print(Printer.ANSI_YELLOW, " Customer Count: ");
-        if (su.getCustomers().size() > su.getPreviousMonthCustomerCount(world.getCurrentDay())) {
+        if (su.getCustomers().size() > su.getSecondToLastEntry().getNumberOfCustomers()) {
             
             Printer.print(Printer.ANSI_GREEN, Integer.toString(su.getCustomers().size()));
         
-        } else if (su.getCustomers().size() < su.getPreviousMonthCustomerCount(world.getCurrentDay())) {
+        } else if (su.getCustomers().size() < su.getSecondToLastEntry().getNumberOfCustomers()) {
             
             Printer.print(Printer.ANSI_RED, Integer.toString(su.getCustomers().size()));
         
@@ -158,11 +183,11 @@ public class Competition {
         }
         
         Printer.print(Printer.ANSI_YELLOW, " Dev Count: ");
-        if (su.getDevs().size() > su.getPreviousMonthDevCount(world.getCurrentDay())) {
+        if (su.getDevs().size() > su.getSecondToLastEntry().getNumberOfDevs()) {
             
             Printer.println(Printer.ANSI_GREEN, Integer.toString(su.getDevs().size()));
             
-        } else if (su.getDevs().size() < su.getPreviousMonthDevCount(world.getCurrentDay())) {
+        } else if (su.getDevs().size() < su.getSecondToLastEntry().getNumberOfDevs()) {
             
             Printer.println(Printer.ANSI_RED, Integer.toString(su.getDevs().size()));
         
@@ -264,7 +289,7 @@ public class Competition {
         this.opponentTwo.setEngagedInCompetition(false );
         this.opponentOne.setCurrentCompetition(null);
         this.opponentTwo.setCurrentCompetition(null);
-        this.world.setCurrentCompetition(null); 
+        World.world.setCurrentCompetition(null); 
     }
     
     private void printOwnership() {
@@ -329,7 +354,7 @@ public class Competition {
     public void awardCriticalXP(StartUp su1, StartUp su2) {
         
         Level lvl = su2.getLevel();
-        su1.setXP(su1.getXP() + su1.getTalentMultiplier() + (lvl.getXP() * 2));
+        su1.setXP(su1.getXP() + (su1.getTalentMultiplier() * 2) + (lvl.getXP() * 2));
     }
     
     private void awardWinnerXP(StartUp su1, StartUp su2) {

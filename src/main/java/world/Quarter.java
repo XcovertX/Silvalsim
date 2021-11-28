@@ -137,6 +137,14 @@ public class Quarter {
         
     }
     
+    public void printTimeStamp() {
+        
+        Printer.print("Cycle: " + currentCycle);
+        Printer.print(" Quarter: " + currentQuarter);
+        Printer.print(" Month: " + currentMonth);
+        Printer.println(" Day: " + currentDay);
+    }
+    
     // getters and setters
     
     private void setCurrentDay(int currentDay) {
@@ -176,6 +184,7 @@ public class Quarter {
     }
 
     private boolean isEven() {
+        
         return isEven;
     }
 

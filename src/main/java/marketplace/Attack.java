@@ -1,7 +1,6 @@
 package main.java.marketplace;
 
 import java.math.BigDecimal;
-import java.util.Random;
 
 import main.java.actor.StartUp;
 import main.java.world.Printer;
@@ -51,9 +50,11 @@ public class Attack {
     
             if (critical) {
                 
-                defender.setXP(defender.getXP() / 2);
+                defender.setXP(defender.getXP() - (defender.getXP() / 4));
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
+                
+                generateAttackExpense();
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" delivers a  ");
@@ -67,7 +68,11 @@ public class Attack {
                 
             } else {
                 
+                defender.setXP(defender.getXP() - (defender.getXP() / 10));
+                
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
+                
+                generateAttackExpense();
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
                 Printer.print(Printer.ANSI_RED, "DRAINS");
@@ -93,7 +98,11 @@ public class Attack {
             Printer.print(Printer.ANSI_RED, " attempts ");
             Printer.print("to to drain the talent of their competition, but");
             
-            if (defender.dodgeSuccess()) {
+            if (attacker.getNetIncome().compareTo(new BigDecimal(0)) <= 0) {
+                
+                insufficentAttackFunds();
+                
+            } else if (defender.dodgeSuccess()) {
                 
                 printDodge();
             
@@ -133,6 +142,8 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
         
+                generateAttackExpense();
+                
                 Printer.print(Printer.ANSI_CYAN, attacker.getName()); 
                 Printer.print(" delivers a ");
                 Printer.print(Printer.ANSI_RED, "CRITICAL");
@@ -161,6 +172,8 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
         
+                generateAttackExpense();
+                
                 Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
                 Printer.print(Printer.ANSI_RED, "STEALS");
                 Printer.print(" a vital ");
@@ -183,7 +196,11 @@ public class Attack {
             Printer.print(Printer.ANSI_RED, " attempts ");
             Printer.print("to steal trade secrets, but");
             
-            if (defender.dodgeSuccess()) {
+            if (attacker.getNetIncome().compareTo(new BigDecimal(0)) <= 0) {
+                
+                insufficentAttackFunds();
+                
+            } else if (defender.dodgeSuccess()) {
                 
                 printDodge();
             
@@ -220,6 +237,8 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
                 
+                generateAttackExpense();
+                
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" delivers a ");
                 Printer.print(Printer.ANSI_RED, "CRITICAL");
@@ -244,6 +263,8 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
                 
+                generateAttackExpense();
+                
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" delivers a ");
                 Printer.print(Printer.ANSI_RED, "CRITICAL");
@@ -264,7 +285,11 @@ public class Attack {
             Printer.print(Printer.ANSI_RED, " attempts ");
             Printer.print("to bribe a corrupt politician, but");
 
-            if (defender.dodgeSuccess()) {
+            if (attacker.getNetIncome().compareTo(new BigDecimal(0)) <= 0) {
+                
+                insufficentAttackFunds();
+                
+            } else if (defender.dodgeSuccess()) {
                 
                 printDodge();
             
@@ -292,6 +317,8 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
                 
+                generateAttackExpense();
+                
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" lands a ");
                 Printer.print(Printer.ANSI_RED, "CRITICAL");
@@ -313,6 +340,8 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
                 
+                generateAttackExpense();
+                
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" attacks ");
                 Printer.print(Printer.ANSI_CYAN, defender.getName());
@@ -332,7 +361,11 @@ public class Attack {
             Printer.print(Printer.ANSI_RED, " attempts ");
             Printer.print("attempts to undercut thier prices, but");
 
-            if (defender.dodgeSuccess()) {
+            if (attacker.getNetIncome().compareTo(new BigDecimal(0)) <= 0) {
+                
+                insufficentAttackFunds();
+                
+            } else if (defender.dodgeSuccess()) {
                 
                 printDodge();
             
@@ -363,13 +396,18 @@ public class Attack {
     
     private boolean calculateAttackSuccess() {
         
+        if (attacker.getNetIncome().compareTo(new BigDecimal(0)) <= 0) {
+            
+            return false;
+        }
+        
         int min = 0;
         int max = 10;
         int offset = attacker.getLevelNumber() - defender.getLevelNumber();
         int probability = 5 + offset;
         int role = RandomNumber.getRandomBetween(min, max);
         
-        System.out.println("attack success: role: " + role + " prob: " + probability);
+//        System.out.println("attack success: role: " + role + " prob: " + probability);
         
         if (role <= probability) {
             
@@ -398,5 +436,29 @@ public class Attack {
         Printer.print(Printer.ANSI_GREEN, " DODGES");
         Printer.println(" the attack!!!");
         defender.setDodge(false);
+    }
+    
+    private void generateAttackExpense() {
+        
+        int randomNumber = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+        int duration = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+        double cost = randomNumber * attacker.getAttackCostMultiplier() * defender.getLevelNumber() * 100000;
+        attacker.addExpense("attack expense", "Attack Expense", cost, World.world.getCurrentDay(), duration);
+    }
+    
+    private void insufficentAttackFunds() {
+        
+        Printer.print(Printer.ANSI_CYAN, " " + attacker.getName());
+        Printer.print(Printer.ANSI_RED, " LACKS");
+        Printer.println(" sufficient funds to attack!!!");
+        
+        attacker.setServiceCost(attacker.getServiceCost() * 2);
+        
+        Printer.print(Printer.ANSI_CYAN, attacker.getName());
+        Printer.print(" service cost is now $");
+        Printer.print(Printer.ANSI_GREEN, Double.toString(attacker.getServiceCost()));
+        Printer.println(".");
+        
+        new LiquidateCommand(attacker, defender);    
     }
 }

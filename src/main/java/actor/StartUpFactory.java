@@ -166,6 +166,7 @@ public class StartUpFactory {
         generalExtenders.add("circuit ");
         generalExtenders.add("solo ");
         generalExtenders.add("fiat ");
+        generalExtenders.add("synth ");
   
     }
     
@@ -225,7 +226,7 @@ public class StartUpFactory {
         financialExtenders = new ArrayList<String>();
         
         financialExtenders.add("Finances");
-        financialExtenders.add("Applications");
+        financialExtenders.add("Exchange");
         financialExtenders.add("Capital");
     }
     
