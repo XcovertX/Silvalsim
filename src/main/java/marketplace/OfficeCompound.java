@@ -9,7 +9,7 @@ public class OfficeCompound extends Level {
         this.setSuccessMultiplier(8);
         this.setAttackCostMultiplier(7);
         this.setDefendCostMultiplier(7);
-        this.setBaseNumber(32000);
+        this.setBaseNumber(16000);
         this.setXPMin(64);
         this.setXPMax(192);
     }

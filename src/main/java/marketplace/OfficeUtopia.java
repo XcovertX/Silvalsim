@@ -9,7 +9,7 @@ public class OfficeUtopia extends Level {
         this.setSuccessMultiplier(9);
         this.setAttackCostMultiplier(8);
         this.setDefendCostMultiplier(8);
-        this.setBaseNumber(64000);
+        this.setBaseNumber(32000);
         this.setXPMin(128);
         this.setXPMax(384);
     }

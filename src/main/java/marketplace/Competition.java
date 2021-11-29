@@ -273,6 +273,8 @@ public class Competition {
             }
             
             opponentTwo.setXP(0);
+
+            opponentTwo.setRevenue(new BigDecimal(1000000.00));
             
             printResults(opponentOne, opponentTwo);
             
@@ -289,12 +291,14 @@ public class Competition {
             
             opponentOne.setXP(0);
 
+            opponentOne.setRevenue(new BigDecimal(1000000.00));
+            
             printResults(opponentTwo, opponentOne);
         }
         
-        this.opponentOne.removeAllFees();
+//        this.opponentOne.removeAllFees();
         this.opponentOne.removeAllLegalBattleExpenses();
-        this.opponentTwo.removeAllFees();
+//        this.opponentTwo.removeAllFees();
         this.opponentTwo.removeAllLegalBattleExpenses();
         
         this.opponentOne.setEngagedInCompetition(false);
@@ -315,13 +319,25 @@ public class Competition {
             Printer.print(Printer.ANSI_CYAN, tg.getName());
             Printer.print(" now owns: ");
             
+            int counter = 0;
             for (int j = 0; j < tg.getStartups().size(); j++) {
                 
                 StartUp su = tg.getStartups().get(j);
+                
                 Printer.print(Printer.ANSI_CYAN, su.getName());
-                if (j + 1 < tg.getStartups().size()) {
-                    
+                if ( 1 + j < tg.getStartups().size()) {
+                  
                     Printer.print(", ");
+                }
+                
+                if (counter > 2) {
+                    
+                    Printer.println("");
+                    counter = 0;
+                    
+                } else {
+                    
+                    counter++;
                 }
             }
             Printer.println("");

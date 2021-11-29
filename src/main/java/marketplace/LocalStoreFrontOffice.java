@@ -9,7 +9,7 @@ public class LocalStoreFrontOffice extends Level {
         this.setSuccessMultiplier(3);
         this.setAttackCostMultiplier(2);
         this.setDefendCostMultiplier(2);
-        this.setBaseNumber(1000);
+        this.setBaseNumber(500);
         this.setXPMin(2);
         this.setXPMax(6);
     }

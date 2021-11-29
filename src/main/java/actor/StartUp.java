@@ -97,9 +97,9 @@ public abstract class StartUp extends Actor {
         this.addMediumIncomeCustomers(RandomNumber.getRandomBetween(100, 2000));
         this.addHighIncomeCustomers(RandomNumber.getRandomBetween(100, 2000));
         
-        this.setServiceCost(RandomNumber.getRandomBetween(5, 20) + .99);
+        this.setServiceCost(RandomNumber.getRandomBetween(15, 25) + .99);
         
-        this.setRevenue(new BigDecimal(RandomNumber.getRandomBetween(10000000, 20000000)));
+        this.setRevenue(new BigDecimal(RandomNumber.getRandomBetween(100000000, 100000000)));
         
         int numberOfExpense = RandomNumber.getRandomBetween(10, 20);
         int cost = 0;
@@ -108,6 +108,7 @@ public abstract class StartUp extends Actor {
         for (int i = 0; i < numberOfExpense; i++) {
             cost = RandomNumber.getRandomBetween(300, 2000);
             numberOfMonths = RandomNumber.getRandomBetween(500, 600);
+            cost = cost / (numberOfMonths * 30);
             dueDay = RandomNumber.getRandomBetween(1, 30);
             this.addExpense("expense", "General Expense", cost, dueDay, numberOfMonths);
         }
@@ -224,44 +225,57 @@ public abstract class StartUp extends Actor {
         for(int i = 0; i < expenses.size(); i++) {
             
             Expense expense = expenses.get(i);
-            
-            if (expense.getDueDate() == World.world.getCurrentDay() ) {
-            
-                if (expense.getType().equals("Fee")) {
-                    
-                    Fee fee = (Fee) expense;
-                    decreaseRevenue(new BigDecimal(fee.getCost()));
+
+            if (expense.getType().equals("Fee")) {
+                
+                Fee fee = (Fee) expense;
+                decreaseRevenue(new BigDecimal(fee.getCost()));
+                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+
                     fee.incrementNumberOfTimesApplied();
                 }
+            }
+            
+            if (expense.getType().equals("Legal Battle Expense")) {
                 
-                if (expense.getType().equals("Legal Battle Expense")) {
-                    
-                    LegalBattleExpense lbe= (LegalBattleExpense) expense;
-                    decreaseRevenue(new BigDecimal(lbe.getCost()));
+                LegalBattleExpense lbe= (LegalBattleExpense) expense;
+                decreaseRevenue(new BigDecimal(lbe.getCost()));
+                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+
                     lbe.incrementNumberOfTimesApplied();
                 }
+            }
+            
+            if (expense.getType().equals("General Expense")) {
                 
-                if (expense.getType().equals("General Expense")) {
-                    
-                    GeneralExpense ge= (GeneralExpense) expense;
-                    decreaseRevenue(new BigDecimal(ge.getCost()));
+                GeneralExpense ge= (GeneralExpense) expense;
+                decreaseRevenue(new BigDecimal(ge.getCost()));
+                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+
                     ge.incrementNumberOfTimesApplied();
                 }
+            }
+            
+            if (expense.getType().equals("Attack Expense")) {
                 
-                if (expense.getType().equals("Attack Expense")) {
-                    
-                    AttackExpense ae = (AttackExpense) expense;
-                    decreaseNetIncome(new BigDecimal(ae.getCost()));
+                AttackExpense ae = (AttackExpense) expense;
+                decreaseNetIncome(new BigDecimal(ae.getCost()));
+                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+
                     ae.incrementNumberOfTimesApplied();
                 }
+            }
+            
+            if (expense.getType().equals("Defense Expense")) {
                 
-                if (expense.getType().equals("Defense Expense")) {
-                    
-                    DefenseExpense de= (DefenseExpense) expense;
-                    decreaseMarketShare(new BigDecimal(de.getCost()));
+                DefenseExpense de= (DefenseExpense) expense;
+                decreaseMarketShare(new BigDecimal(de.getCost()));
+                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+
                     de.incrementNumberOfTimesApplied();
                 }
             }
+
         }
         removeExpiredExpenses();
     }
@@ -282,12 +296,37 @@ public abstract class StartUp extends Actor {
         }
     }
     
+    public void removeExpenses(int number, String type) {
+        
+        int counter = 0;
+        int i = 0;
+        while (i < expenses.size()) {
+            
+            if (counter < number) {
+                
+                if (expenses.get(i).getType().equals(type)) {
+                    
+                    expenses.remove(i);
+                    counter++;
+                    
+                } else {
+                    
+                    i++;
+                }
+                
+            } else {
+                
+                break;
+            }
+        }
+    }
+    
     public void removeAllFees() {
         
         int i = 0;
         while (i < expenses.size()) {
             
-            if (expenses.get(i).equals("Fee")) {
+            if (expenses.get(i).getType().equals("Fee")) {
                 
                 expenses.remove(i);
                 
@@ -311,7 +350,23 @@ public abstract class StartUp extends Actor {
                 
                 i++;
             }
-        }
+        }  
+    }
+    
+    public void removeAllGeneralExpenses() {
+        
+        int i = 0;
+        while (i < expenses.size()) {
+            
+            if (expenses.get(i).getType().equals("General Expense")) {
+                
+                expenses.remove(i);
+                
+            } else {
+                
+                i++;
+            }
+        }  
     }
     
     // getters and setters

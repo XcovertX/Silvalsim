@@ -132,6 +132,7 @@ public class World {
 
                 Printer.print(Printer.ANSI_CYAN, tg.getName());
                 Printer.println(" owns every startup: ");
+                int counter = 0;
                 for (int j = 0; j < tg.getStartups().size(); j++) {
                     
                     StartUp su = tg.getStartups().get(j);
@@ -140,6 +141,16 @@ public class World {
                     if ( 1 + j < tg.getStartups().size()) {
                       
                         Printer.print(", ");
+                    }
+                    
+                    if (counter > 2) {
+                        
+                        Printer.println("");
+                        counter = 0;
+                        
+                    } else {
+                        
+                        counter++;
                     }
                 }
                 Printer.println("");
@@ -280,8 +291,6 @@ public class World {
         if (currentCompetition != null) {
             
 //            if (isPrintTime()) {
-                
-                
                 
                 Printer.println("");
                 Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");

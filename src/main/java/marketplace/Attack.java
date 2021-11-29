@@ -50,11 +50,16 @@ public class Attack {
     
             if (critical) {
                 
-                defender.setXP(defender.getXP() - (defender.getXP() / 4));
+                defender.setXP(defender.getLevel().getBaseNumber());
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
                 
-                generateAttackExpense();
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                
+                for (int i = 0; i < numberOfExpenses; i++) {
+                    
+                    generateAttackExpense();
+                }
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" delivers a  ");
@@ -68,11 +73,14 @@ public class Attack {
                 
             } else {
                 
-                defender.setXP(defender.getXP() - (defender.getXP() / 10));
-                
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
                 
-                generateAttackExpense();
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                
+                for (int i = 0; i < numberOfExpenses; i++) {
+                    
+                    generateAttackExpense();
+                }
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
                 Printer.print(Printer.ANSI_RED, "DRAINS");
@@ -134,15 +142,18 @@ public class Attack {
             
                 if (critical) {
                 
-                int amount = strength * 10000000;
+                int amount = strength * 1000000;
                 int duration = strength * 19;
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
                 
-                defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
-                        World.world.getCurrentQuarter().getCurrentDay(), duration);
+                for (int i = 0; i < numberOfExpenses; i++) {
+                    
+                    defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
+                            World.world.getCurrentQuarter().getCurrentDay(), duration);
+                    generateAttackExpense();
+                }
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
-        
-                generateAttackExpense();
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName()); 
                 Printer.print(" delivers a ");
@@ -164,15 +175,19 @@ public class Attack {
                 
             } else {
                 
-                int amount = strength * 1000000;
+                int amount = strength * 100000;
                 int duration = strength * 7;
+
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
                 
-                defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
-                        World.world.getCurrentQuarter().getCurrentDay(), duration);
+                for (int i = 0; i < numberOfExpenses; i++) {
+                    
+                    defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
+                            World.world.getCurrentQuarter().getCurrentDay(), duration);
+                    generateAttackExpense();
+                }
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
-        
-                generateAttackExpense();
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
                 Printer.print(Printer.ANSI_RED, "STEALS");
@@ -227,17 +242,22 @@ public class Attack {
             
             if (attackCritical) {
                 
-                int amount = strength * 10000000;
+                int amount = strength * 1000000;
                 int duration = strength * 19;
-                defender.decreaseDesirability(defender.getLevel().getLevelNumber() + 1);
                 
+                defender.decreaseDesirability(defender.getLevel().getLevelNumber() + 1);
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
                 defender.setServiceCost(Math.floor(defender.getServiceCost() * 2));
-                defender.addExpense("fee", "Fee", amount,World.world.getCurrentDay(), duration);
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
                 
-                generateAttackExpense();
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                
+                for (int i = 0; i < numberOfExpenses; i++) {
+
+                    defender.addExpense("fee", "Fee", amount, World.world.getCurrentDay(), duration);
+                    generateAttackExpense();
+                }
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" delivers a ");
@@ -254,16 +274,21 @@ public class Attack {
                 
             } else {
                 
-                int amount = strength * 1000000;
+                int amount = strength * 100000;
                 int duration = strength * 5;
                 
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(4)));
                 defender.setServiceCost(Math.floor(defender.getServiceCost() * 1.4));
-                defender.addExpense("fee", "Fee", amount, World.world.getCurrentDay(), duration);
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
                 
-                generateAttackExpense();
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                
+                for (int i = 0; i < numberOfExpenses; i++) {
+
+                    defender.addExpense("fee", "Fee", amount, World.world.getCurrentDay(), duration);
+                    generateAttackExpense();
+                }
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" delivers a ");
@@ -317,7 +342,13 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
                 
-                generateAttackExpense();
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                
+                for (int i = 0; i < numberOfExpenses; i++) {
+                    int newRevenue = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                    attacker.increaseRevenue(new BigDecimal(100000 * newRevenue));
+                    generateAttackExpense();
+                }
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" lands a ");
@@ -340,7 +371,13 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
                 
-                generateAttackExpense();
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                
+                for (int i = 0; i < numberOfExpenses; i++) {
+                    int newRevenue = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                    attacker.increaseRevenue(new BigDecimal(10000 * newRevenue));
+                    generateAttackExpense();
+                }
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName());
                 Printer.print(" attacks ");
@@ -442,7 +479,8 @@ public class Attack {
         
         int randomNumber = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
         int duration = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
-        double cost = randomNumber * attacker.getAttackCostMultiplier() * defender.getLevelNumber() * 100000;
+        double cost = randomNumber * attacker.getAttackCostMultiplier() * defender.getLevelNumber() * 1000000;
+        cost = cost / (duration * 30);
         attacker.addExpense("attack expense", "Attack Expense", cost, World.world.getCurrentDay(), duration);
     }
     

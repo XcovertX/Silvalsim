@@ -31,8 +31,7 @@ public class Defend {
             if (critical) {
             
                 int strength = calculateDefenseStrength(defender)
-                        * defender.getDesirability() 
-                        * defender.getLevelNumber();
+                        * defender.getLevelNumber() + defender.getDesirability();
                     
                 defender.addMediumIncomeCustomers(strength);
                 
@@ -46,7 +45,7 @@ public class Defend {
                 
             } else {
                 
-                int strength = calculateDefenseStrength(defender) * defender.getDesirability();
+                int strength = calculateDefenseStrength(defender) * defender.getLevelNumber();
                 
                 defender.addMediumIncomeCustomers(strength);
                 
@@ -80,6 +79,11 @@ public class Defend {
         
         boolean defenseSuccess = calculateDefenseSuccess();
         
+        if (defender.getDevs().size() > defender.getLevelNumber()) {
+            
+            defenseSuccess = false;
+        }
+        
         if (defenseSuccess) {
             
             boolean critical = calculateCriticalDefenseSuccess();
@@ -87,7 +91,8 @@ public class Defend {
             if (critical) {
             
                 int strength = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
-                    
+                
+                
                 defender.addExperiencedDevs(strength / 2);
                 defender.addSeniorDevs(strength / 2);
                 
@@ -144,6 +149,8 @@ public class Defend {
             if (isHailMary()) {
                 
                 strength = RandomNumber.getRandomBetween(1, defender.getDevs().size());
+                defender.removeExpenses(defender.getLevelNumber() + 2, "Fee");
+                defender.removeExpenses(defender.getLevelNumber() + 2, "Legal Battle Expense");
                 
             } else {
                 
@@ -154,6 +161,9 @@ public class Defend {
                     max = 1;
                 }
                 strength = RandomNumber.getRandomBetween(1, max);
+
+                defender.removeExpenses(defender.getLevelNumber(), "Fee");
+                defender.removeExpenses(defender.getLevelNumber(), "Legal Battle Expense");
             }
             
             int counter = 0;
@@ -298,7 +308,8 @@ public class Defend {
         
         int randomNumber = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
         int duration = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
-        double cost = randomNumber * defender.getAttackCostMultiplier() * attacker.getLevelNumber() * 100000;
+        double cost = randomNumber * defender.getAttackCostMultiplier() * attacker.getLevelNumber() * 1000000;
+        cost = cost / (duration * 30);
         defender.addExpense("defense expense", "Defense Expense", cost, World.world.getCurrentDay(), duration);
     }
     

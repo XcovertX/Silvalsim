@@ -9,7 +9,7 @@ public class OfficeCampus extends Level {
         this.setSuccessMultiplier(7);
         this.setAttackCostMultiplier(6);
         this.setDefendCostMultiplier(6);
-        this.setBaseNumber(16000);
+        this.setBaseNumber(8000);
         this.setXPMin(32);
         this.setXPMax(96);
     }

@@ -1,5 +1,6 @@
 package main.java.marketplace;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import main.java.actor.StartUp;
@@ -59,6 +60,9 @@ public class Levels {
         this.su.setXPMax(nextLevel.getXPMax());
         this.su.increaseDesirability(nextLevel.getLevelNumber());
         
+        this.su.increaseDesirability(50);
+        this.su.increaseRevenue(new BigDecimal(10000000.00));
+        
         Printer.println("");
         Printer.print(Printer.ANSI_CYAN, su.getName());
         Printer.println(" is now leveling up... ");
@@ -85,10 +89,12 @@ public class Levels {
     }
 
     public StartUp getSu() {
+        
         return su;
     }
 
     public void setSu(StartUp su) {
+        
         this.su = su;
     }
 }

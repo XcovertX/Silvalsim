@@ -120,7 +120,7 @@ public class StartUpFactory {
         names.add("Con");
         names.add("Laz");
         names.add("Tet");
-        names.add("Na");
+        names.add("Ner");
         names.add("La");
         names.add("Ko");
         names.add("Ra");
@@ -152,19 +152,19 @@ public class StartUpFactory {
         generalExtenders.add("tronics ");
         generalExtenders.add("tech ");
         generalExtenders.add("techno ");
-        generalExtenders.add("zio");
+        generalExtenders.add("zio ");
         generalExtenders.add("bionic ");
         generalExtenders.add("augment ");
         generalExtenders.add("state ");
         generalExtenders.add("tron ");
-        generalExtenders.add("lite ");
+        generalExtenders.add("-lite ");
         generalExtenders.add("micro ");
         generalExtenders.add("quantum ");
         generalExtenders.add("rem ");
         generalExtenders.add("lorn ");
         generalExtenders.add("tess ");
         generalExtenders.add("circuit ");
-        generalExtenders.add("solo ");
+        generalExtenders.add("solo-");
         generalExtenders.add("fiat ");
         generalExtenders.add("synth ");
   

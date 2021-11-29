@@ -9,7 +9,7 @@ public class HighriseBottomFloorOffice extends Level {
         this.setSuccessMultiplier(4);
         this.setAttackCostMultiplier(3);
         this.setDefendCostMultiplier(3);
-        this.setBaseNumber(2000);
+        this.setBaseNumber(1000);
         this.setXPMin(4);
         this.setXPMax(12);
     }
