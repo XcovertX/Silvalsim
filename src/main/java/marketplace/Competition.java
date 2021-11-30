@@ -140,12 +140,12 @@ public class Competition {
         
         if (opponentOne.compareXPToNextLevelXP()) {
             
-            opponentOne.getLevels().levelUp(opponentOne.getLevelNumber());
+            opponentOne.getLevels().levelUp();
         }
         
         if (opponentTwo.compareXPToNextLevelXP()) {
             
-            opponentTwo.getLevels().levelUp(opponentTwo.getLevelNumber());
+            opponentTwo.getLevels().levelUp();
         }
         
         if( !opponentOne.isAlive() || !opponentTwo.isAlive() ) {
@@ -456,8 +456,8 @@ public class Competition {
     public void awardLevelUp(StartUp su) {
         
         if (su.compareXPToNextLevelXP()){
-            
-            su.getLevels().levelUp(su.getLevelNumber());
+
+            su.getLevels().levelUp();
             
             if (su.compareXPToNextLevelXP()) {
                 

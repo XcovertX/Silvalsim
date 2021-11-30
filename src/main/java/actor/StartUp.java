@@ -102,7 +102,7 @@ public abstract class StartUp extends Actor {
         setServiceCost(0.00);
         
         setLevels(new Levels(this));
-        levels.setLevel(0);
+        levels.setLevel(1);
         devs = new ArrayList<Developer>();
         financialRecord = new ArrayList<RecordEntry>();
         customers = new ArrayList<Customer>();

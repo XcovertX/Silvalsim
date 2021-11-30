@@ -10,6 +10,7 @@ import main.java.world.Printer;
  * Levels.java
  * Package: main.java.marketplace
  * Description: This is a factory class that builds all potential levels.
+ * The 
  * 
  * @author James Covert
  * @version 1.0
@@ -18,12 +19,12 @@ import main.java.world.Printer;
 
 public class Levels {
     
-    private ArrayList<Level> levels = new ArrayList<Level>();
+    private OfficeLevelRepository lvls;
     private StartUp su;
     
     /**
      * Description: The Levels constructor assigns the startup it tracks and
-     * populates the levels list
+     * sets OfficeLevelRepository lvls.
      * 
      * @author James Covert
      * @version 1.0
@@ -33,15 +34,7 @@ public class Levels {
     public Levels(StartUp su) {
         
         this.su = su;
-        
-        levels.add(new GarageOffice());
-        levels.add(new LocalStoreFrontOffice());
-        levels.add(new HighriseBottomFloorOffice());
-        levels.add(new HighriseMiddleFloorOffice());
-        levels.add(new HighriseTopFloorOffice());
-        levels.add(new OfficeCampus());
-        levels.add(new OfficeCompound());
-        levels.add(new OfficeUtopia());
+        setLvls(new OfficeLevelRepository());
     }
     
     /**
@@ -49,13 +42,21 @@ public class Levels {
      * 
      * @author James Covert
      * @version 1.0
-     * @param int index - index where the level is located in levels
+     * @param int levelNumer - the level number of the needed Level
      * @return void
      *-----------------------------------------------------
      */
-    public void setLevel(int index) {
+    public void setLevel(int levelNumber) {
         
-        Level lvl = levels.get(index);
+//        Level lvl = levels.get(index);
+        Level lvl = null;
+        for (Iterator iter = lvls.getIterator(); iter.hasNext();){
+            Level l = (Level)iter.next();
+            if (l.getLevelNumber() == levelNumber) {
+                lvl = l;
+                break;
+            }
+        } 
         this.su.setLevel(lvl);
         this.su.setXpToNextLevel(lvl.getBaseNumber());
         this.su.setLevelNumber(lvl.getLevelNumber());
@@ -66,23 +67,25 @@ public class Levels {
     
     /**
      * Description: This method sets the StartUp to the next level
+     * It utilizes the iterator OfficeLevelRepository to iterate through
+     * the available Levels to find the next one
      * 
      * @author James Covert
      * @version 1.0
-     * @param int index - su current level index
      * @return void
      *-----------------------------------------------------
      */
-    public void levelUp(int index) {
+    public void levelUp() {
         
-        int i = index;
-        
-        if (i >= levels.size()) {
-            
-            return;
-        }
-        
-        Level nextLevel = levels.get(i);
+        Level nextLevel = null;
+        for (Iterator iter = lvls.getIterator(); iter.hasNext();){
+            Level lvl = (Level)iter.next();
+            if (lvl.getLevelNumber() > su.getLevelNumber()) {
+                nextLevel = lvl;
+                break;
+            }
+         } 
+         
         this.su.setLevel(nextLevel);
         this.su.setXpToNextLevel(nextLevel.getBaseNumber());
         this.su.setLevelNumber(nextLevel.getLevelNumber());
@@ -121,9 +124,17 @@ public class Levels {
 
     // getters and setters
     
-    public Level getLevel(int index) {
+    public Level getLevel(int levelNumber) {
         
-        return levels.get(index);
+        Level lvl = null;
+        for (Iterator iter = lvls.getIterator(); iter.hasNext();){
+            Level l = (Level)iter.next();
+            if (l.getLevelNumber() == levelNumber) {
+                lvl = l;
+                break;
+            }
+        } 
+        return lvl;
     }
 
     public StartUp getSu() {
@@ -134,5 +145,15 @@ public class Levels {
     public void setSu(StartUp su) {
         
         this.su = su;
+    }
+
+    public OfficeLevelRepository getLvls() {
+        
+        return lvls;
+    }
+
+    public void setLvls(OfficeLevelRepository lvls) {
+        
+        this.lvls = lvls;
     }
 }
