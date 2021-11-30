@@ -1,8 +1,19 @@
 package main.java.world;
 
 import java.math.BigDecimal;
+
 import java.math.RoundingMode;
 import java.util.Random;
+
+/**
+ * Quarter.java
+ * Package: main.java.world
+ * Description: Quarter keeps track of time.
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
 
 import main.java.actor.StartUp;
 
@@ -17,9 +28,7 @@ public class Quarter {
     final static int LAST_OF_THE_MONTH = 30;
     final static int FIRST_MONTH_OF_THE_QUARTER = 1;
     final static int LAST_MONTH_OF_THE_QUARTER = 3;
-    
-    private World world;
-    
+
     private int currentCycle;
     private int currentQuarter; 
     private int currentDay; 
@@ -31,18 +40,36 @@ public class Quarter {
     
     private BigDecimal taxCutPercent;
     
-    public Quarter(World world, int currentQuarter, int currentMonth, int currentDay) {
-        
-        setWorld(world);
+    /**
+     * Description: Quarter constructor set the current Quarter, Month, and Day.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param int currentQuarter - quarter number
+     * @param int currentMonth - month number
+     * @param int currentDay - day number
+     *-----------------------------------------------------
+     */
+    public Quarter(int currentQuarter, int currentMonth, int currentDay) {
+
         setCurrentCycle(0);
         setCurrentQuarter(currentQuarter);
         setCurrentMonth(currentMonth);
         setCurrentDay(currentDay);
         setFirstDayOfQuarter(true);
         calculateCorporateTaxCutPercent();
+        Printer.println("");
         Printer.println(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has begun.");
     }
     
+    /**
+     * Description:This method calculates Tax Cut Percent to be applied when tax cuts are granted.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void calculateCorporateTaxCutPercent() {
         
         Random r = new Random();
@@ -51,6 +78,15 @@ public class Quarter {
         taxCutPercent = new BigDecimal(rangeMin + (rangeMax - rangeMin) * r.nextDouble());     
     }
 
+    /**
+     * Description:This method calculates Tax Cut Percent to be applied when tax cuts are granted.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp startup - startup to apply tax write off to
+     * @return void
+     *-----------------------------------------------------
+     */
     public void applyFinancialEvents(StartUp startup){
         
         if (isFirstDayOfQuarter()) {
@@ -70,18 +106,46 @@ public class Quarter {
         }
     } 
     
+    /**
+     * Description:This method deducts the taxes.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param BigDecimal adjustedRevenue - revenue to have taxes withdrawn from
+     * @param BigDeccimal taxRate - deduction rate
+     * @return BigDecimal - revenue minus taxes
+     *-----------------------------------------------------
+     */
     private BigDecimal deductTaxes(BigDecimal adjustedRevenue, BigDecimal taxRate) {
         
         return adjustedRevenue.subtract((adjustedRevenue.multiply((taxRate.multiply(new BigDecimal(0.01))))));
         
     }
     
+    /**
+     * Description:This method applies corporate tax cuts.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param BigDeccimal taxRate - current deduction rate
+     * @return BigDecimal - new tax rate
+     *-----------------------------------------------------
+     */
     private BigDecimal applyCorporateTaxCuts(BigDecimal taxRate) {
         
         BigDecimal adjustedTaxRate = taxRate.subtract(taxCutPercent.subtract(new BigDecimal(1)));
         return adjustedTaxRate;     
     }
 
+    /**
+     * Description:This method increments the quarter.
+     * It also prints the appropriate message when the quarter changes.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void incrementQuarter() {
         
         if(currentQuarter >= Q4) {
@@ -102,6 +166,14 @@ public class Quarter {
         setFirstDayOfQuarter(true);
     }
     
+    /**
+     * Description:This method increments the month.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void incrementMonth() {
         
         if (currentMonth >= LAST_MONTH_OF_THE_QUARTER) {
@@ -115,11 +187,19 @@ public class Quarter {
         }
     }
     
+    /**
+     * Description:This method increments the day.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     public void incrementDay() {
         
         if(currentDay >= LAST_OF_THE_MONTH) {
             
-            getWorld().setPrintTime(true);
+            World.world.setPrintTime(true);
             currentDay = FIRST_OF_THE_MONTH;
             incrementMonth();
             this.setLastDayOfMonth(false);
@@ -137,6 +217,15 @@ public class Quarter {
         
     }
     
+    /**
+     * Description: This method prints a time stamp.
+     * It also prints the appropriate message when the quarter changes.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     public void printTimeStamp() {
         
         Printer.print("Cycle: " + currentCycle);
@@ -234,14 +323,6 @@ public class Quarter {
 
     public void setFinalMoment(boolean finalMoment) {
         this.finalMoment = finalMoment;
-    }
-
-    public World getWorld() {
-        return world;
-    }
-
-    public void setWorld(World world) {
-        this.world = world;
     }
 
     public int getCurrentCycle() {

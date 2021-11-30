@@ -2,6 +2,16 @@ package main.java.world;
 
 import java.math.BigDecimal;
 
+/**
+ * NewYork.java
+ * Package: main.java.world
+ * Description: New York location
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class NewYork extends Location {
     
     public NewYork() {

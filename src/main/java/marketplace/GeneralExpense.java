@@ -1,5 +1,17 @@
 package main.java.marketplace;
 
+/**
+ * GeneralExpense.java
+ * Package: main.java.marketplace
+ * Description: The General Expense class generates an Expense of type 'General Expense'
+ * 
+ * General Expenses are deducted from Revenue
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class GeneralExpense extends Expense {
 
     public GeneralExpense(String name, double amount, int dueDate, int duration) {

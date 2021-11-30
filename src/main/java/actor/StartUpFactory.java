@@ -7,16 +7,34 @@ import main.java.world.Location;
 import main.java.world.RandomNumber;
 import main.java.world.World;
 
+/**
+ * StartUpFactory.java
+ * Package: main.java.actor
+ * Description: The StartUp factory class is used to generate any requested type of StartUp.
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
 public class StartUpFactory {
     
-    private ArrayList<String> names;
-    private ArrayList<String> generalExtenders;
-    private ArrayList<String> phoneExtenders;
-    private ArrayList<String> gameExtenders;
-    private ArrayList<String> osExtenders;
-    private ArrayList<String> socialMediaExtenders;
-    private ArrayList<String> financialExtenders;
+    private ArrayList<String> names;                        // list of potential names
+    private ArrayList<String> generalExtenders;             // list of potential general name modifiers
+    private ArrayList<String> phoneExtenders;               // list of potential phone name modifiers
+    private ArrayList<String> gameExtenders;                // list of potential game name modifiers
+    private ArrayList<String> osExtenders;                  // list of potential OS name modifiers
+    private ArrayList<String> socialMediaExtenders;         // list of potential SM name modifiers
+    private ArrayList<String> financialExtenders;           // list of potential FE name modifiers
     
+    /**
+     * Description: The StartUp factory constructor populates all lists pertaining to
+     * generating random, unique names for new start ups. 
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     public StartUpFactory() {
         
         populateNames();
@@ -24,6 +42,20 @@ public class StartUpFactory {
         populateSpecificExtenders();
     }
 
+    /**
+     * Description: This method generates a new StartUp of a given type.
+     * It instantiates required variables to generate a new StartUp.
+     * It then determines the type of StartUp to be created.
+     * It then formulates a random, unique name for the StartUp.
+     * It then gives it a basic description.
+     * It then builds the startup and adds it to the TechGiant who owns it.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param String startUpType - the type of startup to be built
+     * @return void
+     *-----------------------------------------------------
+     */
     public void generateStartUp(String startUpType) {
         
         String name = "";
@@ -69,6 +101,15 @@ public class StartUpFactory {
         }
     }
     
+    /**
+     * Description: This method generates a random, unique name for a given StartUp type
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param String startUpType - the type of startup to be built
+     * @return String - name of the startup
+     *-----------------------------------------------------
+     */
     private String formulateName(String startUpType) {
         
         String name = getName(RandomNumber.getRandomBetween(0, names.size() - 1));
@@ -104,6 +145,14 @@ public class StartUpFactory {
         
     }
     
+    /**
+     * Description: This method populates the possible names a startup could use.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void populateNames() {
 
         names = new ArrayList<String>();
@@ -145,6 +194,14 @@ public class StartUpFactory {
 
     }
     
+    /**
+     * Description: This method populates the possible name modifiers a startup could use.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void populateGeneralExtenders() {
 
         generalExtenders = new ArrayList<String>();
@@ -170,6 +227,15 @@ public class StartUpFactory {
   
     }
     
+    /**
+     * Description: This method calls all of the methods used to populate the 
+     * startup type specific name modifiers.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void populateSpecificExtenders() {
 
         populatePhoneExtenders();
@@ -179,6 +245,14 @@ public class StartUpFactory {
         populateFinancialExtenders(); 
     }
     
+    /**
+     * Description: This method populates the possible name modifiers for startup type 'phone'.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void populatePhoneExtenders() {
         
         phoneExtenders = new ArrayList<String>();
@@ -190,6 +264,14 @@ public class StartUpFactory {
         
     }
     
+    /**
+     * Description: This method populates the possible name modifiers for startup type 'game'.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void populateGameExtenders() {
         
         gameExtenders = new ArrayList<String>();
@@ -201,6 +283,14 @@ public class StartUpFactory {
           
     }
     
+    /**
+     * Description: This method populates the possible name modifiers for startup type 'Operating Systems'.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void populateOSExtenders() {
         
         osExtenders = new ArrayList<String>();
@@ -212,6 +302,14 @@ public class StartUpFactory {
 
     }
     
+    /**
+     * Description: This method populates the possible name modifiers for startup type 'Social Media'.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void populateSMExtenders() {
         
         socialMediaExtenders = new ArrayList<String>();
@@ -221,6 +319,14 @@ public class StartUpFactory {
         socialMediaExtenders.add("Platforms");    
     }
     
+    /**
+     * Description: This method populates the possible name modifiers for startup type 'Financial Tech'.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void populateFinancialExtenders() {
         
         financialExtenders = new ArrayList<String>();
@@ -229,6 +335,8 @@ public class StartUpFactory {
         financialExtenders.add("Exchange");
         financialExtenders.add("Capital");
     }
+    
+    // getters and setters
     
     private String getName(int selectIndex) {
         

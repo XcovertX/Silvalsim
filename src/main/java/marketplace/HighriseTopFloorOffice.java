@@ -2,6 +2,16 @@ package main.java.marketplace;
 
 public class HighriseTopFloorOffice extends Level {
     
+    /**
+     * LocalStoreFrontOffice.java
+     * Package: main.java.marketplace
+     * Description: The level five for all startups
+     * 
+     * @author James Covert
+     * @version 1.0
+     *-----------------------------------------------------
+     */
+    
     public HighriseTopFloorOffice() {
         
         this.setTitle("highrise office on the top floor");

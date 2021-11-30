@@ -1,5 +1,14 @@
 package main.java.world;
 
+/**
+ * Printer.java
+ * Package: main.java.world
+ * Description: This is a static utility class to pretty print
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
 public final class Printer {
     
     public static final String ANSI_RESET = "\u001B[0m";

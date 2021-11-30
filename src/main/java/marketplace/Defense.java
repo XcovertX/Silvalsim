@@ -3,6 +3,17 @@ package main.java.marketplace;
 import main.java.actor.StartUp;
 import main.java.world.RandomNumber;
 
+/**
+ * Offense.java
+ * Package: main.java.marketplace
+ * Description: The Defense class is a controller. 
+ * This class builds all defenses.
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class Defense {
     
     private StartUp defender;
@@ -14,6 +25,14 @@ public class Defense {
         setRecipient(recipient);
     }
     
+    /**
+     * Description: This method executes a randomly selected defenseCommand.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     public void Defend() {
         
         int defenseSelection = selectDefense();
@@ -35,24 +54,15 @@ public class Defense {
             new DodgeCommand(defender, recipient).execute();
         }
     }
-
-    // getters and setters
-    public StartUp getDefender() {
-        return defender;
-    }
-
-    public void setDefender(StartUp defender) {
-        this.defender = defender;
-    }
-
-    public StartUp getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(StartUp recipient) {
-        this.recipient = recipient;
-    }
     
+    /**
+     * Description: This method produces a random selection
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return int - number between 0-3
+     *-----------------------------------------------------
+     */
     public int selectDefense() {
         
         int min = 0;
@@ -60,5 +70,27 @@ public class Defense {
         int randomNumber = RandomNumber.getRandomBetween(min, max);
         
         return randomNumber;
+    }
+
+    // getters and setters
+    
+    public StartUp getDefender() {
+        
+        return defender;
+    }
+
+    public void setDefender(StartUp defender) {
+        
+        this.defender = defender;
+    }
+
+    public StartUp getRecipient() {
+        
+        return recipient;
+    }
+
+    public void setRecipient(StartUp recipient) {
+        
+        this.recipient = recipient;
     }
 }

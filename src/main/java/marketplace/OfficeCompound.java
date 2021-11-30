@@ -2,6 +2,15 @@ package main.java.marketplace;
 
 public class OfficeCompound extends Level {
     
+    /**
+     * LocalStoreFrontOffice.java
+     * Package: main.java.marketplace
+     * Description: The level seven for all startups
+     * 
+     * @author James Covert
+     * @version 1.0
+     *-----------------------------------------------------
+     */
     public OfficeCompound() {
         
         this.setTitle("office compound");

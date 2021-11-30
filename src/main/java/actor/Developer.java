@@ -2,6 +2,18 @@ package main.java.actor;
 
 import java.math.BigDecimal;
 
+/**
+ * Developer.java
+ * Package: main.java.actor
+ * Description: Developers effect a startup's speed and desirability.
+ * The more developers a startup has, the slower they will be
+ * but the more desirable the startup will be to attract new customers
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class Developer extends Actor {
     
     public final static int JUNIOR_DEV_TALENT = 1;
@@ -18,6 +30,8 @@ public class Developer extends Actor {
         this.salary = salary;
         this.paycheck = Math.floor((salary / 24) * 100) / 100;
     }
+    
+    // getters and setter
 
     public int getTalent() {
         
@@ -40,10 +54,12 @@ public class Developer extends Actor {
     }
 
     public BigDecimal getPaycheck() {
+        
         return new BigDecimal(paycheck);
     }
 
     public void setPaycheck(double paycheck) {
+        
         this.paycheck = paycheck;
     }
 

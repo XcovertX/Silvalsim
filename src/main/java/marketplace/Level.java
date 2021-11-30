@@ -2,6 +2,18 @@ package main.java.marketplace;
 
 import main.java.world.RandomNumber;
 
+/**
+ * Level.java
+ * Package: main.java.marketplace
+ * Description: The is an abstract class that is the basis for
+ * all levels: GarageOffice, LocalStoreFront, HighriseBottomFloorOffice,
+ * HighriseMiddleFloorOffice, HighriseTopFloorOffice, OfficeCampus,
+ * OfficeCompound, OfficeUtopia
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
 public abstract class Level {
     
     private String title;
@@ -13,6 +25,13 @@ public abstract class Level {
     private int xpMin;
     private int xpMax;
     
+    /**
+     * Description: The method compares given xp to baseLevelXP
+     * 
+     * @author James Covert
+     * @version 1.0
+     *-----------------------------------------------------
+     */
     public boolean compareXPBase(int xp) {
         
         if (xp > baseNumber) {
@@ -21,6 +40,8 @@ public abstract class Level {
         }
         return false;
     }
+    
+    // getters and setters
     
     public int getXP() {
 
@@ -98,10 +119,12 @@ public abstract class Level {
     }
 
     public int getDefendCostMultiplier() {
+        
         return defendCostMultiplier;
     }
 
     public void setDefendCostMultiplier(int defendCostMultiplier) {
+        
         this.defendCostMultiplier = defendCostMultiplier;
     }
 }

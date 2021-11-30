@@ -2,6 +2,17 @@ package main.java.actor;
 
 import main.java.world.RandomNumber;
 
+/**
+ * Customer.java
+ * Package: main.java.actor
+ * Description: Customers provide the source for revenue. Startups
+ * compete for Customers to subscribe to their service.
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class Customer extends Actor {
     
     public final static double LOW_INCOME_AVAILABLE_FUNDS = 50.00;
@@ -22,6 +33,19 @@ public class Customer extends Actor {
         this.dueDate = dueDate;
     }
     
+    /**
+     * Description: If startup the customer is subscribed to is competing,
+     * This method is called once a month on the subscription due date.
+     * It allows the customer to determine to whether they would like to pay the subscription cost
+     * or switch to the competetor's service. It does this by weighing the 
+     * price difference, desirability difference and talent difference
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp - competition
+     * @return boolean
+     *-----------------------------------------------------
+     */
     public boolean assessSubscription(StartUp competition) {
 
         int priceDifference = determinePriceDifference(competition);
@@ -42,16 +66,43 @@ public class Customer extends Actor {
         return false;
     }
     
+    /**
+     * Description: calculates price difference
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp - competition
+     * @return int
+     *-----------------------------------------------------
+     */
     private int determinePriceDifference(StartUp competition) {
         
         return (int) Math.round(subscription.getServiceCost() / competition.getServiceCost());
     }
     
+    /**
+     * Description: calculates desirability difference
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp - competition
+     * @return int
+     *-----------------------------------------------------
+     */
     private int determineDesirability(StartUp competition) {
         
         return (int) Math.round(subscription.getDesirability() / competition.getDesirability());
     }
     
+    /**
+     * Description: calculates talent difference
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp - competition
+     * @return int
+     *-----------------------------------------------------
+     */
     private int determineTalent(StartUp competition) {
         
         int competitionTalent = competition.getTalentMultiplier();
@@ -63,6 +114,20 @@ public class Customer extends Actor {
         return (int) Math.round(subscription.getTalentMultiplier() / competitionTalent);
     }
     
+    /**
+     * Description: simulates customer income
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
+    public void payDay() {
+        
+        this.availableFunds += this.payAmount;  
+    }
+    
+    // getters and setters
     
     public double getAvailableFunds() {
         
@@ -83,12 +148,6 @@ public class Customer extends Actor {
         
         this.dueDate = dueDate;
     }
-    
-    public void payDay() {
-        
-        this.availableFunds += this.payAmount;
-        
-    }
 
     public StartUp getSubscription() {
         
@@ -98,7 +157,5 @@ public class Customer extends Actor {
     public void setSubscription(StartUp subscription) {
         
         this.subscription = subscription;
-    }
-    
-    
+    }  
 }

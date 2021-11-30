@@ -1,5 +1,17 @@
 package main.java.marketplace;
 
+/**
+ * Expense.java
+ * Package: main.java.marketplace
+ * Description: The Expense abstract class provides the framework 
+ * for General Expenses, Fees, Attack Expenses, Defense Expenses
+ * and Legal Battle Expenses
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public abstract class Expense {
     
     private String name;
@@ -9,6 +21,7 @@ public abstract class Expense {
     private int duration;
     private int numberOfTimesPaid;
     
+    // getters and setters
     
     public void incrementNumberOfTimesApplied() {
         

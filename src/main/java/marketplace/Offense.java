@@ -3,6 +3,17 @@ package main.java.marketplace;
 import main.java.actor.StartUp;
 import main.java.world.RandomNumber;
 
+/**
+ * Offense.java
+ * Package: main.java.marketplace
+ * Description: The Offense class is a controller. 
+ * This class builds all attacks.
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class Offense {
     
     private StartUp attacker;
@@ -14,6 +25,14 @@ public class Offense {
         setRecipient(recipient);
     }
     
+    /**
+     * Description: This method executes a randomly selected attackCommand.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     public void attack() {
         
         int attackSelection = selectAttack();
@@ -35,24 +54,15 @@ public class Offense {
             new UndercutPricesCommand(attacker, recipient).execute();
         }
     }
-
-    // getters and setters
-    public StartUp getAttacker() {
-        return attacker;
-    }
-
-    public void setAttacker(StartUp attacker) {
-        this.attacker = attacker;
-    }
-
-    public StartUp getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(StartUp recipient) {
-        this.recipient = recipient;
-    }
     
+    /**
+     * Description: This method produces a random selection
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return int - number between 0-3
+     *-----------------------------------------------------
+     */
     public int selectAttack() {
         
         int min = 0;
@@ -60,5 +70,27 @@ public class Offense {
         int randomNumber = RandomNumber.getRandomBetween(min, max);
         
         return randomNumber;
+    }
+
+    // getters and setters
+    
+    public StartUp getAttacker() {
+        
+        return attacker;
+    }
+
+    public void setAttacker(StartUp attacker) {
+        
+        this.attacker = attacker;
+    }
+
+    public StartUp getRecipient() {
+        
+        return recipient;
+    }
+
+    public void setRecipient(StartUp recipient) {
+        
+        this.recipient = recipient;
     }
 }

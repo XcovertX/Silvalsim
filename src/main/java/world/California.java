@@ -2,6 +2,16 @@ package main.java.world;
 
 import java.math.BigDecimal;
 
+/**
+ * California.java
+ * Package: main.java.world
+ * Description: California location
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class California extends Location {
     
     public California() {

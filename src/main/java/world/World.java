@@ -1,10 +1,6 @@
 package main.java.world;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Random;
-
-import main.java.actor.Actor;
 import main.java.actor.Customer;
 import main.java.actor.Developer;
 import main.java.actor.StartUp;
@@ -12,31 +8,47 @@ import main.java.actor.StartUpFactory;
 import main.java.actor.TechGiant;
 import main.java.actor.TechGiantFactory;
 import main.java.marketplace.Competition;
-import main.java.marketplace.MarketPlace;
+
+/**
+ * World.java
+ * Package: main.java.world
+ * Description: The StartUp class is the main stage class. This class houses
+ * the current competition and it updates every object within the world.
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
 
 public class World {
     
     public static World world;
     
     final static int FIRST_OF_THE_MONTH = 1;
+    final static int FIRST_PAYDAY = 1;
+    final static int SECOND_PAYDAY = 15;
     
-    private ArrayList<TechGiant> techGiants;
-    private Quarter currentQuarter;
-    private int currentDay;
-    private MarketPlace marketPlace;
-    private Competition currentCompetition;
-    private boolean printTime;
+    private ArrayList<TechGiant> techGiants;    // all TechGiants
+    private Quarter currentQuarter;             // time tracking
+    private int currentDay;                     // current day of the month
+    private Competition currentCompetition;     // current competition
+    private boolean printTime;                  // ready to print
     
-    public int Icounter = 0;
-    public int Mcounter = 0;
-    
+    /**
+     * Description: The world constructor instantiates the ArrayList holding all TechGiants
+     * It then uses TechGiantfactory to generate TechGiants
+     * and a startUpFactory to generate an assortment of different StartUps
+     * 
+     * @author James Covert
+     * @version 1.0
+     *-----------------------------------------------------
+     */
     public World() {
         
         world = this;
         
         techGiants = new ArrayList<TechGiant>();
-        currentQuarter = new Quarter(this, 1, 1, 1);
-        marketPlace = new MarketPlace();
+        currentQuarter = new Quarter(1, 1, 1);
         
         setCurrentDay(0);
         
@@ -58,11 +70,20 @@ public class World {
         suf.generateStartUp("GameTech");
         suf.generateStartUp("FinancialTech");
         suf.generateStartUp("FinancialTech");
-        
-        this.updateStartUps();
     }
 
-    public void updateWorld(int currentQuarter, int currentDay) {
+    /**
+     * Description: This method is used to update everything within the world.
+     * Once a day, it calls updateCustomers(), updateFinancialEvents(),
+     * updateStartUps(), updateMarketPlace()
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param int currentDay - use to update the current day
+     * @return void
+     *-----------------------------------------------------
+     */
+    public void updateWorld(int currentDay) {
 
         setCurrentDay(currentDay);
         
@@ -72,6 +93,16 @@ public class World {
         updateMarketPlace();
     }
 
+    /**
+     * Description: This method is called if the currentCompetions is found to be null;
+     * It find new competitors among the existing TechGiants. 
+     * If a single TechGiant owns all of the startups, the ends the simulation
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void findCompetitors() {
         
         StartUp su1 = null;
@@ -112,7 +143,7 @@ public class World {
                 }
                 Printer.println(" Match FOUND!");
 
-                currentCompetition = new Competition(this, su1, su2);
+                currentCompetition = new Competition(su1, su2);
                 return;
             }
         }
@@ -167,6 +198,17 @@ public class World {
         
     }
     
+    /**
+     * Description: This method retrieves a StartUp from a TechGiant.
+     * If a TechGiant does not have a startup, it returns null.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param TechGiant tg - TechGiant owning the startup
+     * @return StartUp - first StartUp in the collection
+     * @return null - if  collection is empty
+     *-----------------------------------------------------
+     */
     private StartUp getCompetitor(TechGiant tg) {
         
         if (tg.getStartups().isEmpty()) {
@@ -176,6 +218,15 @@ public class World {
         return tg.getStartups().get(0);
     }
 
+    /**
+     * Description: This method applies any scheduled 
+     * financial events to the StartUp.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void updateFinancialEvents() {
         
         if (this.currentQuarter.getCurrentDay() == FIRST_OF_THE_MONTH) {
@@ -194,6 +245,17 @@ public class World {
         }
     }
     
+    /**
+     * Description: This method updates each StartUp in the world.
+     * It pays all devs on payDays
+     * It deducts expenses owed.
+     * It tracks all income via Financial Record Entries
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void updateStartUps() {
 
         for(int i = 0; i < techGiants.size(); i++) {
@@ -206,8 +268,8 @@ public class World {
                 
                 for(int k = 0; k < su.getDevs().size(); k++) {
                     
-                    if (currentQuarter.getCurrentDay() == 1 ||
-                        currentQuarter.getCurrentDay() == 15) {
+                    if (currentQuarter.getCurrentDay() == FIRST_PAYDAY ||
+                        currentQuarter.getCurrentDay() == SECOND_PAYDAY) {
                         
                         Developer dev = su.getDevs().get(k);
                         su.decreaseNetIncome(dev.getPaycheck());
@@ -219,6 +281,18 @@ public class World {
         }
     }
     
+    /**
+     * Description: This method updates each Customer in the world.
+     * It simulates a pay day for the customer.
+     * If a customers subscription payment is due, it causes the customer to assess
+     * whether they should switch to a competitor or not.
+     * It collects all payments for the subscription (revenue)
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void updateCustomers() {
 
         for(int i = 0; i < techGiants.size(); i++) {
@@ -234,7 +308,8 @@ public class World {
                     
                     Customer customer = su.getCustomers().get(k);
                     
-                    if (currentQuarter.getCurrentDay() == 1) {
+                    if (currentQuarter.getCurrentDay() == FIRST_PAYDAY ||
+                        currentQuarter.getCurrentDay() == SECOND_PAYDAY ) {
                         
                         customer.payDay();
                     }
@@ -276,6 +351,18 @@ public class World {
         }
     }
     
+    /**
+     * Description: This method the MarketPlace (competitions).
+     * if there is no competition taking place, it calls findCompetitors();
+     * It updates in progress competitions.
+     * It prints a daily competition summary of the events
+     * It removes dead TechGiants
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     public void updateMarketPlace() {
         
         if (this.currentCompetition == null) {
@@ -289,8 +376,6 @@ public class World {
         }
         
         if (currentCompetition != null) {
-            
-//            if (isPrintTime()) {
                 
                 Printer.println("");
                 Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
@@ -309,8 +394,7 @@ public class World {
                 currentCompetition.printScore(currentCompetition.getOpponentOne());
                 currentCompetition.printScore(currentCompetition.getOpponentTwo());
                 Printer.println("");
-                setPrintTime(false);  
-//            }
+                setPrintTime(false); 
         }
         
         int i = 0;
@@ -338,16 +422,6 @@ public class World {
     public void setCurrentQuarter(Quarter currentQuarter) {
         
         this.currentQuarter = currentQuarter;
-    }
-
-    public MarketPlace getMarketPalce() {
-        
-        return marketPlace;
-    }
-
-    public void setMarketPalce(MarketPlace marketPalce) {
-        
-        this.marketPlace = marketPalce;
     }
     
     public void setCurrentCompetition(Competition competition) {

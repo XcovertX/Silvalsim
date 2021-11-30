@@ -1,5 +1,14 @@
 package main.java.marketplace;
 
+/**
+ * GarageOffice.java
+ * Package: main.java.marketplace
+ * Description: The level one for all startups
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
 public class GarageOffice extends Level {
     
     public GarageOffice() {

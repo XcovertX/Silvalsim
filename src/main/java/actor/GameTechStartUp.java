@@ -1,9 +1,16 @@
 package main.java.actor;
 
-import java.math.BigDecimal;
-
 import main.java.world.Location;
-import main.java.world.RandomNumber;
+
+/**
+ * GameTechStartUp.java
+ * Package: main.java.actor
+ * Description: GameTech are subtype of Startup
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
 
 public class GameTechStartUp extends StartUp {
 
@@ -11,8 +18,6 @@ public class GameTechStartUp extends StartUp {
         super(name, description, location, techGiant);
         
         this.setType("GameTech");
-
-
     }
 
 }

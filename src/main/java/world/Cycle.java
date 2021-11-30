@@ -1,5 +1,16 @@
 package main.java.world;
 
+/**
+ * Cycle.java
+ * Package: main.java.world
+ * Description: This method implements Runnable. 
+ * The primary purpose of this class is to increment update the world twice a second
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class Cycle implements Runnable {
     
     private boolean running;
@@ -9,12 +20,28 @@ public class Cycle implements Runnable {
     
     private World world;
     
+    /**
+     * Description: Cycle constructor assigns the world that cycle is updating.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param World x - current World object
+     *-----------------------------------------------------
+     */
     public Cycle(World w) {
         
         this.world = w;
         currentQuarter = w.getCurrentQuarter();
     }
 
+    /**
+     * Description: This method runs the loop for updating the world.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     @Override
     public void run() {
         
@@ -37,12 +64,20 @@ public class Cycle implements Runnable {
             }
         }
     }
-        
+    
+    /**
+     * Description: This method is called by the loop to update the world.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void update() {
 
         currentQuarter.incrementDay();
             
-        world.updateWorld(currentQuarter.getCurrentQuarter(), currentQuarter.getCurrentDay());
+        world.updateWorld(currentQuarter.getCurrentDay());
     }
     
     // getters and setters

@@ -1,9 +1,16 @@
 package main.java.actor;
 
-import java.math.BigDecimal;
-
 import main.java.world.Location;
-import main.java.world.RandomNumber;
+
+/**
+ * FinancialTechStartUp.java
+ * Package: main.java.actor
+ * Description: FinancialTech are subtype of Startup
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
 
 public class FinancialTechStartUp extends StartUp {
 

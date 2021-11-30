@@ -7,6 +7,17 @@ import main.java.world.Printer;
 import main.java.world.RandomNumber;
 import main.java.world.World;
 
+/**
+ * Defend.java
+ * Package: main.java.marketplace
+ * Description: The defend class is used by an defensive StartUp in competition
+ * to defend against their opposition
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class Defend {
     
     private StartUp attacker;
@@ -17,6 +28,31 @@ public class Defend {
         
     }
     
+    /**
+     * Description: This method deploys an advertising campaign to attract new customers
+     * 
+     * It then calculates if the defense is successful
+     * If the defense is successful it determines if the defense is critical
+     * If defense is critical, it calculates it's strengeth
+     * and adds strength number of new customer to the defender
+     * It then adds desirability to defender
+     * It then generates the dense expense (deducted from marketShare)
+     * If defense is not critical, it calculates it's strengeth
+     * and adds strength number of new customer to the defender
+     * It then adds desirability to defender
+     * It then generates the dense expense,
+     * deducting funds from the defender's marketShare to finance the defense.
+     * If the defender lacks sufficient funds (marketShare) to finance the defense, the defense will fail.
+     * Likewise, the defense will fail if the defenderSuccess returns false
+     * It then prints the appropriate message for resulting defense
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp defender - the startup deploying the defense
+     * @param StartUp attacker - the startup receiving the defense
+     * @return void
+     *-----------------------------------------------------
+     */
     public void advertise(StartUp defender, StartUp attacker) {
         
         this.defender = defender;
@@ -35,6 +71,8 @@ public class Defend {
                     
                 defender.addMediumIncomeCustomers(strength);
                 
+                defender.increaseDesirability(defender.getLevelNumber() * 10);
+                
                 generateDefenseExpense();
                 
                 Printer.print(Printer.ANSI_CYAN, defender.getName() + " ");
@@ -48,6 +86,8 @@ public class Defend {
                 int strength = calculateDefenseStrength(defender) * defender.getLevelNumber();
                 
                 defender.addMediumIncomeCustomers(strength);
+                
+                defender.increaseDesirability(defender.getLevelNumber() * 5);
                 
                 generateDefenseExpense();
                 
@@ -72,6 +112,30 @@ public class Defend {
             }
         }
     }
+    
+    /**
+     * Description: This method deploys an recruiting campaign to attract new devs.
+     * 
+     * It calculates if the defense is successful
+     * If the defense is successful it determines if the defense is critical
+     * If defense is critical, it calculates it's strength
+     * and adds strength number of new senior and experienced devs to the defender
+     * It then generates the dense expense (deducted from marketShare)
+     * If defense is not critical, it calculates it's strengeth
+     * and adds strength number of new junior and experienced devs to the defender
+     * It then generates the dense expense,
+     * deducting funds from the defender's marketShare to finance the defense.
+     * If the defender lacks sufficient funds (marketShare) to finance the defense, the defense will fail.
+     * Likewise, the defense will fail if the defenderSuccess returns false
+     * It then prints the appropriate message for resulting defense
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp defender - the startup deploying the defense
+     * @param StartUp attacker - the startup receiving the defense
+     * @return void
+     *-----------------------------------------------------
+     */
     public void recruitTalent(StartUp defender, StartUp attacker) {
         
         this.defender = defender;
@@ -136,6 +200,30 @@ public class Defend {
         }
     }
     
+    /**
+     * Description: This method liquidates assets
+     * 
+     * It then calculates if the defense is successful
+     * If hailMary is set to true, the liquidate will be successful
+     * It calculates it's strength
+     * It will then remove some expenses and fees
+     * It then will reduce Devs to 1 devs
+     * If not hailmary, it will calculate strength
+     * It will then remove some expenses and fees
+     * It then will reduce Devs to 1/4 the number of devs
+     * It then generates the dense expense,
+     * deducting funds from the defender's marketShare to finance the defense.
+     * If the defender lacks sufficient funds (marketShare) to finance the defense, the defense will fail.
+     * Likewise, the defense will fail if the defenderSuccess returns false
+     * It then prints the appropriate message for resulting defense
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp defender - the startup deploying the defense
+     * @param StartUp attacker - the startup receiving the defense
+     * @return void
+     *-----------------------------------------------------
+     */
     public void liquidate(StartUp defender, StartUp attacker) {
         
         this.defender = defender;
@@ -210,6 +298,17 @@ public class Defend {
         }
     }
     
+    /**
+     * Description: This method activates a dodge for the defender.
+     * next time an attack is made against the defender, the defender will dodge it.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp defender - the startup deploying the defense
+     * @param StartUp attacker - the startup receiving the defense
+     * @return void
+     *-----------------------------------------------------
+     */
     public void dodge(StartUp defender, StartUp attacker) {
         
         this.defender = defender;
@@ -242,12 +341,23 @@ public class Defend {
         }
     }
     
-    private int calculateDefenseStrength(StartUp attacker) {
+    /**
+     * Description: This method calculates the defense strength
+     * 
+     * The method will not allow an defense strength to be less that 1
+
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp defender - the startup deploying the defense
+     * @return int - strength of the defense
+     *-----------------------------------------------------
+     */
+    private int calculateDefenseStrength(StartUp defender) {
         
         int strength;
         
-        int min = attacker.getLevel().getXPMin();
-        int max = attacker.getLevel().getXPMax();;
+        int min = defender.getLevel().getXPMin();
+        int max = defender.getLevel().getXPMax();;
         strength = RandomNumber.getRandomBetween(min, max);
         
         if (strength < 1) {
@@ -259,6 +369,14 @@ public class Defend {
         
     }
     
+    /**
+     * Description: This method calculates if the defense is critical or not
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return boolean - true if role <= probability
+     *-----------------------------------------------------
+     */
     private boolean calculateCriticalDefenseSuccess() {
         
         int min = 0;
@@ -273,6 +391,14 @@ public class Defend {
         return false; 
     }
     
+    /**
+     * Description: This method calculates if the defense is successful or not
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return boolean - true if netIncome > 0 and role <= probability
+     *-----------------------------------------------------
+     */
     private boolean calculateDefenseSuccess() {
         
         if (defender.getMarketShare().compareTo(new BigDecimal(0)) <= 0) {
@@ -285,15 +411,21 @@ public class Defend {
         int offset = defender.getLevelNumber() - attacker.getLevelNumber();
         int probability = 5 + offset;
         int role = RandomNumber.getRandomBetween(min, max);
-        
-//        System.out.println("defense success: role: " + role + " prob: " + probability);
-        
+      
         if (role <= probability) {
             return true;
         }
         return false;    
     }
     
+    /**
+     * Description: This method prints message if defense fails
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void printFail() {
         
         Printer.print(Printer.ANSI_CYAN, defender.getName());
@@ -304,6 +436,14 @@ public class Defend {
         Printer.println(".");  
     }
     
+    /**
+     * Description: This method generates defense expenses (deducted from MarketShare)
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void generateDefenseExpense() {
         
         int randomNumber = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
@@ -313,6 +453,18 @@ public class Defend {
         defender.addExpense("defense expense", "Defense Expense", cost, World.world.getCurrentDay(), duration);
     }
     
+    /**
+     * Description: This method prints message if the defense has 
+     * insufficient funds (marketShare) to deploy a successful defense
+     * 
+     * If insufficient funds are detected, hailmary is set to true
+     *  and the liquidate command is automatically called
+     * a
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void insufficentDefenseFunds() {
         
         Printer.print(Printer.ANSI_CYAN, " " + defender.getName());

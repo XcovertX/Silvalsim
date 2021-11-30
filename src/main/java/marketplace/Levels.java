@@ -6,11 +6,30 @@ import java.util.ArrayList;
 import main.java.actor.StartUp;
 import main.java.world.Printer;
 
+/**
+ * Levels.java
+ * Package: main.java.marketplace
+ * Description: This is a factory class that builds all potential levels.
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class Levels {
     
     private ArrayList<Level> levels = new ArrayList<Level>();
     private StartUp su;
     
+    /**
+     * Description: The Levels constructor assigns the startup it tracks and
+     * populates the levels list
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp su - StartUp that uses this levels object
+     *-----------------------------------------------------
+     */
     public Levels(StartUp su) {
         
         this.su = su;
@@ -23,9 +42,17 @@ public class Levels {
         levels.add(new OfficeCampus());
         levels.add(new OfficeCompound());
         levels.add(new OfficeUtopia());
-
     }
     
+    /**
+     * Description: This method sets the StartUp to to a given Level
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param int index - index where the level is located in levels
+     * @return void
+     *-----------------------------------------------------
+     */
     public void setLevel(int index) {
         
         Level lvl = levels.get(index);
@@ -37,11 +64,15 @@ public class Levels {
         this.su.setXPMax(lvl.getXPMax());
     }
     
-    public Level getLevel(int index) {
-        
-        return levels.get(index);
-    }
-    
+    /**
+     * Description: This method sets the StartUp to the next level
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param int index - su current level index
+     * @return void
+     *-----------------------------------------------------
+     */
     public void levelUp(int index) {
         
         int i = index;
@@ -86,6 +117,13 @@ public class Levels {
         Printer.print(Printer.ANSI_GREEN, nextLevel.getTitle());
         Printer.println("!!!");
         Printer.println("");
+    }
+
+    // getters and setters
+    
+    public Level getLevel(int index) {
+        
+        return levels.get(index);
     }
 
     public StartUp getSu() {

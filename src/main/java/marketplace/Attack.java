@@ -7,15 +7,55 @@ import main.java.world.Printer;
 import main.java.world.RandomNumber;
 import main.java.world.World;
 
+/**
+ * Attack.java
+ * Package: main.java.marketplace
+ * Description: The Attack class is used by an offensive StartUp in competition
+ * to attack their opposition
+ * 
+ * @author James Covert
+ * @version 1.0
+ *-----------------------------------------------------
+ */
+
 public class Attack {
     
-    private StartUp attacker;
-    private StartUp defender;
+    private StartUp attacker;   // offensive StartUp
+    private StartUp defender;   // defensive StartUp
     
     public Attack() {
         
     }
     
+    /**
+     * Description: This method removes talented developers from the competition
+     * and adds them to the attacker's staff.
+     * This decreases potential the amount of xp the opponent can gain through attacks and battles.
+     * This also decreases the opponents overall desirability, effecting customer gains.
+     * However, a negative part of this attack is that it will increase the opponents speed,
+     * allowing the opponent to retailed with numerous attacks.
+     * 
+     * It first calculates the strength of the attack
+     * It then calculates if the attack is successful
+     * If the attack is successful it determines if the attack is critical
+     * If attack is critical, it removes Senior devs from opponent
+     * and reduces opponent xp to it's level's base xp
+     * and awards critical xp to attacker
+     * If attack is not critical, it removes junior devs from opponent
+     * and awards xp to attacker
+     * It then adds an attack expense to the attacker, 
+     * deducting funds from the attackers netIncome to finance the attack.
+     * If the attacker lacks sufficient funds (netIncome) to finance the attack, the attack will fail.
+     * Likewise, the attack will fail if the attacker if attackSucces is false
+     * It then prints the appropriate message for resulting attack
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp attacker - the startup deploying the attack
+     * @param StartUp defender - the startup receiving the attack
+     * @return void
+     *-----------------------------------------------------
+     */
     public void talentDrain(StartUp attacker, StartUp defender) {
         
         this.attacker = attacker;
@@ -123,7 +163,33 @@ public class Attack {
         
     }
         
-    
+    /**
+     * Description: This method 'steals' a trade secret from it's competitor.
+     * This has the effect immediately decreasing the opponents revenue.
+     * 
+     * It first calculates if the attack is successful
+     * It then calculates the strength of the attack
+     * If the attack is successful it determines if the attack is critical
+     * If the attack is critical, it removes desirability 1/2 of the opponents desirability
+     * It then add a strong amount of legal expenses to the opponents expense list
+     * It then awards critical xp to the attacker
+     * If the attack is not critical, it removes desirability 1/4 of the opponents desirability
+     * It then add a less strong amount of legal expenses to the opponents expense list
+     * It then awards xp to the attacker
+     * It then prints the appropriate message
+     * It then adds an attack expense to the attacker, 
+     * deducting funds from the attackers netIncome to finance the attack.
+     * If the attacker lacks sufficient funds (netIncome) to finance the attack, the attack will fail.
+     * Likewise, the attack will fail if the attacker if attackSucces is false
+     * It then prints the appropriate message for resulting attack
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp attacker - the startup deploying the attack
+     * @param StartUp defender - the startup receiving the attack
+     * @return void
+     *-----------------------------------------------------
+     */
     public void tradeSecretTheft(StartUp attacker, StartUp defender) {
         
         this.attacker = attacker;
@@ -134,13 +200,14 @@ public class Attack {
         if (attackSuccess) {
         
             int strength = calculateAttackStrength(attacker);
-            int desirability = defender.getDesirability() / 2;
-            attacker.increaseDesirability(desirability);
-            defender.decreaseDesirability(desirability);
             
             boolean critical = calculateCriticalAttackSuccess();
             
-                if (critical) {
+            if (critical) {
+                
+                int desirability = defender.getDesirability() / 2;
+                attacker.increaseDesirability(desirability);
+                defender.decreaseDesirability(desirability);
                 
                 int amount = strength * 1000000;
                 int duration = strength * 19;
@@ -174,6 +241,10 @@ public class Attack {
                 Printer.println(" months!!");
                 
             } else {
+                
+                int desirability = defender.getDesirability() / 4;
+                attacker.increaseDesirability(desirability);
+                defender.decreaseDesirability(desirability);
                 
                 int amount = strength * 100000;
                 int duration = strength * 7;
@@ -228,16 +299,46 @@ public class Attack {
         
     }
     
+    /**
+     * Description: This method 'bribes' a corrupt politician which adds
+     * fees to the opponent
+     * 
+     * It first calculates if the attack is successful
+     * It then calculates the strength of the attack
+     * If the attack is successful it determines if the attack is critical
+     * If the attack is critical, it reduces opponent's desirability by attackers desirability
+     * It then add a strong amount of legal expenses to the opponents expense list
+     * It then reduces opponent's revenue by 1/2
+     * It then increases opponent's service cost by 2
+     * It then awards critical xp to the attacker
+     * If the attack is not critical, it reduces desirability by 5x the attcker's level number
+     * It then reduces opponent's revenue by 1/4
+     * It then increases opponent's service cost by 1.4
+     * It then awards xp to the attacker
+     * It then prints the appropriate message
+     * It then adds an attack expense to the attacker, 
+     * deducting funds from the attackers netIncome to finance the attack.
+     * If the attacker lacks sufficient funds (netIncome) to finance the attack, the attack will fail.
+     * Likewise, the attack will fail if the attacker if attackSucces is false
+     * It then prints the appropriate message for resulting attack
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp attacker - the startup deploying the attack
+     * @param StartUp defender - the startup receiving the attack
+     * @return void
+     *-----------------------------------------------------
+     */
     public void politicalBribery(StartUp attacker, StartUp defender) {
         
         this.attacker = attacker;
         this.defender = defender;
         
-        int strength = calculateAttackStrength(attacker);
         boolean attackSuccess = calculateAttackSuccess();
         
         if (attackSuccess) {
-            
+
+            int strength = calculateAttackStrength(attacker);
             boolean attackCritical = calculateCriticalAttackSuccess();
             
             if (attackCritical) {
@@ -245,7 +346,7 @@ public class Attack {
                 int amount = strength * 1000000;
                 int duration = strength * 19;
                 
-                defender.decreaseDesirability(defender.getLevel().getLevelNumber() + 1);
+                defender.decreaseDesirability(attacker.getLevel().getLevelNumber() * 10);
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
                 defender.setServiceCost(Math.floor(defender.getServiceCost() * 2));
                 
@@ -277,6 +378,7 @@ public class Attack {
                 int amount = strength * 100000;
                 int duration = strength * 5;
                 
+                defender.decreaseDesirability(attacker.getLevel().getLevelNumber() * 5);
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(4)));
                 defender.setServiceCost(Math.floor(defender.getServiceCost() * 1.4));
                 
@@ -325,7 +427,35 @@ public class Attack {
             }
         }      
     }
-    
+
+    /**
+     * Description: This method undercuts the attackers service cost 
+     * to attract more customers from the opponent
+     * 
+     * 
+     * It first calculates if the attack is successful
+     * It then calculates the strength of the attack
+     * If the attack is successful it determines if the attack is critical
+     * If the attack is critical, it reduces attacker's service cost to 1/10
+     * of the opponent's service cost
+     * It then awards critical xp to the attacker
+     * If the attack is not critical, it reduces attacker's service cost to 1/5
+     * of the opponent's service cost
+     * It then awards xp to the attacker
+     * It then prints the appropriate message
+     * It then adds an attack expense to the attacker, 
+     * deducting funds from the attackers netIncome to finance the attack.
+     * If the attacker lacks sufficient funds (netIncome) to finance the attack, the attack will fail.
+     * Likewise, the attack will fail if the attacker if attackSucces is false
+     * It then prints the appropriate message for resulting attack
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp attacker - the startup deploying the attack
+     * @param StartUp defender - the startup receiving the attack
+     * @return void
+     *-----------------------------------------------------
+     */
     public void undercutPrices(StartUp attacker, StartUp defender) {
         
         this.attacker = attacker;
@@ -415,6 +545,17 @@ public class Attack {
         
     }
     
+    /**
+     * Description: This method calculates the attack strength
+     * 
+     * The method will not allow an attack strength to be less that 1
+
+     * @author James Covert
+     * @version 1.0
+     * @param StartUp attacker - the startup deploying the attack
+     * @return int - strength of the attack
+     *-----------------------------------------------------
+     */
     private int calculateAttackStrength(StartUp attacker) {
         
         int strength;
@@ -431,6 +572,14 @@ public class Attack {
         
     }
     
+    /**
+     * Description: This method calculates if the attack is successful or not
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return boolean - true if netIncome > 0 and role <= probability
+     *-----------------------------------------------------
+     */
     private boolean calculateAttackSuccess() {
         
         if (attacker.getNetIncome().compareTo(new BigDecimal(0)) <= 0) {
@@ -444,8 +593,6 @@ public class Attack {
         int probability = 5 + offset;
         int role = RandomNumber.getRandomBetween(min, max);
         
-//        System.out.println("attack success: role: " + role + " prob: " + probability);
-        
         if (role <= probability) {
             
             return true;
@@ -453,6 +600,14 @@ public class Attack {
         return false;    
     }
     
+    /**
+     * Description: This method calculates if the attack is critical or not
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return boolean - true if role <= probability
+     *-----------------------------------------------------
+     */
     private boolean calculateCriticalAttackSuccess() {
         
         int min = 0;
@@ -467,6 +622,14 @@ public class Attack {
         return false; 
     }
     
+    /**
+     * Description: This method prints message if the opponent dodges the attack
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void printDodge() {
         
         Printer.print(Printer.ANSI_CYAN, " " + attacker.getName());
@@ -475,6 +638,14 @@ public class Attack {
         defender.setDodge(false);
     }
     
+    /**
+     * Description: This method generates attack expenses (deducted from netIncome)
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void generateAttackExpense() {
         
         int randomNumber = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
@@ -484,6 +655,17 @@ public class Attack {
         attacker.addExpense("attack expense", "Attack Expense", cost, World.world.getCurrentDay(), duration);
     }
     
+    /**
+     * Description: This method prints message if the attacker has 
+     * insufficient funds (netIncome) to deploy a successful attack
+     * 
+     * If insufficient funds are detected, liquidate command is automatically called
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @return void
+     *-----------------------------------------------------
+     */
     private void insufficentAttackFunds() {
         
         Printer.print(Printer.ANSI_CYAN, " " + attacker.getName());

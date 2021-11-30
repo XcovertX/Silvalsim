@@ -2,6 +2,16 @@ package main.java.marketplace;
 
 public class HighriseBottomFloorOffice extends Level {
     
+    /**
+     * HighriseBottomFloorOffice.java
+     * Package: main.java.marketplace
+     * Description: The level three for all startups
+     * 
+     * @author James Covert
+     * @version 1.0
+     *-----------------------------------------------------
+     */
+    
     public HighriseBottomFloorOffice() {
         
         this.setTitle("highrise office on the bottom floor");
