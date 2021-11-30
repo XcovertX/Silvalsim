@@ -14,7 +14,6 @@ import main.java.world.World;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Competition {
@@ -32,17 +31,15 @@ public class Competition {
     private int counterTwo;             // used to determine when SU2 is ready to attack
     
     /**
-     * Description: The Competition constructor assigns the variables
+     * Description: The Competition constructor assigns the variables.
      * required from the two competing startups
      * and assigns the two competing opponents
-     * 
      * Lastly, it call printChallengeStart which prints the start message
      * 
      * @author James Covert
      * @version 1.0
-     * @param Startup su1 - the startup deploying a defense
-     * @param StartUp su2 - the startup receiving the defense
-     *-----------------------------------------------------
+     * @param su1 - the startup deploying a defense
+     * @param su2 - the startup receiving the defense
      */
     public Competition(StartUp su1, StartUp su2) {
 
@@ -68,7 +65,6 @@ public class Competition {
      * If the opponent is ready for attack, it calls on the startup's Offense
      * It then calls on their opponents Defense
      * It then resets the attacking startup's counter to 0
-     * 
      * It then checks if either opponent's revenue has dropped below 0
      * If an opponents revenue drops below 0, it dies and prints defeat msg
      * It then checks if either opponent is ready to level up
@@ -78,8 +74,6 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @return void
-     * -----------------------------------------------------
      */
     public void combatCycle() {
         
@@ -119,16 +113,16 @@ public class Competition {
             }
         }
         
-        if (opponentOne.getRevenue().compareTo(new BigDecimal(0)) <= 0 ) {
+        if (opponentOne.getRevenue().compareTo(new BigDecimal(0)) <= 0) {
             
-             opponentOne.die();
+            opponentOne.die();
             
             Printer.println("");
             Printer.print(Printer.ANSI_RED, opponentOne.getName());
             Printer.println(Printer.ANSI_RED, " has been defeated!!");
             Printer.println("");
             
-        } else if (opponentTwo.getRevenue().compareTo(new BigDecimal(0)) <= 0 ) {
+        } else if (opponentTwo.getRevenue().compareTo(new BigDecimal(0)) <= 0) {
             
             opponentTwo.die();
             
@@ -138,17 +132,17 @@ public class Competition {
             Printer.println("");
         }
         
-        if (opponentOne.compareXPToNextLevelXP()) {
+        if (opponentOne.compareXpToNextLevelXp()) {
             
             opponentOne.getLevels().levelUp();
         }
         
-        if (opponentTwo.compareXPToNextLevelXP()) {
+        if (opponentTwo.compareXpToNextLevelXp()) {
             
             opponentTwo.getLevels().levelUp();
         }
         
-        if( !opponentOne.isAlive() || !opponentTwo.isAlive() ) {
+        if (!opponentOne.isAlive() || !opponentTwo.isAlive()) {
         
             endFight();
         }
@@ -156,14 +150,12 @@ public class Competition {
     }
     
     /**
-     * Description: This method is called twice a day, once for each opponent
+     * Description: This method is called twice a day, once for each opponent.
      * It prints the startup's stats: 
      * revenue, netIncome, marketShare, xp, devcount, customer count, office level
 
      * @author James Covert
      * @version 1.0
-     * @return void
-     * -----------------------------------------------------
      */
     public void printScore(StartUp su) {
         
@@ -187,7 +179,8 @@ public class Competition {
         
         Printer.print(" NetIncome: ");
         
-        if (su.getLastEntry().getNetIncome().compareTo(su.getSecondToLastEntry().getNetIncome()) < 0) {
+        if (su.getLastEntry().getNetIncome()
+                .compareTo(su.getSecondToLastEntry().getNetIncome()) < 0) {
             
             Printer.print(Printer.ANSI_RED, "$" + su.getNetIncome().toString()); 
             
@@ -198,7 +191,8 @@ public class Competition {
         
         Printer.print(" MarketShare: ");
         
-        if (su.getLastEntry().getMarketShare().compareTo(su.getSecondToLastEntry().getMarketShare()) < 0) {
+        if (su.getLastEntry().getMarketShare()
+                .compareTo(su.getSecondToLastEntry().getMarketShare()) < 0) {
             
             Printer.println(Printer.ANSI_RED, "$" + su.getMarketShare().toString()); 
             
@@ -208,7 +202,7 @@ public class Competition {
         }
         
         Printer.print(Printer.ANSI_YELLOW, "XP: ");
-        Printer.print(Integer.toString(su.getXP()));
+        Printer.print(Integer.toString(su.getXp()));
 
         Printer.print(Printer.ANSI_YELLOW, " Customer Count: ");
         if (su.getCustomers().size() > su.getSecondToLastEntry().getNumberOfCustomers()) {
@@ -243,7 +237,8 @@ public class Competition {
         Printer.print(Printer.ANSI_YELLOW, "Office Level: ");
         Printer.println(su.getLevel().getTitle());
         
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "************************"
+                + "********************************************************");
     }
     
     /**
@@ -255,13 +250,10 @@ public class Competition {
      * It then prints results.
      * has any more startups.
      * If the tech giant does not have any, it is marked as dead.
-     * 
      * Lastly, it removes ongoing legal fees and sets competition to null
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     * -----------------------------------------------------
      */
     public void endFight() {
         
@@ -274,7 +266,7 @@ public class Competition {
                 opponentTwo.getTechGiant().die();
             }
             
-            opponentTwo.setXP(0);
+            opponentTwo.setXp(0);
 
             opponentTwo.setRevenue(new BigDecimal(1000000.00));
             
@@ -291,7 +283,7 @@ public class Competition {
                 opponentOne.getTechGiant().die();
             }
             
-            opponentOne.setXP(0);
+            opponentOne.setXp(0);
 
             opponentOne.setRevenue(new BigDecimal(1000000.00));
             
@@ -313,13 +305,12 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @return void
-     * -----------------------------------------------------
      */
     private void printOwnership() {
         
         Printer.println("");
-        Printer.println("Number of tech giants in the marketplace: " + World.world.getTechGiants().size());
+        Printer.println("Number of tech giants in the marketplace: " 
+        + World.world.getTechGiants().size());
         
         for (int i = 0; i < World.world.getTechGiants().size(); i++) {
             
@@ -357,10 +348,8 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @param StartUp winningSU - the winning SU
-     * @param StartUp losingSU - the losing SU
-     * @return void
-     * -----------------------------------------------------
+     * @param winningSU - the winning SU
+     * @param losingSU - the losing SU
      */
     private void award(StartUp winningSU, StartUp losingSU) {
         
@@ -374,10 +363,8 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @param StartUp winningSU - the winning SU
-     * @param StartUp losingSU - the losing SU
-     * @return void
-     * -----------------------------------------------------
+     * @param winningSU - the winning SU
+     * @param losingSU - the losing SU
      */
     private void awardStartUp(StartUp winningStartUp, StartUp losingStartUp) {
         
@@ -401,15 +388,13 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @param StartUp winningSU - the winning SU
-     * @param StartUp losingSU - the losing SU
-     * @return void
-     * -----------------------------------------------------
+     * @param winningSU - the winning SU
+     * @param losingSU - the losing SU
      */
     public void awardXP(StartUp su1, StartUp su2) {
         
         Level lvl = su2.getLevel();
-        su1.setXP(su1.getXP() + lvl.getXP());
+        su1.setXp(su1.getXp() + lvl.getXp());
     }
     
     /**
@@ -417,15 +402,13 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @param StartUp winningSU - the winning SU
-     * @param StartUp losingSU - the losing SU
-     * @return void
-     * -----------------------------------------------------
+     * @param winningSU - the winning SU
+     * @param losingSU - the losing SU
      */
     public void awardCriticalXP(StartUp su1, StartUp su2) {
         
         Level lvl = su2.getLevel();
-        su1.setXP(su1.getXP() + (su1.getTalentMultiplier() * 2) + (lvl.getXP() * 2));
+        su1.setXp(su1.getXp() + (su1.getTalentMultiplier() * 2) + (lvl.getXp() * 2));
     }
     
     /**
@@ -433,15 +416,13 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @param StartUp winningSU - the winning SU
-     * @param StartUp losingSU - the losing SU
-     * @return void
-     * -----------------------------------------------------
+     * @param winningSU - the winning SU
+     * @param losingSU - the losing SU
      */
     private void awardWinnerXP(StartUp su1, StartUp su2) {
         
         Level lvl = su2.getLevel();
-        su1.setXP(su1.getXP() + (su1.getTalentMultiplier() * 3) + (lvl.getXP() * su1.getLevelNumber()));
+        su1.setXp(su1.getXp() + (su1.getTalentMultiplier() * 3) + (lvl.getXp() * su1.getLevelNumber()));
     }
     
     /**
@@ -449,17 +430,15 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @param StartUp su - the winning SU
-     * @return void
-     * -----------------------------------------------------
+     * @param su - the winning SU
      */
     public void awardLevelUp(StartUp su) {
         
-        if (su.compareXPToNextLevelXP()){
+        if (su.compareXpToNextLevelXp()){
 
             su.getLevels().levelUp();
             
-            if (su.compareXPToNextLevelXP()) {
+            if (su.compareXpToNextLevelXp()) {
                 
                 awardLevelUp(su);
             } 
@@ -471,8 +450,6 @@ public class Competition {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     * -----------------------------------------------------
      */
     public void printResults(StartUp winningStartUp, StartUp losingStartUp) {
         
@@ -498,8 +475,6 @@ public class Competition {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     * -----------------------------------------------------
      */
     public void printChallengeStart(StartUp su1, StartUp su2) {
         

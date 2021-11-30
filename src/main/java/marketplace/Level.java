@@ -43,7 +43,7 @@ public abstract class Level {
     
     // getters and setters
     
-    public int getXP() {
+    public int getXp() {
 
         return RandomNumber.getRandomBetween(xpMin, xpMax);
     }
@@ -88,22 +88,22 @@ public abstract class Level {
         this.levelNumber = levelNumber;
     }
 
-    public int getXPMin() {
+    public int getXpMin() {
         
         return xpMin;
     }
 
-    public void setXPMin(int xpMin) {
+    public void setXpMin(int xpMin) {
         
         this.xpMin = xpMin;
     }
 
-    public int getXPMax() {
+    public int getXpMax() {
         
         return xpMax;
     }
 
-    public void setXPMax(int xpMax) {
+    public void setXpMax(int xpMax) {
         
         this.xpMax = xpMax;
     }

@@ -9,7 +9,6 @@ public class HighriseTopFloorOffice extends Level {
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     
     public HighriseTopFloorOffice() {
@@ -20,8 +19,8 @@ public class HighriseTopFloorOffice extends Level {
         this.setAttackCostMultiplier(5);
         this.setDefendCostMultiplier(5);
         this.setBaseNumber(4000);
-        this.setXPMin(16);
-        this.setXPMax(48);
+        this.setXpMin(16);
+        this.setXpMax(48);
     }
 
 }

@@ -51,10 +51,8 @@ public class Attack {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp attacker - the startup deploying the attack
-     * @param StartUp defender - the startup receiving the attack
-     * @return void
-     *-----------------------------------------------------
+     * @param attacker - the startup deploying the attack
+     * @param defender - the startup receiving the attack
      */
     public void talentDrain(StartUp attacker, StartUp defender) {
         
@@ -90,11 +88,11 @@ public class Attack {
     
             if (critical) {
                 
-                defender.setXP(defender.getLevel().getBaseNumber());
+                defender.setXp(defender.getLevel().getBaseNumber());
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
                     
@@ -115,7 +113,7 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
                     
@@ -185,10 +183,8 @@ public class Attack {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp attacker - the startup deploying the attack
-     * @param StartUp defender - the startup receiving the attack
-     * @return void
-     *-----------------------------------------------------
+     * @param attacker - the startup deploying the attack
+     * @param defender - the startup receiving the attack
      */
     public void tradeSecretTheft(StartUp attacker, StartUp defender) {
         
@@ -211,7 +207,7 @@ public class Attack {
                 
                 int amount = strength * 1000000;
                 int duration = strength * 19;
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
                     
@@ -249,7 +245,7 @@ public class Attack {
                 int amount = strength * 100000;
                 int duration = strength * 7;
 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
                     
@@ -324,10 +320,8 @@ public class Attack {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp attacker - the startup deploying the attack
-     * @param StartUp defender - the startup receiving the attack
-     * @return void
-     *-----------------------------------------------------
+     * @param attacker - the startup deploying the attack
+     * @param defender - the startup receiving the attack
      */
     public void politicalBribery(StartUp attacker, StartUp defender) {
         
@@ -352,7 +346,7 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
 
@@ -384,7 +378,7 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
 
@@ -451,10 +445,8 @@ public class Attack {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp attacker - the startup deploying the attack
-     * @param StartUp defender - the startup receiving the attack
-     * @return void
-     *-----------------------------------------------------
+     * @param attacker - the startup deploying the attack
+     * @param defender - the startup receiving the attack
      */
     public void undercutPrices(StartUp attacker, StartUp defender) {
         
@@ -472,10 +464,10 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
-                    int newRevenue = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                    int newRevenue = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                     attacker.increaseRevenue(new BigDecimal(100000 * newRevenue));
                     generateAttackExpense();
                 }
@@ -501,10 +493,10 @@ public class Attack {
                 
                 attacker.getCurrentCompetition().awardXP(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
-                    int newRevenue = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+                    int newRevenue = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                     attacker.increaseRevenue(new BigDecimal(10000 * newRevenue));
                     generateAttackExpense();
                 }
@@ -552,15 +544,14 @@ public class Attack {
 
      * @author James Covert
      * @version 1.0
-     * @param StartUp attacker - the startup deploying the attack
+     * @param attacker - the startup deploying the attack
      * @return int - strength of the attack
-     *-----------------------------------------------------
      */
     private int calculateAttackStrength(StartUp attacker) {
         
         int strength;
-        int min = attacker.getLevel().getXPMin();
-        int max = attacker.getLevel().getXPMax();;
+        int min = attacker.getLevel().getXpMin();
+        int max = attacker.getLevel().getXpMax();;
         strength = RandomNumber.getRandomBetween(min, max);
         
         if (strength < 1) {
@@ -578,7 +569,6 @@ public class Attack {
      * @author James Covert
      * @version 1.0
      * @return boolean - true if netIncome > 0 and role <= probability
-     *-----------------------------------------------------
      */
     private boolean calculateAttackSuccess() {
         
@@ -606,7 +596,6 @@ public class Attack {
      * @author James Covert
      * @version 1.0
      * @return boolean - true if role <= probability
-     *-----------------------------------------------------
      */
     private boolean calculateCriticalAttackSuccess() {
         
@@ -627,8 +616,6 @@ public class Attack {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void printDodge() {
         
@@ -643,13 +630,11 @@ public class Attack {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void generateAttackExpense() {
         
-        int randomNumber = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
-        int duration = RandomNumber.getRandomBetween(attacker.getXPMin(), attacker.getXPMax());
+        int randomNumber = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+        int duration = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
         double cost = randomNumber * attacker.getAttackCostMultiplier() * defender.getLevelNumber() * 1000000;
         cost = cost / (duration * 30);
         attacker.addExpense("attack expense", "Attack Expense", cost, World.world.getCurrentDay(), duration);
@@ -663,8 +648,6 @@ public class Attack {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void insufficentAttackFunds() {
         

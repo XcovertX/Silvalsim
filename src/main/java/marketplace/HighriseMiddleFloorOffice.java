@@ -8,8 +8,6 @@ public class HighriseMiddleFloorOffice extends Level {
      * Description: The level four for all startups
      * 
      * @author James Covert
-     * @version 1.0
-     *-----------------------------------------------------
      */
     
     public HighriseMiddleFloorOffice() {
@@ -20,8 +18,8 @@ public class HighriseMiddleFloorOffice extends Level {
         this.setAttackCostMultiplier(4);
         this.setDefendCostMultiplier(4);
         this.setBaseNumber(2000);
-        this.setXPMin(8);
-        this.setXPMax(24);
+        this.setXpMin(8);
+        this.setXpMax(24);
     }
 
 }

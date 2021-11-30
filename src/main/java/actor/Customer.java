@@ -10,7 +10,6 @@ import main.java.world.RandomNumber;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Customer extends Actor {
@@ -42,9 +41,8 @@ public class Customer extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp - competition
-     * @return boolean
-     *-----------------------------------------------------
+     * @param competition - competition startUp
+     * @return boolean - true is customer should switch
      */
     public boolean assessSubscription(StartUp competition) {
 
@@ -71,9 +69,8 @@ public class Customer extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp - competition
-     * @return int
-     *-----------------------------------------------------
+     * @param competition - comp startup
+     * @return int -difference
      */
     private int determinePriceDifference(StartUp competition) {
         
@@ -85,9 +82,8 @@ public class Customer extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp - competition
-     * @return int
-     *-----------------------------------------------------
+     * @param competition - comp startup
+     * @return int - difference
      */
     private int determineDesirability(StartUp competition) {
         
@@ -99,9 +95,8 @@ public class Customer extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp - competition
-     * @return int
-     *-----------------------------------------------------
+     * @param competition -competition strup
+     * @return int - difference
      */
     private int determineTalent(StartUp competition) {
         
@@ -119,8 +114,6 @@ public class Customer extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void payDay() {
         

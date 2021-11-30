@@ -15,7 +15,6 @@ import main.java.world.World;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Defend {
@@ -48,10 +47,8 @@ public class Defend {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp defender - the startup deploying the defense
-     * @param StartUp attacker - the startup receiving the defense
-     * @return void
-     *-----------------------------------------------------
+     * @param defender - the startup deploying the defense
+     * @param attacker - the startup receiving the defense
      */
     public void advertise(StartUp defender, StartUp attacker) {
         
@@ -131,10 +128,8 @@ public class Defend {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp defender - the startup deploying the defense
-     * @param StartUp attacker - the startup receiving the defense
-     * @return void
-     *-----------------------------------------------------
+     * @param defender - the startup deploying the defense
+     * @param attacker - the startup receiving the defense
      */
     public void recruitTalent(StartUp defender, StartUp attacker) {
         
@@ -154,7 +149,7 @@ public class Defend {
             
             if (critical) {
             
-                int strength = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
+                int strength = RandomNumber.getRandomBetween(defender.getXpMin(), defender.getXpMax());
                 
                 
                 defender.addExperiencedDevs(strength / 2);
@@ -170,7 +165,7 @@ public class Defend {
             
             } else {
                 
-                int strength = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
+                int strength = RandomNumber.getRandomBetween(defender.getXpMin(), defender.getXpMax());
                 
                 defender.addJuniorDevs(strength / 2);
                 defender.addExperiencedDevs(strength / 4);
@@ -219,10 +214,8 @@ public class Defend {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp defender - the startup deploying the defense
-     * @param StartUp attacker - the startup receiving the defense
-     * @return void
-     *-----------------------------------------------------
+     * @param defender - the startup deploying the defense
+     * @param attacker - the startup receiving the defense
      */
     public void liquidate(StartUp defender, StartUp attacker) {
         
@@ -304,10 +297,8 @@ public class Defend {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp defender - the startup deploying the defense
-     * @param StartUp attacker - the startup receiving the defense
-     * @return void
-     *-----------------------------------------------------
+     * @param defender - the startup deploying the defense
+     * @param attacker - the startup receiving the defense
      */
     public void dodge(StartUp defender, StartUp attacker) {
         
@@ -348,16 +339,15 @@ public class Defend {
 
      * @author James Covert
      * @version 1.0
-     * @param StartUp defender - the startup deploying the defense
+     * @param defender - the startup deploying the defense
      * @return int - strength of the defense
-     *-----------------------------------------------------
      */
     private int calculateDefenseStrength(StartUp defender) {
         
         int strength;
         
-        int min = defender.getLevel().getXPMin();
-        int max = defender.getLevel().getXPMax();;
+        int min = defender.getLevel().getXpMin();
+        int max = defender.getLevel().getXpMax();;
         strength = RandomNumber.getRandomBetween(min, max);
         
         if (strength < 1) {
@@ -375,7 +365,6 @@ public class Defend {
      * @author James Covert
      * @version 1.0
      * @return boolean - true if role <= probability
-     *-----------------------------------------------------
      */
     private boolean calculateCriticalDefenseSuccess() {
         
@@ -397,7 +386,6 @@ public class Defend {
      * @author James Covert
      * @version 1.0
      * @return boolean - true if netIncome > 0 and role <= probability
-     *-----------------------------------------------------
      */
     private boolean calculateDefenseSuccess() {
         
@@ -423,8 +411,6 @@ public class Defend {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void printFail() {
         
@@ -441,13 +427,11 @@ public class Defend {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void generateDefenseExpense() {
         
-        int randomNumber = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
-        int duration = RandomNumber.getRandomBetween(defender.getXPMin(), defender.getXPMax());
+        int randomNumber = RandomNumber.getRandomBetween(defender.getXpMin(), defender.getXpMax());
+        int duration = RandomNumber.getRandomBetween(defender.getXpMin(), defender.getXpMax());
         double cost = randomNumber * defender.getAttackCostMultiplier() * attacker.getLevelNumber() * 1000000;
         cost = cost / (duration * 30);
         defender.addExpense("defense expense", "Defense Expense", cost, World.world.getCurrentDay(), duration);
@@ -462,8 +446,6 @@ public class Defend {
      * a
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void insufficentDefenseFunds() {
         

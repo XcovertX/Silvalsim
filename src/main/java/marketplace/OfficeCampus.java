@@ -9,7 +9,6 @@ public class OfficeCampus extends Level {
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     
     public OfficeCampus() {
@@ -20,8 +19,8 @@ public class OfficeCampus extends Level {
         this.setAttackCostMultiplier(6);
         this.setDefendCostMultiplier(6);
         this.setBaseNumber(8000);
-        this.setXPMin(32);
-        this.setXPMax(96);
+        this.setXpMin(32);
+        this.setXpMax(96);
     }
 
 }

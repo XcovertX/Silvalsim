@@ -9,7 +9,6 @@ public class LocalStoreFrontOffice extends Level {
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     
     public LocalStoreFrontOffice() {
@@ -20,8 +19,8 @@ public class LocalStoreFrontOffice extends Level {
         this.setAttackCostMultiplier(2);
         this.setDefendCostMultiplier(2);
         this.setBaseNumber(500);
-        this.setXPMin(2);
-        this.setXPMax(6);
+        this.setXpMin(2);
+        this.setXpMax(6);
     }
 
 }

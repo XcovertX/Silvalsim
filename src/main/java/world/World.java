@@ -17,7 +17,6 @@ import main.java.marketplace.Competition;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class World {
@@ -35,13 +34,12 @@ public class World {
     private boolean printTime;                  // ready to print
     
     /**
-     * Description: The world constructor instantiates the ArrayList holding all TechGiants
+     * Description: The world constructor instantiates the ArrayList holding all TechGiants.
      * It then uses TechGiantfactory to generate TechGiants
      * and a startUpFactory to generate an assortment of different StartUps
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     public World() {
         
@@ -79,9 +77,7 @@ public class World {
      * 
      * @author James Covert
      * @version 1.0
-     * @param int currentDay - use to update the current day
-     * @return void
-     *-----------------------------------------------------
+     * @param currentDay - use to update the current day
      */
     public void updateWorld(int currentDay) {
 
@@ -94,14 +90,12 @@ public class World {
     }
 
     /**
-     * Description: This method is called if the currentCompetions is found to be null;
+     * Description: This method is called if the currentCompetions is found to be null.
      * It find new competitors among the existing TechGiants. 
      * If a single TechGiant owns all of the startups, the ends the simulation
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void findCompetitors() {
         
@@ -207,7 +201,6 @@ public class World {
      * @param TechGiant tg - TechGiant owning the startup
      * @return StartUp - first StartUp in the collection
      * @return null - if  collection is empty
-     *-----------------------------------------------------
      */
     private StartUp getCompetitor(TechGiant tg) {
         
@@ -224,18 +217,16 @@ public class World {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void updateFinancialEvents() {
         
         if (this.currentQuarter.getCurrentDay() == FIRST_OF_THE_MONTH) {
 
-            for(int i = 0; i < techGiants.size(); i++) {
+            for (int i = 0; i < techGiants.size(); i++) {
                 
                 TechGiant tg = techGiants.get(i);
                 
-                for(int j = 0; j < tg.getStartups().size(); j++) {
+                for (int j = 0; j < tg.getStartups().size(); j++) {
                     
                     StartUp su = tg.getStartups().get(j);
                     
@@ -253,8 +244,6 @@ public class World {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void updateStartUps() {
 
@@ -262,11 +251,11 @@ public class World {
             
             TechGiant tg = techGiants.get(i);
             
-            for(int j = 0; j < tg.getStartups().size(); j++) {
+            for (int j = 0; j < tg.getStartups().size(); j++) {
                 
                 StartUp su = tg.getStartups().get(j);
                 
-                for(int k = 0; k < su.getDevs().size(); k++) {
+                for (int k = 0; k < su.getDevs().size(); k++) {
                     
                     if (currentQuarter.getCurrentDay() == FIRST_PAYDAY ||
                         currentQuarter.getCurrentDay() == SECOND_PAYDAY) {
@@ -290,16 +279,14 @@ public class World {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void updateCustomers() {
 
-        for(int i = 0; i < techGiants.size(); i++) {
+        for (int i = 0; i < techGiants.size(); i++) {
             
             TechGiant tg = techGiants.get(i);
             
-            for(int j = 0; j < tg.getStartups().size(); j++) {
+            for (int j = 0; j < tg.getStartups().size(); j++) {
                 
                 StartUp su = tg.getStartups().get(j);
                 
@@ -360,8 +347,6 @@ public class World {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void updateMarketPlace() {
         

@@ -29,7 +29,6 @@ import main.java.world.World;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public abstract class StartUp extends Actor {
@@ -57,7 +56,7 @@ public abstract class StartUp extends Actor {
     private int defendCostMultiplier;               // for determining the cost to defend
     private int talentMultiplier;                   // for adjusting xp gains
     private double serviceCost;                     // cost to use the service
-    private int desirability;                       // determines desire level, effects customer gains
+    private int desirability;                       // det desire level, effects customer gains
     private boolean dodge;                          // determines if next attack will be dodged
     private Location location;                      // company location, holds tax info
     private ArrayList<Expense> expenses;            // costs for running business
@@ -74,15 +73,14 @@ public abstract class StartUp extends Actor {
 
     
     /**
-     * Description: The StartUp constructor builds a startup and generates random stats
+     * Description: The StartUp constructor builds a startup and generates random stats.
      * 
      * @author James Covert
-     * @param String name - the name of the startup
-     * @param String description - description of the startup
-     * @param Location location - where the startup is located (for taxes)
-     * @param TechGiant techGiant - the techGiant that owns the startup
+     * @param name - the name of the startup
+     * @param description - description of the startup
+     * @param location - where the startup is located (for taxes)
+     * @param techGiant - the techGiant that owns the startup
      * @version 1.0
-     *-----------------------------------------------------
      */
     public StartUp(String name, String description, Location location, TechGiant techGiant) {
         
@@ -93,7 +91,7 @@ public abstract class StartUp extends Actor {
         setType(type);
         
         setLocation(location);
-        setXP(0);
+        setXp(0);
         setNetIncome(new BigDecimal(0.00));
         setRevenue(new BigDecimal(0.00));
         setTotalRevenue(new BigDecimal(0.00));
@@ -112,24 +110,22 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method adds new junior developers to the startup staff
+     * Description: This method adds new junior developers to the startup staff.
      * 
      * @author James Covert
      * @version 1.0
-     * @param int - number of junior devs to add
-     * @return void
-     *-----------------------------------------------------
+     * @param numOfDevs - number of junior devs to add
      */
     public void addJuniorDevs(int numOfDevs) {
 
         int max = 5;
         int min = 0;
         int offset;
-        for(int i = 0; i < numOfDevs; i++) {
+        for (int i = 0; i < numOfDevs; i++) {
             
             offset = RandomNumber.getRandomBetween(min, max);
             double salary = 100000;
-            for(int j = 0; j < offset; j++) {
+            for (int j = 0; j < offset; j++) {
                 salary += 1000;
             }
             Developer dev = new Developer(Developer.JUNIOR_DEV_TALENT + offset, salary);
@@ -138,25 +134,23 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method adds new experienced developers to the startup staff
+     * Description: This method adds new experienced developers to the startup staff.
      * 
      * @author James Covert
      * @version 1.0
-     * @param int - number of experienced devs to add
-     * @return void
-     *-----------------------------------------------------
+     * @param numOfDevs - number of experienced devs to add
      */
     public void addExperiencedDevs(int numOfDevs) {
 
         int max = 5;
         int min = 0;
         int offset;
-        for(int i = 0; i < numOfDevs; i++) {
+        for (int i = 0; i < numOfDevs; i++) {
             
             offset = RandomNumber.getRandomBetween(min, max);
             double salary = 120000;
             
-            for(int j = 0; j < offset; j++) {
+            for (int j = 0; j < offset; j++) {
                 
                 salary += 1000;
             }
@@ -166,25 +160,23 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method adds new senior developers to the startup staff
+     * Description: This method adds new senior developers to the startup staff.
      * 
      * @author James Covert
      * @version 1.0
-     * @param int - number of senior devs to add
-     * @return void
-     *-----------------------------------------------------
+     * @param numOfDevs - number of senior devs to add
      */
     public void addSeniorDevs(int numOfDevs) {
 
         int max = 5;
         int min = 0;
         int offset;
-        for(int i = 0; i < numOfDevs; i++) {
+        for (int i = 0; i < numOfDevs; i++) {
             
             offset = RandomNumber.getRandomBetween(min, max);
             double salary = 150000;
             
-            for(int j = 0; j < offset; j++) {
+            for (int j = 0; j < offset; j++) {
                 
                 salary += 1000;
             }
@@ -194,13 +186,11 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method adds new low income customers to the startup staff
+     * Description: This method adds new low income customers to the startup staff.
      * 
      * @author James Covert
      * @version 1.0
-     * @param int - number of low income customers to add
-     * @return void
-     *-----------------------------------------------------
+     * @param numOfCustomers - number of low income customers to add
      */
     public void addLowIncomeCustomers(int numOfCustomers) {
 
@@ -208,26 +198,25 @@ public abstract class StartUp extends Actor {
         int min = 0;
         int offset;
         int dueDate;
-        for(int i = 0; i < numOfCustomers; i++) {
+        for (int i = 0; i < numOfCustomers; i++) {
             
             offset = RandomNumber.getRandomBetween(min, max);
             max = 30;
             min = 1;
             dueDate = RandomNumber.getRandomBetween(min, max);
-            Customer customer = new Customer(this, Customer.LOW_INCOME_AVAILABLE_FUNDS + offset, dueDate);
+            Customer customer = new Customer(this, 
+                    Customer.LOW_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
             
         }   
     }
     
     /**
-     * Description: This method adds new medium income customers to the startup staff
+     * Description: This method adds new medium income customers to the startup staff.
      * 
      * @author James Covert
      * @version 1.0
-     * @param int - number of medium income customers to add
-     * @return void
-     *-----------------------------------------------------
+     * @param numOfCustomers - number of medium income customers to add
      */
     public void addMediumIncomeCustomers(int numOfCustomers) {
 
@@ -235,25 +224,24 @@ public abstract class StartUp extends Actor {
         int min = 0;
         int offset;
         int dueDate;
-        for(int i = 0; i < numOfCustomers; i++) {
+        for (int i = 0; i < numOfCustomers; i++) {
             
             offset = RandomNumber.getRandomBetween(min, max);
             max = 30;
             min = 1;
             dueDate = RandomNumber.getRandomBetween(min, max);
-            Customer customer = new Customer(this, Customer.MEDIUM_INCOME_AVAILABLE_FUNDS + offset, dueDate);
+            Customer customer = new Customer(this, 
+                    Customer.MEDIUM_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
         }
     }
     
     /**
-     * Description: This method adds new high income customers to the startup staff
+     * Description: This method adds new high income customers to the startup staff.
      * 
      * @author James Covert
      * @version 1.0
-     * @param int - number of high income customers to add
-     * @return void
-     *-----------------------------------------------------
+     * @param numOfCustomers - number of high income customers to add
      */
     public void addHighIncomeCustomers(int numOfCustomers) {
 
@@ -261,13 +249,14 @@ public abstract class StartUp extends Actor {
         int min = 0;
         int offset;
         int dueDate;
-        for(int i = 0; i < numOfCustomers; i++) {
+        for (int i = 0; i < numOfCustomers; i++) {
             
             offset = RandomNumber.getRandomBetween(min, max);
             max = 30;
             min = 1;
             dueDate = RandomNumber.getRandomBetween(min, max);
-            Customer customer = new Customer(this, Customer.HIGH_INCOME_AVAILABLE_FUNDS + offset, dueDate);
+            Customer customer = new Customer(this, 
+                    Customer.HIGH_INCOME_AVAILABLE_FUNDS + offset, dueDate);
             this.addCustomer(customer);
         }
     }
@@ -277,13 +266,11 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param Customer customer - customer to be removed
-     * @return void
-     *-----------------------------------------------------
+     * @param customer - customer to be removed
      */
     public void removeCustomer(Customer customer) {
         
-        for(int i = 0; i < customers.size(); i++) {
+        for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).equals(customer)) {
                 customers.remove(i);
             }
@@ -303,12 +290,10 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void deductExpenses() {
         
-        for(int i = 0; i < expenses.size(); i++) {
+        for (int i = 0; i < expenses.size(); i++) {
             
             Expense expense = expenses.get(i);
 
@@ -316,7 +301,7 @@ public abstract class StartUp extends Actor {
                 
                 Fee fee = (Fee) expense;
                 decreaseRevenue(new BigDecimal(fee.getCost()));
-                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+                if (expense.getDueDate() == World.world.getCurrentDay()) {
 
                     fee.incrementNumberOfTimesApplied();
                 }
@@ -324,9 +309,9 @@ public abstract class StartUp extends Actor {
             
             if (expense.getType().equals("Legal Battle Expense")) {
                 
-                LegalBattleExpense lbe= (LegalBattleExpense) expense;
+                LegalBattleExpense lbe = (LegalBattleExpense) expense;
                 decreaseRevenue(new BigDecimal(lbe.getCost()));
-                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+                if (expense.getDueDate() == World.world.getCurrentDay()) {
 
                     lbe.incrementNumberOfTimesApplied();
                 }
@@ -334,9 +319,9 @@ public abstract class StartUp extends Actor {
             
             if (expense.getType().equals("General Expense")) {
                 
-                GeneralExpense ge= (GeneralExpense) expense;
+                GeneralExpense ge = (GeneralExpense) expense;
                 decreaseRevenue(new BigDecimal(ge.getCost()));
-                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+                if (expense.getDueDate() == World.world.getCurrentDay()) {
 
                     ge.incrementNumberOfTimesApplied();
                 }
@@ -346,7 +331,7 @@ public abstract class StartUp extends Actor {
                 
                 AttackExpense ae = (AttackExpense) expense;
                 decreaseNetIncome(new BigDecimal(ae.getCost()));
-                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+                if (expense.getDueDate() == World.world.getCurrentDay()) {
 
                     ae.incrementNumberOfTimesApplied();
                 }
@@ -354,9 +339,9 @@ public abstract class StartUp extends Actor {
             
             if (expense.getType().equals("Defense Expense")) {
                 
-                DefenseExpense de= (DefenseExpense) expense;
+                DefenseExpense de = (DefenseExpense) expense;
                 decreaseMarketShare(new BigDecimal(de.getCost()));
-                if (expense.getDueDate() == World.world.getCurrentDay() ) {
+                if (expense.getDueDate() == World.world.getCurrentDay()) {
 
                     de.incrementNumberOfTimesApplied();
                 }
@@ -367,14 +352,13 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method collects a given customer's payment
-     * and distributes it to the appropriate locations: revenue, netIncome and marketShare
+     * Description: This method collects a given customer's payment.
+     * and distributes it to the appropriate locations: revenue, 
+     * netIncome and marketShare
      * 
      * @author James Covert
      * @version 1.0
-     * @param Customer customer - customer to have payment collected from
-     * @return void
-     *-----------------------------------------------------
+     * @param customer - customer to have payment collected from
      */
     public void collectPayment(Customer customer) {
         
@@ -391,8 +375,6 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void removeExpiredExpenses() {
         
@@ -415,10 +397,8 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param int number - number of expenses to be removed
-     * @param String type - the type of expense to be removed
-     * @return void
-     *-----------------------------------------------------
+     * @param number - number of expenses to be removed
+     * @param type - the type of expense to be removed
      */
     public void removeExpenses(int number, String type) {
         
@@ -450,8 +430,6 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void removeAllFees() {
         
@@ -470,13 +448,11 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method removes all expenses of
+     * Description: This method removes all expenses of.
      * 'Legal Battle Expense' type.
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void removeAllLegalBattleExpenses() {
         
@@ -495,13 +471,11 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method removes all expenses of
+     * Description: This method removes all expenses of.
      * 'General Expense' type.
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void removeAllGeneralExpenses() {
         
@@ -524,13 +498,11 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param String name - name of the expense
-     * @param String type - type of expense
-     * @param double cost - expense cost
-     * @param int dueDate - day of the month the expense is due
-     * @param int duration - number of months the expense is to be collected
-     * @return void
-     *-----------------------------------------------------
+     * @param name - name of the expense
+     * @param type - type of expense
+     * @param cost - expense cost
+     * @param dueDate - day of the month the expense is due
+     * @param duration - number of months the expense is to be collected
      */
     public void addExpense(String name, String type, double cost, int dueDate, int duration) {
         
@@ -566,12 +538,10 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method this method builds random stats for a newly created Startup
+     * Description: This method this method builds random stats for a newly created Startup.
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void buildRandomStats() {
         
@@ -603,18 +573,16 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method removes a specific developer from the startup staff 
+     * Description: This method removes a specific developer from the startup staff. 
      * and adjusts startup stats in accordance with the developer removed.
      * 
      * @author James Covert
      * @version 1.0
-     * @param Developer - dev to be removed
-     * @return void
-     *-----------------------------------------------------
+     * @param dev - dev to be removed
      */
     public void removeDev(Developer dev) {
         
-        for(int i = 0; i < devs.size(); i++) {
+        for (int i = 0; i < devs.size(); i++) {
             
             if (devs.get(i).equals(dev)) {
                 
@@ -627,13 +595,12 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method removes the most senior developer
+     * Description: This method removes the most senior developer.
      * and adjusts the startup stats matching the dev removed.
      * 
      * @author James Covert
      * @version 1.0
      * @return Developer - the most senior dev
-     *-----------------------------------------------------
      */
     public Developer removeTopDev() {
         
@@ -664,13 +631,12 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method removes the most junior developer
+     * Description: This method removes the most junior developer.
      * and adjusts the startup stats matching the dev removed.
      * 
      * @author James Covert
      * @version 1.0
      * @return Developer - the most junior dev
-     *-----------------------------------------------------
      */
     public Developer removeLowestDev() {
         
@@ -700,14 +666,12 @@ public abstract class StartUp extends Actor {
     }
     
     /**
-     * Description: This method adds a given developer to the startup staff
+     * Description: This method adds a given developer to the startup staff.
      * and adjusts the startup stats matching the dev being added.
      * 
      * @author James Covert
      * @version 1.0
-     * @param Developer dev - developer to be added
-     * @return void
-     *-----------------------------------------------------
+     * @param dev - developer to be added
      */
     public void addDev(Developer dev) {
         
@@ -722,8 +686,6 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void addFinancialRecord() {
         
@@ -739,7 +701,6 @@ public abstract class StartUp extends Actor {
      * @author James Covert
      * @version 1.0
      * @return RecordEntry -  the last entry recorded
-     *-----------------------------------------------------
      */
     public RecordEntry getLastEntry() {
         
@@ -748,7 +709,8 @@ public abstract class StartUp extends Actor {
             return this.financialRecord.get(financialRecord.size() - 1);
         } 
        
-        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0, 0);
+        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), 
+                new BigDecimal(0), new BigDecimal(0), 0, 0);
     }
     
     /**
@@ -757,7 +719,6 @@ public abstract class StartUp extends Actor {
      * @author James Covert
      * @version 1.0
      * @return RecordEntry -  the second to last entry recorded
-     *-----------------------------------------------------
      */
     public RecordEntry getSecondToLastEntry() {
         
@@ -766,7 +727,8 @@ public abstract class StartUp extends Actor {
             return this.financialRecord.get(financialRecord.size() - 2);
         } 
         
-        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), 0, 0);
+        return new RecordEntry(new BigDecimal(0), new BigDecimal(0), 
+                new BigDecimal(0), new BigDecimal(0), 0, 0);
     }
     
     /**
@@ -774,9 +736,8 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param int day - day used to locate previous month revenue information
+     * @param day - day used to locate previous month revenue information
      * @return BigDecimal - previous month's total revenue
-     *-----------------------------------------------------
      */
     public BigDecimal getPreviousMonthRevenue(int day) {
         
@@ -793,15 +754,15 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param int day - day used to locate previous month customer count
+     * @param day - day used to locate previous month customer count
      * @return int - previous month's customer total
-     *-----------------------------------------------------
      */
     public int getPreviousMonthCustomerCount(int day) {
         
         if (financialRecord.size() - 29 - day >= 1) {
             
-            return this.financialRecord.get(financialRecord.size() - 29 - day).getNumberOfCustomers();
+            return this.financialRecord
+                    .get(financialRecord.size() - 29 - day).getNumberOfCustomers();
         } 
         
         return 0;
@@ -812,15 +773,15 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param int day - day used to locate previous month dev count
+     * @param day - day used to locate previous month dev count
      * @return int - previous month's dev total
-     *-----------------------------------------------------
      */
     public int getPreviousMonthDevCount(int day) {
         
         if (financialRecord.size() - 29 - day >= 1) {
             
-            return this.financialRecord.get(financialRecord.size() - 29 - day).getNumberOfDevs();
+            return this.financialRecord
+                    .get(financialRecord.size() - 29 - day).getNumberOfDevs();
         } 
         
         return 0;
@@ -833,9 +794,8 @@ public abstract class StartUp extends Actor {
      * @author James Covert
      * @version 1.0
      * @return boolean - true if startup's xp is greater than required xp to level up
-     *-----------------------------------------------------
      */
-    public boolean compareXPToNextLevelXP() {
+    public boolean compareXpToNextLevelXp() {
         
         if (this.xp > this.xpToNextLevel) {
             
@@ -849,9 +809,7 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal amount - amount to be added
-     * @return void
-     *-----------------------------------------------------
+     * @param amount - amount to be added
      */
     public void increaseRevenue(BigDecimal amount) {
         
@@ -866,9 +824,7 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal amount - amount to be added
-     * @return void
-     *-----------------------------------------------------
+     * @param amount - amount to be added
      */
     public void increaseNetIncome(BigDecimal amount) {
         
@@ -882,9 +838,7 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal amount - amount to be added
-     * @return void
-     *-----------------------------------------------------
+     * @param amount - amount to be added
      */
     public void increaseMarketShare(BigDecimal amount) {
         
@@ -897,9 +851,7 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal amount - amount to be added
-     * @return void
-     *-----------------------------------------------------
+     * @param amount - amount to be added
      */
     public void increaseTalentMultiplier(int amount) {
         
@@ -911,9 +863,7 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal amount - amount to be removed
-     * @return void
-     *-----------------------------------------------------
+     * @param amount - amount to be removed
      */
     public void decreaseRevenue(BigDecimal amount) {
         
@@ -925,9 +875,7 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal amount - amount to be removed
-     * @return void
-     *-----------------------------------------------------
+     * @param amount - amount to be removed
      */
     public void decreaseNetIncome(BigDecimal amount) {
         
@@ -939,9 +887,7 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal amount - amount to be removed
-     * @return void
-     *-----------------------------------------------------
+     * @param amount - amount to be removed
      */
     public void decreaseMarketShare(BigDecimal amount) {
         
@@ -953,9 +899,7 @@ public abstract class StartUp extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal amount - amount to be removed
-     * @return void
-     *-----------------------------------------------------
+     * @param amount - amount to be removed
      */
     public void decreaseTalentMultiplier(int amount) {
         
@@ -982,7 +926,6 @@ public abstract class StartUp extends Actor {
     public void setRevenue(BigDecimal revenue) {
         
         this.revenue = revenue.setScale(2, RoundingMode.DOWN);
-       
     }
 
     public BigDecimal getMarketShare() {
@@ -1035,12 +978,12 @@ public abstract class StartUp extends Actor {
         this.speed = speed;
     }
 
-    public int getXP() {
+    public int getXp() {
         
         return xp;
     }
 
-    public void setXP(int xp) {
+    public void setXp(int xp) {
         
         this.xp = xp;
     }
@@ -1050,6 +993,12 @@ public abstract class StartUp extends Actor {
         return devs;
     }
 
+    /**
+     * Description: This method sets devs.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public void setDevs(ArrayList<Developer> devs) {
         
         this.speed = devs.size();
@@ -1121,22 +1070,22 @@ public abstract class StartUp extends Actor {
         this.levelNumber = levelNumber;
     }
 
-    public int getXPMin() {
+    public int getXpMin() {
         
         return xpMin;
     }
 
-    public void setXPMin(int xpMin) {
+    public void setXpMin(int xpMin) {
         
         this.xpMin = xpMin;
     }
 
-    public int getXPMax() {
+    public int getXpMax() {
         
         return xpMax;
     }
 
-    public void setXPMax(int xpMax) {
+    public void setXpMax(int xpMax) {
         
         this.xpMax = xpMax;
     }
@@ -1206,6 +1155,12 @@ public abstract class StartUp extends Actor {
         this.expenses = expenses;
     }
 
+    /**
+     * Description: This method retrieves Desirability.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public int getDesirability() {
         
         if (desirability <= 0) {

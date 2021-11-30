@@ -9,7 +9,6 @@ public class OfficeCompound extends Level {
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     public OfficeCompound() {
         
@@ -19,8 +18,8 @@ public class OfficeCompound extends Level {
         this.setAttackCostMultiplier(7);
         this.setDefendCostMultiplier(7);
         this.setBaseNumber(16000);
-        this.setXPMin(64);
-        this.setXPMax(192);
+        this.setXpMin(64);
+        this.setXpMax(192);
     }
 
 }

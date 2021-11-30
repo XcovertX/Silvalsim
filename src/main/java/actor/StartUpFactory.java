@@ -14,7 +14,6 @@ import main.java.world.World;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public class StartUpFactory {
     
@@ -32,8 +31,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public StartUpFactory() {
         
@@ -53,8 +50,6 @@ public class StartUpFactory {
      * @author James Covert
      * @version 1.0
      * @param String startUpType - the type of startup to be built
-     * @return void
-     *-----------------------------------------------------
      */
     public void generateStartUp(String startUpType) {
         
@@ -106,9 +101,8 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @param String startUpType - the type of startup to be built
+     * @param startUpType - the type of startup to be built
      * @return String - name of the startup
-     *-----------------------------------------------------
      */
     private String formulateName(String startUpType) {
         
@@ -150,8 +144,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateNames() {
 
@@ -199,8 +191,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateGeneralExtenders() {
 
@@ -233,8 +223,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateSpecificExtenders() {
 
@@ -250,8 +238,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populatePhoneExtenders() {
         
@@ -269,8 +255,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateGameExtenders() {
         
@@ -288,8 +272,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateOSExtenders() {
         
@@ -307,8 +289,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateSMExtenders() {
         
@@ -324,8 +304,6 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateFinancialExtenders() {
         

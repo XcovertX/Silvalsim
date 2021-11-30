@@ -1,7 +1,6 @@
 package main.java.marketplace;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import main.java.actor.StartUp;
 import main.java.world.Printer;
@@ -14,7 +13,6 @@ import main.java.world.Printer;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Levels {
@@ -43,8 +41,6 @@ public class Levels {
      * @author James Covert
      * @version 1.0
      * @param int levelNumer - the level number of the needed Level
-     * @return void
-     *-----------------------------------------------------
      */
     public void setLevel(int levelNumber) {
         
@@ -61,8 +57,8 @@ public class Levels {
         this.su.setXpToNextLevel(lvl.getBaseNumber());
         this.su.setLevelNumber(lvl.getLevelNumber());
         this.su.setAttackSuccessMultiplier(lvl.getSuccessMultiplier());
-        this.su.setXPMin(lvl.getXPMin());
-        this.su.setXPMax(lvl.getXPMax());
+        this.su.setXpMin(lvl.getXpMin());
+        this.su.setXpMax(lvl.getXpMax());
     }
     
     /**
@@ -72,8 +68,6 @@ public class Levels {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void levelUp() {
         
@@ -90,8 +84,8 @@ public class Levels {
         this.su.setXpToNextLevel(nextLevel.getBaseNumber());
         this.su.setLevelNumber(nextLevel.getLevelNumber());
         this.su.setAttackSuccessMultiplier(nextLevel.getSuccessMultiplier());
-        this.su.setXPMin(nextLevel.getXPMin());
-        this.su.setXPMax(nextLevel.getXPMax());
+        this.su.setXpMin(nextLevel.getXpMin());
+        this.su.setXpMax(nextLevel.getXpMax());
         this.su.increaseDesirability(nextLevel.getLevelNumber());
         
         this.su.increaseDesirability(50);

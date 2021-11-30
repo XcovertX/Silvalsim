@@ -7,7 +7,7 @@ package main.java.actor;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
+ *
  */
 
 public abstract class Actor {

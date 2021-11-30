@@ -19,8 +19,8 @@ public class GarageOffice extends Level {
         this.setAttackCostMultiplier(1);
         this.setDefendCostMultiplier(1);
         this.setBaseNumber(10);
-        this.setXPMin(1);
-        this.setXPMax(3);
+        this.setXpMin(1);
+        this.setXpMax(3);
     }
 
 }

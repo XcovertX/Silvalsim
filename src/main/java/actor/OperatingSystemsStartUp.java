@@ -9,7 +9,6 @@ import main.java.world.Location;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public class OperatingSystemsStartUp extends StartUp {
 

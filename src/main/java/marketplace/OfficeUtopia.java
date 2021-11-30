@@ -9,7 +9,6 @@ public class OfficeUtopia extends Level {
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     
     public OfficeUtopia() {
@@ -20,8 +19,8 @@ public class OfficeUtopia extends Level {
         this.setAttackCostMultiplier(8);
         this.setDefendCostMultiplier(8);
         this.setBaseNumber(32000);
-        this.setXPMin(128);
-        this.setXPMax(384);
+        this.setXpMin(128);
+        this.setXpMax(384);
     }
 
 }
