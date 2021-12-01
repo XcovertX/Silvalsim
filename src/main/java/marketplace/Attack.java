@@ -674,6 +674,6 @@ public class Attack {
         Printer.print(Printer.ANSI_GREEN, Double.toString(attacker.getServiceCost()));
         Printer.println(".");
         
-        new LiquidateCommand(attacker, defender);    
+        new LiquidateCommand(attacker, defender).execute();  
     }
 }

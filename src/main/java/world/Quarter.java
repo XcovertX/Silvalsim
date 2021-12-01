@@ -114,7 +114,7 @@ public class Quarter {
     private BigDecimal deductTaxes(BigDecimal adjustedRevenue, BigDecimal taxRate) {
         
         return adjustedRevenue.subtract((adjustedRevenue.multiply((
-                taxRate.multiply(new BigDecimal(0.01))))));
+                taxRate.multiply(BigDecimal.valueOf(1.01))))));
         
     }
     

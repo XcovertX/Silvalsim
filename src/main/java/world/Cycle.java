@@ -13,7 +13,7 @@ package main.java.world;
 public class Cycle implements Runnable {
     
     private boolean running;
-    private final double updateRate = 30.0d / 60.0d;
+    private static final double updateRate = 30.0d / 60.0d;
     
     private Quarter currentQuarter;
     

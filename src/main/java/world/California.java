@@ -23,7 +23,7 @@ public class California extends Location {
         
         this.setStateName("California");
         this.setStateAbbreviation("CA");
-        this.setTaxRate(new BigDecimal(1.088));
+        this.setTaxRate(BigDecimal.valueOf(1.088));
     }
 
 }

@@ -23,7 +23,7 @@ public class NewYork extends Location {
         
         this.setStateName("New York");
         this.setStateAbbreviation("NY");
-        this.setTaxRate(new BigDecimal(1.085));
+        this.setTaxRate(BigDecimal.valueOf(1.085));
     }
 
 }

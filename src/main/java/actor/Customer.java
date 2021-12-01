@@ -96,7 +96,7 @@ public class Customer extends Actor {
      */
     private int determineDesirability(StartUp competition) {
         
-        return (int) Math.round(subscription.getDesirability() / competition.getDesirability());
+        return subscription.getDesirability() / competition.getDesirability();
     }
     
     /**
@@ -115,7 +115,7 @@ public class Customer extends Actor {
             
             competitionTalent = 1;
         }
-        return (int) Math.round(subscription.getTalentMultiplier() / competitionTalent);
+        return subscription.getTalentMultiplier() / competitionTalent;
     }
     
     /**

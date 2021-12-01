@@ -42,20 +42,19 @@ public class Levels {
      */
     public void setLevel(int levelNumber) {
         
-        Level lvl = null;
+
         for (Iterator iter = lvls.getIterator(); iter.hasNext();) {
-            Level l = (Level)iter.next();
-            if (l.getLevelNumber() == levelNumber) {
-                lvl = l;
-                break;
+            Level lvl = (Level)iter.next();
+            if (lvl.getLevelNumber() == levelNumber) {
+                
+                this.su.setLevel(lvl);
+                this.su.setXpToNextLevel(lvl.getBaseNumber());
+                this.su.setLevelNumber(lvl.getLevelNumber());
+                this.su.setAttackSuccessMultiplier(lvl.getSuccessMultiplier());
+                this.su.setXpMin(lvl.getXpMin());
+                this.su.setXpMax(lvl.getXpMax());
             }
-        } 
-        this.su.setLevel(lvl);
-        this.su.setXpToNextLevel(lvl.getBaseNumber());
-        this.su.setLevelNumber(lvl.getLevelNumber());
-        this.su.setAttackSuccessMultiplier(lvl.getSuccessMultiplier());
-        this.su.setXpMin(lvl.getXpMin());
-        this.su.setXpMax(lvl.getXpMax());
+        }
     }
     
     /**
@@ -68,49 +67,47 @@ public class Levels {
      */
     public void levelUp() {
         
-        Level nextLevel = null;
         for (Iterator iter = lvls.getIterator(); iter.hasNext();) {
-            Level lvl = (Level)iter.next();
-            if (lvl.getLevelNumber() > su.getLevelNumber()) {
-                nextLevel = lvl;
+            Level nextLevel = (Level)iter.next();
+            if (nextLevel.getLevelNumber() > su.getLevelNumber()) {
+
+                this.su.setLevel(nextLevel);
+                this.su.setXpToNextLevel(nextLevel.getBaseNumber());
+                this.su.setLevelNumber(nextLevel.getLevelNumber());
+                this.su.setAttackSuccessMultiplier(nextLevel.getSuccessMultiplier());
+                this.su.setXpMin(nextLevel.getXpMin());
+                this.su.setXpMax(nextLevel.getXpMax());
+                this.su.increaseDesirability(nextLevel.getLevelNumber());
+                
+                this.su.increaseDesirability(50);
+                this.su.increaseRevenue(new BigDecimal(10000000.00));
+                
+                Printer.println("");
+                Printer.print(Printer.ANSI_CYAN, su.getName());
+                Printer.println(" is now leveling up... ");
+                Printer.println("");
+                
+                for (int j = 0; j < 50; j++) {
+                    
+                    Printer.print("=");
+                    try {
+                        
+                        Thread.sleep(50);
+                        
+                    } catch (InterruptedException e) {
+                        
+                        e.printStackTrace();
+                    }
+                }
+        
+                Printer.print(Printer.ANSI_CYAN, " " + su.getName());
+                Printer.print(" has leveled up to ");
+                Printer.print(Printer.ANSI_GREEN, nextLevel.getTitle());
+                Printer.println("!!!");
+                Printer.println("");
                 break;
             }
         } 
-         
-        this.su.setLevel(nextLevel);
-        this.su.setXpToNextLevel(nextLevel.getBaseNumber());
-        this.su.setLevelNumber(nextLevel.getLevelNumber());
-        this.su.setAttackSuccessMultiplier(nextLevel.getSuccessMultiplier());
-        this.su.setXpMin(nextLevel.getXpMin());
-        this.su.setXpMax(nextLevel.getXpMax());
-        this.su.increaseDesirability(nextLevel.getLevelNumber());
-        
-        this.su.increaseDesirability(50);
-        this.su.increaseRevenue(new BigDecimal(10000000.00));
-        
-        Printer.println("");
-        Printer.print(Printer.ANSI_CYAN, su.getName());
-        Printer.println(" is now leveling up... ");
-        Printer.println("");
-        
-        for (int j = 0; j < 50; j++) {
-            
-            Printer.print("=");
-            try {
-                
-                Thread.sleep(50);
-                
-            } catch (InterruptedException e) {
-                
-                e.printStackTrace();
-            }
-        }
-
-        Printer.print(Printer.ANSI_CYAN, " " + su.getName());
-        Printer.print(" has leveled up to ");
-        Printer.print(Printer.ANSI_GREEN, nextLevel.getTitle());
-        Printer.println("!!!");
-        Printer.println("");
     }
     
     /**
@@ -121,15 +118,14 @@ public class Levels {
      */
     public Level getLevel(int levelNumber) {
         
-        Level lvl = null;
         for (Iterator iter = lvls.getIterator(); iter.hasNext();) {
             Level l = (Level)iter.next();
             if (l.getLevelNumber() == levelNumber) {
-                lvl = l;
-                break;
+
+                return l;
             }
         } 
-        return lvl;
+        return new OfficeUtopia();
     }
 
     public StartUp getSu() {

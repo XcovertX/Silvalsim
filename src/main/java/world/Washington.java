@@ -23,7 +23,7 @@ public class Washington extends Location {
         
         this.setStateName("Washington");
         this.setStateAbbreviation("WA");
-        this.setTaxRate(new BigDecimal(1.065));
+        this.setTaxRate(BigDecimal.valueOf(1.065));
     }
 
 }
