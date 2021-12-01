@@ -2,8 +2,6 @@ package test.java.start;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import main.java.actor.FinancialTechStartUp;
 import main.java.actor.GameTechStartUp;
 import main.java.actor.TechGiant;
@@ -13,12 +11,13 @@ import main.java.marketplace.Competition;
 import main.java.marketplace.DodgeCommand;
 import main.java.marketplace.DrainTalentCommand;
 import main.java.marketplace.LiquidateCommand;
-import main.java.marketplace.Offense;
 import main.java.marketplace.RecruitTalentCommand;
 import main.java.marketplace.StealTradeSecretCommand;
 import main.java.marketplace.UndercutPricesCommand;
 import main.java.world.California;
 import main.java.world.World;
+
+import org.junit.Test;
 
 public class CommandTest {
 
@@ -27,7 +26,6 @@ public class CommandTest {
      */
     @Test
     public void drainTalentTest() {
-        World w = new World();
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -37,6 +35,8 @@ public class CommandTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);
@@ -55,7 +55,6 @@ public class CommandTest {
      */
     @Test
     public void bribePoliticianTest() {
-        World w = new World();
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -65,6 +64,7 @@ public class CommandTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);
@@ -83,7 +83,6 @@ public class CommandTest {
      */
     @Test
     public void tradeTheftTest() {
-        World w = new World();
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -93,6 +92,7 @@ public class CommandTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);
@@ -111,7 +111,7 @@ public class CommandTest {
      */
     @Test
     public void undercutPricesTest() {
-        World w = new World();
+
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -121,6 +121,7 @@ public class CommandTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);
@@ -139,7 +140,7 @@ public class CommandTest {
      */
     @Test
     public void advertiseTest() {
-        World w = new World();
+
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -149,6 +150,7 @@ public class CommandTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);
@@ -167,7 +169,7 @@ public class CommandTest {
      */
     @Test
     public void recruitTalentTest() {
-        World w = new World();
+
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -177,6 +179,7 @@ public class CommandTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);
@@ -195,7 +198,7 @@ public class CommandTest {
      */
     @Test
     public void liquidateTest() {
-        World w = new World();
+
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -205,6 +208,7 @@ public class CommandTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);
@@ -223,7 +227,7 @@ public class CommandTest {
      */
     @Test
     public void dodgeTest() {
-        World w = new World();
+
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -233,6 +237,7 @@ public class CommandTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);

@@ -17,7 +17,7 @@ public class CompetitionTest {
      */
     @Test
     public void endFightOppTwoTest() {
-        World w = new World();
+        
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -27,6 +27,7 @@ public class CompetitionTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);
@@ -46,7 +47,6 @@ public class CompetitionTest {
      */
     @Test
     public void endFightOppOneTest() {
-        World w = new World();
         TechGiant tg1 = new TechGiant("test", "test");
         TechGiant tg2 = new TechGiant("test", "test");
         California ca = new California();
@@ -56,6 +56,7 @@ public class CompetitionTest {
         gtsu.addHighIncomeCustomers(100);
         tg1.getStartups().add(ftsu);
         tg2.getStartups().add(gtsu);
+        World w = new World();
         w.getTechGiants().add(tg1);
         w.getTechGiants().add(tg2);
         Competition comp = new Competition(ftsu, gtsu);

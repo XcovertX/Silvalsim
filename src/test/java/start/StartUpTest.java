@@ -331,12 +331,10 @@ public class StartUpTest {
         TechGiant tg = new TechGiant("test", "test");
         California ca = new California();
         FinancialTechStartUp ftsu = new FinancialTechStartUp("test", "test", ca, tg);
+        ftsu.addFinancialRecord();
+        ftsu.addFinancialRecord();
         RecordEntry fe1 = ftsu.getLastEntry();
         RecordEntry fe2 = ftsu.getSecondToLastEntry();
-        ftsu.addFinancialRecord();
-        ftsu.addFinancialRecord();
-        fe1 = ftsu.getLastEntry();
-        fe2 = ftsu.getSecondToLastEntry();
         boolean entriesAreSame = fe1.equals(fe2);
         assertEquals(false, entriesAreSame);
     }
