@@ -222,7 +222,7 @@ public class World {
      * @author James Covert
      * @version 1.0
      */
-    private void updateFinancialEvents() {
+    public void updateFinancialEvents() {
         
         if (this.currentQuarter.getCurrentDay() == FIRST_OF_THE_MONTH) {
 
@@ -249,7 +249,7 @@ public class World {
      * @author James Covert
      * @version 1.0
      */
-    private void updateStartUps() {
+    public void updateStartUps() {
 
         for (int i = 0; i < techGiants.size(); i++) {
             
@@ -284,7 +284,7 @@ public class World {
      * @author James Covert
      * @version 1.0
      */
-    private void updateCustomers() {
+    public void updateCustomers() {
 
         for (int i = 0; i < techGiants.size(); i++) {
             

@@ -514,8 +514,8 @@ public abstract class StartUp extends Actor {
         
         if (type.equals("Legal Battle Expense")) {
             
-            Fee fee = new Fee(name, cost, dueDate, duration);
-            expenses.add(fee);
+            LegalBattleExpense lbe = new LegalBattleExpense(name, cost, dueDate, duration);
+            expenses.add(lbe);
         }
         
         if (type.equals("General Expense")) {
@@ -609,12 +609,12 @@ public abstract class StartUp extends Actor {
             @Override
             public int compare(Developer d1, Developer d2) {
                 
-                if (d1.getTalent() > d2.getTalent()) {
+                if (d1.getTalent() < d2.getTalent()) {
                     
                     return 1;
                 }
                 
-                if (d1.getTalent() < d2.getTalent()) {
+                if (d1.getTalent() > d2.getTalent()) {
                     
                     return -1;
                 }
