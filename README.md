@@ -10,3 +10,6 @@ StartUpFactory.generateStartUp(String startUpType) generates the corresponding S
 - Command Pattern: I used the command pattern to to generate the all of the actions that a StartUp can utilize in competition. Command interface defines the execute() method. DodgeCommand, AdevertiseCommand, RecruitTalentCommand, LiquidateCommand, DrainTalentCommand, BribePoliticianCommand, StealTradeSecretCommand, UndercutPricesCommand all implement the the Command interface. Offense remotely calls the attack commands and Defense  calls the defend commands.
 
 - Iterator Pattern: OfficeLevelRepository utilizes the iterator pattern. Levels utilizes OfficeLevelRepository to retrieve different Levels.
+
+screencast: https://youtu.be/hwkTFUxHCJc
+Repo: 
