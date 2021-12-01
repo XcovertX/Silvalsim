@@ -17,16 +17,16 @@ import main.java.world.World;
  */
 public class StartUpFactory {
     
-    private ArrayList<String> names;                        // list of potential names
-    private ArrayList<String> generalExtenders;             // list of potential general name modifiers
-    private ArrayList<String> phoneExtenders;               // list of potential phone name modifiers
-    private ArrayList<String> gameExtenders;                // list of potential game name modifiers
-    private ArrayList<String> osExtenders;                  // list of potential OS name modifiers
-    private ArrayList<String> socialMediaExtenders;         // list of potential SM name modifiers
-    private ArrayList<String> financialExtenders;           // list of potential FE name modifiers
+    private ArrayList<String> names;                // list of potential names
+    private ArrayList<String> generalExtenders;     // list of potential name modifiers
+    private ArrayList<String> phoneExtenders;       // list of potential phone name modifiers
+    private ArrayList<String> gameExtenders;        // list of potential game name modifiers
+    private ArrayList<String> osExtenders;          // list of potential OS name modifiers
+    private ArrayList<String> socialMediaExtenders; // list of potential SM name modifiers
+    private ArrayList<String> financialExtenders;   // list of potential FE name modifiers
     
     /**
-     * Description: The StartUp factory constructor populates all lists pertaining to
+     * Description: The StartUp factory constructor populates all lists pertaining to.
      * generating random, unique names for new start ups. 
      * 
      * @author James Covert
@@ -49,13 +49,14 @@ public class StartUpFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @param String startUpType - the type of startup to be built
+     * @param startUpType - the type of startup to be built
      */
     public void generateStartUp(String startUpType) {
         
         String name = "";
         String description = "";
-        int techGiantIndex = RandomNumber.getRandomBetween(0, World.world.getTechGiants().size() - 1);
+        int techGiantIndex = RandomNumber
+                .getRandomBetween(0, World.world.getTechGiants().size() - 1);
         TechGiant tg = World.world.getTechGiants().get(techGiantIndex);
         Location location = new California();
         
@@ -97,7 +98,7 @@ public class StartUpFactory {
     }
     
     /**
-     * Description: This method generates a random, unique name for a given StartUp type
+     * Description: This method generates a random, unique name for a given. StartUp type
      * 
      * @author James Covert
      * @version 1.0
@@ -105,36 +106,42 @@ public class StartUpFactory {
      * @return String - name of the startup
      */
     private String formulateName(String startUpType) {
-        
-        String name = getName(RandomNumber.getRandomBetween(0, names.size() - 1));
-        String genExtender = getGeneralExtender(RandomNumber.getRandomBetween(0, generalExtenders.size() - 1));
+
         String specificExtender = "";
         
         if (startUpType.equals("PhoneTech")) {
             
-            specificExtender = getPhoneExtender(RandomNumber.getRandomBetween(0, phoneExtenders.size() - 1));
+            specificExtender = getPhoneExtender(RandomNumber
+                    .getRandomBetween(0, phoneExtenders.size() - 1));
         }
         
         if (startUpType.equals("OperatingSystems")) {
             
-            specificExtender = getOSExtender(RandomNumber.getRandomBetween(0, osExtenders.size() - 1));
+            specificExtender = getOsExtender(RandomNumber
+                    .getRandomBetween(0, osExtenders.size() - 1));
         }
         
         if (startUpType.equals("GameTech")) {
             
-            specificExtender = getGameExtender(RandomNumber.getRandomBetween(0, gameExtenders.size() - 1));
+            specificExtender = getGameExtender(RandomNumber
+                    .getRandomBetween(0, gameExtenders.size() - 1));
         }
         
         if (startUpType.equals("SocialMedia")) {
             
-            specificExtender = getSocialMediaExtender(RandomNumber.getRandomBetween(0, socialMediaExtenders.size() - 1));
+            specificExtender = getSocialMediaExtender(RandomNumber
+                    .getRandomBetween(0, socialMediaExtenders.size() - 1));
         }
         
         if (startUpType.equals("FinancialTech")) {
             
-            specificExtender = getFinancialExtender(RandomNumber.getRandomBetween(0, financialExtenders.size() - 1));
+            specificExtender = getFinancialExtender(RandomNumber
+                    .getRandomBetween(0, financialExtenders.size() - 1));
         }
         
+        String name = getName(RandomNumber.getRandomBetween(0, names.size() - 1));
+        String genExtender = getGeneralExtender(RandomNumber
+                .getRandomBetween(0, generalExtenders.size() - 1));
         return name + genExtender + specificExtender;
         
     }
@@ -228,8 +235,8 @@ public class StartUpFactory {
 
         populatePhoneExtenders();
         populateGameExtenders();
-        populateOSExtenders();
-        populateSMExtenders();
+        populateOsExtenders();
+        populateSmExtenders();
         populateFinancialExtenders(); 
     }
     
@@ -268,12 +275,13 @@ public class StartUpFactory {
     }
     
     /**
-     * Description: This method populates the possible name modifiers for startup type 'Operating Systems'.
+     * Description: This method populates the possible name modifiers.
+     * for startup type 'Operating Systems'.
      * 
      * @author James Covert
      * @version 1.0
      */
-    private void populateOSExtenders() {
+    private void populateOsExtenders() {
         
         osExtenders = new ArrayList<String>();
         
@@ -285,12 +293,13 @@ public class StartUpFactory {
     }
     
     /**
-     * Description: This method populates the possible name modifiers for startup type 'Social Media'.
+     * Description: This method populates the possible name modifiers.
+     * for startup type 'Social Media'.
      * 
      * @author James Covert
      * @version 1.0
      */
-    private void populateSMExtenders() {
+    private void populateSmExtenders() {
         
         socialMediaExtenders = new ArrayList<String>();
         
@@ -300,7 +309,8 @@ public class StartUpFactory {
     }
     
     /**
-     * Description: This method populates the possible name modifiers for startup type 'Financial Tech'.
+     * Description: This method populates the possible.
+     * name modifiers for startup type 'Financial Tech'.
      * 
      * @author James Covert
      * @version 1.0
@@ -346,7 +356,7 @@ public class StartUpFactory {
         return financialExtenders.get(selectIndex);
     }
     
-    private String getOSExtender(int selectIndex) {
+    private String getOsExtender(int selectIndex) {
         
         return osExtenders.get(selectIndex);
     }

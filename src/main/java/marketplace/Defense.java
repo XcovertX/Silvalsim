@@ -11,7 +11,6 @@ import main.java.world.RandomNumber;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Defense {
@@ -19,6 +18,14 @@ public class Defense {
     private StartUp defender;
     private StartUp recipient;
     
+    /**
+     * Description: Defense constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param defender - su deploying the defense
+     * @param recipient - su receiving the defense
+     */
     public Defense(StartUp defender, StartUp recipient) {
         
         setDefender(defender);
@@ -30,10 +37,8 @@ public class Defense {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
-    public void Defend() {
+    public void defend() {
         
         int defenseSelection = selectDefense();
         
@@ -56,12 +61,11 @@ public class Defense {
     }
     
     /**
-     * Description: This method produces a random selection
+     * Description: This method produces a random selection.
      * 
      * @author James Covert
      * @version 1.0
      * @return int - number between 0-3
-     *-----------------------------------------------------
      */
     public int selectDefense() {
         

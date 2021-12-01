@@ -7,10 +7,15 @@ package main.java.marketplace;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public class GarageOffice extends Level {
     
+    /**
+     * Description: constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public GarageOffice() {
         
         this.setTitle("Garage Office");

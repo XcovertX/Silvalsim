@@ -1,16 +1,15 @@
 package test.java.start;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
-
-import org.junit.Test;
 
 import main.java.actor.FinancialTechStartUp;
 import main.java.actor.TechGiant;
 import main.java.world.California;
 import main.java.world.World;
 
+import org.junit.Test;
 
 public class StartUpTest {
 
@@ -57,7 +56,7 @@ public class StartUpTest {
      * Tests removeAllGeneralExpenses.
      */
     @Test
-    public void RemoveAllGeneralExpensesTest() {
+    public void removeAllGeneralExpensesTest() {
         TechGiant tg = new TechGiant("test", "test");
         California ca = new California();
         FinancialTechStartUp ftsu = new FinancialTechStartUp("test", "test", ca, tg);
@@ -85,7 +84,7 @@ public class StartUpTest {
      * Tests deducting 'Fee' expenses.
      */
     @Test
-    public void DeductFeeExpenseTest() {
+    public void deductFeeExpenseTest() {
         World w = new World();
         TechGiant tg = new TechGiant("test", "test");
         California ca = new California();

@@ -4,16 +4,21 @@ package main.java.marketplace;
  * DefenseExpense.java
  * Package: main.java.marketplace
  * Description: The Defense Expense class generates an Expense of type 'Defense Expense'
- * 
  * Defense Expenses are deducted from marketShare
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class DefenseExpense extends Expense {
     
+
+    /**
+     * Description: constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public DefenseExpense(String name, double amount, int dueDate, int duration) {
         
         this.setName(name);

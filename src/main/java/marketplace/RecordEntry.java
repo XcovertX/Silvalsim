@@ -2,6 +2,15 @@ package main.java.marketplace;
 
 import java.math.BigDecimal;
 
+/**
+ * RecordEntry.java
+ * Package: main.java.marketplace
+ * Description: This class stores startup stats to compare with at a later date. 
+ * This class builds all attacks.
+ * 
+ * @author James Covert
+ * @version 1.0
+ */
 public class RecordEntry {
     
     private BigDecimal netIncome;
@@ -11,6 +20,19 @@ public class RecordEntry {
     private int numberOfCustomers;
     private int numberOfDevs;
     
+    /**
+     * Description: RecordEntry constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param netIncome - netIncome to be recorded
+     * @param monthlyRevenue - monthlyRevenue to be recorded
+     * @param totalRevenue - totalRevenue ever made to be recorded
+     * @param marketShare - marketShare to be recorded
+     * @param numOfCustomers - numOfCustomers to be recorded
+     * @param numOfDevs - numOfDevs to be recorded
+     * 
+     */
     public RecordEntry(BigDecimal netIncome, BigDecimal monthlyRevenue, 
             BigDecimal totalRevenue, BigDecimal marketShare, int numOfCustomers, int numOfDevs) {
         

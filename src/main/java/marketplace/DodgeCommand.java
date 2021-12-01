@@ -10,7 +10,6 @@ import main.java.actor.StartUp;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public class DodgeCommand implements Command {
 
@@ -19,14 +18,13 @@ public class DodgeCommand implements Command {
     private StartUp attacker;
     
     /**
-     * Description: The DodgeCommand constructor builds a new Defend()
+     * Description: The DodgeCommand constructor builds a new Defend().
      * and assigns the two competing opponents
      * 
      * @author James Covert
      * @version 1.0
-     * @param Startup defender - the startup deploying a defense
-     * @param StartUp attacker - the startup receiving the defense
-     *-----------------------------------------------------
+     * @param defender - the startup deploying a defense
+     * @param attacker - the startup receiving the defense
      */
     public DodgeCommand(StartUp defender, StartUp attacker) {
         
@@ -41,7 +39,6 @@ public class DodgeCommand implements Command {
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     @Override
     public void execute() {

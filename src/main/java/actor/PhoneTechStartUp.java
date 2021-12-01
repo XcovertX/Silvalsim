@@ -13,7 +13,18 @@ import main.java.world.Location;
 
 public class PhoneTechStartUp extends StartUp {
 
-    public PhoneTechStartUp(String name, String description, Location location, TechGiant techGiant) {
+    /**
+     * Description: Phone Tech constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param name - name of startup
+     * @param description - descr of startup
+     * @param location - location of startup
+     * @param techGiant - tg who owns the startup
+     */
+    public PhoneTechStartUp(String name, String description, 
+            Location location, TechGiant techGiant) {
         super(name, description, location, techGiant);
         
         this.setType("PhoneTech");

@@ -10,24 +10,22 @@ import main.java.actor.StartUp;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
-public class AdvertiseCommand implements Command{
+public class AdvertiseCommand implements Command {
     
     private Defend defend;
     private StartUp defender;
     private StartUp attacker;
     
     /**
-     * Description: The Advertise constructor builds a new Defend()
+     * Description: The Advertise constructor builds a new Defend().
      * and assigns the two competing opponents
      * 
      * @author James Covert
      * @version 1.0
-     * @param Startup defender - the startup deploying a defense
-     * @param StartUp attacker - the startup receiving the defense
-     *-----------------------------------------------------
+     * @param defender - the startup deploying a defense
+     * @param attacker - the startup receiving the defense
      */
     public AdvertiseCommand(StartUp defender, StartUp attacker) {
         
@@ -42,7 +40,6 @@ public class AdvertiseCommand implements Command{
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     @Override
     public void execute() {

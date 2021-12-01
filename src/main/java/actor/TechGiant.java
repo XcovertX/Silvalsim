@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public class TechGiant extends Actor {
     
@@ -21,9 +20,8 @@ public class TechGiant extends Actor {
      * 
      * @author James Covert
      * @version 1.0
-     * @param String name - name of the TechGiant
-     * @param String description - general description of the TechGiant
-     *-----------------------------------------------------
+     * @param name - name of the TechGiant
+     * @param description - general description of the TechGiant
      */
     public TechGiant(String name, String description) {
         

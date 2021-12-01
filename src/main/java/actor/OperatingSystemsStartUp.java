@@ -12,7 +12,18 @@ import main.java.world.Location;
  */
 public class OperatingSystemsStartUp extends StartUp {
 
-    public OperatingSystemsStartUp(String name, String description, Location location, TechGiant techGiant) {
+    /**
+     * Description: Operating Systems constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param name - name of startup
+     * @param description - descr of startup
+     * @param location - location of startup
+     * @param techGiant - tg who owns the startup
+     */
+    public OperatingSystemsStartUp(String name, String description, 
+            Location location, TechGiant techGiant) {
         super(name, description, location, techGiant);
         
         this.setType("OperatingSystems");

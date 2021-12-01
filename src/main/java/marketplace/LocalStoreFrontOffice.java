@@ -1,16 +1,21 @@
 package main.java.marketplace;
 
+/**
+ * LocalStoreFrontOffice.java
+ * Package: main.java.marketplace
+ * Description: The level two for all startups
+ * 
+ * @author James Covert
+ * @version 1.0
+ */
 public class LocalStoreFrontOffice extends Level {
     
     /**
-     * LocalStoreFrontOffice.java
-     * Package: main.java.marketplace
-     * Description: The level two for all startups
+     * Description: constructor.
      * 
      * @author James Covert
      * @version 1.0
      */
-    
     public LocalStoreFrontOffice() {
         
         this.setTitle("Local Store Front Office");

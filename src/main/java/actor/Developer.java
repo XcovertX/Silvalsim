@@ -11,19 +11,26 @@ import java.math.BigDecimal;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Developer extends Actor {
     
-    public final static int JUNIOR_DEV_TALENT = 1;
-    public final static int EXPERIENCED_DEV_TALENT = 5;
-    public final static int SENIOR_DEV_TALENT = 10;
+    public static final int JUNIOR_DEV_TALENT = 1;
+    public static final int EXPERIENCED_DEV_TALENT = 5;
+    public static final int SENIOR_DEV_TALENT = 10;
     
     private int talent;
     private double salary;
     private double paycheck; 
     
+    /**
+     * Description: Developers constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param talent - dev's level of talent
+     * @param salary - salary of dev
+     */
     public Developer(int talent, double salary) {
 
         this.talent = talent;

@@ -7,10 +7,10 @@ package main.java.marketplace;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public interface Iterator {
 
     public boolean hasNext();
+    
     public Object next();
 }

@@ -9,7 +9,6 @@ import main.java.world.Printer;
  * Levels.java
  * Package: main.java.marketplace
  * Description: This is a factory class that builds all potential levels.
- * The 
  * 
  * @author James Covert
  * @version 1.0
@@ -26,8 +25,7 @@ public class Levels {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp su - StartUp that uses this levels object
-     *-----------------------------------------------------
+     * @param su - StartUp that uses this levels object
      */
     public Levels(StartUp su) {
         
@@ -36,17 +34,16 @@ public class Levels {
     }
     
     /**
-     * Description: This method sets the StartUp to to a given Level
+     * Description: This method sets the StartUp to to a given Level.
      * 
      * @author James Covert
      * @version 1.0
-     * @param int levelNumer - the level number of the needed Level
+     * @param levelNumber - the level number of the needed Level
      */
     public void setLevel(int levelNumber) {
         
-//        Level lvl = levels.get(index);
         Level lvl = null;
-        for (Iterator iter = lvls.getIterator(); iter.hasNext();){
+        for (Iterator iter = lvls.getIterator(); iter.hasNext();) {
             Level l = (Level)iter.next();
             if (l.getLevelNumber() == levelNumber) {
                 lvl = l;
@@ -62,7 +59,7 @@ public class Levels {
     }
     
     /**
-     * Description: This method sets the StartUp to the next level
+     * Description: This method sets the StartUp to the next level.
      * It utilizes the iterator OfficeLevelRepository to iterate through
      * the available Levels to find the next one
      * 
@@ -72,13 +69,13 @@ public class Levels {
     public void levelUp() {
         
         Level nextLevel = null;
-        for (Iterator iter = lvls.getIterator(); iter.hasNext();){
+        for (Iterator iter = lvls.getIterator(); iter.hasNext();) {
             Level lvl = (Level)iter.next();
             if (lvl.getLevelNumber() > su.getLevelNumber()) {
                 nextLevel = lvl;
                 break;
             }
-         } 
+        } 
          
         this.su.setLevel(nextLevel);
         this.su.setXpToNextLevel(nextLevel.getBaseNumber());
@@ -115,13 +112,17 @@ public class Levels {
         Printer.println("!!!");
         Printer.println("");
     }
-
-    // getters and setters
     
+    /**
+     * Description: This method retrieves a level by a given int.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public Level getLevel(int levelNumber) {
         
         Level lvl = null;
-        for (Iterator iter = lvls.getIterator(); iter.hasNext();){
+        for (Iterator iter = lvls.getIterator(); iter.hasNext();) {
             Level l = (Level)iter.next();
             if (l.getLevelNumber() == levelNumber) {
                 lvl = l;

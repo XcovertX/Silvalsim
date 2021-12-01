@@ -1,11 +1,17 @@
 package main.java.marketplace;
 
+/**
+ * LocalStoreFrontOffice.java
+ * Package: main.java.marketplace
+ * Description: The level seven for all startups
+ * 
+ * @author James Covert
+ * @version 1.0
+ */
 public class OfficeCompound extends Level {
     
     /**
-     * LocalStoreFrontOffice.java
-     * Package: main.java.marketplace
-     * Description: The level seven for all startups
+     * Description: constructor.
      * 
      * @author James Covert
      * @version 1.0

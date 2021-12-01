@@ -14,9 +14,9 @@ import main.java.world.RandomNumber;
 
 public class Customer extends Actor {
     
-    public final static double LOW_INCOME_AVAILABLE_FUNDS = 50.00;
-    public final static double MEDIUM_INCOME_AVAILABLE_FUNDS = 150.00;
-    public final static double HIGH_INCOME_AVAILABLE_FUNDS = 1500.00;
+    public static final double LOW_INCOME_AVAILABLE_FUNDS = 50.00;
+    public static final double MEDIUM_INCOME_AVAILABLE_FUNDS = 150.00;
+    public static final double HIGH_INCOME_AVAILABLE_FUNDS = 1500.00;
     
     private StartUp subscription;
     
@@ -24,6 +24,15 @@ public class Customer extends Actor {
     private double payAmount;
     private int dueDate;
     
+    /**
+     * Description: Customer constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param subscribedTo - customer subscribes to this startup
+     * @param availFunds - customers funds
+     * @param dueDate - date subscription cost is due
+     */
     public Customer(StartUp subscribedTo, double availFunds, int dueDate) {
         
         this.setSubscription(subscribedTo);
@@ -33,7 +42,7 @@ public class Customer extends Actor {
     }
     
     /**
-     * Description: If startup the customer is subscribed to is competing,
+     * Description: If startup the customer is subscribed to is competing.
      * This method is called once a month on the subscription due date.
      * It allows the customer to determine to whether they would like to pay the subscription cost
      * or switch to the competetor's service. It does this by weighing the 
@@ -65,7 +74,7 @@ public class Customer extends Actor {
     }
     
     /**
-     * Description: calculates price difference
+     * Description: calculates price difference.
      * 
      * @author James Covert
      * @version 1.0
@@ -78,7 +87,7 @@ public class Customer extends Actor {
     }
     
     /**
-     * Description: calculates desirability difference
+     * Description: calculates desirability difference.
      * 
      * @author James Covert
      * @version 1.0
@@ -91,7 +100,7 @@ public class Customer extends Actor {
     }
     
     /**
-     * Description: calculates talent difference
+     * Description: calculates talent difference.
      * 
      * @author James Covert
      * @version 1.0
@@ -110,7 +119,7 @@ public class Customer extends Actor {
     }
     
     /**
-     * Description: simulates customer income
+     * Description: simulates customer income.
      * 
      * @author James Covert
      * @version 1.0

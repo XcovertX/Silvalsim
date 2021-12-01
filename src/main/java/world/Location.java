@@ -10,7 +10,6 @@ import java.math.BigDecimal;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public abstract class Location {
@@ -25,22 +24,27 @@ public abstract class Location {
         
         return stateName;
     }
+    
     public void setStateName(String stateName) {
         
         this.stateName = stateName;
     }
+    
     public String getStateAbbreviation() {
         
         return stateAbbreviation;
     }
+    
     public void setStateAbbreviation(String stateAbbreviation) {
         
         this.stateAbbreviation = stateAbbreviation;
     }
+    
     public BigDecimal getTaxRate() {
         
         return taxRate;
     }
+    
     public void setTaxRate(BigDecimal taxRate) {
         
         this.taxRate = taxRate;

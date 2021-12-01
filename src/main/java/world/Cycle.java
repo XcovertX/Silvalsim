@@ -8,13 +8,12 @@ package main.java.world;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Cycle implements Runnable {
     
     private boolean running;
-    private final double updateRate = 30.0d/60.0d;
+    private final double updateRate = 30.0d / 60.0d;
     
     private Quarter currentQuarter;
     
@@ -25,8 +24,7 @@ public class Cycle implements Runnable {
      * 
      * @author James Covert
      * @version 1.0
-     * @param World x - current World object
-     *-----------------------------------------------------
+     * @param w - current World object
      */
     public Cycle(World w) {
         
@@ -39,8 +37,6 @@ public class Cycle implements Runnable {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     @Override
     public void run() {
@@ -50,14 +46,14 @@ public class Cycle implements Runnable {
         long currentTime = System.currentTimeMillis();
         long lastUpdate = System.currentTimeMillis();
         
-        while(running) {
+        while (running) {
             
             currentTime = System.currentTimeMillis();
             double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
             accumulator += lastRenderTimeInSeconds;
             lastUpdate = currentTime;
             
-            while(accumulator > updateRate) {
+            while (accumulator > updateRate) {
                 
                 update();
                 accumulator -= updateRate;
@@ -70,8 +66,6 @@ public class Cycle implements Runnable {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void update() {
 

@@ -14,8 +14,6 @@ import main.java.world.World;
  * to attack their opposition
  * 
  * @author James Covert
- * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Attack {
@@ -28,13 +26,12 @@ public class Attack {
     }
     
     /**
-     * Description: This method removes talented developers from the competition
+     * Description: This method removes talented developers from the competition.
      * and adds them to the attacker's staff.
      * This decreases potential the amount of xp the opponent can gain through attacks and battles.
      * This also decreases the opponents overall desirability, effecting customer gains.
      * However, a negative part of this attack is that it will increase the opponents speed,
      * allowing the opponent to retailed with numerous attacks.
-     * 
      * It first calculates the strength of the attack
      * It then calculates if the attack is successful
      * If the attack is successful it determines if the attack is critical
@@ -45,7 +42,8 @@ public class Attack {
      * and awards xp to attacker
      * It then adds an attack expense to the attacker, 
      * deducting funds from the attackers netIncome to finance the attack.
-     * If the attacker lacks sufficient funds (netIncome) to finance the attack, the attack will fail.
+     * If the attacker lacks sufficient funds (netIncome)
+     * to finance the attack, the attack will fail.
      * Likewise, the attack will fail if the attacker if attackSucces is false
      * It then prints the appropriate message for resulting attack
      * 
@@ -68,7 +66,7 @@ public class Attack {
             
             int developers = 0;
             
-            for(int i = 0; i < strength; i++) {
+            for (int i = 0; i < strength; i++) {
                 
                 if (defender.getDevs().size() > 1) {
                     
@@ -90,9 +88,10 @@ public class Attack {
                 
                 defender.setXp(defender.getLevel().getBaseNumber());
                 
-                attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
+                attacker.getCurrentCompetition().awardCriticalXp(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                int numberOfExpenses = RandomNumber
+                        .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
                     
@@ -111,9 +110,10 @@ public class Attack {
                 
             } else {
                 
-                attacker.getCurrentCompetition().awardXP(attacker, defender);
+                attacker.getCurrentCompetition().awardXp(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                int numberOfExpenses = RandomNumber
+                        .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
                     
@@ -164,7 +164,6 @@ public class Attack {
     /**
      * Description: This method 'steals' a trade secret from it's competitor.
      * This has the effect immediately decreasing the opponents revenue.
-     * 
      * It first calculates if the attack is successful
      * It then calculates the strength of the attack
      * If the attack is successful it determines if the attack is critical
@@ -177,7 +176,8 @@ public class Attack {
      * It then prints the appropriate message
      * It then adds an attack expense to the attacker, 
      * deducting funds from the attackers netIncome to finance the attack.
-     * If the attacker lacks sufficient funds (netIncome) to finance the attack, the attack will fail.
+     * If the attacker lacks sufficient funds (netIncome)
+     * to finance the attack, the attack will fail.
      * Likewise, the attack will fail if the attacker if attackSucces is false
      * It then prints the appropriate message for resulting attack
      * 
@@ -205,10 +205,10 @@ public class Attack {
                 attacker.increaseDesirability(desirability);
                 defender.decreaseDesirability(desirability);
                 
-                int amount = strength * 1000000;
+                int numberOfExpenses = RandomNumber
+                        .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+
                 int duration = strength * 19;
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
-                
                 for (int i = 0; i < numberOfExpenses; i++) {
                     
                     defender.addExpense("Trade Theft", "Legal Battle Expense", strength, 
@@ -216,7 +216,7 @@ public class Attack {
                     generateAttackExpense();
                 }
                 
-                attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
+                attacker.getCurrentCompetition().awardCriticalXp(attacker, defender);
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName()); 
                 Printer.print(" delivers a ");
@@ -229,6 +229,7 @@ public class Attack {
                 Printer.print(Printer.ANSI_CYAN, defender.getName());
                 Printer.println("!!");
                 
+                int amount = strength * 1000000;
                 Printer.print(Printer.ANSI_CYAN, defender.getName());
                 Printer.print(" will have to pay monthly legal expenses of ");
                 Printer.print(Printer.ANSI_RED, "$" + Integer.toString(amount));
@@ -242,10 +243,10 @@ public class Attack {
                 attacker.increaseDesirability(desirability);
                 defender.decreaseDesirability(desirability);
                 
-                int amount = strength * 100000;
                 int duration = strength * 7;
 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                int numberOfExpenses = RandomNumber
+                        .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
                     
@@ -254,7 +255,7 @@ public class Attack {
                     generateAttackExpense();
                 }
                 
-                attacker.getCurrentCompetition().awardXP(attacker, defender);
+                attacker.getCurrentCompetition().awardXp(attacker, defender);
                 
                 Printer.print(Printer.ANSI_CYAN, attacker.getName() + " ");
                 Printer.print(Printer.ANSI_RED, "STEALS");
@@ -264,6 +265,7 @@ public class Attack {
                 Printer.print(Printer.ANSI_CYAN, defender.getName());
                 Printer.println("!!");
                 
+                int amount = strength * 100000;
                 Printer.print(Printer.ANSI_CYAN, defender.getName());
                 Printer.print(" will have to pay monthly legal expenses of ");
                 Printer.print(Printer.ANSI_RED, "$" + Integer.toString(amount));
@@ -296,9 +298,8 @@ public class Attack {
     }
     
     /**
-     * Description: This method 'bribes' a corrupt politician which adds
+     * Description: This method 'bribes' a corrupt politician which adds.
      * fees to the opponent
-     * 
      * It first calculates if the attack is successful
      * It then calculates the strength of the attack
      * If the attack is successful it determines if the attack is critical
@@ -314,7 +315,8 @@ public class Attack {
      * It then prints the appropriate message
      * It then adds an attack expense to the attacker, 
      * deducting funds from the attackers netIncome to finance the attack.
-     * If the attacker lacks sufficient funds (netIncome) to finance the attack, the attack will fail.
+     * If the attacker lacks sufficient funds (netIncome)
+     * to finance the attack, the attack will fail.
      * Likewise, the attack will fail if the attacker if attackSucces is false
      * It then prints the appropriate message for resulting attack
      * 
@@ -344,13 +346,15 @@ public class Attack {
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(2)));
                 defender.setServiceCost(Math.floor(defender.getServiceCost() * 2));
                 
-                attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
+                attacker.getCurrentCompetition().awardCriticalXp(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                int numberOfExpenses = RandomNumber
+                        .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
 
-                    defender.addExpense("fee", "Fee", amount, World.world.getCurrentDay(), duration);
+                    defender.addExpense("fee", "Fee", 
+                            amount, World.world.getCurrentDay(), duration);
                     generateAttackExpense();
                 }
                 
@@ -376,13 +380,15 @@ public class Attack {
                 defender.decreaseRevenue(defender.getRevenue().divide(new BigDecimal(4)));
                 defender.setServiceCost(Math.floor(defender.getServiceCost() * 1.4));
                 
-                attacker.getCurrentCompetition().awardXP(attacker, defender);
+                attacker.getCurrentCompetition().awardXp(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                int numberOfExpenses = RandomNumber
+                        .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
 
-                    defender.addExpense("fee", "Fee", amount, World.world.getCurrentDay(), duration);
+                    defender.addExpense("fee", "Fee", 
+                            amount, World.world.getCurrentDay(), duration);
                     generateAttackExpense();
                 }
                 
@@ -423,10 +429,8 @@ public class Attack {
     }
 
     /**
-     * Description: This method undercuts the attackers service cost 
+     * Description: This method undercuts the attackers service cost. 
      * to attract more customers from the opponent
-     * 
-     * 
      * It first calculates if the attack is successful
      * It then calculates the strength of the attack
      * If the attack is successful it determines if the attack is critical
@@ -439,7 +443,8 @@ public class Attack {
      * It then prints the appropriate message
      * It then adds an attack expense to the attacker, 
      * deducting funds from the attackers netIncome to finance the attack.
-     * If the attacker lacks sufficient funds (netIncome) to finance the attack, the attack will fail.
+     * If the attacker lacks sufficient funds (netIncome)
+     * to finance the attack, the attack will fail.
      * Likewise, the attack will fail if the attacker if attackSucces is false
      * It then prints the appropriate message for resulting attack
      * 
@@ -462,12 +467,14 @@ public class Attack {
                 
                 attacker.setServiceCost(Math.floor(defender.getServiceCost() / 10) + .99);
                 
-                attacker.getCurrentCompetition().awardCriticalXP(attacker, defender);
+                attacker.getCurrentCompetition().awardCriticalXp(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                int numberOfExpenses = RandomNumber
+                        .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
-                    int newRevenue = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                    int newRevenue = RandomNumber
+                            .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                     attacker.increaseRevenue(new BigDecimal(100000 * newRevenue));
                     generateAttackExpense();
                 }
@@ -489,14 +496,17 @@ public class Attack {
                 
             } else {
                 
-                attacker.setServiceCost(Math.floor(defender.getServiceCost() - (defender.getServiceCost() / 5)) + .99);
+                attacker.setServiceCost(Math.floor(defender.getServiceCost() 
+                        - (defender.getServiceCost() / 5)) + .99);
                 
-                attacker.getCurrentCompetition().awardXP(attacker, defender);
+                attacker.getCurrentCompetition().awardXp(attacker, defender);
                 
-                int numberOfExpenses = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                int numberOfExpenses = RandomNumber
+                        .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                 
                 for (int i = 0; i < numberOfExpenses; i++) {
-                    int newRevenue = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+                    int newRevenue = RandomNumber
+                            .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
                     attacker.increaseRevenue(new BigDecimal(10000 * newRevenue));
                     generateAttackExpense();
                 }
@@ -538,8 +548,7 @@ public class Attack {
     }
     
     /**
-     * Description: This method calculates the attack strength
-     * 
+     * Description: This method calculates the attack strength.
      * The method will not allow an attack strength to be less that 1
 
      * @author James Covert
@@ -564,7 +573,7 @@ public class Attack {
     }
     
     /**
-     * Description: This method calculates if the attack is successful or not
+     * Description: This method calculates if the attack is successful or not.
      * 
      * @author James Covert
      * @version 1.0
@@ -591,7 +600,7 @@ public class Attack {
     }
     
     /**
-     * Description: This method calculates if the attack is critical or not
+     * Description: This method calculates if the attack is critical or not.
      * 
      * @author James Covert
      * @version 1.0
@@ -612,7 +621,7 @@ public class Attack {
     }
     
     /**
-     * Description: This method prints message if the opponent dodges the attack
+     * Description: This method prints message if the opponent dodges the attack.
      * 
      * @author James Covert
      * @version 1.0
@@ -626,24 +635,27 @@ public class Attack {
     }
     
     /**
-     * Description: This method generates attack expenses (deducted from netIncome)
+     * Description: This method generates attack expenses (deducted from netIncome).
      * 
      * @author James Covert
      * @version 1.0
      */
     private void generateAttackExpense() {
         
-        int randomNumber = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
-        int duration = RandomNumber.getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
-        double cost = randomNumber * attacker.getAttackCostMultiplier() * defender.getLevelNumber() * 1000000;
+        int randomNumber = RandomNumber
+                .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+        int duration = RandomNumber
+                .getRandomBetween(attacker.getXpMin(), attacker.getXpMax());
+        double cost = randomNumber * attacker.getAttackCostMultiplier() 
+                * defender.getLevelNumber() * 1000000;
         cost = cost / (duration * 30);
-        attacker.addExpense("attack expense", "Attack Expense", cost, World.world.getCurrentDay(), duration);
+        attacker.addExpense("attack expense", "Attack Expense", 
+                cost, World.world.getCurrentDay(), duration);
     }
     
     /**
-     * Description: This method prints message if the attacker has 
+     * Description: This method prints message if the attacker has.
      * insufficient funds (netIncome) to deploy a successful attack
-     * 
      * If insufficient funds are detected, liquidate command is automatically called
      * 
      * @author James Covert

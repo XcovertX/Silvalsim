@@ -17,7 +17,7 @@ public abstract class Actor {
     private boolean isAlive;
     
     /**
-     * This marks the actor as loser in a competition
+     * This marks the actor as loser in a competition.
      */
     public void die() {
         setAlive(false);

@@ -13,7 +13,6 @@ import main.java.world.World;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class TechGiantFactory {
@@ -27,8 +26,6 @@ public class TechGiantFactory {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public TechGiantFactory() {
         
@@ -37,13 +34,11 @@ public class TechGiantFactory {
     }
     
     /**
-     * Description: Thish method generates a new TechGiant and adds it to the world's
+     * Description: Thish method generates a new TechGiant and adds it to the world's.
      * list of all TechGiants 
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void generateTechGiant() {
         String name = getName();
@@ -52,12 +47,10 @@ public class TechGiantFactory {
     }
     
     /**
-     * Description: This method generates a random name for a new TechGiant
+     * Description: This method generates a random name for a new TechGiant.
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateNames() {
 
@@ -78,12 +71,10 @@ public class TechGiantFactory {
     }
     
     /**
-     * Description: This method generates a random description for a new TechGiant
+     * Description: This method generates a random description for a new TechGiant.
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void populateDescriptions() {
 
@@ -103,8 +94,12 @@ public class TechGiantFactory {
 
     }
     
-    // getters
-    
+    /**
+     * Description: This method retrieves a random name for a new TechGiant.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public String getName() {
         
         int randomNumber = RandomNumber.getRandomBetween(0, names.size() - 1);
@@ -112,6 +107,12 @@ public class TechGiantFactory {
         return name;
     }
     
+    /**
+     * Description: This method retrieves a random description for a new TechGiant.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public String getDescription() {
         
         int randomNumber = RandomNumber.getRandomBetween(0, descriptions.size() - 1);

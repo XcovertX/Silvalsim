@@ -23,9 +23,9 @@ public class World {
     
     public static World world;
     
-    final static int FIRST_OF_THE_MONTH = 1;
-    final static int FIRST_PAYDAY = 1;
-    final static int SECOND_PAYDAY = 15;
+    static final int FIRST_OF_THE_MONTH = 1;
+    static final int FIRST_PAYDAY = 1;
+    static final int SECOND_PAYDAY = 15;
     
     private ArrayList<TechGiant> techGiants;    // all TechGiants
     private Quarter currentQuarter;             // time tracking
@@ -143,11 +143,14 @@ public class World {
         }
    
         Printer.println("");
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "**************************"
+                + "******************************************************");
         Printer.print(Printer.ANSI_PURPLE, "*");
-        Printer.print                        ("                         Total Domination Achieved                            ");
+        Printer.print("                         Total Domination Achieved"
+                + "                            ");
         Printer.println(Printer.ANSI_PURPLE, "*");
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "**************************"
+                + "******************************************************");
         for (int i = 0; i < world.getTechGiants().size(); i++) {
             
             TechGiant tg = world.getTechGiants().get(i);
@@ -163,7 +166,7 @@ public class World {
                     StartUp su = tg.getStartups().get(j);
                     
                     Printer.print(Printer.ANSI_CYAN, su.getName());
-                    if ( 1 + j < tg.getStartups().size()) {
+                    if (1 + j < tg.getStartups().size()) {
                       
                         Printer.print(", ");
                     }
@@ -186,7 +189,8 @@ public class World {
         Printer.println("Exiting SILVALSIM......");
         Printer.println("");
         
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "**************************"
+                + "******************************************************");
         
         System.exit(0);
         
@@ -247,7 +251,7 @@ public class World {
      */
     private void updateStartUps() {
 
-        for(int i = 0; i < techGiants.size(); i++) {
+        for (int i = 0; i < techGiants.size(); i++) {
             
             TechGiant tg = techGiants.get(i);
             
@@ -257,8 +261,8 @@ public class World {
                 
                 for (int k = 0; k < su.getDevs().size(); k++) {
                     
-                    if (currentQuarter.getCurrentDay() == FIRST_PAYDAY ||
-                        currentQuarter.getCurrentDay() == SECOND_PAYDAY) {
+                    if (currentQuarter.getCurrentDay() == FIRST_PAYDAY 
+                            || currentQuarter.getCurrentDay() == SECOND_PAYDAY) {
                         
                         Developer dev = su.getDevs().get(k);
                         su.decreaseNetIncome(dev.getPaycheck());
@@ -295,36 +299,40 @@ public class World {
                     
                     Customer customer = su.getCustomers().get(k);
                     
-                    if (currentQuarter.getCurrentDay() == FIRST_PAYDAY ||
-                        currentQuarter.getCurrentDay() == SECOND_PAYDAY ) {
+                    if (currentQuarter.getCurrentDay() == FIRST_PAYDAY 
+                            || currentQuarter.getCurrentDay() == SECOND_PAYDAY) {
                         
                         customer.payDay();
                     }
                     
-                    if (customer.getDueDate() == currentQuarter.getCurrentDay() ) {
+                    if (customer.getDueDate() == currentQuarter.getCurrentDay()) {
                         
                         if (!(su.getCurrentCompetition() == null)) {
                             
                             if (su.equals(currentCompetition.getOpponentOne())) {
     
-                                boolean shouldSwitchService = customer.assessSubscription(currentCompetition.getOpponentTwo());
+                                boolean shouldSwitchService = customer
+                                        .assessSubscription(currentCompetition.getOpponentTwo());
                             
                                 if (shouldSwitchService) {
                                     
                                     Customer transferingCustomer = su.getCustomers().remove(k);
-                                    currentCompetition.getOpponentTwo().addCustomer(transferingCustomer);
+                                    currentCompetition.getOpponentTwo()
+                                        .addCustomer(transferingCustomer);
                                     k--;
                                     
                                 }
                                 
                             } else if (su.equals(currentCompetition.getOpponentTwo())) {
                                 
-                                boolean shouldSwitchService = customer.assessSubscription(currentCompetition.getOpponentOne());
+                                boolean shouldSwitchService = customer
+                                        .assessSubscription(currentCompetition.getOpponentOne());
                                
                                 if (shouldSwitchService) {
                                     
                                     Customer transferingCustomer = su.getCustomers().remove(k);
-                                    currentCompetition.getOpponentOne().addCustomer(transferingCustomer);
+                                    currentCompetition.getOpponentOne()
+                                        .addCustomer(transferingCustomer);
                                     k--;
                                     
                                 }
@@ -362,24 +370,28 @@ public class World {
         
         if (currentCompetition != null) {
                 
-                Printer.println("");
-                Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
-                Printer.print(Printer.ANSI_PURPLE, "*");
-                Printer.print                        ("                                   Summary                                    ");
-                Printer.println(Printer.ANSI_PURPLE, "*");
-                Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+            Printer.println("");
+            Printer.println(Printer.ANSI_PURPLE, "************************"
+                        + "********************************************************");
+            Printer.print(Printer.ANSI_PURPLE, "*");
+            Printer.print("                                   Summary"
+                        + "                                    ");
+            Printer.println(Printer.ANSI_PURPLE, "*");
+            Printer.println(Printer.ANSI_PURPLE, "***********************"
+                        + "*********************************************************");
                 
-                Printer.print("Cycle: " + getCurrentQuarter().getCurrentCycle());
-                Printer.print(" Quarter: " + getCurrentQuarter().getCurrentQuarter());
-                Printer.print(" Month: " + getCurrentQuarter().getCurrentMonth());
-                Printer.println(" Day: " + getCurrentQuarter().getCurrentDay());
+            Printer.print("Cycle: " + getCurrentQuarter().getCurrentCycle());
+            Printer.print(" Quarter: " + getCurrentQuarter().getCurrentQuarter());
+            Printer.print(" Month: " + getCurrentQuarter().getCurrentMonth());
+            Printer.println(" Day: " + getCurrentQuarter().getCurrentDay());
                 
-                Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+            Printer.println(Printer.ANSI_PURPLE, "************************"
+                        + "********************************************************");
 
-                currentCompetition.printScore(currentCompetition.getOpponentOne());
-                currentCompetition.printScore(currentCompetition.getOpponentTwo());
-                Printer.println("");
-                setPrintTime(false); 
+            currentCompetition.printScore(currentCompetition.getOpponentOne());
+            currentCompetition.printScore(currentCompetition.getOpponentTwo());
+            Printer.println("");
+            setPrintTime(false); 
         }
         
         int i = 0;

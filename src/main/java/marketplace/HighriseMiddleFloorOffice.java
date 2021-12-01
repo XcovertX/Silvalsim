@@ -1,15 +1,20 @@
 package main.java.marketplace;
 
+/**
+ * LocalStoreFrontOffice.java
+ * Package: main.java.marketplace
+ * Description: The level four for all startups
+ * 
+ * @author James Covert
+ */
 public class HighriseMiddleFloorOffice extends Level {
     
     /**
-     * LocalStoreFrontOffice.java
-     * Package: main.java.marketplace
-     * Description: The level four for all startups
+     * Description: constructor.
      * 
      * @author James Covert
+     * @version 1.0
      */
-    
     public HighriseMiddleFloorOffice() {
         
         this.setTitle("middle floor highrise office floor");

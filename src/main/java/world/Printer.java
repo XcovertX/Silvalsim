@@ -7,7 +7,6 @@ package main.java.world;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public final class Printer {
     

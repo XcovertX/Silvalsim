@@ -9,11 +9,16 @@ import java.math.BigDecimal;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class NewYork extends Location {
     
+    /**
+     * Description: New York location.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public NewYork() {
         
         this.setStateName("New York");

@@ -82,7 +82,7 @@ public class Competition {
             Printer.println("");
             World.world.getCurrentQuarter().printTimeStamp();
             opponentOneOffense.attack();    
-            opponentTwoDefense.Defend();
+            opponentTwoDefense.defend();
             setCounterOne(0);
             Printer.println("");
             
@@ -102,7 +102,7 @@ public class Competition {
             
             World.world.getCurrentQuarter().printTimeStamp();
             opponentTwoOffense.attack();    
-            opponentOneDefense.Defend();
+            opponentOneDefense.defend();
             setCounterTwo(0);
             Printer.println("");
             
@@ -294,7 +294,7 @@ public class Competition {
         this.opponentTwo.removeAllLegalBattleExpenses();
         
         this.opponentOne.setEngagedInCompetition(false);
-        this.opponentTwo.setEngagedInCompetition(false );
+        this.opponentTwo.setEngagedInCompetition(false);
         this.opponentOne.setCurrentCompetition(null);
         this.opponentTwo.setCurrentCompetition(null);
         World.world.setCurrentCompetition(null); 
@@ -310,7 +310,7 @@ public class Competition {
         
         Printer.println("");
         Printer.println("Number of tech giants in the marketplace: " 
-        + World.world.getTechGiants().size());
+                + World.world.getTechGiants().size());
         
         for (int i = 0; i < World.world.getTechGiants().size(); i++) {
             
@@ -324,7 +324,7 @@ public class Competition {
                 StartUp su = tg.getStartups().get(j);
                 
                 Printer.print(Printer.ANSI_CYAN, su.getName());
-                if ( 1 + j < tg.getStartups().size()) {
+                if (1 + j < tg.getStartups().size()) {
                   
                     Printer.print(", ");
                 }
@@ -351,11 +351,11 @@ public class Competition {
      * @param winningSU - the winning SU
      * @param losingSU - the losing SU
      */
-    private void award(StartUp winningSU, StartUp losingSU) {
+    private void award(StartUp winningSu, StartUp losingSu) {
         
-        awardStartUp(winningSU, losingSU);
-        awardWinnerXP(winningSU, losingSU);
-        awardLevelUp(winningSU);
+        awardStartUp(winningSu, losingSu);
+        awardWinnerXp(winningSu, losingSu);
+        awardLevelUp(winningSu);
     }
     
     /**
@@ -373,7 +373,7 @@ public class Competition {
         
         for (int i = 0; i < losingTechGiant.getStartups().size(); i++) {
             
-            if(losingTechGiant.getStartups().get(i).getName().equals(losingStartUp.getName())) {
+            if (losingTechGiant.getStartups().get(i).getName().equals(losingStartUp.getName())) {
                 losingTechGiant.getStartups().get(i).setAlive(true);
                 losingTechGiant.getStartups().get(i).setTechGiant(winningTechGiant);
                 winningTechGiant.getStartups().add(losingTechGiant.getStartups().get(i));
@@ -388,10 +388,10 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @param winningSU - the winning SU
-     * @param losingSU - the losing SU
+     * @param su1 - the winning SU
+     * @param su2 - the losing SU
      */
-    public void awardXP(StartUp su1, StartUp su2) {
+    public void awardXp(StartUp su1, StartUp su2) {
         
         Level lvl = su2.getLevel();
         su1.setXp(su1.getXp() + lvl.getXp());
@@ -402,10 +402,10 @@ public class Competition {
 
      * @author James Covert
      * @version 1.0
-     * @param winningSU - the winning SU
-     * @param losingSU - the losing SU
+     * @param su1 - the winning SU
+     * @param su2 - the losing SU
      */
-    public void awardCriticalXP(StartUp su1, StartUp su2) {
+    public void awardCriticalXp(StartUp su1, StartUp su2) {
         
         Level lvl = su2.getLevel();
         su1.setXp(su1.getXp() + (su1.getTalentMultiplier() * 2) + (lvl.getXp() * 2));
@@ -419,10 +419,11 @@ public class Competition {
      * @param winningSU - the winning SU
      * @param losingSU - the losing SU
      */
-    private void awardWinnerXP(StartUp su1, StartUp su2) {
+    private void awardWinnerXp(StartUp su1, StartUp su2) {
         
         Level lvl = su2.getLevel();
-        su1.setXp(su1.getXp() + (su1.getTalentMultiplier() * 3) + (lvl.getXp() * su1.getLevelNumber()));
+        su1.setXp(su1.getXp() + (su1.getTalentMultiplier() * 3) 
+                + (lvl.getXp() * su1.getLevelNumber()));
     }
     
     /**
@@ -434,7 +435,7 @@ public class Competition {
      */
     public void awardLevelUp(StartUp su) {
         
-        if (su.compareXpToNextLevelXp()){
+        if (su.compareXpToNextLevelXp()) {
 
             su.getLevels().levelUp();
             
@@ -453,9 +454,12 @@ public class Competition {
      */
     public void printResults(StartUp winningStartUp, StartUp losingStartUp) {
         
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
-        Printer.println(Printer.ANSI_PURPLE, "*                              Competition Results                             *");
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "*************************"
+                + "*******************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "*                              "
+                + "Competition Results                             *");
+        Printer.println(Printer.ANSI_PURPLE, "*************************"
+                + "*******************************************************");
         
         Printer.print(Printer.ANSI_CYAN, winningStartUp.getName());
         Printer.println(" has won the competition!!");
@@ -467,7 +471,8 @@ public class Competition {
         
         printOwnership();
         
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "**************************"
+                + "******************************************************");
     }
     
     /**
@@ -489,9 +494,12 @@ public class Competition {
         Printer.println("!!");
         Printer.println("");
         
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
-        Printer.println(Printer.ANSI_PURPLE, "*                                Starting Summary                              *");
-        Printer.println(Printer.ANSI_PURPLE, "********************************************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "**************************"
+                + "******************************************************");
+        Printer.println(Printer.ANSI_PURPLE, "*                                "
+                + "Starting Summary                              *");
+        Printer.println(Printer.ANSI_PURPLE, "**************************"
+                + "******************************************************");
 
         printScore(opponentOne);
         printScore(opponentTwo);
@@ -504,7 +512,7 @@ public class Competition {
         return opponentOne;
     }
 
-    public void setOpponentOne( StartUp actorOne ) {
+    public void setOpponentOne(StartUp actorOne) {
         
         this.opponentOne = actorOne;
     }
@@ -514,7 +522,7 @@ public class Competition {
         return opponentTwo;
     }
 
-    public void setOpponentTwo( StartUp actorTwo ) {
+    public void setOpponentTwo(StartUp actorTwo) {
         
         this.opponentTwo = actorTwo;
     }
@@ -529,16 +537,22 @@ public class Competition {
         return counterTwo;
     }
 
-    public void setCounterOne( int counter ) {
+    public void setCounterOne(int counter) {
         
         this.counterOne = counter;
     }
     
-    public void setCounterTwo( int counter ) {
+    public void setCounterTwo(int counter) {
         
         this.counterTwo = counter;
     }
     
+    /**
+     * Description: This method increments both counters.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public void incrementCounters() {
         
         this.counterOne++;

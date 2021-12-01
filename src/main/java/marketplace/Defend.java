@@ -23,13 +23,8 @@ public class Defend {
     private StartUp defender; 
     private boolean hailMary;
     
-    public Defend() {
-        
-    }
-    
     /**
-     * Description: This method deploys an advertising campaign to attract new customers
-     * 
+     * Description: This method deploys an advertising campaign to attract new customers.
      * It then calculates if the defense is successful
      * If the defense is successful it determines if the defense is critical
      * If defense is critical, it calculates it's strengeth
@@ -41,7 +36,8 @@ public class Defend {
      * It then adds desirability to defender
      * It then generates the dense expense,
      * deducting funds from the defender's marketShare to finance the defense.
-     * If the defender lacks sufficient funds (marketShare) to finance the defense, the defense will fail.
+     * If the defender lacks sufficient funds (marketShare)
+     * to finance the defense, the defense will fail.
      * Likewise, the defense will fail if the defenderSuccess returns false
      * It then prints the appropriate message for resulting defense
      * 
@@ -112,7 +108,6 @@ public class Defend {
     
     /**
      * Description: This method deploys an recruiting campaign to attract new devs.
-     * 
      * It calculates if the defense is successful
      * If the defense is successful it determines if the defense is critical
      * If defense is critical, it calculates it's strength
@@ -122,7 +117,8 @@ public class Defend {
      * and adds strength number of new junior and experienced devs to the defender
      * It then generates the dense expense,
      * deducting funds from the defender's marketShare to finance the defense.
-     * If the defender lacks sufficient funds (marketShare) to finance the defense, the defense will fail.
+     * If the defender lacks sufficient funds (marketShare)
+     * to finance the defense, the defense will fail.
      * Likewise, the defense will fail if the defenderSuccess returns false
      * It then prints the appropriate message for resulting defense
      * 
@@ -149,7 +145,8 @@ public class Defend {
             
             if (critical) {
             
-                int strength = RandomNumber.getRandomBetween(defender.getXpMin(), defender.getXpMax());
+                int strength = RandomNumber.getRandomBetween(defender
+                        .getXpMin(), defender.getXpMax());
                 
                 
                 defender.addExperiencedDevs(strength / 2);
@@ -165,7 +162,8 @@ public class Defend {
             
             } else {
                 
-                int strength = RandomNumber.getRandomBetween(defender.getXpMin(), defender.getXpMax());
+                int strength = RandomNumber.getRandomBetween(defender
+                        .getXpMin(), defender.getXpMax());
                 
                 defender.addJuniorDevs(strength / 2);
                 defender.addExperiencedDevs(strength / 4);
@@ -196,8 +194,7 @@ public class Defend {
     }
     
     /**
-     * Description: This method liquidates assets
-     * 
+     * Description: This method liquidates assets.
      * It then calculates if the defense is successful
      * If hailMary is set to true, the liquidate will be successful
      * It calculates it's strength
@@ -208,7 +205,8 @@ public class Defend {
      * It then will reduce Devs to 1/4 the number of devs
      * It then generates the dense expense,
      * deducting funds from the defender's marketShare to finance the defense.
-     * If the defender lacks sufficient funds (marketShare) to finance the defense, the defense will fail.
+     * If the defender lacks sufficient funds (marketShare)
+     * to finance the defense, the defense will fail.
      * Likewise, the defense will fail if the defenderSuccess returns false
      * It then prints the appropriate message for resulting defense
      * 
@@ -248,7 +246,7 @@ public class Defend {
             }
             
             int counter = 0;
-            for(int i = 0; i < defender.getDevs().size(); i++) {
+            for (int i = 0; i < defender.getDevs().size(); i++) {
     
                 if (counter < strength) {
                     
@@ -333,8 +331,7 @@ public class Defend {
     }
     
     /**
-     * Description: This method calculates the defense strength
-     * 
+     * Description: This method calculates the defense strength.
      * The method will not allow an defense strength to be less that 1
 
      * @author James Covert
@@ -360,7 +357,7 @@ public class Defend {
     }
     
     /**
-     * Description: This method calculates if the defense is critical or not
+     * Description: This method calculates if the defense is critical or not.
      * 
      * @author James Covert
      * @version 1.0
@@ -381,7 +378,7 @@ public class Defend {
     }
     
     /**
-     * Description: This method calculates if the defense is successful or not
+     * Description: This method calculates if the defense is successful or not.
      * 
      * @author James Covert
      * @version 1.0
@@ -407,7 +404,7 @@ public class Defend {
     }
     
     /**
-     * Description: This method prints message if defense fails
+     * Description: This method prints message if defense fails.
      * 
      * @author James Covert
      * @version 1.0
@@ -423,7 +420,7 @@ public class Defend {
     }
     
     /**
-     * Description: This method generates defense expenses (deducted from MarketShare)
+     * Description: This method generates defense expenses (deducted from MarketShare).
      * 
      * @author James Covert
      * @version 1.0
@@ -432,18 +429,19 @@ public class Defend {
         
         int randomNumber = RandomNumber.getRandomBetween(defender.getXpMin(), defender.getXpMax());
         int duration = RandomNumber.getRandomBetween(defender.getXpMin(), defender.getXpMax());
-        double cost = randomNumber * defender.getAttackCostMultiplier() * attacker.getLevelNumber() * 1000000;
+        double cost = randomNumber * defender
+                .getAttackCostMultiplier() * attacker.getLevelNumber() * 1000000;
         cost = cost / (duration * 30);
-        defender.addExpense("defense expense", "Defense Expense", cost, World.world.getCurrentDay(), duration);
+        defender.addExpense("defense expense", "Defense Expense", 
+                cost, World.world.getCurrentDay(), duration);
     }
     
     /**
-     * Description: This method prints message if the defense has 
+     * Description: This method prints message if the defense has.
      * insufficient funds (marketShare) to deploy a successful defense
-     * 
      * If insufficient funds are detected, hailmary is set to true
-     *  and the liquidate command is automatically called
-     * a
+     * and the liquidate command is automatically called
+     *  
      * @author James Covert
      * @version 1.0
      */

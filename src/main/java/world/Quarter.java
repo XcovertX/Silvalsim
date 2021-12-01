@@ -12,22 +12,21 @@ import java.util.Random;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 import main.java.actor.StartUp;
 
 public class Quarter {
     
-    final static int Q1 = 1;
-    final static int Q2 = 2;
-    final static int Q3 = 3;
-    final static int Q4 = 4;
+    static final int Q1 = 1;
+    static final int Q2 = 2;
+    static final int Q3 = 3;
+    static final int Q4 = 4;
     
-    final static int FIRST_OF_THE_MONTH = 1;
-    final static int LAST_OF_THE_MONTH = 30;
-    final static int FIRST_MONTH_OF_THE_QUARTER = 1;
-    final static int LAST_MONTH_OF_THE_QUARTER = 3;
+    static final int FIRST_OF_THE_MONTH = 1;
+    static final int LAST_OF_THE_MONTH = 30;
+    static final int FIRST_MONTH_OF_THE_QUARTER = 1;
+    static final int LAST_MONTH_OF_THE_QUARTER = 3;
 
     private int currentCycle;
     private int currentQuarter; 
@@ -45,10 +44,9 @@ public class Quarter {
      * 
      * @author James Covert
      * @version 1.0
-     * @param int currentQuarter - quarter number
-     * @param int currentMonth - month number
-     * @param int currentDay - day number
-     *-----------------------------------------------------
+     * @param currentQuarter - quarter number
+     * @param currentMonth - month number
+     * @param currentDay - day number
      */
     public Quarter(int currentQuarter, int currentMonth, int currentDay) {
 
@@ -68,7 +66,6 @@ public class Quarter {
      * @author James Covert
      * @version 1.0
      * @return void
-     *-----------------------------------------------------
      */
     private void calculateCorporateTaxCutPercent() {
         
@@ -83,11 +80,9 @@ public class Quarter {
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp startup - startup to apply tax write off to
-     * @return void
-     *-----------------------------------------------------
+     * @param startup - startup to apply tax write off to
      */
-    public void applyFinancialEvents(StartUp startup){
+    public void applyFinancialEvents(StartUp startup) {
         
         if (isFirstDayOfQuarter()) {
             
@@ -100,7 +95,8 @@ public class Quarter {
                 taxRate = applyCorporateTaxCuts(taxRate);   
             }
     
-            adjustedRevenue = (deductTaxes(adjustedRevenue, taxRate).setScale(2, RoundingMode.DOWN));  
+            adjustedRevenue = (deductTaxes(adjustedRevenue, taxRate)
+                    .setScale(2, RoundingMode.DOWN));  
             
             startup.setRevenue(adjustedRevenue);
         }
@@ -111,14 +107,14 @@ public class Quarter {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDecimal adjustedRevenue - revenue to have taxes withdrawn from
-     * @param BigDeccimal taxRate - deduction rate
+     * @param adjustedRevenue - revenue to have taxes withdrawn from
+     * @param taxRate - deduction rate
      * @return BigDecimal - revenue minus taxes
-     *-----------------------------------------------------
      */
     private BigDecimal deductTaxes(BigDecimal adjustedRevenue, BigDecimal taxRate) {
         
-        return adjustedRevenue.subtract((adjustedRevenue.multiply((taxRate.multiply(new BigDecimal(0.01))))));
+        return adjustedRevenue.subtract((adjustedRevenue.multiply((
+                taxRate.multiply(new BigDecimal(0.01))))));
         
     }
     
@@ -127,9 +123,8 @@ public class Quarter {
      * 
      * @author James Covert
      * @version 1.0
-     * @param BigDeccimal taxRate - current deduction rate
+     * @param taxRate - current deduction rate
      * @return BigDecimal - new tax rate
-     *-----------------------------------------------------
      */
     private BigDecimal applyCorporateTaxCuts(BigDecimal taxRate) {
         
@@ -143,12 +138,10 @@ public class Quarter {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void incrementQuarter() {
         
-        if(currentQuarter >= Q4) {
+        if (currentQuarter >= Q4) {
             
             Printer.println("");
             Printer.print(Printer.ANSI_YELLOW, "QUARTER " + currentQuarter + " has ended and ");
@@ -171,8 +164,6 @@ public class Quarter {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     private void incrementMonth() {
         
@@ -192,12 +183,10 @@ public class Quarter {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void incrementDay() {
         
-        if(currentDay >= LAST_OF_THE_MONTH) {
+        if (currentDay >= LAST_OF_THE_MONTH) {
             
             World.world.setPrintTime(true);
             currentDay = FIRST_OF_THE_MONTH;
@@ -223,8 +212,6 @@ public class Quarter {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void printTimeStamp() {
         
@@ -238,7 +225,7 @@ public class Quarter {
     
     private void setCurrentDay(int currentDay) {
         
-        if(!(currentDay < FIRST_OF_THE_MONTH || currentDay >= LAST_OF_THE_MONTH)) {
+        if (!(currentDay < FIRST_OF_THE_MONTH || currentDay >= LAST_OF_THE_MONTH)) {
             
             this.currentDay = currentDay; 
             
@@ -250,7 +237,7 @@ public class Quarter {
 
     private void setCurrentQuarter(int currentQuarter) {
         
-        if(!(currentQuarter < Q1 || currentQuarter >= Q4)) {
+        if (!(currentQuarter < Q1 || currentQuarter >= Q4)) {
             
             this.currentQuarter = currentQuarter; 
             
@@ -279,7 +266,7 @@ public class Quarter {
 
     private void setEven() {
 
-        if((this.currentQuarter % 2) == 0) {
+        if ((this.currentQuarter % 2) == 0) {
             
             this.isEven = true;
             

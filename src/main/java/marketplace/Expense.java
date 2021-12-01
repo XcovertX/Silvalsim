@@ -9,7 +9,6 @@ package main.java.marketplace;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public abstract class Expense {

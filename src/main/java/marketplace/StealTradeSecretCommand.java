@@ -10,7 +10,6 @@ import main.java.actor.StartUp;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class StealTradeSecretCommand implements Command {
@@ -20,14 +19,13 @@ public class StealTradeSecretCommand implements Command {
     private StartUp recipient;
     
     /**
-     * Description: The StealTradeSecret constructor builds a new Attack()
+     * Description: The StealTradeSecret constructor builds a new Attack().
      * and assigns the two competing opponents
      * 
      * @author James Covert
      * @version 1.0
-     * @param Startup attacker - the startup deploying an attack
-     * @param StartUp defender - the startup receiving the attack
-     *-----------------------------------------------------
+     * @param attacker - the startup deploying an attack
+     * @param recipient - the startup receiving the attack
      */
     public StealTradeSecretCommand(StartUp attacker, StartUp recipient) {
         
@@ -42,7 +40,6 @@ public class StealTradeSecretCommand implements Command {
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     @Override
     public void execute() {

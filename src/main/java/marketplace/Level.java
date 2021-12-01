@@ -12,7 +12,6 @@ import main.java.world.RandomNumber;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public abstract class Level {
     
@@ -26,13 +25,13 @@ public abstract class Level {
     private int xpMax;
     
     /**
-     * Description: The method compares given xp to baseLevelXP
+     * Description: The method compares given xp to baseLevelXP.
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
+     * @param xp - startup's xp
      */
-    public boolean compareXPBase(int xp) {
+    public boolean compareXpBase(int xp) {
         
         if (xp > baseNumber) {
             

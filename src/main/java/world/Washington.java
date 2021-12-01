@@ -9,11 +9,16 @@ import java.math.BigDecimal;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Washington extends Location {
     
+    /**
+     * Description: Washington location.
+     * 
+     * @author James Covert
+     * @version 1.0
+     */
     public Washington() {
         
         this.setStateName("Washington");

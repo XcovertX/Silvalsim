@@ -10,7 +10,6 @@ import main.java.actor.StartUp;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 public class DrainTalentCommand implements Command {
     
@@ -19,14 +18,13 @@ public class DrainTalentCommand implements Command {
     private StartUp recipient;
     
     /**
-     * Description: The DrainTalen constructor builds a new Attack()
+     * Description: The DrainTalen constructor builds a new Attack().
      * and assigns the two competing opponents
      * 
      * @author James Covert
      * @version 1.0
-     * @param Startup attacker - the startup deploying a attack
-     * @param StartUp defender - the startup receiving the attack
-     *-----------------------------------------------------
+     * @param attacker - the startup deploying a attack
+     * @param recipient - the startup receiving the attack
      */
     public DrainTalentCommand(StartUp attacker, StartUp recipient) {
         
@@ -41,7 +39,6 @@ public class DrainTalentCommand implements Command {
      * 
      * @author James Covert
      * @version 1.0
-     *-----------------------------------------------------
      */
     @Override
     public void execute() {

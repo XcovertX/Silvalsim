@@ -11,7 +11,6 @@ import main.java.world.RandomNumber;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
 
 public class Offense {
@@ -19,6 +18,14 @@ public class Offense {
     private StartUp attacker;
     private StartUp recipient;
     
+    /**
+     * Description: Offense constructor.
+     * 
+     * @author James Covert
+     * @version 1.0
+     * @param attacker - attacking su
+     * @param recipient - defending su
+     */
     public Offense(StartUp attacker, StartUp recipient) {
         
         setAttacker(attacker);
@@ -30,8 +37,6 @@ public class Offense {
      * 
      * @author James Covert
      * @version 1.0
-     * @return void
-     *-----------------------------------------------------
      */
     public void attack() {
         
@@ -56,12 +61,11 @@ public class Offense {
     }
     
     /**
-     * Description: This method produces a random selection
+     * Description: This method produces a random selection.
      * 
      * @author James Covert
      * @version 1.0
      * @return int - number between 0-3
-     *-----------------------------------------------------
      */
     public int selectAttack() {
         

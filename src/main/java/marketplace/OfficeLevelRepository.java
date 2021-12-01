@@ -10,19 +10,16 @@ import java.util.ArrayList;
  * 
  * @author James Covert
  * @version 1.0
- *-----------------------------------------------------
  */
-public class OfficeLevelRepository implements Container{
+public class OfficeLevelRepository implements Container {
     
     private ArrayList<Level> levels = new ArrayList<Level>();
     
     /**
-     * Description: The OfficeLevelRepository constructor populates the levels list
+     * Description: The OfficeLevelRepository constructor populates the levels list.
      * 
      * @author James Covert
      * @version 1.0
-     * @param StartUp su - StartUp that uses this levels object
-     *-----------------------------------------------------
      */
     public OfficeLevelRepository() {
         
@@ -37,12 +34,11 @@ public class OfficeLevelRepository implements Container{
     }
 
     /**
-     * Description: This method retrieves the Iterator
+     * Description: This method retrieves the Iterator.
      * 
      * @author James Covert
      * @version 1.0
      * @return Iterator - used to iterate though available Levels
-     *-----------------------------------------------------
      */
     @Override
     public Iterator getIterator() {
@@ -51,13 +47,12 @@ public class OfficeLevelRepository implements Container{
     }
     
     /**
-     * Description: This is a private class used to 
+     * Description: This is a private class used to.
      * iterate through the collection of Levels
      * 
      * @author James Covert
      * @version 1.0
      * @return Iterator - used to iterate though available Levels
-     *-----------------------------------------------------
      */
     private class LevelIterator implements Iterator {
 
