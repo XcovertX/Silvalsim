@@ -1,4 +1,7 @@
-"# Silvalsim" 
+# Silvalsim
+
+This is a final project for SER316. It generates random Silicon Valley startupw and then pits them against eachother in a classic multi-user dungeon format. The start ups can deploy attacks and hostile take overs, defend through investing, and heal through liquidating assets. In the end, there is a winner that successfully consumes all of its competition.
+
 
 main class is located at src/main/java/start/Silvalsim.java
 
